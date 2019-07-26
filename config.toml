@@ -1,0 +1,32 @@
+baseurl = "/"
+languageCode = "en-GB"
+title = "Badge.team API documentation"
+paginate = 5
+theme = "badgeteam-docs"
+
+enableRobotsTXT = true
+canonifyURLs = true
+
+[Params]
+  subtitle = ""
+  description = "Documentation"
+  powered_by = ""
+  author = "BADGE.TEAM"
+  copyright = ""
+  date_format = "02-01-2006"
+  showVisitedLinks = false
+  disableInlineCopyToClipBoard = true
+  themeVariant = "badgeteam"
+  
+[menu]
+  [[menu.shortcuts]]
+    name = "Wiki"
+    url = "https://wiki.badge.team"
+    weight = 0
+  [[menu.shortcuts]]
+    name = "Hatchery"
+    url = "https://badge.team/"
+    weight = 1
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]

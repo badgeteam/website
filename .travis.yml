@@ -1,0 +1,12 @@
+language: go
+
+go:
+  - 1.9
+
+sudo: false
+
+install:
+  - go get -u -v github.com/gohugoio/hugo
+
+script:
+  - hugo
