@@ -1,6 +1,6 @@
 baseurl = "/"
 languageCode = "en-GB"
-title = "Badge.team API documentation"
+title = "BADGE.TEAM documentation"
 paginate = 5
 theme = "hugo-theme-learn-badgeteam"
 
@@ -20,12 +20,16 @@ canonifyURLs = true
   
 [menu]
   [[menu.shortcuts]]
+    name = "GIT repository"
+    url = "https://github.com/badgeteam/ESP32-platform-firmware"
+    weight = 0
+  [[menu.shortcuts]]
     name = "Wiki"
     url = "https://wiki.badge.team"
     weight = 0
   [[menu.shortcuts]]
     name = "Hatchery"
-    url = "https://badge.team/"
+    url = "https://badge.team"
     weight = 1
 
 [outputs]
