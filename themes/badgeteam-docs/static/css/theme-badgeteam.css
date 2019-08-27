@@ -3,14 +3,15 @@
     
     --MAIN-TEXT-color:#000000; /* Color of text by default */
     --MAIN-TITLES-TEXT-color: #5e5e5e; /* Color of titles h2-h3-h4-h5 */
-    --MAIN-LINK-color:#000000; /* Color of links */
+    --MAIN-LINK-color:#0086DC; /* Color of links */
     --MAIN-LINK-HOVER-color:#000000; /* Color of hovered links */
     --MAIN-ANCHOR-color: #000000; /* color of anchors on titles */
 
-    --MENU-HEADER-BG-color:#FFE700; /* Background color of menu header */
+    --MENU-HEADER-BG-color:#0086DC; /* Background color of menu header */
     --MENU-HEADER-BORDER-color:#000000; /*Color of menu header border */ 
+    --MENU-HEADER-color:#FFFFFF;
 
-    --MENU-SEARCH-BG-color:#FFE700; /* Search field background color (by default borders + icons) */
+    --MENU-SEARCH-BG-color:#FFFFFF; /* Search field background color (by default borders + icons) */
     --MENU-SEARCH-BOX-color: #000000; /* Override search field border color */
     --MENU-SEARCH-BOX-ICONS-color: #000000; /* Override search field icons color */
 
@@ -21,7 +22,7 @@
     --MENU-SECTION-ACTIVE-CATEGORY-color: #777; /* Color of active category text */
     --MENU-SECTION-ACTIVE-CATEGORY-BG-color: #fff; /* Color of background for the active category (only) */
     
-    --MENU-VISITED-color: #FFE700; /* Color of 'page visited' icons in menu */
+    --MENU-VISITED-color: #FF6600; /* Color of 'page visited' icons in menu */
     --MENU-SECTION-HR-color: #2b2020; /* Color of <hr> separator in menu */
     
 }
@@ -61,7 +62,7 @@ a:hover {
 }
 
 :focus::placeholder {
-  color: #FFE700 !important;
+  color: #000000 !important;
   opacity: 1;
 }
 
@@ -82,7 +83,7 @@ a:hover {
 }
 #sidebar #header-wrapper {
     background: var(--MENU-HEADER-BG-color);
-    color: var(--MENU-SEARCH-BOX-color);
+    color: var(--MENU-HEADER-color);
     border-color: var(--MENU-HEADER-BORDER-color);
 }
 #sidebar .searchbox {
