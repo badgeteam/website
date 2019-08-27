@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en-GB"
 title = "Badge.team API documentation"
 paginate = 5
-theme = "badgeteam-docs"
+theme = "hugo-theme-learn-badgeteam"
 
 enableRobotsTXT = true
 canonifyURLs = true
