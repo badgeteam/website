@@ -1,12 +1,13 @@
-language: go
-
-go:
-  - 1.9
-
+dist: bionic
 sudo: false
+language: bash
+os:
+  - linux
 
-install:
-  - go get -u -v github.com/gohugoio/hugo
+addons:
+  apt:
+    packages:
+      - hugo
 
 script:
   - hugo
