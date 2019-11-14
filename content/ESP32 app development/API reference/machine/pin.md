@@ -1,3 +1,9 @@
+---
+title: "Pin: direct GPIO control"
+nodateline: true
+weight: 2
+---
+
 # Direct GPIO control
 
 The *machine.Pin* API allows you to directly control GPIOs of the ESP32 on your badge.
@@ -26,8 +32,13 @@ myInput.value(True) # Set the pin state to 1 or "HIGH"
 
 ## Interrupts
 
-To-Do
+(To-Do)
 
 ## Pulse Width Modulation (PWM)
 
-To-Do
+(To-Do)
+
+
+## Wakeup from deep-sleep
+
+(To-Do)

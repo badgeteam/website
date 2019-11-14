@@ -1,7 +1,7 @@
 ---
 title: "Hatchery"
 nodateline: true
-weight: 3
+weight: 4
 ---
 
 The hathery is the application repository which hosts the apps ("eggs") you can load onto your badge.

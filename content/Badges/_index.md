@@ -14,13 +14,13 @@ Our very own ESP32 based badges, fully designed, tested and built by BADGE.TEAM
 
 | [SHA2017](sha2017)                                       | [HackerHotel 2019](hackerhotel-2019)                                      | [I-PANE (CampZone 2019)](campzone-2019)                                |
 |----------------------------------------------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------|
-| [<img src="sha2017/sha2017.svg" width="200" />](sha2017) | [<img src="hackerhotel-2019/hh2019.svg" width="200" />](hackerhotel-2019) | [<img src="campzone-2019/cz2019.svg" width="200" />](campzone-2019)    |
+| [<img src="sha2017/sha2017.svg" width="200" />](sha2017) | [<img src="hackerhotel-2019/hh2019.svg" width="150" />](hackerhotel-2019) | [<img src="campzone-2019/cz2019.svg" width="300" />](campzone-2019)    |
 
 ### Other badges
 
 | [ETH0](eth0-2019)                                         | [HackerHotel 2020](hackerhotel-2020)                             |
 |-----------------------------------------------------------|------------------------------------------------------------------|
-| [<img src="eth0-2019/eth0.svg" width="200" />](eth0-2019) | [<img src="eth0-2019/eth0.svg" width="200" />](hackerhotel-2020) |
+| [<img src="eth0-2019/eth0.png" width="200" />](eth0-2019) | [<img src="eth0-2019/eth0.svg" width="200" />](hackerhotel-2020) |
 
 ## Collaborations
 

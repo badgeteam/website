@@ -1,7 +1,7 @@
 ---
 title: "Firmware development (ESP32)"
 nodateline: true
-weight: 4
+weight: 3
 ---
 
 This section desribes the development workflow and firmware structure for the BADGE.TEAM ESP32 platform firmware.

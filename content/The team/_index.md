@@ -1,5 +1,5 @@
 ---
-title: "The team"
+title: "The team: who are we?"
 nodateline: true
 weight: 9000
 ---

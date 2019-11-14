@@ -1,7 +1,7 @@
 ---
 title: "Non Volatile Storage"
 nodateline: true
-weight: 40
+weight: 1
 ---
 
 This page describes the Non-Volatile-Storage (NVS) functions of the machine API. This NVS is used to store settings such as WiFi credentials and your nickname.
