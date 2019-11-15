@@ -4,13 +4,7 @@ nodateline: true
 weight: 30
 ---
 
-The *display* module is available on platforms which have the framebuffer driver enabled. It allows for controlling the display of your device.
-
-*Note: This API is still under active development and may change at any time. Not all functions are usable at the moment. The functions marked with DO NOT USE do not work in the currently provided firmware version.*
-
-# Status
-
-This API is currently in development. Not all functions have been implemented and there are known bugs.
+The *display* module is available on platforms which have the *framebuffer* driver enabled. It allows for controlling the display of your device.
 
 # Reference
 | Command          | Parameters                                                            | Description                                                                                                                                                                                                                                                                                            |
@@ -41,13 +35,6 @@ This API is currently in development. Not all functions have been implemented an
 | windowHide       | name                                                                  |                                                                                                                                                                                                                                                                                                        |
 | windowFocus      | name                                                                  |                                                                                                                                                                                                                                                                                                        |
 | windowList       | \-                                                                    |                                                                                                                                                                                                                                                                                                        |
-| windowLoop       | *DO NOT USE*                                                          |                                                                                                                                                                                                                                                                                                        |
-| frameAdd         | *DO NOT USE*                                                          |                                                                                                                                                                                                                                                                                                        |
-| frameRemove      | *DO NOT USE*                                                          |                                                                                                                                                                                                                                                                                                        |
-| frameStep        | *DO NOT USE*                                                          |                                                                                                                                                                                                                                                                                                        |
-| frameSeek        | *DO NOT USE*                                                          |                                                                                                                                                                                                                                                                                                        |
-| frameCurrent     | *DO NOT USE*                                                          |                                                                                                                                                                                                                                                                                                        |
-| frameCount       | *DO NOT USE*                                                          |                                                                                                                                                                                                                                                                                                        |
 
 # Color representation
 Colors are always represented in 24-bit from within Python, in the 0xRRGGBB format. This matches HTML/CSS colors which are #RRGGBB as well.
@@ -84,11 +71,8 @@ display.drawRect(30, 30, 10, 10, True, 0xFFFFFF) # Draw a filled 10x10 rectangle
 display.flush() # Write the contents of the buffer to the display
 ```
 
-# Known bugs & other problems
- - All frame related APIs have not been properly implemented yet
- - Rotation of the contents of windows does not work correctly in combination with rotation of the screen itself.
+# Known problems
+ - Rotation of the contents of windows does not work correctly in combination with rotation of the screen itself
  - There is no method available to list the fonts available on your platform
  - There is no method for providing a custom font
- - There is no method for checking if a specific font is available
  - There is no anti-aliassing support
- - There are no examples available yet

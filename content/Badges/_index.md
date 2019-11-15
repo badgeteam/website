@@ -9,18 +9,21 @@ weight: 2
 Since 2017 we've designed multiple badges. This section lists the badges BADGE.TEAM developed or helped developing.
 
 ### ESP32 based
+| Badge                                                                     |                                                                           |
+|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| [SHA2017](sha2017)                                                        | [<img src="sha2017/sha2017.svg" width="250" />](sha2017)                  |
+| [Disobey 2019](disobey-2019)                                              | [<img src="disobey-2019/disobey2019.svg" width="230" />](disobey-2019)    |
+| [HackerHotel 2019](hackerhotel-2019)                                      | [<img src="hackerhotel-2019/hh2019.svg" width="150" />](hackerhotel-2019) |
+| [I-PANE (CampZone 2019)](campzone-2019)                                   | [<img src="campzone-2019/cz2019.svg" width="300" />](campzone-2019)       |
+| [Disobey 2020](disobey-2020)                                              | (Secret!)                                                                 |
 
-Our very own ESP32 based badges, fully designed, tested and built by BADGE.TEAM
 
-| [SHA2017](sha2017)                                       | [HackerHotel 2019](hackerhotel-2019)                                      | [I-PANE (CampZone 2019)](campzone-2019)                                |
-|----------------------------------------------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------|
-| [<img src="sha2017/sha2017.svg" width="200" />](sha2017) | [<img src="hackerhotel-2019/hh2019.svg" width="150" />](hackerhotel-2019) | [<img src="campzone-2019/cz2019.svg" width="300" />](campzone-2019)    |
 
 ### Other badges
-
-| [ETH0](eth0-2019)                                         | [HackerHotel 2020](hackerhotel-2020)                             |
-|-----------------------------------------------------------|------------------------------------------------------------------|
-| [<img src="eth0-2019/eth0.png" width="200" />](eth0-2019) | [<img src="eth0-2019/eth0.svg" width="200" />](hackerhotel-2020) |
+| Badge                                                                     |                                                                           |
+|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| [ETH0](eth0-2019)                                                         | [<img src="eth0-2019/eth0.png" width="200" />](eth0-2019)                 |
+| [HackerHotel 2020](hackerhotel-2020)                                      | (Secret!)                                                                 |
 
 ## Collaborations
 
