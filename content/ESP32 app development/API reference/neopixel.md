@@ -4,14 +4,20 @@ nodateline: true
 weight: 9999
 ---
 
+Init & turn off all LEDs
 ```
 import neopixel
 
 neopixel.enable()
-ledData = [0xFF, 0xFF, 0xFF]*12
+ledData = [0x00, 0x00, 0x00]*12
 neopixel.send(bytes(ledData))
 ```
+Turn all LEDs on
+```
+neopixel.send(bytes([0xFF, 0xFF, 0xFF]*12))
+```
 
+From disobey sponsor-app
 ```
 import neopixel
 
