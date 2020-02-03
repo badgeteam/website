@@ -20,10 +20,10 @@ Since 2017 we've designed multiple badges. This section lists the badges BADGE.T
 
 
 ### Other badges
-| Badge                                                                     |                                                                           |
-|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| [ETH0](eth0-2019)                                                         | [<img src="eth0-2019/eth0.png" width="200" />](eth0-2019)                 |
-| [HackerHotel 2020](hackerhotel-2020)                                      | (Secret!)                                                                 |
+| Badge                                                                     |                                                                                    |
+|---------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| [ETH0](eth0-2019)                                                         | [<img src="eth0-2019/eth0.png" width="200" />](eth0-2019)                          |
+| [HackerHotel 2020](hackerhotel-2020)                                      | [<img src="hackerhotel-2020/hackerhotel2020.gif" width="200" />](hackerhotel-2020) |
 
 ## Collaborations
 
