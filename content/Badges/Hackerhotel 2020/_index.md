@@ -16,6 +16,11 @@ This badge is a bit different from our other badges: it's a challenge badge. No 
 
 The Hackerhotel 2020 badge is a mixed reality escape room. Reminiscent of the classic 'text adventures' but with interactions in the real world, it will present you with many challenges to overcome in both the virtual and the real hotel. 
 
+## The story so far...
+![comic](Comic140x120_resized.png)
+
+Want a big version to make a poster? Click [here](Comic140x120_big.png)
+
 ## Getting started
 
 Did you just receive your badge at the event? Great! Plug in the batteries and you can start playing the minigames on the badge right away. There are four buttons on the front of the device using which you can control the games. Good luck figuring out how it works, as we're leaving that part as a little secret!
