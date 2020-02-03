@@ -5,7 +5,7 @@ Local development:
 [Install hugo](https://gohugo.io/getting-started/installing/)
 
 ```bash
-git clone —recursive https://github.com/badgeteam/website-docs.git
+git clone https://github.com/badgeteam/website-docs.git
 cd website-docs
 hugo server
 ```
