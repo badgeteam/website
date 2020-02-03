@@ -33,14 +33,14 @@ The badge will present you with a text entry prompt when you connect to it using
 ### Installing a terminal emulator
   - [On Linux](connecting-linux)
   - [On Windows 7, 8 and 10](connecting-windows)
-  - [On Apple OS X](connecting-mac)
+  - [On macOS](connecting-mac)
 
 ## Errata
 Some mistakes were made both in the design and during assembly, which we couldn't fix in time for the event. The SAO (shitty add-on) connector has been placed on the bottom of the badge, while it was intended to be placed on the top side. This means that the pinout of the SAO connector is mirrored when compared to the SAO specifications. The pinout mentioned on the silkscreen of your badge does properly match the connector, so no worries there. Should you want to plug in a shitty-addon then you will have to replace the connector.
 
 At the badge assembly, both during Hackerhotel 2020 and during future events where we attend we will be sure to take some extra SAO connectors with us, together with the necessary equipment for doing this small rework step.
 
-Other mistakes are more visible, but less obvious: we've mirrored the pinout of the LEDs on this badge. To work around this issue we've removed the N-mosfets used to drive the LED-matrix and replaced them with bodgewires. To get the most light intensity out of your badge and to restore your badge to it's full potential you can flip the leds (they're symmetric), solder the N-mosfets back in place and re-flash the firmware to drive the LED-matrix the right way round. Doing this rework takes a lot of time (30 minutes or more), but we're glad to be of assistance should you want to attempt this.
+Other mistakes are more visible, but less obvious: we've mirrored the pinout of the LEDs on this badge. To work around this issue we've removed the N-mosfets used to drive the LED-matrix and replaced them with bodgewires. To get the most light intensity out of your badge and to restore your badge to it's full potential you can flip the leds (they're symmetric), solder some SOT23 N-mosfets back in place and re-flash the firmware to drive the LED-matrix the right way round. Doing this rework takes a lot of time (30 minutes or more), but we're glad to be of assistance should you want to attempt this.
 
 You can find a manual for fully reworking your badge [here](rework-manual).
 
