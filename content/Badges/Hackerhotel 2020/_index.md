@@ -21,6 +21,16 @@ The Hackerhotel 2020 badge is a mixed reality escape room. Reminiscent of the cl
 
 Want a big version to make a poster? Click [here](Comic140x120_big.png)
 
+## In the bag
+Your badgekit contains all the essentials:
+* badge
+* lanyard
+* batteries
+
+If you forgot to bring your USB to Serial adapter, you can pick one up at the badge hacking area if needed. We didn't buy 350 of them, so please only pick one up if you need one!
+
+The same goes for the headphones. They won't be in the bag, but pick up a pair if you need one. Note: ours won't be as nice as the one you already have!
+
 ## Getting started
 
 Did you just receive your badge at the event? Great! Plug in the batteries and you can start playing the minigames on the badge right away. There are four buttons on the front of the device using which you can control the games. Good luck figuring out how it works, as we're leaving that part as a little secret!
