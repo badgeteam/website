@@ -61,6 +61,8 @@ At the badge assembly, both during Hackerhotel 2020 and during future events whe
 ### Undo the rework (if you want to)
 Other mistakes are more visible, but less obvious: we've mirrored the pinout of the LEDs on this badge. To work around this issue we've removed the N-mosfets used to drive the LED-matrix and replaced them with bodgewires. To get the most light intensity out of your badge and to restore your badge to it's full potential you can flip the leds (they're symmetric), solder some SOT23 N-mosfets back in place and re-flash the firmware to drive the LED-matrix the right way round. Doing this rework takes a lot of time (30 minutes or more), but we're glad to be of assistance should you want to attempt this.
 
+Get the firmware (To be released after event) and go to `resources.h` and enable `#define PURIST_BADGE` and flash following instructions.
+
 You can find a manual for fully reworking your badge [here](rework-manual).
 
 
