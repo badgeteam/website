@@ -1,5 +1,5 @@
 ---
-title: "Firmware development (ESP32)"
+title: "ESP32: firmware development"
 nodateline: true
 weight: 3
 ---

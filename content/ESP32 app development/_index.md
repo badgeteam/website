@@ -1,5 +1,5 @@
 ---
-title: "App development (ESP32)"
+title: "ESP32: app development"
 nodateline: true
 weight: 3
 ---
