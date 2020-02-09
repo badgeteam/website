@@ -20,17 +20,21 @@ canonifyURLs = true
   
 [menu]
   [[menu.shortcuts]]
-    name = "GIT repository"
-    url = "https://github.com/badgeteam/ESP32-platform-firmware"
+    name = "Hatchery (app market)"
+    url = "https://hatchery.badge.team"
+    weight = 1
+  [[menu.shortcuts]]
+    name = "Github"
+    url = "https://github.com/badgeteam"
+    weight = 0
+  [[menu.shortcuts]]
+    name = "Main website"
+    url = "https://badge.team"
     weight = 0
   [[menu.shortcuts]]
     name = "Wiki"
     url = "https://wiki.badge.team"
     weight = 0
-  [[menu.shortcuts]]
-    name = "Hatchery"
-    url = "https://badge.team"
-    weight = 1
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
