@@ -1,5 +1,5 @@
 ---
-title: "Connecting to Mac"
+title: "Connecting on Mac"
 nodateline: true
 weight: 10
 ---
@@ -13,7 +13,7 @@ Brew is the installer every Mac should ship with. A ton of open source apps will
 ### Picocom
 Install Picocom using `brew install picocom`.
 Done. It's that easy.
-### Connecting badge to Mac
+### Connecting to your badge on Mac
 Plug in a USB-Serial board, and maybe install some drivers to get it working. 
 
 On your terminal type `ls /dev/tty.*` and hit enter
@@ -31,7 +31,9 @@ Picocom is a bit spartan. Start it using
 
 Instead of `/dev/tty.SLAB_USBtoUART` you should use the device name you found earlier.
 
-type in `?` and get going in the awesome experience. Type in `a` and verify the symbols you see match the symbols you see on the badge. If you get question marks in blocks, weird symbols etc, your locale is not set right.
+When you see a blank screen, press the Enter key twice. A welcoming prompt should be displayed.
+
+Type in `?` and get going in the awesome experience. Type in `a` and verify the symbols you see match the symbols you see on the badge. If you get question marks in blocks, weird symbols etc, your locale is not set right.
 
 Press *control-a* and then *control-h* to see Picocom **help**
 
