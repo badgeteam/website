@@ -7,13 +7,16 @@ We get it. The square black Lenovo is still number one 😊
 ## Preparations
 We assume you're running a modern version of Linux. 
 ### Picocom
-Install Picocom using `sudo apt install picocom` or `yum install picocom` or `dnf install picocom` or `pacman -S picocom` or `emerge -atv ` which ever looks familiar.
+Install Picocom using `sudo apt install picocom` or `yum install picocom` or `dnf install picocom` or `pacman -S picocom` or `emerge -atv picocom` which ever looks familiar.
+
 Done. It's that easy.
 ### Connecting to your badge on Linux
 Plug in a USB-Serial board, and maybe install some drivers to get it working. 
 
-On your terminal type `ls /dev/tty.*` and hit enter
+On your terminal type `ls /dev/tty.*` and hit enter:
+
 * Serial chips are usually labeled /dev/ttyUSB0
+
 If your USB-Serial doesn't show up in `/dev/tty*`then the driver hasn't been installed or isn't working properly (or you have a dead USB port or a dead USB-Serial)
 
 Connect the 3.3v and GND to the header on the back of the badge. Connect the RX of the badge to the TX of the USB-Serial, and the TX of the badge to the RX of the USB-Serial. 

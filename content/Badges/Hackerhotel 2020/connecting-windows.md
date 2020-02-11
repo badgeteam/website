@@ -10,8 +10,10 @@ We assume you're running a modern version of Windows.
 ### PuTTY
 Download PuTTY from https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html 
 
+Install PuTTY.
 ### Connecting to your badge on Windows
 Configure the PuTTY menu as follows:
+
 * Under Connection type, select Serial.
 * In the Serial line field, enter the COM# for your board, such as COM7.
     * Note: If you did not identify your COM# when setting up your board, navigate to the Device Manager and check for an entry called USB Serial Port

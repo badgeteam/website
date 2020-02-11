@@ -12,15 +12,18 @@ Visit [https://brew.sh](https://brew.sh) and use the oneliner you find there to 
 Brew is the installer every Mac should ship with. A ton of open source apps will become available to you without the hassle. Just type in `brew install $appname` and it will happen!
 ### Picocom
 Install Picocom using `brew install picocom`.
+
 Done. It's that easy.
 ### Connecting to your badge on Mac
 Plug in a USB-Serial board, and maybe install some drivers to get it working. 
 
-On your terminal type `ls /dev/tty.*` and hit enter
+On your terminal type `ls /dev/tty.*` and hit enter:
+
 * CP210x chips are usually labeled /dev/tty.SLAB_USBtoUART
 * CH340 chips are labeled ...
 * FTDI chips are labeled ...
 * Prolific 2303 chips should just die. Please discard.
+
 If your USB-Serial doesn't show up in `/dev/tty.*`then the driver hasn't been installed or isn't working properly (or you have a dead USB port or a dead USB-Serial)
 
 Connect the 3.3v and GND to the header on the back of the badge. Connect the RX of the badge to the TX of the USB-Serial, and the TX of the badge to the RX of the USB-Serial. 
