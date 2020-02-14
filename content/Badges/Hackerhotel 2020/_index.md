@@ -36,6 +36,11 @@ The same goes for the headphones. They won't be in the bag, but pick up a pair i
 Did you just receive your badge at the event? Great! Plug in the batteries and you can start playing the minigames on the badge right away. There are four buttons on the front of the device using which you can control the games. Good luck figuring out how it works, as we're leaving that part as a little secret!
 
 {{% notice warning %}}
+Please pay attention to the batteries when plugging them in. Orient them like so:
+![batteries.png](batteries.png)
+{{% /notice %}}
+
+{{% notice warning %}}
 Before plugigng in shitty addons please read the notes mentioned in the Errata section of this page!
 {{% /notice %}}
 
