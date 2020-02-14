@@ -39,6 +39,10 @@ Did you just receive your badge at the event? Great! Plug in the batteries and y
 Before plugigng in shitty addons please read the notes mentioned in the Errata section of this page!
 {{% /notice %}}
 
+{{% notice warning %}}
+Please do not bring front of badge in contact with anything metallic. All exposed metal is GND, and the battery-terminals poke out. Short them: battery overheats. When storing badge: please remove batteries. 
+{{% /notice %}}
+
 ## Playing the game
 
 To play the "escape from Hackerhotel" challenge you need to connect your badge to a computer. You can do this by connecting a USB-serial converter with 3.3 volt signal levels to the GND, RX and TX pins of the shitty-addon (SAO) connector. The TX pin is the pin transmitting data to your computer, the RX pin is for sending data from your computer to the badge.
