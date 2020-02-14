@@ -55,7 +55,13 @@ The badge will present you with a text entry prompt when you connect to it using
   - [On macOS](connecting-mac)
 
 ## Errata
-Some mistakes were made both in the design and during assembly, which we couldn't fix in time for the event. 
+Some mistakes were made both in the design and during assembly, which we couldn't fix in time for the event.
+
+## Troubleshooting
+### 3 red lights
+(3redlights.png)
+Two red eyes and a red diamond an an unresponsive badge are the notification that the EEprom has been corrupted. Either you broke it, the code broke it, or it was another fault. No worries, visit a friendly badge.team member and they can program that chip for you in under 15 seconds!
+ 
 
 ### SAO
 The SAO (shitty add-on) connector has been placed on the bottom of the badge, while it was intended to be placed on the top side. This means that the pinout of the SAO connector is mirrored when compared to the SAO specifications. The pinout mentioned on the silkscreen of your badge does properly match the connector, so no worries there. Should you want to plug in a shitty-addon, then you will have to remove and replace the connector.
