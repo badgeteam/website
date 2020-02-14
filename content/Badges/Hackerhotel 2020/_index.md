@@ -81,10 +81,5 @@ Get the firmware (To be released after event) and go to `resources.h` and enable
 You can find a manual for fully reworking your badge [here](rework-manual).
 
 
-
-
-
-
-
-
- 
+### CYBER SCARAB
+Our friends at Tilde Industries made a very nice addon for the badge. [Find out more on their website.](https://tilde.industries/cyber-scarab/)
