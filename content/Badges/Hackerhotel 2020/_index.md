@@ -52,7 +52,7 @@ Please do not bring front of badge in contact with anything metallic. All expose
 
 To play the "escape from Hackerhotel" challenge you need to connect your badge to a computer. You can do this by connecting a USB-serial converter with 3.3 volt signal levels to the GND, RX and TX pins of the shitty-addon (SAO) connector. The TX pin is the pin transmitting data to your computer, the RX pin is for sending data from your computer to the badge.
 
-The badge will present you with a text entry prompt when you connect to it using a terminal emulator configured for 115200 baud, 8-bit data width, no pairity bit and 1 stop-bit (115200 8n1).
+The badge will present you with a text entry prompt when you connect to it using a terminal emulator configured for 115200 baud, 8-bit data width, no pairity bit and 1 stop-bit (115200 8n1). You might have to type an "h" followed by ENTER to get the badge to show it's prompt.
 
 ### Installing a terminal emulator
   - [On Linux](connecting-linux)
