@@ -6,7 +6,7 @@ weight: 5
 
 ![Disobey2019](disobey2019.svg)
 
-This badge has been produced for participants, sponsors, and organizers of the Finnish event Disobey in year 2019. It had custom PCBs with art and colors varying by type and was programmed to contain pointers as part of a hacker puzzle competition. As a stand alone device after the event, the Disobey 2019 badge would be able to run micropython on its esp32.
+This badge has been produced for participants, sponsors, and organizers of the Finnish event Disobey in year 2019. It had a custom PCB with variations in art and color depending on the participant's ticket. It was programmed to contain pointers as part of a hacker puzzle competition. As a stand alone device after the event, the Disobey 2019 badge would be able to run micropython on its esp32.
 
 ## Getting started
 
@@ -14,11 +14,15 @@ Attendees received the badge along with 2 alkaline AAA 1.5V batteries, provided 
 
 The badge needs a wireless connection to access the Hatchery, where micropython applications (called eggs) are stored. Badges can be used to download the eggs directly and use them without needing to connect to a computer.
 
-The badge can be connected to a computer via USB. It communicates via serial at 115200 baudrate. In Linux it should appear as /dev/ttyACM0 (or the first free number, higher than 0). Users can open the Menu and navigate it, or invoke a micropython shell and live-code on the hardware. There is also an on-screen menu. There, users can trigger an OTA firmware update or change the WiFi credentials to use the badge post-event.
+The badge can be connected to a computer via USB. It communicates via serial at 115200 baudrate. In Linux it should appear as /dev/ttyACM0 (or the first free number, higher than 0). To connect to it, you can use e.g. screen:
+
+    screen /dev/ttyACM0 115200
+
+Users can open the menu and navigate it, or invoke a micropython shell and live-code on the hardware. There is also an on-screen menu. There, users can trigger an OTA firmware update or change the WiFi credentials to use the badge post-event.
 
 ## Hardware
 
-This badge has buttons, a small screen with backlight, a buzzer, and both an infrared receiver and transmitter. Hoewever, the most used feature during the event were multiple SMD RGB LEDs going around the outline of the PCB, attached to the back.
+This badge has buttons, a small screen with backlight, a buzzer, and both an infrared receiver and transmitter. However, the most used feature during the event were multiple SMD RGB LEDs going around the outline of the PCB, attached to the back.
 
 ## Programming API
 
