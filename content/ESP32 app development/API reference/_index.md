@@ -40,6 +40,7 @@ Should you have ideas, problems or observations but no means to act on them then
 | [system](system)       | Abstraction layer for starting apps and controlling badge behaviour and sleep mode | Yes     | Yes          | Yes              | Yes                    |
 | [samd](samd)           | Disobey 2019 specific hardware interface module                                    | No      | Yes          | Yes              | Yes                    |
 | [sndmixer](sndmixer)   | Audio related functions *in active development, may change at ANY time*            | No      | Partially    | Yes              | No                     |
+| [opus](opus)           | Opus encoding and decoding                                                         | No      | No           | No               | No                     |
 | [neopixel](neopixel)   | Control the addressable LEDs on your badge                                         | Yes     | No           | Yes              | No                     |
 | [mpu6050](mpu6050)     | MPU6050 accelerometer and gyroscope control                                        | No      | No           | No               | Yes                    |
 | [rgb](rgb)             | Legacy display API for CampZone 2019 badges (1/2)                                  | No      | No           | No               | Yes                    |
