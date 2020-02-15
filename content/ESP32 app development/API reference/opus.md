@@ -20,8 +20,8 @@ Then you can use the encoder to encode audio frames. Those may have lengths of 2
 ```
 # One frame of data containing 480 null samples
 input = bytearray(960)
-# Encode the data
-output = encoder.encode(input)
+# Encode the data, using at most 128 bytes for the frame. This would be around 2 kByte/s. At 8 kHz sampling rates, opus will use around 1 kByte/s for mono audio.
+output = encoder.encode(input, 128)
 ```
 
 Each encoded frame has some metadata at the beginning containing the channel,
@@ -48,6 +48,6 @@ encoder = opus.Encoder(8000, 0)
 decoder = opus.Encoder(8000, 0)
 
 input = bytearray(960)
-encoded = encoder.encode(input)
+encoded = encoder.encode(input, 128)
 decoded = decoder.decode(encoded)
 ```
