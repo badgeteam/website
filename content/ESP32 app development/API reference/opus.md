@@ -30,13 +30,11 @@ into one packet.
 
 # Decoding data
 
-Decoders are created just like encoders:
+Decoders do not take any arguments with their constructor, because they take the necessary information from their input frames:
 
 ```
 import opus
-sampling_rate = 8000
-stereo = False
-decoder = opus.Decoder(sampling_rate, stereo)
+decoder = opus.Decoder()
 ```
 
 The created decoder can handle any data created by `opus.Encoder`, even if the
@@ -45,7 +43,7 @@ match the new settings.
 
 ```
 encoder = opus.Encoder(8000, 0)
-decoder = opus.Encoder(8000, 0)
+decoder = opus.Decoder()
 
 input = bytearray(960)
 encoded = encoder.encode(input, 128)
