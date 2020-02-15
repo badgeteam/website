@@ -60,6 +60,18 @@ audioStreamId = sndmixer.mp3_stream(mp3file)
 sndmixer.volume(audioStreamId, 50)
 ```
 
+## Playing opus-encoded data
+Playback of opus works the same as MP3. You just have to replace `mp3` with `opus`:
+```
+import sndmixer
+sndmixer.begin(2, True)
+sndmixer.opus_stream(open('snd.opus', 'rb'))
+```
+
+Opus data is expected to have frames formed like this: `u8: channels | u8:
+sampling_rate / 400 | u16: len | u8[len]: data`, where `data` is the actual
+opus-encoded data. This is the format produced by the `opus` module.
+
 # Playing tracker music
 The sound-mixer can play mod, s3m and other tracker music files (your mileage may vary).
 
