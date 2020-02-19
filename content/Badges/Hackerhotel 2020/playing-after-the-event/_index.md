@@ -4,7 +4,7 @@ nodateline: true
 weight: 10
 ---
 
-![badge](hackerhotel2020.gif)
+![badge](../hackerhotel2020.gif)
 
 ## Mixed reality
 
