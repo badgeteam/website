@@ -86,7 +86,7 @@ When you do your offering, you will be asked how many times you kneeled and whic
 
 
 
-If you don't have python3 on your system, you can execute this code online at [https://repl.it/languages/python3]()
+If you don't have python3 on your system, you can execute this code online at https://repl.it/languages/python3
 
 ## Picture frames
 There were two other picture frames spread accross the bar. Use at your own risk ;-)
