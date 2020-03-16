@@ -4,43 +4,39 @@ nodateline: true
 weight: 9999
 ---
 
-Init & turn off all LEDs
+## Import the library and start the driver
 ```
 import neopixel
-
 neopixel.enable()
-ledData = [0x00, 0x00, 0x00]*12
+```
+
+## Sending data to the LEDs
+Once you have enabled the driver you can start sending data. The driver expects a bytes object containing a byte per channel. The exact meaning of these bytes depends on the type of addressable leds your device uses. The easiest way to generate the needed bytes object is by converting a list into one by wrapping it with ```bytes()```.
+
+```
+import neopixel
+neopixel.enable()
+ledData = [0xFF,0x00,0x00,0x00]
 neopixel.send(bytes(ledData))
 ```
-Turn all LEDs on
-```
-neopixel.send(bytes([0xFF, 0xFF, 0xFF]*12))
-```
 
-From disobey sponsor-app
+You can easily repeat patterns by using a simple Python trick: you can "multiply" a list by an amount to have python repeat the list that amount of times. The next example shows this, expecting 3 channels per led and 12 leds to be on the badge. If this is the case then all LEDs on the badge should light up in the same color.
+
 ```
 import neopixel
-
 neopixel.enable()
-ledStop = False
-def ledThread():
-  global ledStop
-  ledState = 0
-  ledData = [0x00, 0x00, 0x00]*12
-  while True:
-	for i in range(len(ledData)):
-	  if ledData[i] > 64:
-		ledData[i] -= 64
-	  else:
-		ledData[i] = 0
-	if not ledStop:
-	  ledData[ledState*3] = 0xFF
-	  ledData[(11-ledState)*3+1] = 0xFF
-	  ledData[ledState*3+2] = 0xFF
-	  ledData[(11-ledState)*3+2] = 0xFF
-	neopixel.send(bytes(ledData))
-	ledState = ledState + 1
-	if ledState > 11:
-	  ledState = 0
-	time.sleep_ms(50)
+ledData = [0xFF,0x00,0x00] * 12
+neopixel.send(bytes(ledData))
+```
+
+Turning all LEDs off
+
+```
+import neopixel
+neopixel.enable()
+amount_of_channels = 3
+amount_of_leds = 12
+ledData = [0x00] * amount_of_channels * amount_of_leds
+neopixel.send(bytes(ledData))
+neopixel.disable()
 ```
