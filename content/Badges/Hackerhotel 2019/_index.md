@@ -4,7 +4,7 @@ nodateline: true
 weight: 2
 ---
 
-![HackerHotel 2019 badge](hackerhotel2019.svg)
+![HackerHotel 2019 badge](hh2019.svg)
 
 ## The HackerHotel 2019 badge
 
