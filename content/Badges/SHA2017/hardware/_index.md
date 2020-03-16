@@ -8,9 +8,13 @@ weight: 2
 
 ### E-ink display: the DKE Group DEPG0290B1
 The DKE Group DEPG0290B1 is used on the SHA Badge.
-This display might be hard to come by so we also support an alternative: the *to-do*.
 
 Datasheet: [DEPG0290B01V3.0.pdf](DEPG0290B01V3.0.pdf)
+
+{{%/* notice tip */%}}
+In case you want to build a SHA2017 badge yourself or in case you broke the display that came with your badge back in 2017 you might have noticed that the display is hard to come by so we also support a pinout compatible alternative: the GDEH029A1.
+For this alternative display to function you need to set a flag in the non-volitile memory of your badge. Go to the shell of your device and type in the following command to switch the display type: ```import machine;machine.nvs_set_u8('system','eink.dev.type',1)```. To reset your badge to the default DEPG0290B1 type display enter the following command: ```import machine;machine.nvs_set_u8('system','eink.dev.type',2)```.
+{{%/* /notice */%}}
 
 The datasheet does a very good job explaining how to initialize the display and get it to picture something.
 The LUT is explained in the section below, because THAT isn't really documented at all... 
