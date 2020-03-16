@@ -29,7 +29,7 @@ ledData = [0xFF,0x00,0x00] * 12
 neopixel.send(bytes(ledData))
 ```
 
-Turning all LEDs off
+## Turning all LEDs off
 
 ```
 import neopixel
