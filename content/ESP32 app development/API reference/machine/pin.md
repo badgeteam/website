@@ -17,7 +17,7 @@ Be carefull!
 
 ```
 from machine import Pin
-myInput = machine.Pin(0) # GPIO0 (exposed as the "flash" button on most badges)
+myInput = Pin(0) # GPIO0 (exposed as the "flash" button on most badges)
 value = myInput.value()
 print("The value of GPIO0 is {}.".format(value))
 ```
@@ -26,8 +26,8 @@ print("The value of GPIO0 is {}.".format(value))
 
 ```
 from machine import Pin
-myInput = machine.Pin(<GPIO NUMBER>, Pin,OUT) # Check the schematic of your badge to find the numbers which can be entered here
-myInput.value(True) # Set the pin state to 1 or "HIGH"
+myOutput = Pin(<GPIO NUMBER>, Pin.OUT) # Check the schematic of your badge to find the numbers which can be entered here
+myOutput.value(True) # Set the pin state to 1 or "HIGH"
 ```
 
 ## Interrupts
