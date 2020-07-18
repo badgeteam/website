@@ -32,9 +32,10 @@ Please click on the badge you have to go to the getting started guide for your b
 
 | Badge                                                                     |                                                                           |
 |---------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| [SHA2017](/badges/sha2017/getting_started/)                               | [<img src="sha2017.svg" width="250" />](sha2017)                          |
-| [Disobey 2019](/badges/disobey-2019/getting_started/)                     | [<img src="disobey2019.svg" width="230" />](disobey-2019)                 |
-| [HackerHotel 2019](/badges/hackerhotel-2019/getting_started/)             | [<img src="hh2019.svg" width="150" />](hackerhotel-2019)                  |
-| [I-PANE (CampZone 2019)](campzone-2019)                                   | [<img src="cz2019.svg" width="300" />](campzone-2019)                     |
+| [CampZone 2020](campzone-2020)                                              | [](campzone-2020)                                                                |
 | [Disobey 2020](disobey-2020)                                              | (Secret!)                                                                 |
+| [CampZone 2019](campzone-2019)                                   | [<img src="cz2019.svg" width="300" />](campzone-2019)                     |
+| [HackerHotel 2019](/badges/hackerhotel-2019/getting_started/)             | [<img src="hh2019.svg" width="150" />](hackerhotel-2019)                  |
+| [Disobey 2019](/badges/disobey-2019/getting_started/)                     | [<img src="disobey2019.svg" width="230" />](disobey-2019)                 |
+| [SHA2017](/badges/sha2017/getting_started/)                               | [<img src="sha2017.svg" width="250" />](sha2017)                          |
 

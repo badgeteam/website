@@ -1,7 +1,7 @@
 ---
 title: "Hackerhotel 2019"
 nodateline: true
-weight: 2
+weight: -3
 ---
 
 ![HackerHotel 2019 badge](hh2019.svg)
