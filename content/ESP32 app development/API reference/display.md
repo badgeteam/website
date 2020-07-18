@@ -1,10 +1,14 @@
 ---
 title: "Display"
 nodateline: true
-weight: 30
+weight: 1
 ---
 
 The *display* module is available on platforms which have the *framebuffer* driver enabled. It allows for controlling the display of your device.
+{{% notice tip %}}
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/) &nbsp;&nbsp; ✅ [Disobey 2020](/badges/disobey-2020/) &nbsp;&nbsp; ✅ [CampZone 2019](/badges/campzone-2019/) &nbsp;&nbsp; ✅ [HackerHotel 2019](/badges/hackerhotel-2019/) 
+<br> ✅ [Disobey 2019](/badges/disobey-2019/) &nbsp;&nbsp; ✅ [SHA2017](/badges/sha2017/)
+{{% /notice %}}
 
 # Reference
 | Command          | Parameters                                                            | Description                                                                                                                                                                                                                                                                                            |
@@ -44,6 +48,16 @@ For displays with a color depth of less than 24-bit the display driver will auto
 This means that even if you have a black and white display 0x000000 is black and 0xFFFFFF is white.
 
 # Examples
+
+## Setting one pixel
+
+```
+import display
+x = 2
+y = 3
+display.drawPixel(x, y, 0x00FF00)  # Set one pixel to 100% green
+display.flush() # Write the contents of the buffer to the display
+```
 
 ## Drawing a line
 

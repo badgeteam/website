@@ -5,17 +5,12 @@ weight: 60
 ---
 
 The *wifi* API allows you to connect to WiFi networks easily.
+{{% notice tip %}}
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/) &nbsp;&nbsp; ✅ [Disobey 2020](/badges/disobey-2020/) &nbsp;&nbsp; ✅ [CampZone 2019](/badges/campzone-2019/) &nbsp;&nbsp; ✅ [HackerHotel 2019](/badges/hackerhotel-2019/) 
+<br> ✅ [Disobey 2019](/badges/disobey-2019/) &nbsp;&nbsp; ✅ [SHA2017](/badges/sha2017/)
+{{% /notice %}}
 
-# Reference
-| Command    | Parameters                     | Description                                                                                                                                                                                                                                                                                                                     |
-| ---------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| connect    | \[ssid\], \[password\]         | Connect to a WiFi network. By default the stored credentials are used, but you can optionally provide the SSID (and password) of the network to connect to.                                                                                                                                                                     |
-| disconnect | \-                             | Disconnect from the WiFi network.                                                                                                                                                                                                                                                                                               |
-| status     | \-                             | Returns True if connected and False if not connected.                                                                                                                                                                                                                                                                           |
-| wait       | \[timeout\]                    | Wait until a connection with the WiFi network has been made or until the timeout time is reached. Timeout is in seconds but may be provided in 10ths of seconds. If no timeout is provided the default timeout is used. Returns True if connected after waiting and False if a connection could not be made before the timeout. |
-| ntp        | \[only-if-needed\], \[server\] | Synchronize the Real-Time-Clock with the network. Normally the synchronisation is only started when the system clock has not yet been set since the last reset. This can be overruled by setting the only-if-needed parameter to False. By default the "'pool.ntp.org" server pool is used.                                     |
-
-# Usage
+# Example
 ```
 import wifi
 wifi.connect() # Connect to the WiFi network using the stored credentials
@@ -24,6 +19,15 @@ if not wifi.wait():
 else:
 	print("You are now connected to WiFi!")
 ```
+
+# Reference
+| Function    | Parameters                     | Description                                                                                                                                                                                                                                                                                                                     |
+| ---------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| connect    | \[ssid\], \[password\]         | Connect to a WiFi network. By default the stored credentials are used, but you can optionally provide the SSID (and password) of the network to connect to.                                                                                                                                                                     |
+| disconnect | \-                             | Disconnect from the WiFi network.                                                                                                                                                                                                                                                                                               |
+| status     | \-                             | Returns True if connected and False if not connected.                                                                                                                                                                                                                                                                           |
+| wait       | \[timeout\]                    | Wait until a connection with the WiFi network has been made or until the timeout time is reached. Timeout is in seconds but may be provided in 10ths of seconds. If no timeout is provided the default timeout is used. Returns True if connected after waiting and False if a connection could not be made before the timeout. |
+| ntp        | \[only-if-needed\], \[server\] | Synchronize the Real-Time-Clock with the network. Normally the synchronisation is only started when the system clock has not yet been set since the last reset. This can be overruled by setting the only-if-needed parameter to False. By default the "'pool.ntp.org" server pool is used.                                     |
 
 # Wait, is that all you can do with WiFi?!
 No, of course not. The whole network API from the mainline MicroPython project is available on the badge.team firmware.

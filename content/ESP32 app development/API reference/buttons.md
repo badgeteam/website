@@ -1,7 +1,7 @@
 ---
 title: "Buttons"
 nodateline: true
-weight: 50
+weight: 10
 ---
 
 The *buttons* API allows you to read the state of the buttons on a badge.
