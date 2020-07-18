@@ -16,7 +16,7 @@ Specifically, the MicroPython core in our firmware is based on the ESP32 port of
 
 We have made a lot of changes on top of the work done by Loboris. We've added some badge specific APIs, a brand new framebuffer system for displaying graphics and drivers for the hardware specific to the supported badges.
 
-By doing this we aim to take the resource intensive parts of driving the hardware to the C level beneith the Python. This allows for a much more speedy experience and a lot more possibilities and flexibility.
+By doing this we aim to take the resource intensive parts of driving the hardware to the C level beneath Python. This allows for a much more speedy experience and a lot more possibilities and flexibility.
 
 ### Things to keep in mind while looking up documentation
 
@@ -31,31 +31,36 @@ Should you have ideas, problems or observations but no means to act on them then
 
 ## BADGE.TEAM platform APIs
 
-| Library                | Function                                                                           | SHA2017 | Disobey 2019 | HackerHotel 2019 | I-PANE (CampZone 2019) |
-|------------------------|------------------------------------------------------------------------------------|---------|--------------|------------------|------------------------|
-| [display](display)     | Control the display of your badge: create and display text and graphics            | Yes     | Yes          | Yes              | Yes                    |
-| [buttons](buttons)     | Read button status and attach callback functions to button interactions            | Yes     | Yes          | Yes              | Yes                    |
-| [wifi](wifi)           | Abstraction layer wrapping the ```network``` API for connection to WiFi networks   | Yes     | Yes          | Yes              | Yes                    |
-| [terminal](terminal)   | Helper functions for presenting a user interface over the serial port or telnet    | Yes     | Yes          | Yes              | Yes                    |
-| [system](system)       | Abstraction layer for starting apps and controlling badge behaviour and sleep mode | Yes     | Yes          | Yes              | Yes                    |
-| [samd](samd)           | Disobey 2019 specific hardware interface module                                    | No      | Yes          | Yes              | Yes                    |
-| [sndmixer](sndmixer)   | Audio related functions *in active development, may change at ANY time*            | No      | Partially    | Yes              | No                     |
-| [opus](opus)           | Opus encoding and decoding                                                         | No      | No           | No               | No                     |
-| [neopixel](neopixel)   | Control the addressable LEDs on your badge                                         | Yes     | No           | Yes              | No                     |
-| [mpu6050](mpu6050)     | MPU6050 accelerometer and gyroscope control                                        | No      | No           | No               | Yes                    |
-| [rgb](rgb)             | Legacy display API for CampZone 2019 badges (1/2)                                  | No      | No           | No               | Yes                    |
-| [hub75](hub75)         | Legacy display API for CampZone 2019 badges (2/2)                                  | No      | No           | No               | Yes                    |
-| [espnow](espnow)       | Mesh networking API utilizing the Espressif ESPNOW features of the ESP32           | Yes     | Yes          | Yes              | Yes                    |
-| [consts](consts)       | Reference containing constants describing your badge and it's firmware             | Yes     | Yes          | Yes              | Yes                    |
-| ssd1306                | Direct SSD1306 display control (*will be removed in a future release*)             | No      | No           | No               | No                     |
-| erc12864               | Direct ERC12864 display control (*will be removed in a future release*)            | No      | Yes          | No               | No                     |
-| eink                   | Direct E-INK display control    (*will be removed in a future release*)            | Yes     | No           | No               | No                     |
-| rtc                    | Legacy real-time-clock API (*please use machine.RTC and utime instead*)            | Yes     | Yes          | Yes              | Yes                    |
-| _buttons               | Generic GPIO button handler API, usefull for adding extra buttons to GPIO headers  | Yes     | Yes          | Yes              | Yes                    |
-| voltages               | API for reading various voltages, exact functionality differs per badge            | No      | No           | No               | No                     |
-| keyboard               | Display a text entry form complete with on-screen-keyboard                         | Yes     | Yes          | Yes              | No                     |
-| esp32_ulp              | Collection of helper functions for using the Ultra Low Power co-processor          | Yes     | Yes          | Yes              | Yes                    |
-| umqtt                  | MQTT client library                                                                | Yes     | Yes          | Yes              | Yes                    |
+| Library                | Function                                                                           | SHA2017 | Disobey 2019 | HackerHotel 2019 | CampZone 2019 | CampZone 2020 |
+|------------------------|------------------------------------------------------------------------------------|---------|--------------|------------------|---------------|---------------|
+| [display](display)     | Control the display of your badge: create and display text and graphics            | ✅      | ✅           | ✅                | ✅            | ✅             |
+| [buttons](buttons)     | Read button status and attach callback functions to button interactions            | ✅      | ✅           | ✅                | ✅            | ❌             |
+| [wifi](wifi)           | Abstraction layer wrapping the ```network``` API for connection to WiFi networks   | ✅      | ✅           | ✅                | ✅            | ✅             |
+| [system](system)       | Abstraction layer for starting apps and controlling badge behaviour and sleep mode | ✅      | ✅           | ✅                | ✅            | ✅             |
+| [consts](consts)       | Reference containing constants describing your badge and it's firmware             | ✅      | ✅           | ✅                | ✅            | ✅             |
+| [audio](audio)         | Easy to use wrapper around [sndmixer](sndmixer) for playing audio files            | ❌      | ❌           | ❌                | ❌            | ✅             |
+| [sndmixer](sndmixer)   | Audio related functions *in active development, may change at ANY time*            | ❌      | Partially    | ✅                | ❌            | ✅             |
+| [terminal](terminal)   | Helper functions for presenting a user interface over the serial port or telnet    | ✅      | ✅           | ✅                | ✅            | ✅             |
+| [opus](opus)           | Opus encoding and decoding                                                         | ❌      | ❌           | ❌                | ❌            | ❌             |
+| [neopixel](neopixel)   | Control the addressable LEDs on your badge                                         | ✅      | ❌           | ✅                | ❌            | ❌             |
+| [mpu6050](mpu6050)     | MPU6050 accelerometer and gyroscope control                                        | ❌      | ❌           | ❌                | ✅            | ❌             |
+| [ugTTS](ugTTS)         | A small library to generate and play back Text-to-Speech voice messages            | ❌      | ❌           | ❌                | ❌            | ✅             |
+| [espnow](espnow)       | Mesh networking API utilizing the Espressif ESPNOW features of the ESP32           | ✅      | ✅           | ✅                | ✅            | ❌             |
+| [hid](hid)             | Send keyboard and mouse events over USB (only on supported boards)                 | ❌      | ❌           | ❌                | ❌            | ✅             |
+| [midi](midi)           | Send MIDI messages over USB (only on supported boards)                             | ❌      | ❌           | ❌                | ❌            | ✅             |
+| [keypad](keypad)       | CampZone 2020 specific silicon keypad button event handler                         | ❌      | ❌           | ❌                | ❌            | ✅             |
+| [touchpads](touchpads) | Register callbacks that trigger when ESP32 touch pads are touched                  | ❌      | ❌           | ❌                | ❌            | ✅             |
+| [samd](samd)           | Disobey 2019 specific hardware interface module                                    | ❌      | ✅           | ❌                | ❌            | ✅             |
+| [rgb](rgb)             | Legacy display API for CampZone 2019 badges                                        | ❌      | ❌           | ❌                | ✅            | ❌             |
+| keyboard               | Display a text entry form complete with on-screen-keyboard                         | ✅      | ✅           | ✅                | ❌            | ❌             |
+| umqtt                  | MQTT client library                                                                | ✅      | ✅           | ✅                | ✅            | ✅             |
+| ssd1306                | Direct SSD1306 display control (*will be removed in a future release*)             | ❌      | ❌           | ❌                | ❌            | ❌             |
+| erc12864               | Direct ERC12864 display control (*will be removed in a future release*)            | ❌      | ✅           | ❌                | ❌            | ❌             |
+| eink                   | Direct E-INK display control    (*will be removed in a future release*)            | ✅      | ❌           | ❌                | ❌            | ❌             |
+| rtc                    | Legacy real-time-clock API (*please use machine.RTC and utime instead*)            | ✅      | ✅           | ✅                | ✅            | ✅             |
+| _buttons               | Generic GPIO button handler API, usefull for adding extra buttons to GPIO headers  | ✅      | ✅           | ✅                | ✅            | ✅             |
+| voltages               | API for reading various voltages, exact functionality differs per badge            | ❌      | ❌           | ❌                | ❌            | ❌             |
+| esp32_ulp              | Collection of helper functions for using the Ultra Low Power co-processor          | ✅      | ✅           | ✅                | ✅            | ✅             |
 
 
 
