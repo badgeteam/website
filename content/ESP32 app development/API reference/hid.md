@@ -13,10 +13,9 @@ The *HID* API allows you to make your [CampZone 2020](/badges/campzone-2020/) ba
 # Example
 
 ```python
-import hid, keycodes, time
+import hid, keycodes
 
 hid.keyboard_type("Cyber")
-time.sleep(2)
 ```
 
 # Reference
