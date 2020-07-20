@@ -6,8 +6,6 @@ weight: 2
 
 ## BADGE.TEAM badges
 
-Since 2017 we've designed multiple badges. This section lists the badges BADGE.TEAM developed or helped developing.
-
 ### ESP32 based
 | Badge                                                                     |                                                                           |
 |---------------------------------------------------------------------------|---------------------------------------------------------------------------|
