@@ -14,6 +14,8 @@ weight: -8
 * [MIDI](/esp32-app-development/api-reference/midi/)
 * [Touchpads](/esp32-app-development/api-reference/touchpads/)
 * [ugTTS](/esp32-app-development/api-reference/ugtts/)
+* [Appconfig](/esp32-app-development/api-reference/appconfig/)
 * [System](/esp32-app-development/api-reference/system/)
 * [Consts](/esp32-app-development/api-reference/consts/)
+* [uMQTT](/esp32-app-development/api-reference/umqtt/)
 * [Sndmixer](/esp32-app-development/api-reference/sndmixer/)
