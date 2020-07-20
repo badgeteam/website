@@ -11,7 +11,7 @@ Since 2017 we've designed multiple badges. This section lists the badges BADGE.T
 ### ESP32 based
 | Badge                                                                     |                                                                           |
 |---------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| [CampZone 2020](campzone-2020)                                            | [<img src="campzone-2019/badge.jpg" width="300" />](campzone-2020)        |
+| [CampZone 2020](campzone-2020)                                            | [<img src="campzone-2020/badge.png" width="300" />](campzone-2020)        |
 | [Disobey 2020](disobey-2020)                                              | [<img src="disobey-2020/badge.jpg: width="300" />](disobey-2020)          |
 | [CampZone 2019](campzone-2019)                                            | [<img src="campzone-2019/cz2019.svg" width="300" />](campzone-2019)       |
 | [HackerHotel 2019](hackerhotel-2019)                                      | [<img src="hackerhotel-2019/hh2019.svg" width="150" />](hackerhotel-2019) |
