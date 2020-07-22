@@ -22,6 +22,9 @@ if not wifi.wait():
 
 ugTTS.speak('This is a test')  # Plays over speakers
 ugTTS.text_to_mp3('This is a test too', '/cache/test_speech.mp3')  # Saves to file for later playback
+
+ugTTS.speak("Slaap kindje slaap", lang='nl') # Dutch
+ugTTS.speak("Dommage", lang='fr', volume=100) # French and set volume
 ```
 
 # Reference
