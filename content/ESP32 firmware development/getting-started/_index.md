@@ -40,7 +40,7 @@ You can find the official toolchain installation instructions here:
 
 The very, very short version of these instructions for Linux is as follows:
 - Extract the archive
-- Add the path to the ```bin``` folder in the archive, containing the toolchain executables to your path ```export PATH="$PATH:/path/to/my/toolchain/xtensa-esp32-elf/bin"```
+- Add the path to the ```bin``` folder in the archive, containing the toolchain executables, to your path ```export PATH="$PATH:/path/to/my/toolchain/xtensa-esp32-elf/bin"```
 
 ## Configuring the firmware
 
