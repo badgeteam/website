@@ -48,6 +48,8 @@ The firmware can be built for many different targets. Because of this the firmwa
 
 To apply the configuration for a specific badge navigate to the ```firmware/configs``` folder and overwrite (/create) the file ```firmware/sdkconfig``` with the configuration relevant to your badge.
 
+(Note that running ```make clean``` to remove the build output is a bit broken / insufficient at the moment. Please remove the ```firmware/build``` folder manually after switching configurations to make sure the firmware is built correctly.)
+
 
 ## Building the firmware
 
