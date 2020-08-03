@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/badgeteam/website-docs.svg?branch=master)](https://travis-ci.org/badgeteam/website-docs)
+
 # BADGE.TEAM documentation website
 
 You can find our documentation website at [docs.badge.team](docs.badge.team). This repository contains the Markdown files with content, the theme files and the configuration needed to build our website using Hugo.
@@ -14,4 +16,3 @@ git clone https://github.com/badgeteam/website-docs.git
 cd website-docs
 hugo server
 ```
-
