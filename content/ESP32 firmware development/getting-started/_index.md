@@ -50,6 +50,7 @@ To apply the configuration for a specific badge navigate to the ```firmware/conf
 
 (Note that running ```make clean``` to remove the build output is a bit broken / insufficient at the moment. Please remove the ```firmware/build``` folder manually after switching configurations to make sure the firmware is built correctly.)
 
+Manually changing the configuration of the firmware is explained in the [menuconfig](menuconfig) section.
 
 ## Building the firmware
 
