@@ -4,7 +4,7 @@ nodateline: true
 weight: 3
 ---
 
-This section desribes the development workflow and firmware structure for the BADGE.TEAM ESP32 platform firmware.
+<br /><br />
 
 # [<i class="fa fa-code" aria-hidden="true"></i> Getting started](getting-started)
 
