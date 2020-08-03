@@ -42,3 +42,17 @@ The very, very short version of these instructions for Linux is as follows:
 - Extract the archive
 - Add the path to the ```bin``` folder in the archive, containing the toolchain executables to your path ```export PATH="$PATH:/path/to/my/toolchain/xtensa-esp32-elf/bin"```
 
+## Configuring the firmware
+
+The firmware can be built for many different targets. Because of this the firmware has to be configured before it can be built. By default a "generic" configuration is used. Building the firmware using the generic configuration will get you to a Python shell on any ESP32 based device. However: almost all hardware support will be missing.
+
+To apply the configuration for a specific badge navigate to the ```firmware/configs``` folder and overwrite (/create) the file ```firmware/sdkconfig``` with the configuration relevant to your badge.
+
+
+## Building the firmware
+
+After you've downloaded the firmware, applied the correct configuration and installed the correct toolchain you have to build the Micropython cross compiler. This extra compiler converts Python scripts into a Micropython specific binary format so that these Python scripts can be integrated inside the firmware image.
+
+Building the Micropython cross compiler can be done by running ```bash mpy_cross.sh``` from inside the ```firmware``` folder.
+
+After you've built the Micropython cross compiler you can build the firmware by navigating to the ```firmware``` folder and running ```make```. On multi-core systems compilation speeds can be improved by adding the number of threads to be used: ```make -j 4```.
