@@ -28,9 +28,10 @@ If you want to store large(er) amounts of data we suggest you use the filesystem
 
 The following list describes the settings stored by the BADGE.TEAM firmware.
 
-| Space | Key      | Type    | Function                               |
-|-------|----------|---------|----------------------------------------|
-| owner | nickname | string  | The nickname of the owner of the badge |
+| Space  | Key         | Type    | Function                               |
+|--------|-------------|---------|----------------------------------------|
+| owner  | name        | string  | The nickname of the owner of the badge |
+| system | default_app | string  | The app/egg launched on powerup        |
 
 # NVS settings for your app
 
