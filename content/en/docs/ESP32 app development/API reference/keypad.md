@@ -5,9 +5,9 @@ weight: 50
 ---
 
 
-The *keypad* API allows you to call functions when someone presses a button on the silicone keypad of their [CampZone 2020](/badges/campzone-2020/) badge.
+The *keypad* API allows you to call functions when someone presses a button on the silicone keypad of their [CampZone 2020](/docs/badges/campzone-2020/) badge.
 
-**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/)
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/docs/badges/campzone-2020/)
 
 
 # Example

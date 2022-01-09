@@ -6,8 +6,8 @@ weight: 1
 
 The *display* module is available on platforms which have the *framebuffer* driver enabled. It allows for controlling the display of your device.
 
-**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/) &nbsp;&nbsp; ✅ [Disobey 2020](/badges/disobey-2020/) &nbsp;&nbsp; ✅ [CampZone 2019](/badges/campzone-2019/) &nbsp;&nbsp; ✅ [HackerHotel 2019](/badges/hackerhotel-2019/) 
-<br> ✅ [Disobey 2019](/badges/disobey-2019/) &nbsp;&nbsp; ✅ [SHA2017](/badges/sha2017/)
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/docs/badges/campzone-2020/) &nbsp;&nbsp; ✅ [Disobey 2020](/docs/badges/disobey-2020/) &nbsp;&nbsp; ✅ [CampZone 2019](/docs/badges/campzone-2019/) &nbsp;&nbsp; ✅ [HackerHotel 2019](/docs/badges/hackerhotel-2019/) 
+<br> ✅ [Disobey 2019](/docs/badges/disobey-2019/) &nbsp;&nbsp; ✅ [SHA2017](/docs/badges/sha2017/)
 
 
 # Reference

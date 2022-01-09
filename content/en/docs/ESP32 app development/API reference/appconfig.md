@@ -7,7 +7,7 @@ weight: 50
 
 The *appconfig* API apps to register their user-configurable settings. By using this API, app settings are shown in the Settings page of the WebUSB website for supported badges.
 
-**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/)
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/docs/badges/campzone-2020/)
 
 
 # Example

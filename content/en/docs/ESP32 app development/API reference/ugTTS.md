@@ -7,7 +7,7 @@ weight: 50
 
 The *ugTTS* API allows you to turn text into synthesized speech by querying Google Translate over WiFi. Either save it as an mp3 file, or play it directly. This module is based on the popular [gTTS](https://github.com/pndurette/gTTS) library.
 
-**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/)
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/docs/badges/campzone-2020/)
 
 
 # Example

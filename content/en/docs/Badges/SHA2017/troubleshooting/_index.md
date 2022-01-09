@@ -35,4 +35,4 @@ If your LEDs aren't getting any power either the MPR121 or the transistor is sus
 Either the MPR121 or the transistor are suspect.
 
 ## Other issues
-Please [contact](/contact/) us to help you figure things out either [online](/contact/) or by visiting us at a camp or event.
+Please [contact](/docs/contact/) us to help you figure things out either [online](/docs/contact/) or by visiting us at a camp or event.

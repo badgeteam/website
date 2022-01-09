@@ -12,5 +12,5 @@ The [getting started section](getting-started) will help you get started with al
 # [<i class="fa fa-book" aria-hidden="true"></i> API reference](api-reference)
 Once your first "hello world" app is up-and-running you're probably wondering "how do I do...". The [API reference](api-reference) gives you detailed, in-depth information about the things you can do with your badge.
 
-# [<i class="fa fa-upload" aria-hidden="true"></i> Publishing your app](/hatchery)
-Now that your app is ready to be shared with the world the [hatchery section](/hatchery) will help you with publishing your app.
+# [<i class="fa fa-upload" aria-hidden="true"></i> Publishing your app](/docs/hatchery)
+Now that your app is ready to be shared with the world the [hatchery section](/docs/hatchery) will help you with publishing your app.

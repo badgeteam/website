@@ -7,7 +7,7 @@ weight: 50
 
 The *touchpads* API allows you to call functions when someone presses a touchpad.
 
-**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/)
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/docs/badges/campzone-2020/)
 
 
 # Example

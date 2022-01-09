@@ -5,9 +5,9 @@ weight: 50
 ---
 
 
-The *HID* API allows you to make your [CampZone 2020](/badges/campzone-2020/) badge act like a keyboard and mouse over USB. You can use it to type text, press key combinations, and click or move the mouse cursor.
+The *HID* API allows you to make your [CampZone 2020](/docs/badges/campzone-2020/) badge act like a keyboard and mouse over USB. You can use it to type text, press key combinations, and click or move the mouse cursor.
 
-**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/)
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/docs/badges/campzone-2020/)
 
 # Example
 

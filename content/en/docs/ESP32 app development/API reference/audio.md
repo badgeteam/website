@@ -7,7 +7,7 @@ weight: 50
 
 The *audio* API allows you to easily play audio files or stream URLs (.mp3, .wav, and modtracker .mod, .s3m, .xm). It is a wrapper around [sndmixer](../sndmixer), which can do much more but is a bit more verbose.
 
-**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/badges/campzone-2020/)
+**Available on:** &nbsp;&nbsp; ✅ [CampZone 2020](/docs/badges/campzone-2020/)
 
 # Example
 
