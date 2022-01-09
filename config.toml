@@ -1,43 +1,105 @@
-baseurl = "/"
-languageCode = "en-GB"
-title = "BADGE.TEAM documentation"
-paginate = 5
-theme = "hugo-theme-learn-badgeteam"
+baseURL = "/"
+title = "BADGE.TEAM"
 
 enableRobotsTXT = true
 canonifyURLs = true
 
-[Params]
-  subtitle = ""
-  description = "Documentation"
-  powered_by = ""
-  author = "BADGE.TEAM"
-  copyright = ""
-  date_format = "02-01-2006"
-  showVisitedLinks = false
-  disableInlineCopyToClipBoard = true
-  themeVariant = "badgeteam"
-  
-[menu]
-  [[menu.shortcuts]]
-    name = "Hatchery (app market)"
-    url = "https://hatchery.badge.team"
-    weight = 1
-  [[menu.shortcuts]]
-    name = "Github"
-    url = "https://github.com/badgeteam"
-    weight = 0
-  [[menu.shortcuts]]
-    name = "Main website"
-    url = "https://badge.team"
-    weight = 0
-  [[menu.shortcuts]]
-    name = "Wiki"
-    url = "https://wiki.badge.team"
-    weight = 0
+theme = ["docsy"]
+
+enableGitInfo = true
+
+contentDir = "content/en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+enableMissingTranslationPlaceholders = true
+
+[taxonomies]
+tag = "tags"
+category = "categories"
+
+[params.taxonomy]
+taxonomyCloud = ["tags", "categories"]
+taxonomyCloudTitle = ["Tag Cloud", "Categories"]
+taxonomyPageHeader = ["tags", "categories"]
+
+pygmentsCodeFences = true
+pygmentsUseClasses = false
+pygmentsUseClassic = false
+pygmentsStyle = "tango"
+
+[permalinks]
+blog = "/:section/:year/:month/:day/:slug/"
+
+[blackfriday]
+plainIDAnchors = true
+hrefTargetBlank = true
+angledQuotes = false
+latexDashes = true
+
+[imaging]
+resampleFilter = "CatmullRom"
+quality = 75
+anchor = "smart"
+
+[languages]
+[languages.en]
+title = "BADGE.TEAM"
+description = "Badges and badgers"
+languageName ="English"
+weight = 1
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "tango"
 
 [outputs]
-home = [ "HTML", "RSS", "JSON"]
+section = ["HTML", "print", "RSS"]
 
-[markup.goldmark.renderer]
-unsafe= true
+[params]
+copyright = ""
+privacy_policy = ""
+version_menu = "Releases"
+archived_version = false
+version = "0.0"
+url_latest_version = "https://badge.team"
+github_repo = "https://github.com/badgeteam/website"
+github_project_repo = "https://github.com/badgeteam"
+
+algolia_docsearch = false
+offlineSearch = true
+prism_syntax_highlighting = false
+
+[params.ui]
+breadcrumb_disable = false
+footer_about_disable = false
+navbar_logo = true
+navbar_translucent_over_cover_disable = false
+sidebar_menu_compact = false
+sidebar_search_disable = false
+
+[params.ui.feedback]
+enable = false
+
+[params.ui.readingtime]
+enable = false
+
+[params.links]
+# End user relevant links. These will show up on left side of footer and in the community page if you have one.
+[[params.links.user]]
+  name = "Hatchery (app market)"
+  url = "https://hatchery.badge.team"
+  icon = "fa fa-shopping-bag"
+  desc = ""
+[[params.links.user]]
+  name ="Twitter"
+  url = "https://twitter.com/sha2017badge"
+  icon = "fab fa-twitter"
+  desc = "Follow us on Twitter to get the latest news!"
+[[params.links.developer]]
+  name = "GitHub"
+  url = "https://github.com/badgeteam"
+  icon = "fab fa-github"
+  desc = ""

@@ -3,3 +3,5 @@ content/projects/git-*
 content/agenda.md.DS_Store
 .idea
 .DS_Store
+.hugo_build.lock
+node_modules

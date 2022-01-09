@@ -1,0 +1,22 @@
+{
+  "name": "website-docs",
+  "version": "1.0.0",
+  "main": "none.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/badgeteam/website-docs.git"
+  },
+  "author": "Badge.team",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/badgeteam/website-docs/issues"
+  },
+  "homepage": "https://github.com/badgeteam/website-docs#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss-cli": "^9.1.0"
+  }
+}
