@@ -6,7 +6,7 @@ weight: -8
 
 ### Available Python API modules:
 
-* [Keypad](/docs/docs/esp32-app-development/api-reference/keypad/)
+* [Keypad](/docs/esp32-app-development/api-reference/keypad/)
 * [Display](/docs/esp32-app-development/api-reference/display/)
 * [Audio](/docs/esp32-app-development/api-reference/audio/)
 * [WiFi](/docs/esp32-app-development/api-reference/wifi/)
