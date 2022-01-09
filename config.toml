@@ -79,6 +79,7 @@ navbar_logo = true
 navbar_translucent_over_cover_disable = false
 sidebar_menu_compact = false
 sidebar_search_disable = false
+sidebar_menu_foldable = true
 
 [params.ui.feedback]
 enable = false

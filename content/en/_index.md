@@ -4,7 +4,7 @@ linkTitle: "Home"
 menu:
   main:
     weight: 1
-    pre: <i class='fas fa-book'></i>
+    pre: <i class='fas fa-home'></i>
 ---
 
 {{< blocks/cover title="BADGE.TEAM" image_anchor="top" height="full" color="primary" >}}
