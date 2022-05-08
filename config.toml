@@ -96,7 +96,7 @@ enable = false
   desc = ""
 [[params.links.user]]
   name ="Twitter"
-  url = "https://twitter.com/sha2017badge"
+  url = "https://twitter.com/BadgeteamNL"
   icon = "fab fa-twitter"
   desc = "Follow us on Twitter to get the latest news!"
 [[params.links.developer]]
