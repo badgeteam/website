@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/badgeteam/website-docs.svg?branch=master)](https://travis-ci.org/badgeteam/website)
+[![Build Status](https://travis-ci.org/badgeteam/website.svg?branch=master)](https://travis-ci.org/badgeteam/website)
 
 # BADGE.TEAM website
 
