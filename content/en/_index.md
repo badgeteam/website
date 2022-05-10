@@ -36,7 +36,7 @@ Our soft- and hardware designs are fully open source and can be found on **GitHu
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/sha2017-badge" %}}
+{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/BadgeteamNL" %}}
 For announcement of latest features etc.
 {{% /blocks/feature %}}
 {{< /blocks/section >}}
