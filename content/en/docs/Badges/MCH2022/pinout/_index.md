@@ -108,14 +108,14 @@ The PMOD connector is wired up to the iCE40 FPGA. Note that while the connector 
 
 # ICE40 FPGA
 
-| ICE40 pin | ICE40 GPIO        | Direction | Description         |
-|-----------|-------------------|-----------|---------------------|
+| ICE40 pin | ICE40 GPIO        | Direction | Description         | Notes
+|-----------|-------------------|-----------|---------------------|-------
 | 2         | `IOB_6a`          | Both      | PMOD pin 4          |
 | 3         | `IOB_8a`          | Both      | PMOD pin 3          |
 | 4         | `IOB_9b`          | Both      | PMOD pin 9          |
 | 6         | `IOB_13b`         | Input     | UART RX             |
 | 9         | `IOB_16a`         | Output    | UART TX             |
-| 10        | `IOB_18a`         | Output    | Interrupt           |
+| 10        | `IOB_18a`         | Output    | Interrupt           | Active-low
 | 11        | `IOB_20a`         | Output    | LCD register select |
 | 12        | `IOB_22b`         | Both      | RAM SPI D2          |
 | 13        | `IOB_24a`         | Both      | RAM SPI D1          |
