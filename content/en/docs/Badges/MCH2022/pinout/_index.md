@@ -60,7 +60,7 @@ The PMOD connector is wired up to the iCE40 FPGA. Note that while the connector 
 | 22             | Both                                  | I2C data                                             | Connected to RP2040, BNO055, BME680, Qwiic connector and SAO addon connector                  |
 | 23             | Output                                | SPI MOSI                                             | Data from ESP32 to LCD / FPGA                                                                 |
 | 25             | Both                                  | LCD reset                                            | Set to output low to reset LCD, leave floating normally                                       |
-| 26             | "Output" (will change on final badge) | LCD mode                                             | Low: LCD in SPI mode, high: LCD in parallel mode                                              |
+| 26             | Output                                | LCD mode                                             | Low: LCD in SPI mode, high: LCD in parallel mode                                              |
 | 27             | Output                                | SPI chip select for ICE40                            | Low: select ICE40, high: deselect ICE40                                                       |
 | 32             | Both                                  | SPI chip select for LCD                              | Low: select LCD, high: deselect LCD. Note: output in LCD SPI mode, input in LCD parallel mode |
 | 33             | Both                                  | LCD DC (data or command) selection                   | Note: output in LCD SPI mode, input in LCD parallel mode                                      |
@@ -136,14 +136,14 @@ The PMOD connector is wired up to the iCE40 FPGA. Note that while the connector 
 | 32        | `IOT_43a`         | Output    | LCD data 3          |
 | 34        | `IOT_44b`         | Output    | LCD data 4          |
 | 35        | `IOT_46b_G0`      | Input     | 12MHz clock         |
-| 36        | `IOT_48b`         | Output    | LCD reset           |
+| 36        | `IOT_48b`         | Output    | LCD reset           | Active-low, drive open-drain
 | 37        | `IOT_45a_G1`      | Output    | LCD data 5          |
 | 38        | `IOT_50b`         | Output    | LCD data 6          |
 | 39        | `RGB0`            | Output    | LED                 |
 | 40        | `RGB1`            | Output    | LED                 |
 | 41        | `RGB2`            | Output    | LED                 |
 | 42        | `IOT_51a`         | Output    | LCD data 7          |
-| 43        | `IOT_49a`         | Output    | LCD mode            |
+| 43        | `IOT_49a`         | Input     | LCD mode            | Should be driven by ESP and monitored by FPGA
 | 44        | `IOB_3b_G6`       | Both      | PMOD pin 7          |
 | 45        | `IOB_5b`          | Both      | PMOD pin 8          |
 | 46        | `IOB_0a`          | Both      | PMOD pin 10         |
