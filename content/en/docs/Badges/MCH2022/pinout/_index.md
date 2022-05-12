@@ -24,16 +24,19 @@ Addon connector following the [SHITTY ADD-ON V1.69BIS standard](https://hackaday
 
 ![PMOD](pmod.png)
 
-| PMOD pin | ICE40 pin |
-|----------|-----------|
-| 1        | 47        |
-| 2        | 48        |
-| 3        | 4         |
-| 4        | 2         |
-| 7        | 44        |
-| 8        | 45        |
-| 9        | 3         |
-| 10       | 46        |
+The PMOD connector is wired up to the iCE40 FPGA. Note that while the connector is physically located on the backside of the badge, it has been wired up such that the PMOD's top side must be pointed in the same direction as the badge's top.
+
+| PMOD pin | ICE40 pin | Note                                               |
+|----------|-----------|----------------------------------------------------|
+| 1        | 47        | `IOB_2a`    (paired with PMOD pin 7 `IOB_3b_G6`)   |
+| 2        | 48        | `IOB_4a`    (paired with PMOD pin 8 `IOB_5b`)      |
+| 3        | 4         | `IOB_8a`    (paired with PMOD pin 9 `IOB_9b`)      |
+| 4        | 2         | `IOB_6a`                                           |
+| 7        | 44        | `IOB_3b_G6` (paired with PMOD pin 1 `IOB_2a`)      |
+| 8        | 45        | `IOB_5b`    (paired with PMOD pin 2 `IOB_4a`)      |
+| 9        | 3         | `IOB_9b`    (paired with PMOD pin 3 `IOB_8a`)      |
+| 10       | 46        | `IOB_0a`                                           |
+
 
 ## Chips
 
