@@ -30,3 +30,12 @@ The battery is a silver pouch with a short cable terminated in a trailing socket
 The trailing socket on the battery has a small lug on one side that locates with a notch in the on-board socket. With the lug facing upwards, carefully slot the two connectors together.
 
 The battery should now be attached to the badge. Offer it up to see which side lies most naturally against the badge while the two are connected together, this will tell you on which side to stick the Velcro patch. Peel off the protective paper from one side of the patch and fix it to the side of the battery that will attach to the badge, in the centre. Then remove the paper fromt he pooosite side of the patch, and stick it to the badge. We suggest fixing it to the Espressif silver can containing the ESP32 microcontroller.
+
+## Now what?
+
+All being well, you should now have a working badge. We strongly suggest that you hook it up to a live USB power source to fully charge the battery. 
+
+While the battery is charging, it's time to explore the badge a little. When you turn it on it will start with a splash screen and details of all the sponsors who have made the event and the badge possible. You'll then see the badge menu screen, so now's a goo time to move along to the next step in this introduction: [using the MCH 2022 badge](./software.md). 
+
+
+
