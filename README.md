@@ -2,7 +2,7 @@
 
 # BADGE.TEAM website
 
-You can find our website and the documentation website at [docs.badge.team](docs.badge.team). This repository contains the Markdown files with content, the theme files and the configuration needed to build our website using Hugo.
+You can find our website and the documentation website at [badge.team/docs](https://badge.team/docs/). This repository contains the Markdown files with content, the theme files and the configuration needed to build our website using Hugo.
 
 # Development
 If you want to test your changes locally then you first have to install [Hugo](https://gohugo.io/getting-started/installing/).
