@@ -9,8 +9,14 @@ weight: 1
 
 This is a shameless placeholder for the software development section
 
+# Micropython
 
-### Arduino
+The Badge contains a Python interpreter. This should be the easiest way to
+control the device and the most preferable mode to write apps for The Badge, especially if you are a beginner or don't want to spend a lot of time downloading toolchains and debugging drivers.
+
+[start here](../../../esp32-platform-firmware/esp32-app-development/getting-started/first_egg/)
+
+# Arduino
 
 The ESP32 on the badge can be programmed using the Aduino IDE.
 
