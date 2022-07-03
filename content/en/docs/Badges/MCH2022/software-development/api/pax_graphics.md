@@ -73,3 +73,91 @@ void my_fancy_graphics() {
 
 We encourage you to try what happens when you change some of the parameters. Try changing `text_x` and `text_y` to see where it appears on screen, or maybe change `text_font` to (for example) `pax_font_sky`.
 
+## Using images
+Using images requires a bit more work, but is still easy to do.
+First, you must ensure to include `#include <pax_codecs.h>` in each file that decodes PNG images.
+
+Next, you must find an image that fits in memory (so make it small). Add this to the `main` folder, next to `main.c` and include it in CMakeLists.txt:
+```cmake
+idf_component_register(
+    SRCS
+        # You source files are here, there might be more than just main.c
+        "main.c"
+    INCLUDE_DIRS
+        # The directories to open header files from are here, again, there might be more.
+        "." "include"
+    EMBED_FILES
+        # This is the location of your image.
+        ${project_dir}/main/my_image.png
+)
+```
+
+Next, you need to include the image in the main file:
+```c
+//...
+extern const uint8_t image_start[] asm("_binary_my_image_png_start");
+extern const uint8_t image_end[]   asm("_binary_my_image_png_end");
+//...
+```
+This tells the compiler where to find the image.
+When embedding files, [they waill always be named similar to this](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#embedding-binary-data).
+
+```c
+//...
+// A neat little graphics function.
+void my_fancy_graphics() {
+    // Blue background in case decoding the PNG fails.
+    pax_background(&buf, 0xff0000ff);
+    
+    // Draws an image, but does not support transformations.
+    pax_insert_png_buf(&buf, image_start, image_end-image_start, 0, 0, CODEC_FLAG_OPTIMAL);
+}
+//...
+```
+![(An image of two oranges and an apple.)](pax_png_decode.jpg)
+
+If your screen turned blue, then the image may have failed to decode.
+
+Try running `make monitor` and re-opening the app to see what happened (most likely, the image is too big to fit in memory).
+To exit `make monitor`, press `CTRL+]`
+
+## Getting more abstract
+Of course, you can do much more than just drawing text!
+Shown here is an example of drawing a rectangle, a circle and a line:
+```c
+//...
+    // Draw a green circle (position is center).
+    //                    color       x   y   radius
+    pax_draw_circle(&buf, 0xff00ff00, 60, 60, 20);
+    // Draw a transparent red rectangle (position is top left corner).
+    //                  color       x   y   width  height
+    pax_draw_rect(&buf, 0xb0ff0000, 40, 10, 70,    50);
+    // Draw a white line across the entire screen.
+    //                  color       x1  y1  x2         y2
+    pax_draw_line(&buf, 0xffffffff, 0,  0,  buf.width, buf.height);
+//...
+```
+![(Transparent red rectangle over a green circle on a blue background.)](pax_shapes.jpg)
+
+Of course, you can make it even more abstract still.
+PAX (the graphics) supports [matrix transformations](https://github.com/robotman2412/pax-graphics/tree/main/docs#api-reference-matrix-transformations).
+
+In short, this feature allows you to stretch, resize, rotate and move around drawing. Consider the following example:
+```c
+//...
+    // Save this for later.
+    pax_push_2d(&buf);
+        // Modify the translation: shear it.
+        pax_apply_2d(&buf, matrix_2d_shear(0.5, 0));
+        // This will no longer have a circular shape.
+        pax_draw_circle(&buf, 0xff00ff00, 60, 60, 20);
+    // Restore the matrix.
+    pax_pop_2d(&buf);
+    
+    // This will still have a rectangular shape.
+    pax_draw_rect(&buf, 0xb0ff0000, 40, 10, 70,    50);
+//...
+```
+![(A warped version of the circle, making it now an elipse.)](pax_transform.jpg)
+
+
