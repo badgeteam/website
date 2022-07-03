@@ -64,9 +64,62 @@ Let's change that so the screen is briefly pink after pressing the A button.
         if (message.input == RP2040_INPUT_BUTTON_ACCEPT && message.state) {
                 // Make a pink background.
                 pax_background(&buf, 0xeb34cf);
+                // Update the screen.
+                disp_flush();
+                // Wait for half a second.
+                vTaskDelay(pdMS_TO_TICKS(500));
+                // After this, it loops again with a new random background color.
         } else if (message.input == RP2040_INPUT_BUTTON_HOME && message.state) {
             // If home is pressed, exit to launcher.
             exit_to_launcher();
         }
 //...
 ```
+![(A pink screen when the A button is pressed.)](template_pink_screen.jpg)
+
+### Using WiFi
+The little template app you've been playing with has a simple WiFi connection API.
+First, empty the while loop so it looks like this:
+```c
+//...
+    while (1) {
+        // Await any button press and do another cycle.
+        // Structure used to receive data.
+        rp2040_input_message_t message;
+        // Await forever (because of portMAX_DELAY), a button press.
+        xQueueReceive(buttonQueue, &message, portMAX_DELAY);
+        
+        // Is the home button currently pressed?
+        if (message.input == RP2040_INPUT_BUTTON_HOME && message.state) {
+            // If home is pressed, exit to launcher.
+            exit_to_launcher();
+        }
+    }
+//...
+```
+This is because we're going to get information from the internet instead of writing "Hello, World!" to the screen.
+Now, call `wifi_connect_to_stored()` to connect to WiFi:
+```c
+//...
+    // Init (but not connect to) WiFi.
+    wifi_init();
+    // Now, connect to WiFi using the stored settings.
+    bool success = wifi_connect_to_stored();
+    if (success) {
+        // Green color if connected successfully.
+        pax_background(&buf, 0xff00ff00);
+    } else {
+        // Red color if not connected.
+        pax_background(&buf, 0xffff0000);
+    }
+    disp_flush();
+//...
+```
+![(A red screen and a green screen side by side.)](template_wifi.png)
+
+What you want to do with WiFi varies a lot, so we can't explain that here. But if you have other libraries that need WiFi (for example an MQTT client), you start them after this code.
+
+For further information:
+- [Official ESP-IDF WiFi and network API](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/index.html#wi-fi)
+- [Tickets App using WiFi (example)](https://github.com/badgeteam/mch2022-esp32-app-tickets)
+- [Official ESP-IDF HTTP client API](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html)
