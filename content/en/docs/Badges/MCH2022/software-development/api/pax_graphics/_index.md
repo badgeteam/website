@@ -5,21 +5,27 @@ nodateline: true
 weight: 1
 ---
 
-PAX Grahics is the default way to draw graphics for the MCH2022 babdge.
+PAX Graphics is the default way to draw graphics for the MCH2022 badge.
 Don't want the getting started? [Complete API can be found here.](https://github.com/robotman2412/pax-graphics/tree/main/docs#pax-graphics-documentation)
 
 
 # Getting started
-First, want to download [the template app](https://github.com/badgeteam/mch2022-template-app):
+
+First, download [the template app](https://github.com/badgeteam/mch2022-template-app):
+
 ```bash
 git clone https://github.com/badgeteam/mch2022-template-app my_fancy_app
 make install
 ```
-This will download and install the template app to your badge, showing a colorful "Hello, World!".
+
+This will download and install the template app to your badge, showing a
+colorful "Hello, World!".
 
 Simply repeat the `make install` step every time you want to test your app.
 
-To avoid clutter, remove the graphics from the while loop and make a function just graphics:
+To avoid clutter, remove the graphics from the while loop and make a function
+containing just the graphics code:
+
 ```c
 // before main ...
 // A neat little graphics function.
@@ -49,10 +55,12 @@ void my_fancy_graphics() {
     }
 //...
 ```
-Do note that graphics aren't shown on screen immediately, that part is the job of `disp_flush()`.
+Note that graphics aren't immediately shown on screen, this is handled by `disp_flush()`.
 
-## Simple helloworld
+## Simple HelloWorld
+
 Let's start by drawing some white text on the blue background:
+
 ```c
 //...
 // A neat little graphics function.
@@ -71,13 +79,20 @@ void my_fancy_graphics() {
 ```
 ![(The text "Hello, World!" on a blue background.)](pax_helloworld.jpg)
 
-We encourage you to try what happens when you change some of the parameters. Try changing `text_x` and `text_y` to see where it appears on screen, or maybe change `text_font` to (for example) `pax_font_sky`.
+Play around with the parameters and see what happens. Try changing `text_x` and
+`text_y` to see where it appears on screen, or maybe change `text_font` to (for
+example) `pax_font_sky`.
 
-## Using images
-Using images requires a bit more work, but is still easy to do.
-First, you must ensure to include `#include <pax_codecs.h>` in each file that decodes PNG images.
+## Using Images
 
-Next, you must find an image that fits in memory (so make it small). Add this to the `main` folder, next to `main.c` and include it in CMakeLists.txt:
+Using images requires a bit more work, but is still easy to do.  First, you
+must include `#include <pax_codecs.h>` in each file that decodes PNG
+images.
+
+
+Next, find an image that fits in memory (so make it small). Add this
+to the `main` folder, next to `main.c` and include it in `CMakeLists.txt`:
+
 ```cmake
 idf_component_register(
     SRCS
@@ -92,15 +107,18 @@ idf_component_register(
 )
 ```
 
-Next, you need to include the image in the main file:
+The `EMBED_FILES` directive causes the file's data to be added to the .rodata
+section in flash. The data can be refenced vis symbol names as follows:
+
 ```c
 //...
 extern const uint8_t image_start[] asm("_binary_my_image_png_start");
 extern const uint8_t image_end[]   asm("_binary_my_image_png_end");
 //...
 ```
-This tells the compiler where to find the image.
-When embedding files, [they waill always be named similar to this](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#embedding-binary-data).
+
+This tells the compiler where to find the image.  When embedding files, [they
+will always be named in a similiar manner](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#embedding-binary-data).
 
 ```c
 //...
@@ -114,16 +132,21 @@ void my_fancy_graphics() {
 }
 //...
 ```
+
 ![(An image of two oranges and an apple.)](pax_png_decode.jpg)
 
 If your screen turned blue, then the image may have failed to decode.
 
-Try running `make monitor` and re-opening the app to see what happened (most likely, the image is too big to fit in memory).
-To exit `make monitor`, press `CTRL+]`
+Try running `make monitor` and re-opening the app to see what happened (most
+likely, the image is too big to fit in memory).  To exit `make monitor`, press
+`CTRL+]`
+
 
 ## Getting more abstract
+
 Of course, you can do much more than just drawing text!
 Shown here is an example of drawing a rectangle, a circle and a line:
+
 ```c
 //...
     // Draw a green circle (position is center).
@@ -139,25 +162,31 @@ Shown here is an example of drawing a rectangle, a circle and a line:
 ```
 ![(Transparent red rectangle over a green circle on a blue background.)](pax_shapes.jpg)
 
-Of course, you can make it even more abstract still.
-PAX (the graphics) supports [matrix transformations](https://github.com/robotman2412/pax-graphics/tree/main/docs#api-reference-matrix-transformations).
+PAX (the graphics) also supports [matrix
+transformations](https://github.com/robotman2412/pax-graphics/tree/main/docs#api-reference-matrix-transformations).
 
-In short, this feature allows you to stretch, resize, rotate and move around drawing. Consider the following example:
+In short, this feature allows you to stretch, resize, rotate and move around
+drawing. Consider the following example:
+
 ```c
 //...
     // Save this for later.
     pax_push_2d(&buf);
-        // Modify the translation: shear it.
-        pax_apply_2d(&buf, matrix_2d_shear(0.5, 0));
-        // This will no longer have a circular shape.
-        pax_draw_circle(&buf, 0xff00ff00, 60, 60, 20);
+    // Modify the translation: shear it.
+    pax_apply_2d(&buf, matrix_2d_shear(0.5, 0));
+    // This will no longer have a circular shape.
+    pax_draw_circle(&buf, 0xff00ff00, 60, 60, 20);
     // Restore the matrix.
     pax_pop_2d(&buf);
     
     // This will still have a rectangular shape.
     pax_draw_rect(&buf, 0xb0ff0000, 40, 10, 70,    50);
 //...
+
 ```
+
 ![(A warped version of the circle, making it now an elipse.)](pax_transform.jpg)
 
+## Where to Go from Here?
 
+For further details about the library, have a look at the API reference in the library's repository, [robotman2412/pax-graphics](https://github.com/robotman2412/pax-graphics/tree/main/docs#api-reference)
