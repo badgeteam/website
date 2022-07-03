@@ -1,7 +1,9 @@
+---
 title: "The Badge Software"
 linkTitle: "On-board Software"
 nodateline: true
 weight: 1
+---
 
 Your MCH badge comes with installed software which allows you to select and run applications, install new applications from our online hatchery, and set up badge functions such as the Wi-Fi password.
 
