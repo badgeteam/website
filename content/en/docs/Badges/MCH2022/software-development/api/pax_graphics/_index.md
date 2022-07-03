@@ -107,8 +107,8 @@ idf_component_register(
 )
 ```
 
-The `EMBED_FILES` directive causes the file's data to be added to the .rodata
-section in flash. The data can be refenced vis symbol names as follows:
+The `EMBED_FILES` directive causes the file's data to be included mostly as if it were a source file.
+You reference the files like so:
 
 ```c
 //...
@@ -140,7 +140,7 @@ void my_fancy_graphics() {
 If your screen turned blue, then the image may have failed to decode.
 
 Try running `make monitor` and re-opening the app to see what happened (most
-likely, the image is too big to fit in memory).  To exit `make monitor`, press
+likely, the image is too big to fit in memory). To exit `make monitor`, press
 `CTRL+]`
 
 
@@ -174,10 +174,10 @@ drawing. Consider the following example:
 //...
     // Save this for later.
     pax_push_2d(&buf);
-    // Modify the translation: shear it.
-    pax_apply_2d(&buf, matrix_2d_shear(0.5, 0));
-    // This will no longer have a circular shape.
-    pax_draw_circle(&buf, 0xff00ff00, 60, 60, 20);
+        // Modify the translation: shear it.
+        pax_apply_2d(&buf, matrix_2d_shear(0.5, 0));
+        // This will no longer have a circular shape.
+        pax_draw_circle(&buf, 0xff00ff00, 60, 60, 20);
     // Restore the matrix.
     pax_pop_2d(&buf);
     
