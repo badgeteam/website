@@ -120,6 +120,8 @@ extern const uint8_t image_end[]   asm("_binary_my_image_png_end");
 This tells the compiler where to find the image.  When embedding files, [they
 will always be named in a similiar manner](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#embedding-binary-data).
 
+Finally, draw the image using `pax_insert_png_buf`.
+If your image is located on the SD card or internal filesystem, use `pax_insert_png_fd` instead.
 ```c
 //...
 // A neat little graphics function.
