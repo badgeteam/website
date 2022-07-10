@@ -23,7 +23,7 @@ The *display* module is available on platforms which have the *framebuffer* driv
 | drawPixel        | \[window\], x, y, color                                               | Draw a pixel in the framebuffer or a window                                                                                                                                                                                                                                                            |
 | drawFill         | \[window\], color                                                     | Fill the framebuffer or a window                                                                                                                                                                                                                                                                       |
 | drawLine         | \[window\], x0, y0, x1, y1, color                                     | Draw a line from (x0, y0) to (x1, y1)                                                                                                                                                                                                                                                                  |
-| drawTri(angle)   | \[window\], x0, y0, x1, y1, x2, y2                                    | Draws a filled triangle                                                                                                                                                                                                                                                                                |
+| drawTri(angle)   | \[window\], x0, y0, x1, y1, x2, y2, color                             | Draws a filled triangle                                                                                                                                                                                                                                                                                |
 | drawRect         | \[window\], x, y, width, height, filled, color                        | Draw a rectangle at (x, y) with size (width, height). Set the filled parameter to False to draw only the border, or set it to True to draw a filled rectangle.                                                                                                                                         |
 | drawQuad*        | \[window\], x0, y0, x1, y1, x2, y2, x3, y3                            | Draws a four-pointed shape between (x0, y0), (x1, y1), (x2, y2) and (x3, y3), always filled                                                                                                                                                                                                            |
 | drawCircle       | \[window\], x0, y0, radius, a0, a1, fill, color                       | Draw a circle with center point (x0, y0) with the provided radius from angle a0 to angle a1, optionally filled (boolean)                                                                                                                                                                               |
@@ -89,6 +89,16 @@ import display
 display.drawFill(0x000000) # Fill the screen with black
 display.drawLine(10, 10, 20, 20, 0xFFFFFF) # Draw a white line from (10,10) to (20,20)
 display.flush() # Write the contents of the buffer to the display
+```
+## Drawing a line using pixels:
+```
+import display, time
+display.drawFill(display.BLACK) # Fill the screen with black before drawing the line
+displau.flush() # Write the color to the screen before drawing the line
+for i in range(80): # Loop for the X axis
+    display.drawPixel(i, 1, 0x00FF00) # Set 1 pixel on the X axis i, and the Y axis 1 to 100% green 
+    display.flush() # Write the pixel output to the screen
+    time.sleep(0.050) # Sleep for 50 milliseconds as to show the line being drawn
 ```
 
 ## Drawing text
