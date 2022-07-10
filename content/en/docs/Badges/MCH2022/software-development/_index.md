@@ -11,10 +11,19 @@ This is a shameless placeholder for the software development section
 
 # Micropython
 
-The Badge contains a Python interpreter. This should be the easiest way to
+A Python interpreter is available for the badge. This should be the easiest way to
 control the device and the most preferable mode to write apps for The Badge, especially if you are a beginner or don't want to spend a lot of time downloading toolchains and debugging drivers.
 
-[start here](../../../esp32-platform-firmware/esp32-app-development/getting-started/first_egg/)
+First, install the Python app from the Hatchery by going to `Hatchery -> ESP32 native binaryies -> Utility -> Python` and instal it either onto the flash or onto an SD card.
+
+This badge contains a common ESP32 firmware platform shared with other badges, so to learn more about the general platform and its components, [start here](../../../esp32-platform-firmware/esp32-app-development/getting-started/first_egg/). In addition there is also a `mch22` module that offers a few badge-specific APIs.
+
+While the above allows you to access the Python shell and install Python apps from the hatchery, here is how you upload custom apps to the badge over USB:
+
+1. Download [mch2022-tools](https://github.com/badgeteam/mch2022-tools/archive/refs/heads/master.zip)
+2. Write you Python code using the platfrom modules documented above
+3. Use `python3 webusb_fat_push.py __init__.py /sdcard/apps/python/myapp/__init__.py`
+4. Start you app in the Apps menu.
 
 # Arduino
 
