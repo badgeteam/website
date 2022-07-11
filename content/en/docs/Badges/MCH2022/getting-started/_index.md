@@ -20,8 +20,8 @@ the right way around. Set the labeled on/off switch to ON. Things should
 quickly start up, display works and it makes a sound.
 
 If this is the case everything works and you're good to go. Attach the battery
-to the badge using the included velcro, slap on the lanyard and Start Hacking!
-(-> link to ???)
+to the badge using the included velcro, slap on the lanyard and [Start
+Hacking](../software-development)!
 
 The rest of this page contains more detailed instructions in case you run into
 problems.

@@ -20,11 +20,11 @@ SDK which provides:
 <!-- TODO insert some links to IDF code. point out version!-->
 
 The IDF will be installed automatically (via git submodules and make commands which we
-will point out) but it does require some dependancies to be installed. 
+will point out) but it does require some dependencies to be installed. 
 
 # Installing Prerequisites
 
-How to install these prerequisites is described on the IDF documenttion page for 
+How to install these prerequisites is described on the IDF documenttion page for:
 
 - [Linux](https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/get-started/windows-setup.html)
 - [Mac](https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/get-started/macos-setup.html)
@@ -61,7 +61,7 @@ The
 [`Makefile`](https://github.com/badgeteam/mch2022-template-app/blob/master/Makefile)
 in the template app contains a number of targets for your convenience:
 
-- `prepare` : Download all the ESP32 dependencies needed to build
+- `prepare` : Download all the ESP32 dependencies needed to build, you only need to run this once!
 - `build`   : compile the code
 - `install` : install the app you just compiled (NOTE: if you have previously 
               used the IDF to build ESP32 code, this is different from regular flashing! see below)
@@ -70,10 +70,11 @@ in the template app contains a number of targets for your convenience:
 
 ```bash
 $ make prepare # this downloads all the dependecies and may take a couple of minutes
+
 $ make build   # this compile your app
 $ make install # this installs the successfully compiled app to a connected badge.
 
-# you really only need '$make install' because it depedns on `install` and `prepare`
+# you really only need '$make install' because it depends on `install`. 
 
 ```
 
@@ -101,8 +102,9 @@ app and would need to reinstall it later.
 # Customizing the template app
 
 Finally! Now that we have all the bureaucracy taken care of, we'll start off by
-modifying the message printed to the screen.  Have a look at line 48 of
-`main.c`, you can see the text shown on screen:
+modifying the message printed to the screen.  Have a look at [this
+line](https://github.com/badgeteam/mch2022-template-app/blob/1c5638321528c86361b2df3f6ae85058fa1635b1/main/main.c#L48)
+of `main.c`, you can see the text shown on screen:
 
 ```c
 //...
@@ -123,8 +125,10 @@ are read by the rp2040 coprocessor via I2C. Have a look in the
 [esp32-component-mch2022-rp2040](https://github.com/badgeteam/esp32-component-mch2022-rp2040)
 component in case you are interested in the details.
 
-The button handler starting on line 68 of `main.c` currently causes the app to
-exit and return to the launcher whenever the HOME button is pressed.:
+The button handler starting on [this
+line](https://github.com/badgeteam/mch2022-template-app/blob/1c5638321528c86361b2df3f6ae85058fa1635b1/main/main.c#L68)
+of `main.c` currently causes the app to exit and return to the launcher
+whenever the HOME button is pressed.:
 
 ```c
 
