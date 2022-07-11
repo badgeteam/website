@@ -20,7 +20,7 @@ the right way around. Set the labeled on/off switch to ON. Things should
 quickly start up, display works and it makes a sound.
 
 If this is the case everything works and you're good to go. Attach the battery
-to the badge using the included velcro, slap on the lanyard and [Start
+to the badge using the included velcro, slap on the lanyard (and possibly [insert an SD-Card](sdcard/)) and [Start
 Hacking](../software-development)!
 
 The rest of this page contains more detailed instructions in case you run into
@@ -28,7 +28,7 @@ problems.
 
 # In the pack
 
-(Picture of contents of pack here)
+![Picture of contents of pack](pack.jpg)
 
 If you are reading this at MCH, you received the unassembled badge in a
 bag when you entered the camp.  Inside the bag are the following items:
@@ -43,7 +43,7 @@ bag when you entered the camp.  Inside the bag are the following items:
 
 ## Fitting the battery
 
-(TODO picture)
+![Battery](battery.jpg)
 
 The battery is a silver pouch with a short cable terminated in a
 trailing socket connector. This mates with a PCB mounted plug  which
@@ -52,7 +52,8 @@ side down with the USB-C connector facing towards you, and you'll find
 the on-board battery connector at the bottom right next to a field of gold
 squares (the prototyping area -> link to hardware).
 
-(Photo showing connector location and the two connectors facing each other)
+![Connector](connector.jpg)
+
 
 The trailing plug on the battery has a small lug on one side that
 interfaces with a notch in the on-board socket. With the lug facing
@@ -67,6 +68,11 @@ provided velcro so you can affix it to the badge more firmly. One side
 of the battery tends to buldge, so try out which side lies most snugly
 against the badge. Find a good spot on the back of the battery and the
 reverse of the badge to attach the velcro.
+
+### Inserting an SD-Card
+
+The SD-Card holder is a bit fiddly. We've assembled an [illustrated guide](sdcard/) to
+inserting an SD-Card.
 
 
 ## Now what?
