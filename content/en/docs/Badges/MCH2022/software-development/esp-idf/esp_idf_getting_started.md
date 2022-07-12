@@ -116,7 +116,7 @@ of `main.c`, you can see the text shown on screen:
 This part is responsible for drawing the text to the screen.
 Go ahead and try to edit the text, here shown as "Fancy App!":
 
-![(The text "Fancy App!" on a blueish green background.)](template_fancy_app.jpg)
+![(The text "Fancy App!" on a blueish green background.)](../hello.jpg)
 
 # Reading the buttons
 
@@ -177,7 +177,7 @@ Pax uses the same RGB (well, ARGB, to be precise) hex triplets as HTML.
         }
 //...
 ```
-![(A pink screen when the A button is pressed.)](template_pink_screen.jpg)
+![(A pink screen when the A button is pressed.)](../hello_pink.jpg)
 
 # Using WiFi
 
@@ -226,7 +226,8 @@ depending on whether the function returned successfully.
 //...
 ```
 
-![(A red screen and a green screen side by side.)](template_wifi.png)
+![(A red screen and a green screen side by side.)](../red.png)
+![(A red screen and a green screen side by side.)](../green.png)
 
 What you want to do with WiFi varies a lot, so we can't explain that here. But
 if you have other libraries that need WiFi (for example an MQTT client), you
