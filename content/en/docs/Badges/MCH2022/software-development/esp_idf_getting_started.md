@@ -157,7 +157,8 @@ Let's change this behaviour so the screen is briefly pink after pressing the A b
 Graphics for the badge are handled by a library called `Pax`, if you want to dig deeper 
 have a look at the [docs here](https://github.com/robotman2412/pax-graphics/tree/main/docs)
 
-Pax uses the same RGB hex triplets as HTML. `0xeb34cf` is beautiful MCH pink.
+Pax uses the same RGB (well, ARGB, to be precise) hex triplets as HTML.
+`0xeb34cf` is beautiful MCH pink.
 
 ```c
 //...
