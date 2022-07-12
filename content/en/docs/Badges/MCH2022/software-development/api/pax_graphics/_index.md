@@ -5,8 +5,9 @@ nodateline: true
 weight: 1
 ---
 
-PAX Graphics is the default way to draw graphics for the MCH2022 badge.
-Don't want the getting started? [Complete API can be found here.](https://github.com/robotman2412/pax-graphics/tree/main/docs#pax-graphics-documentation)
+PAX Graphics is the default way to draw graphics for the MCH2022 badge.  Don't
+want the getting started? [Complete API can be found
+here.](https://github.com/robotman2412/pax-graphics/tree/main/docs#pax-graphics-documentation)
 
 
 # Getting started
@@ -118,10 +119,12 @@ extern const uint8_t image_end[]   asm("_binary_my_image_png_end");
 ```
 
 This tells the compiler where to find the image.  When embedding files, [they
-will always be named in a similiar manner](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#embedding-binary-data).
+will always be named in a similiar
+manner](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#embedding-binary-data).
 
-Finally, draw the image using `pax_insert_png_buf`.
-If your image is located on the SD card or internal filesystem, use `pax_insert_png_fd` instead.
+Finally, draw the image using `pax_insert_png_buf`.  If your image is located
+on the SD card or internal filesystem, use `pax_insert_png_fd` instead.
+
 ```c
 //...
 // A neat little graphics function.
@@ -162,6 +165,7 @@ Shown here is an example of drawing a rectangle, a circle and a line:
     pax_draw_line(&buf, 0xffffffff, 0,  0,  buf.width, buf.height);
 //...
 ```
+
 ![(Transparent red rectangle over a green circle on a blue background.)](pax_shapes.jpg)
 
 PAX (the graphics) also supports [matrix
@@ -191,4 +195,6 @@ drawing. Consider the following example:
 
 ## Where to Go from Here?
 
-For further details about the library, have a look at the API reference in the library's repository, [robotman2412/pax-graphics](https://github.com/robotman2412/pax-graphics/tree/main/docs#api-reference)
+For further details about the library, have a look at the API reference in the
+library's repository,
+[robotman2412/pax-graphics](https://github.com/robotman2412/pax-graphics/tree/main/docs#api-reference)
