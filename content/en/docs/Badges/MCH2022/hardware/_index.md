@@ -54,3 +54,4 @@ expansion modules or their own creations.
 - [BNO055](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bno055-ds000.pdf) accelerometer, gyroscope, magnetometer sensor
 - [Display](https://raw.githubusercontent.com/badgeteam/mch2022-badge-hardware/prototype/second/datasheets/Z240IT008%E8%A7%84%E6%A0%BC%E4%B9%A6%20v0.1.pdf) also have a look [here](https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf) 
 - [SK6812-EC15](https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf) addressable RGB - LEDs (aka Neopixel)
+- [MS4344](http://www.relmon.com/en/index.php/welcome/download/132.html) Audio DAC
