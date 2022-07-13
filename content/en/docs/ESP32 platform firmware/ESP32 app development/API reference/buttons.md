@@ -54,3 +54,20 @@ Support for GPIO buttons and touch-buttons via the MPR121 touch controller IC ar
 | DOWN   |          |                  |              |               |              |                |                         |
 | LEFT   |          |                  |              |               |              |                |                         |
 | RIGHT  |          |                  |              |               |              |                |                         |
+
+
+# Callback implementation:
+
+to use the buttons, you need to implement a callback function:
+
+```
+
+import buttons, display # Imports 2 libraries to use the buttons, the display library, as well as the buttons library
+def on_action_btn(pressed): # Defines a function on_action_btn with the required parameter pressed
+    if pressed: # Uses an if statement to check if the button has been pressed
+        display.drawFill(display.BLACK) # If the button is pressed, sets the screen to black
+        display.drawText(10,10,"Hack The Planet!!!", display.GREEN, "roboto_regular18") # Draws text if the button is pressed
+        display.flush() # Flushes the screen to draw the text and color onto the screen
+buttons.attach(buttons.BTN_A, on_action_btn) # Assigns the function on_action_btn to the A button
+```
+

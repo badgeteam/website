@@ -58,7 +58,7 @@ import system
 system.sleep(60000)
 ```
 
-## Querying the name of the currently runnig app
+## Querying the name of the currently running app
 ```
 import system
 appName = system.currentApp()
