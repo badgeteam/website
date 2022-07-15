@@ -226,14 +226,16 @@ depending on whether the function returned successfully.
 //...
 ```
 
-![(A red screen and a green screen side by side.)](../red.png)
-![(A red screen and a green screen side by side.)](../green.png)
+![(A red screen and a green screen side by side.)](../red.jpg)
+![(A red screen and a green screen side by side.)](../green.jpg)
 
 What you want to do with WiFi varies a lot, so we can't explain that here. But
 if you have other libraries that need WiFi (for example an MQTT client), you
 start them after this code.
 
-<!-- TBD : how to publish app to Hatchery -->
+# Sharing is caring!
+
+Now you're ready to publish your app in the Hatchery. [Follow these instructions](../../hatchery) to publish your app.
 
 <!-- TBD where to go from here: maybe point people towards examples in IDF ... -->
 <!-- TBD perhaps more in depth discussion of all the moving parts of the template app -->

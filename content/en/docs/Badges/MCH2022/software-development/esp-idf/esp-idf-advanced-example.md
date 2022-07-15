@@ -701,7 +701,7 @@ repeat). There should be awesome sound and an awesome user interface.
 
 ## Publishing
 
-The badge.team hatchery also allows publishing native apps. Go to the hatchery,
-register, login. There should be an option to publish native ESP32 apps.
-Unfortunately, this feature is not yet published at time of writing this text.
-So you will have to figure it out yourself (or someone edits this text). Sorry!
+The badge.team hatchery also allows publishing native apps. Go to The Hatchery,
+register, login. There should be an option to publish native ESP32 apps.  This
+tutorial is already way to long, though. [Follow these instructions](../../hatchery) if you want
+to publish your app in The Hatchery
