@@ -8,14 +8,28 @@ weight: -10
 You're on the main documentation site for The Badge.
 
 We hope that we'll be able to centralize all documentation efforts here,
-but who konws what happens at camps.
+but who knows what happens at camps.
 
-We would be very happy to accept pull request (TOD link to how to make a
+We would be very happy to accept pull request (TODO link to how to make a
 good PR) if you find the documentation lacking and feel you are able to
 make improvements. The documentation project lives in this [github
 repository](https://github.com/badgeteam/website)
 
-# Speaking of github
+# Random Resources for Getting Help
+
+- [Twitter @BadgeteamNL](https://twitter.com/BadgeteamNL)
+- [MCH2022 Wiki Badge Page](https://wiki.mch2022.org/Badge)
+
+
+## But I want to chat with somebody ... 
+
+- Try the Telegram channel[Badge.team](https://t.me/+tjHw6Rtao19jODM8)
+- IRC: `badgeteam` on irc.oftc.net
+- Matrix: [#oftc_#badgeteam:pixie.town](https://matrix.to/#/#oftc_#badgeteam:pixie.town)
+
+And if you're reading this at MCH2022, just come by our [tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0)
+
+# Overview of the main github Repos you can contribute to ...
 
 You can find the sources and hardware files for all Badge artefacts
 files under the [Badge.team](https://github.com/badgeteam) organization:
@@ -31,10 +45,6 @@ files under the [Badge.team](https://github.com/badgeteam) organization:
 - [mch2022-firmware-ice40](https://github.com/badgeteam/mch2022-firmware-ice40) code for the built in FPGA
 
 
-# Random Resources
-
-- [Twitter @BadgeteamNL](https://twitter.com/BadgeteamNL)
-- [MCH2022 Wiki Badge Page](https://wiki.mch2022.org/Team:Badge)
 
 
 # Non-Specific Resources

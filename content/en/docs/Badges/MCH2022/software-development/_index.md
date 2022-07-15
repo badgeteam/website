@@ -43,6 +43,18 @@ should be the easiest way to control the device and the easiest mode to
 write apps for The Badge, especially if you are a beginner or don't want
 to spend a lot of time downloading toolchains and debugging drivers.
 
+## Before the Camp and if you are afraid to break things...
+
+Uri Shaked a.k.a [Wokwi](https://wokwi.com/projects/335445228923126356) built
+an awesome emulation of the badge that runs in your browser. You can use it to
+test stuff out if you don't yet have a Badge or your Badge is being used for
+something else. Or if you just feel more comfortable with a Badge that can't
+catch on fire. It fantastic, you can click the buttons and everything! [Try it.](https://wokwi.com/projects/335445228923126356)
+
+![Wokwi Badge Emulator](wokwi.png)
+
+## On the device!
+
 First, make sure Python is installed and that you didn't accidentally
 delete it. Check in the `apps` menu. If it's not there: install the
 Python app from the Hatchery by going to `Hatchery -> ESP32 native
