@@ -18,7 +18,7 @@ weight: 1
   a fun way. It's very unlikely we'll have the resource to help you fix
   the badge during the camp.
 
-Press SELECT while you're powering on the Badge, this gets you into RP2 Boot mode:
+Press `SELECT` while you're powering on the Badge, this gets you into RP2 Boot mode:
 
 ```
 $ lsusb 
@@ -31,4 +31,7 @@ this causes the USB connection to NOT appear as a serial device (acting as a
 passthrough to the ESP), but instead as a USB mass storage device (MSD) and
 will show up like a USB thumb drive. RP2040 Firmware you develop can be flashed
 by copying it to this "drive".
+
+In case you do brick your device, go to the [repo for the RP2040
+firmware](https://github.com/badgeteam/mch2022-firmware-rp2040).
 
