@@ -133,7 +133,7 @@ A light emitting diode can shine, but it can also detect light. This contains an
 
 ## Forth Pmod Lab
 
-Soldered something special for the Pmod collector? The [Forth Pmod Lab](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Forth) helps you to quickly examine your hardware using the Forth language. Due to [extensive documentation](https://github.com/badgeteam/mch2022-firmware-ice40/blob/master/projects/Forth/README) also suitable if you want to try Forth for the first time.
+Soldered something special for the Pmod connector? The [Forth Pmod Lab](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Forth) helps you to quickly examine your hardware using the Forth language. Due to [extensive documentation](https://github.com/badgeteam/mch2022-firmware-ice40/blob/master/projects/Forth/README) also suitable if you want to try Forth for the first time.
 
 ## Snake
 
