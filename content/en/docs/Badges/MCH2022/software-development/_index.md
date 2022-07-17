@@ -35,6 +35,22 @@ The other two:
   a fun way. It's very unlikely we'll have the resource to help you fix
   the badge during the camp.
 
+## Linux permissions
+
+Regardless of the way you're going to program the badge, to connect to the badge over USB from Linux, do the following.
+
+Create `/etc/udev/rules.d/99-mch2022.rules` with the following contents:
+
+```
+SUBSYSTEM=="usb", ATTR{idVendor}=="16d0", ATTR{idProduct}=="0f9a", MODE="0666"
+```
+
+Then run the following commands to apply the new rule:
+
+```
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
 
 # Micropython
 
