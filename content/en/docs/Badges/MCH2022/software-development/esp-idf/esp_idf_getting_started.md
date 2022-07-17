@@ -26,7 +26,7 @@ will point out) but it does require some dependencies to be installed.
 
 How to install these prerequisites is described on the IDF documenttion page for:
 
-- [Linux](https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/get-started/windows-setup.html)
+- [Linux](https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/get-started/linux-setup.html)
 - [Mac](https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/get-started/macos-setup.html)
 - [Windows](https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/get-started/windows-setup.html)
 
