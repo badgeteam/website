@@ -20,6 +20,13 @@ This projects contains a beginner friendly RISC-V 'fantasy microcontroller' for 
 
 Detailed descriptions, memory map and register set are described in the [README](https://github.com/badgeteam/mch2022-firmware-ice40/blob/master/projects/RISCV-Playground/README) file.
 
+# Docs on RISC-V itself
+
+ * Instruction set quick reference, recommended: [http://www.riscvbook.com/greencard-20181213.pdf](http://www.riscvbook.com/greencard-20181213.pdf)
+
+ * Complete specifications: [https://riscv.org/technical/specifications/](https://riscv.org/technical/specifications/)
+   See `Volume 1, Unprivileged Spec` for instruction set, and `Volume 2, Privileged Spec` for interrupt infrastructure.
+
 # Quickstart
 
 Clone both the bitstream tools repo
