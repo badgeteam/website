@@ -22,7 +22,7 @@ onto an SD card.
 This badge contains a common ESP32 firmware platform shared with other
 badges, so to learn more about the general platform and its components,
 [start
-here](../../../esp32-platform-firmware/esp32-app-development/getting-started/first_egg/).
+here](../../../../esp32-platform-firmware/esp32-app-development/getting-started/first_egg/).
 In addition there is also a `mch22` module that offers a few
 badge-specific APIs.
 
