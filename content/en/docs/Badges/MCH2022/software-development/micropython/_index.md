@@ -92,7 +92,7 @@ it.](https://wokwi.com/projects/335445228923126356)
 
 ## Run an app on the Badge itself
 
-Have a look at your filesystem and example apps in the
+Have a look at your Badge's filesystem and the example apps in the
 [Hatchery](https://mch2022.badge.team) (btw: browsing the hatchery is a great
 resource for examples). You will see that each app resides in its own directory
 `/apps/python/<appname>`. The main entry point is the `__init__.py` script
@@ -148,8 +148,8 @@ Directory "sdcard"
 ```
 
 See? The the microPython and WebUSB paths differ: We will need to copy our file to
-`/flash/apps/python/myapp/__init.py` in order to get it to Python's
-`/apps/python/myapp/__init.py` path.
+`/flash/apps/python/myapp/__init__.py` in order to get it to Python's
+`/apps/python/myapp/__init__.py` path.
 
 Call `python3 tools/webusb_fat_push.py __init__.py
 /flash/apps/python/myapp/__init__.py` to upload your file to the Badge (don't
@@ -212,7 +212,7 @@ Repeat the upload using the `webusb_fat_push.py` script. Restart your app. Done!
 ## Publish your work!
 
 After you're done writing an amazing app (and writing an amazing `README.md`
-with it), share it with others! The [Hatchery](mch2022.badge.team) is the
+with it), share it with others! The [Hatchery](https://mch2022.badge.team) is the
 Badge's "App store". You can read about publishing eggs in the hatchery
 [here](../hatchery/).
 
