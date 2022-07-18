@@ -50,7 +50,7 @@ The PMOD connector is wired up to the iCE40 FPGA. Note that while the connector 
 | 3              | Input                                 | UART RX                                              | Connected to RP2040                                                                           |
 | 4              | Output                                | I2S bit clock                                        |                                                                                               |
 | 5              | Output                                | LED data                                             | Connected to the SK6805 LEDs in the kite                                                      |
-| 12             | Output                                | I2S LR channel select                                            |                                                                                               |
+| 12             | Output                                | I2S LR channel select                                |                                                                                               |
 | 13             | Output                                | I2S data                                             |                                                                                               |
 | 14             | Output                                | SD clock                                             | SD card slot                                                                                  |
 | 15             | Output                                | SD command                                           | SD card slot                                                                                  |
