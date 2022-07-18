@@ -40,9 +40,9 @@ expansion modules or their own creations.
 
 # Resources
 
-- An [overview](./pinout) of the how all the wonderful toyes are connected to each other.
+- [Check here for pinout tables](./pinout) describing how all the wonderful toyes are connected to each other.
 - The [board schematics download](https://github.com/badgeteam/mch2022-badge-hardware/raw/master/schematic.pdf) or view [online](https://github.com/badgeteam/mch2022-badge-hardware/blob/master/schematic.pdf) at github
-- 
+ 
 
 ## Datasheets and Resources
 - [ESP32 datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf) the datasheet for the main processor
