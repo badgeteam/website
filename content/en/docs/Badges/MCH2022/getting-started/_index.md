@@ -23,6 +23,9 @@ If this is the case everything works and you're good to go. Attach the battery
 to the badge using the included velcro, slap on the lanyard (and possibly [insert an SD-Card](sdcard/)) and [Start
 Hacking](../software-development)!
 
+Don't forget to update the OS and preinstalled apps. And have a look at some
+general tips for [Using the Badge](software).
+
 The rest of this page contains more detailed instructions in case you run into
 problems.
 
@@ -71,21 +74,26 @@ reverse of the badge to attach the velcro.
 
 ### Inserting an SD-Card
 
-The SD-Card holder is a bit fiddly. We've assembled an [illustrated guide](sdcard/) to
-inserting an SD-Card.
+The SD-Card holder is a bit fiddly. We've assembled an [illustrated
+guide](sdcard/) to inserting an SD-Card.
 
 
 ## Now what?
 
-You should now have a working badge. We strongly suggest
-that you hook it up to a live USB power source to fully charge the
-battery. You'll need a cable with a USB-C at the badge end. 
+You should now have a working badge. We strongly suggest that you hook it up to
+a live USB power source to fully charge the battery.You'll need a cable with a
+USB-C at the Badge end.   
+
 
 While the battery is charging, it's time to explore the badge a little.
 When you turn it on it will start with a splash screen and details of
 all the sponsors who have made the event and the badge possible. You'll
-then see the badge menu screen, so now's a goo time to move along to the
+then see the badge menu screen, so now's a good time to move along to the
 next step in this introduction: [using the MCH 2022 badge](./software). 
 
+Also, as with all security critical devices, make sure
+you update the Badge software and any of the apps you installed. There's a menu
+item for that, which will probably save you a lot of grief from bugs we've
+already fixed!
 
 

@@ -12,7 +12,7 @@ Once assembled, you can use the badge to display your name, write Python
 code and maybe play a game or find an Easter Egg, but don't forget: the
 real fun starts when you hack it to make it your own!
 
-![MCH2022 badge](mch2022.jpg)
+![MCH2022 badge](overview.jpg)
 
 # Getting Started
 
@@ -30,9 +30,9 @@ flash storage and 8MB of PSRAM, an Raspberry Pi RP2040 microcontroller
 chip for advanced USB communication and board management and a Lattice
 ICE40UP5K FPGA for hardware accelerated graphics.
 
-It also contains a bunch of (stuff TODO elaborate).
+It also contains a bunch of stuff (TODO elaborate "stuff").
 
-The hardware is described in detail in the [hardware section](./hardware).
+The hardware is described in more detail in the [hardware section](./hardware).
 
 # The Software
 
@@ -42,6 +42,7 @@ Once loaded, you can launch a number of preinstalled applications:
 - the Name-Tag app
 - a Micropython scripting environment
 - a sensor playground for the Bosch sensors
+- [The Hatchery](getting-started/hatchery) where you can load more apps!
  
 and the app contains a link to the Hatchery an app store you can use to
 load more apps. And more importantly, where you can publish app you
