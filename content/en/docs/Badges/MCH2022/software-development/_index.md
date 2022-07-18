@@ -93,4 +93,5 @@ over USB:
 3. Use `python3 webusb_fat_push.py __init__.py /sdcard/apps/python/myapp/__init__.py`
 4. Start your app in the Apps menu.
 
+There's a more detailled description on Micropython development [here](./micropython).
 
