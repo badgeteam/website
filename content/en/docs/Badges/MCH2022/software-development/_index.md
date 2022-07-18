@@ -13,27 +13,34 @@ This is a shameless placeholder for the software development section.
 There are roughly 3 to 5 ways to develop for the Badge (depending on how
 you count:)
 
-- Micropython : write app in Python! This is the easiest way to get
-  started, with the additional benefit that you probably don't need
-  to install anything (or much)
-- ESP-IDF : native EPS apps using the IDF
-- FPGA : this is the special feature ... not happy with the Tensilica
+- [Micropython](micropython) : write apps in Python! This is the easiest way to
+  get started, with the additional benefit that you probably don't need to
+  install anything (or much). Actually this _should_ be the easiest way, but
+  unfortunately has the fewest docs.
+- [ESP-IDF](esp-idf) : native EPS apps using the IDF (IoT Development Framework)
+- [FPGA](fpga) : this is the special feature ... not happy with the Tensilica
   CPU on the ESP? Just implement your own RISC-V core (or, to get
   started, connect all the buttons together with an AND gate...)
 
-The other two:
+The other two plus (depending on how well you can count) :
 
-- Arduino: this was intended to be done and beautifully polished ... but
-  then we all got COVID and couldn't finish. You can try to develop apps
-  with Arduino if you think it will be easier, but it will probably
-  cause some pain. Of course, we would be ecstatic if you help getting
-  it work smoothly.
-- RP2040: aka Raspberry Pico. This is an onboard conprocessor that we
-  are using as our USB Lifeline to the outside world. As such, if you
-  break stuff here, you can easily brick your badge. Feel free to play
-  around with it, but be aware: THIS VOIDS YOUR WARRANTY ... and not in
-  a fun way. It's very unlikely we'll have the resource to help you fix
-  the badge during the camp.
+- [Arduino](arduino): this was intended to be done and beautifully polished ...
+  but then we all got COVID and couldn't finish. You can try to develop apps
+  with Arduino if you think it will be easier, but it will probably cause some
+  pain. Of course, we would be ecstatic if you help getting it work smoothly.
+- [RP2040](rp2040): aka Raspberry Pico. This is an onboard conprocessor that we
+  are using as our USB Lifeline to the outside world. As such, if you break
+  stuff here, you can easily brick your badge. Feel free to play around with
+  it, but be aware: THIS VOIDS YOUR WARRANTY ... and not in a fun way. It's
+  very unlikely we'll have the resource to help you fix the badge during the
+  camp.
+- [RISC-V](risc-v) and
+  [Forth](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Forth)
+  because The Badge contains an FPGA, you can turn it into anything you want.
+  Technically the RISC-V and Forth projects are just FPGA projects, but the
+  RISC-V CPU is powerful enough to run Doom and the Forth CPU is even more
+  powerful and can run
+  [Snake](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Snake)!
 
 ## Linux permissions
 

@@ -9,7 +9,12 @@ weight: 1
 
 The badge contains an ice40 FPGA that is connected to a PMOD connector, some
 RAM, and an RGB LED.  It can also control the display over a parallel bus, and
-has an USB UART link via the RP2040 and an SPI link to the ESP32.
+has an USB UART link via the RP2040 and an SPI link to the ESP32. See here for
+a confusing [diagram with boxes and arrows](../../hardware) showing how everything fits together.
+
+Check out our ["FPGA **Getting Started** for Badgers with Tiny
+Brains"](fpga-getting-started) guide for step by step information getting from
+0 to a hardly working FPGA setup, in case you never heard of FPGAs before.
 
 As with all the other methods to program the badge, step one is to download
 [mch2022-tools](https://github.com/badgeteam/mch2022-tools/archive/refs/heads/master.zip).
