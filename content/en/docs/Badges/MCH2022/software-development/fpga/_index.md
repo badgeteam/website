@@ -108,3 +108,42 @@ c.queue_read(2, 0)
 # execute the command queue
 c.exec()
 ```
+
+# Example projects
+
+This is a list of Verilog examples available in [https://github.com/badgeteam/mch2022-firmware-ice40/](https://github.com/badgeteam/mch2022-firmware-ice40/).
+
+There is also a collection of examples written in Silice: [https://github.com/sylefeb/mch2022-silice](https://github.com/sylefeb/mch2022-silice).
+
+## Blinkies
+
+Three different blinkies are available for a bright first experience:
+
+* [Hello-World](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Hello-World) Completely new to FPGAs? Start here!
+* [Fading-White](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Fading-White) Smoother blinking than just on-off.
+* [Fading-RGB](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Fading-RGB) Smooth with colors!
+
+## Buttons
+
+A small [example](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Buttons) on how to get the state of the buttons. This is not trivial as the buttons are not connected to the FPGA.
+
+## Ledcomm
+
+A light emitting diode can shine, but it can also detect light. This contains an [UART <-> Ledcomm bridge](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Ledcomm) that allows one to transfer data between two badges just using a pair of LEDs. Still confused? Read the original paper [https://merl.com/publications/docs/TR2003-35.pdf](https://merl.com/publications/docs/TR2003-35.pdf).
+
+## Forth Pmod Lab
+
+Soldered something special for the Pmod connector? The [Forth Pmod Lab](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Forth) helps you to quickly examine your hardware using the Forth language. Due to [extensive documentation](https://github.com/badgeteam/mch2022-firmware-ice40/blob/master/projects/Forth/README) also suitable if you want to try Forth for the first time.
+
+## Snake
+
+A free interpretation of the classic ["snake" game](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Snake) with ASCII art and a Ledcomm based two-player mode. Enjoy!
+
+## RISCV-Playground
+
+A complete beginner friendly RISC-V 'fantasy microcontroller' that deserves [its own documentation](../risc-v).
+
+## Doom
+
+Does it run [Doom](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/riscv_doom)? Of course!
+
