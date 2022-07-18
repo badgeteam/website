@@ -15,8 +15,11 @@ good PR) if you find the documentation lacking and feel you are able to
 make improvements. The documentation project lives in this [github
 repository](https://github.com/badgeteam/website)
 
+## [If you feel your Badge is broken, go HERE first!](troubleshooting_faq)
+
 # Random Resources for Getting Help
 
+- During the MCH2022 Event, please visit us at the [Badge Tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) in case you have any questions!
 - [Twitter @BadgeteamNL](https://twitter.com/BadgeteamNL)
 - [MCH2022 Wiki Badge Page](https://wiki.mch2022.org/Badge)
 
