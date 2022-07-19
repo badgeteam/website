@@ -13,6 +13,8 @@ git clone --recursive https://github.com/badgeteam/mch2022-firmware-ice40
 python3 mch2022-tools/webusb_fpga.py mch2022-firmware-ice40/projects/Hello-World/hello_world.bin
 ```
 
+If the TL;DR wasn't wordy enough for you, try ["FPGA **Getting Started** for Badgers with Tiny Brains"](fpga-getting-started) or read on!
+
 ## Welcome
 
 The badge contains an ice40 FPGA that is connected to a PMOD connector, a serial QSPI
