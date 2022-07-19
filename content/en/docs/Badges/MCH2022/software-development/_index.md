@@ -36,7 +36,7 @@ The other two plus (depending on how well you can count) :
   camp.
 - [RISC-V](risc-v) and
   [Forth](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Forth):
-  Because the badge contains a FPGA, you can turn it into anything you want.
+  Because the badge contains an FPGA, you can turn it into anything you want.
   Technically the RISC-V and Forth projects are just FPGA projects, but the
   RISC-V CPU is powerful enough to run a [Mandelbrot and Tricorn fractal explorer](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/RISCV-Playground/fw/mandelbrot).
   A different RISC-V processor implementation with a focus on performance instead of readability can even run [Doom](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/riscv_doom)!
