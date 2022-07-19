@@ -20,14 +20,14 @@ This projects contains a beginner friendly RISC-V 'fantasy microcontroller' for 
 
 Detailed descriptions, memory map and register set are described in the [README](https://github.com/badgeteam/mch2022-firmware-ice40/blob/master/projects/RISCV-Playground/README) file.
 
-# Docs on RISC-V itself
+## Docs on RISC-V itself
 
  * Instruction set quick reference, recommended: [http://www.riscvbook.com/greencard-20181213.pdf](http://www.riscvbook.com/greencard-20181213.pdf)
 
  * Complete specifications: [https://riscv.org/technical/specifications/](https://riscv.org/technical/specifications/)
    See `Volume 1, Unprivileged Spec` for instruction set, and `Volume 2, Privileged Spec` for interrupt infrastructure.
 
-# Quickstart
+## Quickstart
 
 Clone both the bitstream tools repo
 
@@ -47,28 +47,56 @@ folder and load both the bitstream for the FPGA and a RISC-V binary:
 
 Connect to the serial terminal using your favourite terminal emulator with 115200 baud 8N1 LF on `ttyACM1`.
 
-# Example firmware
-## Bootloader
+## Get RISC-V assembler
+
+The GNU binutils for RISC-V include the assembler.
+
+Unlike as for the FPGA tools that change rapidly,
+you can just have a look for binary packages in your distribution.
+
+For Debian 11 Stable "Bullseye", one gets using
+
+`apt-cache search binutils | grep riscv`
+
+```
+binutils-riscv64-linux-gnu - GNU binary utilities, for riscv64-linux-gnu target
+binutils-riscv64-linux-gnu-dbg - GNU binary utilities, for riscv64-linux-gnu target (debug symbols)
+binutils-riscv64-unknown-elf - GNU assembler, linker and binary utilities for RISC-V processors
+```
+
+Both `binutils-riscv64-linux-gnu` and `binutils-riscv64-unknown-elf` are fine,
+but you might have to adjust the actual invocations to the tools depending
+on which package(s) you actually installed.
+
+Despite the names, these also support 32 bit RISC-V targets.
+
+## Example firmware
+### Bootloader
 
   This one is included into the bitstream for default.
   It initialises the LCD display and initialises the 128 kb RAM from
   file "0xdabbad00" using the file read interface over SPI provided
   by the ESP32 firmware.
 
-## Tinyblinky
+### Tinyblinky
 
   A little blinky in RISC-V assembler. A nice "hello world" project.
 
-## Interrupt
+### Interrupt
 
   An example on how to use interrupts on RISC-V, including notes
   on compressed opcodes and and small tools for printing hex numbers.
 
-## Hello GCC
+### Mandelbrot
+
+  Explore the Mandelbrot and Tricorn fractals in ASCII art.
+  This example shows how to use the LCD and buttons in assembler.
+
+### Hello GCC
 
   A small project in C featuring serial terminal, buttons, LED and LCD.
 
-## Forth
+### Forth
 
   This is a port of Mecrisp-Quintus, a 32 Bit Forth implementation,
   available under GPL3.
