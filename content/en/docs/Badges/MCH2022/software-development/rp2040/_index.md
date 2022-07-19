@@ -10,8 +10,7 @@ weight: 1
 RP2040: aka Raspberry Pico. This is an onboard coprocessor that handles
 two USB <-> serial bridges and acts as an IO extender.
 
-At this point in time, we have no way for the apps to include custom
-firmware to be run on the RP2040.
+At this point in time, we have no way for the apps to automatically load new firmware to the RP2040 along with their main functionality on the ESP32, but manually flashing a custom firmware using the recovery method is possible, although not recommended.
 
 Should you like to experiment with the RP2040 firmware,
 [its repo resides here](https://github.com/badgeteam/mch2022-firmware-rp2040).
