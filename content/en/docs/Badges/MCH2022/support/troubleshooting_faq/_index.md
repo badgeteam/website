@@ -32,6 +32,13 @@ But you will need to:
 
 This sound way more complicated than it is, you'll figure it out. In case you don't that means we msessed up something else as well, please bring your Badge to the [Badge tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) so we can have a look to see what went wrong.
 
+# The badge doesn't connect to the computer
+
+You probably have a bad USB cable. Have a look at `dmesg`
+
+# The wifi doesn't work!
+
+Your battery is probably too close to the ESP32 "tin can".
 
 # Button presses are glitching/bouncing‽
 
