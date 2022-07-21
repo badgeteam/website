@@ -39,7 +39,7 @@ connection. Baud rate is 115200. Connect to it using a serial terminal of your
 choice (e.g. `screen /dev/tty.<your_serial> 115200`, you may also use other
 terminal emulators such as `PuTTY` or `picocom` based on your OS and/or
 preference). The badge typically exposes two serial ports, simply try - one
-should give you access to a terminal.
+should give you access to a terminal. If terminal gives a totally black screen, **press enter** to see the prompt appear.
 
 !["Interactive Python shell now active ..."](python.jpg)
 
