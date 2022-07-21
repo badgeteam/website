@@ -31,3 +31,8 @@ But you will need to:
 - Drag-n-drop (or whatever it is you Linux-from-Scratch folks do ...) the U2F firmware onto the drive
 
 This sound way more complicated than it is, you'll figure it out. In case you don't that means we msessed up something else as well, please bring your Badge to the [Badge tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) so we can have a look to see what went wrong.
+
+
+# Button presses are glitching/bouncing‽
+
+Your badge is probably not broken. Try updating the OS first.
