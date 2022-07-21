@@ -75,8 +75,7 @@ Try using the screen:
 ![Red!](../esp-idf/red.jpg)
 
 `display` is a badge-specific module. There are several Badge-specific modules.
-You can find documentation on them [in the CampZone 2020 badge
-documentation](https://badge.team/docs/badges/campzone-2020/) (they might not
+You can find documentation on them [api-reference](https://badge.team/docs/esp32-platform-firmware/esp32-app-development/api-reference/) (they might not
 be all fully up-to-date, but good enough for a start). In addition there is
 also a `mch22` module that offers a few badge-specific APIs. Finding out about
 it's features is left as an exercise to the reader (hint: `import mch22`,
