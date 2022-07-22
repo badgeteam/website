@@ -40,7 +40,7 @@ terminal emulators such as `PuTTY` or `picocom` based on your OS and/or
 preference). The badge typically exposes two serial ports, simply try - one
 should give you access to a terminal. If terminal gives a totally black screen, **press enter** to see the prompt appear.
 
-!["Interactive Python shell now active ..."](python.jpg)
+!["Interactive Python shell now active ..."](../python.jpg)
 
 You can now run python interactively. For example, run `print("That was
 easy!")`. Amazing! 
@@ -54,7 +54,7 @@ That was easy
 Not only is the terminal a great way to try stuff out, it also allows easy
 access to The Badge's file system. Type `import os`, then `os.listdir("/")` to
 see the root filesystem. A FAT partition is mounted on the badge's internal
-flash at `/`. If you [inserted a MicroSD card](../../getting-started/sdcard),
+flash at `/`. If you [inserted a MicroSD card](../../../getting-started/sdcard),
 its contents will be mounted at `/sd`. You can traverse the directories with
 `os.listdir()` (and you will see that Python apps live at
 `/apps/python/<appname>/`). You can create and remove directories with
@@ -71,10 +71,10 @@ Try using the screen:
 >>> display.flush()
 ```
 
-![Red!](../esp-idf/red.jpg)
+![Red!](../../esp-idf/red.jpg)
 
 `display` is a badge-specific module. There are several Badge-specific modules.
-You can find documentation on them [api-reference](https://badge.team/docs/esp32-platform-firmware/esp32-app-development/api-reference/) (they might not
+You can find documentation on them [api-reference](/docs/esp32-platform-firmware/esp32-app-development/api-reference/) (they might not
 be all fully up-to-date, but good enough for a start). In addition there is
 also a `mch22` module that offers a few badge-specific APIs. Finding out about
 it's features is left as an exercise to the reader (hint: `import mch22`,
@@ -98,8 +98,49 @@ inside that directory. The directory may contain other python sources and
 resource files.  Apps stored in the internal flash reside in `/apps/python`,
 apps on the (optional) SD card reside in `/sd/apps/python/`.
 
-Create an app folder on your Badge's filesystem (let's call it `/apps/python/myapp` in
-this example) using the interactive Python console described above. 
+
+Create an app folder on your Badge's filesystem (let's call it
+`/apps/python/myapp` in this example).  There are two ways to create a
+new app folder for your app: either connect to the BadgePython interactive
+shell (`screen`, PuTTY, ...), and create the directory with the `os`
+package:
+
+```
+>>> import os
+>>> os.listdir("/apps/python")
+['citycontrol', 'someapp']
+
+>>> os.mkdir("/apps/python/myapp")
+
+>>> os.listdir("/apps/python")
+['citycontrol', 'someapp', 'myapp']
+
+```
+
+or use the [mch2022 tools](https://github.com/badgeteam/mch2022-tools) to create a new folder from your laptop:
+
+```bash
+$ python webusb_fat_ls.py /flash/apps/python
+Booting into WebUSB, please wait ...
+transfer speed: 2.32 kb/s
+Directory listing for "/flash/apps/python"...
+Directory "citycontrol"
+Directory "someapp"
+
+$ python webusb_fat_mkdir.py /flash/apps/python/myapp
+Starting...
+/internal/apps/python/
+Succesfully created directory
+
+$ python webusb_fat_ls.py /flash/apps/python
+Booting into WebUSB, please wait ...
+transfer speed: 20.32 kb/s
+Directory listing for "/flash/apps/python"...
+Directory "citycontrol"
+Directory "someapp"
+Directory "myapp"
+
+```
 
 Now it's time to write some code on your laptop using a text editor of your
 choice. If you're not sure what and how to program, you can use the following
@@ -131,10 +172,12 @@ To upload the file to the Badge, you can clone the [mch2022
 tools](https://github.com/badgeteam/mch2022-tools). This repository contains
 scripts to upload files to the badge via WebUSB.
 
-Python apps reside in the FatFS partitions inside the badge's internal flash
-and/or the optional SD card, so you should use the `webusb_fat_***` scripts.
-Try `python3 tools/webusb_fat_ls.py /`. You will see that the root directory
-listing contains two entries: `flash` and `sdcard` (the mount points for the
+Python apps reside in the FatFS partitions inside the badge's internal
+flash and/or the optional SD card, so you should use the
+`webusb_fat_***` scripts from the tools
+project.  Try `python3
+tools/webusb_fat_ls.py /`. You will see that the root directory listing
+contains two entries: `flash` and `sdcard` (the mount points for the
 internal and external partitions).
 
 ```
@@ -145,12 +188,26 @@ Directory "flash"
 Directory "sdcard"
 ```
 
-See? The the microPython and WebUSB paths differ: We will need to copy our file to
-`/flash/apps/python/myapp/__init__.py` in order to get it to Python's
-`/apps/python/myapp/__init__.py` path.
+### **Warning: Confusion. Pandemonium. Chaos!**
 
-Call `python3 tools/webusb_fat_push.py __init__.py
-/flash/apps/python/myapp/__init__.py` to upload your file to the Badge (don't
+_The paths in the filesystems are different depending on whether you
+access them internally via the `os` MicroPython API or whether you adress
+them externally via the `webusb_fat...` scripts_
+
+_Internally, i.e. from MicroPython (or native apps) are prefixed with
+`sd` if they are located on the optional SD-Card._
+
+_Externally, i.e. from the `webusb_fat...py` scripts, paths pointing to
+internal files are prefixed with `flash` and paths pointing to the SD
+Card are prefixed with `sdcard`. *_
+
+¯\\ _(ツ)_/¯
+
+
+## Copy the \_\_init.py__ file.
+
+Call `python3 tools/webusb_fat_push.py <file on your laptop>
+<file on The Badge>` to upload your file to the Badge (don't
 forget to adjust the path for your laptop). You should see a
 progress message and a success message on the terminal and your badge screen.
 If you get a Unicode error, you can probably fix it by changing the `fill`
@@ -167,9 +224,9 @@ After uploading, you should be ready to launch your app on the Badge (`apps` ->
 you will typically see a crash message on screen. To see error messages,
 connect your serial terminal (see above) to the badge before starting your app.
 
-![Lines!](lines.jpg)
+![Lines!](../lines.jpg)
 
-## Be nice
+## Be kind, rewind
 
 Unfortunately, there's no way to end the app yet, so you have to restart your
 badge by power cycling it (or using the `webusb_reset.py` script in the `tools`
@@ -212,5 +269,5 @@ Repeat the upload using the `webusb_fat_push.py` script. Restart your app. Done!
 After you're done writing an amazing app (and writing an amazing `README.md`
 with it), share it with others! The [Hatchery](https://mch2022.badge.team) is the
 Badge's "App store". You can read about publishing eggs in the hatchery
-[here](../hatchery/).
+[here](../../hatchery/).
 
