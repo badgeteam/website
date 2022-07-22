@@ -6,7 +6,9 @@ nodateline: true
 
 The badge is made for hacking, and the hardware is no exception. There are several *intended* ways to extend the badge, next to unlimited unintented ones.
 
-If you have access to a 3D printer, an easy and worthwile hardware mod is to print a knob for the joystick, such as [this one](https://www.thingiverse.com/thing:5429071).
+If you have access to a 3D printer, an easy and worthwile hardware mod is to
+print a knob for the joystick, such as [this
+one](https://www.thingiverse.com/thing:5429071) or a [case](https://twitter.com/daveborghuis/status/1549144081825255424).
 
 # Shitty Add-on
 

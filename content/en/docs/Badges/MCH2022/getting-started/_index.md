@@ -81,9 +81,8 @@ guide](sdcard/) to inserting an SD-Card.
 ## Now what?
 
 You should now have a working badge. We strongly suggest that you hook it up to
-a live USB power source to fully charge the battery.You'll need a cable with a
+a live USB power source to fully charge the battery. You'll need a cable with a
 USB-C at the Badge end.   
-
 
 While the battery is charging, it's time to explore the badge a little.
 When you turn it on it will start with a splash screen and details of
@@ -91,9 +90,14 @@ all the sponsors who have made the event and the badge possible. You'll
 then see the badge menu screen, so now's a good time to move along to the
 next step in this introduction: [using the MCH 2022 badge](./software). 
 
+- learn to [program The Badge](../software-development)
+- find a 3D printer [print a case](https://twitter.com/daveborghuis/status/1549144081825255424) for The Badge 
+
 Also, as with all security critical devices, make sure
 you update the Badge software and any of the apps you installed. There's a menu
 item for that, which will probably save you a lot of grief from bugs we've
 already fixed!
+
+
 
 
