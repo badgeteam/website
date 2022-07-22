@@ -30,7 +30,7 @@ But you will need to:
 - The Badge will mount as a mass storage device (MSD, a.k.a USB thumbdrive)
 - Drag-n-drop (or whatever it is you Linux-from-Scratch folks do ...) the U2F firmware onto the drive
 
-This sound way more complicated than it is, you'll figure it out. In case you
+This sounds way more complicated than it is, you'll figure it out. In case you
 don't that means we msessed up something else as well, please bring your Badge
 to the [Badge tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) so we can
 have a look to see what went wrong.
@@ -46,12 +46,25 @@ running `lsusb`, it should contain an entry like the one below:
 ```
 $ lsusb
 ...
-Bus 002 Device 024: ID 0403:6015 Future Technology Devices International, Ltd Bridge(I2C/SPI/UART/FIFO)
+Bus 002 Device 025: ID 16d0:0f9a MCS MCH2022 badge
 ...
 
 ```
+If instead, you see a line like this:
 
-If this is not the case, try out a friends cable.
+```
+Bus 002 Device 027: ID 2e8a:0003 Raspberry Pi RP2 Boot
+```
+
+You may be having some issues with the Bootloader, have a look
+[here](../../software-development/rp2040/) for some hints.
+
+Try running `lsusb` without a badge and see if you get different messages when
+a Badge is connected.
+
+If this is not the case, try out a friend's cable.
+
+
 
 # The wifi doesn't work!
 
