@@ -67,8 +67,7 @@ be in a table. For our AND the configured LUT will look like this:
 # This is *still* really abstract
 ## Install the tools
 
-Ok, let's get started for real. First clone the repo and download all the tools
-from https://github.com/YosysHQ/oss-cad-suite-build/releases :
+Ok, let's get started for real. First clone out repo  :
 
 ```
 $ git clone git@github.com:badgeteam/mch2022-firmware-ice40.git --recursive
@@ -89,6 +88,11 @@ Get the latest package for your computers architecture:
 https://github.com/YosysHQ/oss-cad-suite-build/releases
 
 ..... 8< ....  snip snip snip boring .....
+```
+... and then download all the necessary tools
+from https://github.com/YosysHQ/oss-cad-suite-build/releases
+
+```bash
 
 $ mkdir toolchain && cd toolchain
 $ wget https://github.com/YosysHQ/oss-cad-suite-build/releases/download/$MY_TOOL_CHAIN_IT_DEPENDS!
