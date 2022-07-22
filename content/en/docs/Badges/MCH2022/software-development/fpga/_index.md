@@ -15,6 +15,8 @@ python3 mch2022-tools/webusb_fpga.py mch2022-firmware-ice40/projects/Hello-World
 
 If the TL;DR wasn't wordy enough for you, try ["FPGA **Getting Started** for Badgers with Tiny Brains"](fpga-getting-started) or read on!
 
+If you look for a beginner friendly, graphical FPGA development suite: [https://github.com/badgeteam/mch2022-icestudio](https://github.com/badgeteam/mch2022-icestudio)
+
 ## Welcome
 
 The badge contains an ice40 FPGA that is connected to a PMOD connector, a serial QSPI
