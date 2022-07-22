@@ -38,8 +38,11 @@ You probably have a bad USB cable. Have a look at `dmesg`
 
 # The wifi doesn't work!
 
-Your battery is probably too close to the ESP32 "tin can".
+Your battery is probably too close to the ESP32 "tin can". Try moving it over :)
+
+![Move battery in this direction](battery.jpg)
 
 # Button presses are glitching/bouncing‽
 
-Your badge is probably not broken. Try updating the OS first.
+Your badge is probably not broken. Try updating the OS first. Choose "OS
+Update" in the main menu.
