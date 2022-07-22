@@ -11,7 +11,13 @@ menu:
 
 In all likelihood you came here because you want to learn how to get the most out of your MCH2022 Badge...
 
-Please proceed to the [MCH2022 section](badges/mch2022/), where we have gathered all necessary information for you.
+Please proceed to the [**MCH2022 section**](badges/mch2022/), where we have gathered all necessary information for you.
+
+If you are having difficulties getting The Badge badge up and running, first
+reread the [**Getting Started**](badges/mch2022/getting-started) instructions
+then check our [**Troubleshooting**](badges/mch2022/support/troubleshooting_faq) Hints. You can do both of these things
+at the [Badge Tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) where you
+will find friendly Badgers to assist you!
 
 [![Badge Stuff](badges/mch2022/getting-started/pack.jpg)](badges/mch2022)
 

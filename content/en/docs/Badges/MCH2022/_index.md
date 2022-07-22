@@ -21,7 +21,11 @@ started](./getting-started).
 
 # Getting Help (and helping ...)
 
+Reread the instructions if something isn't working. Then go to our
+[**Troubleshooting Guide**](support/troubleshooting_faq)
+
 Check out [these resources](./support) if you run into trouble.
+
 
 # The Hardware
 
