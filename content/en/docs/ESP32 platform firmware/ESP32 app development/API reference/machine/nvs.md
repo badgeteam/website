@@ -30,7 +30,7 @@ The following list describes the settings stored by the BADGE.TEAM firmware.
 
 | Space  | Key         | Type    | Function                               |
 |--------|-------------|---------|----------------------------------------|
-| owner  | name        | string  | The nickname of the owner of the badge |
+| owner  | nick        | string  | The nickname of the owner of the badge |
 | system | default_app | string  | The app/egg launched on powerup        |
 
 # NVS settings for your app
@@ -44,15 +44,15 @@ Please use the *slug* name of your app as the name of the space used to store yo
 ### Reading the nickname
 
 ```
-import machine
-nickname = machine.nvs_getstr("owner", "name")
+import nvs
+nickname = nvs.nvs_getstr("owner", "nickname")
 print("Your nickname is '{}'!".format(nickname))
 ```
 
 ### Setting the nickname
 
 ```
-import machine
-machine.nvs_setstr("owner", "name", "badge.team")
+import nvs
+nvs.nvs_setstr("owner", "nickname", "badge.team")
 ```
 
