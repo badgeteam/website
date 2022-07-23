@@ -62,6 +62,23 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
+## Windows installation
+
+To upload programs to the badge with the provided tools, python and pyusb are needed. The easiest way to install these on windows is by installing [miniconda](https://docs.conda.io/en/latest/miniconda.html)
+
+After installation, open "Anaconda prompt" from the start menu. Then do the following
+
+```
+conda create -n badge -c conda-forge python pyusb
+conda activate badge
+```
+
+Now you should be able to run commands like:
+
+```
+python ".\Desktop\mch2022-tools-master\webusb_fat_push.py" .\Desktop\my_test.py /flash/apps/python/button_tester/__init__.py
+```
+
 # Micropython
 
 The Badge comes with a preinstalled Micropython interpreter. Python
