@@ -51,6 +51,10 @@ $ picocom /dev/ttyACM0 -b 115200
 That was easy
 ```
 
+*If you are having problems connecting to the serial console, [please check
+here](../../../support/troubleshooting_faq/#micropython-crashes-every-time-i-connect-to-it-)
+!*
+
 Not only is the terminal a great way to try stuff out, it also allows easy
 access to The Badge's file system. Type `import os`, then `os.listdir("/")` to
 see the root filesystem. A FAT partition is mounted on the badge's internal
