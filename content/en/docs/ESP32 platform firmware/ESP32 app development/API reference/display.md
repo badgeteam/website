@@ -288,6 +288,9 @@ while True:
 The source code for the boat can be found here:
 [gist: boat.py](https://gist.github.com/robotman2412/121ebe82a74dbca13d3c5f3d1eddb1d7)
 
+## Available fonts:
+The fonts in the latest firmware can be obtained from the [sourcecode](https://github.com/badgeteam/badgePython/blob/master/components/driver_framebuffer/driver_framebuffer_text.cpp#L50).
+
 # Known problems
  - Rotation of the contents of windows does not work correctly in combination with rotation of the screen itself
  - There is no method available to list the fonts available on your platform
