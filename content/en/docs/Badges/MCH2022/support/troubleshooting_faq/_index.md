@@ -8,14 +8,12 @@ weight: -10
 This page is intended to collect answers to questions that pop up frequently and
 solutions to common problems...
 
-# OMGWTFBBQ "FAIL"!?
 
-In case you see this when first booting your Badge:
+# The wifi doesn't work!
 
-![OMG, Fail!?](bootfailure.jpg)
+Your battery is probably too close to the ESP32 "tin can". Try moving it over :)
 
-Don't worry, that just means one of the elves in Santa's workshop forgot to
-confirm that the self-test passed. Plug it into USB, and press A.
+![Move battery in this direction](battery.jpg)
 
 
 # The kite in the front is flashing RED!? Am I in danger!?
@@ -34,6 +32,39 @@ This sounds way more complicated than it is, you'll figure it out. In case you
 don't that means we msessed up something else as well, please bring your Badge
 to the [Badge tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) so we can
 have a look to see what went wrong.
+
+# MicroPython crashes every time I connect to it ...
+## Apparently I'm disturbing the Guru's Meditation
+
+In case you are trying some Python samples and the firmware crashes ... like this:
+
+```
+Guru Meditation Error: Core  0 panic'ed (Interrupt wdt timeout on CPU0).
+
+Core  0 register dump:
+PC      : 0x40084b56  PS      : 0x00050035  A0      : 0x400d7fde  A1      : 0x3ffbe990
+A2      : 0x00040040  A3      : 0x3ffb27e0  A4      : 0xc0000000  A5      : 0x3ffbe970
+A6      : 0x3ff40000  A7      : 0x3ffbf074  A8      : 0x800d7fde  A9      : 0x40090908
+A10     : 0x00000000  A11     : 0xa6000000  A12     : 0x00000000  A13     : 0x00000473
+A14     : 0x3f403a98  A15     : 0xffffffff  SAR     : 0x0000001f  EXCCAUSE: 0x00000005
+EXCVADDR: 0x00000000  LBEG    : 0x4000c2e0  LEND    : 0x4000c2f6  LCOUNT  : 0xffffffff
+Core  0 was running in ISR context:
+EPC1    : 0x400d3f03  EPC2    : 0x400d7fde  EPC3    : 0x00000000  EPC4    : 0x00000000
+
+
+Backtrace:0x40084b53:0x3ffbe9900x400d7fdb:0x3ffb27e0 0x401d505f:0x3ffb2800
+
+```
+
+We are [working on it](https://github.com/badgeteam/badgePython/issues/25):
+
+- make sure you've updated your BadgePython to the newest version. Use the `AppUpdate` menu item...
+- try deleting Python from the `Apps` menu and reinstalling it from The Hatchery (`Hatchery->ESP32->Utilities`)
+
+
+If none of this helps, here's an easy work around ... Connect to the serial console *before* you start Python. While you're still in the launcher, connect, you will see some of the logging of the launcher application, when you start Python, you will see the boot messages. If the serial console is already attached when Python starts, it doesn't crash. WTF!? ¯\\_ (ツ)_/¯
+
+
 
 # The badge doesn't connect to the computer
 
@@ -66,13 +97,17 @@ If this is not the case, try out a friend's cable.
 
 
 
-# The wifi doesn't work!
-
-Your battery is probably too close to the ESP32 "tin can". Try moving it over :)
-
-![Move battery in this direction](battery.jpg)
 
 # Button presses are glitching/bouncing‽
 
 Your badge is probably not broken. Try updating the OS first. Choose "OS
 Update" in the main menu.
+
+# OMGWTFBBQ "FAIL"!?
+
+In case you see this when first booting your Badge:
+
+![OMG, Fail!?](bootfailure.jpg)
+
+Don't worry, that just means one of the elves in Santa's workshop forgot to
+confirm that the self-test passed. Plug it into USB, and press A.
