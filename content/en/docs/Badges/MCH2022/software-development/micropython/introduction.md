@@ -78,11 +78,20 @@ Try using the screen:
 ![Red!](../../esp-idf/red.jpg)
 
 `display` is a badge-specific module. There are several Badge-specific modules.
-You can find documentation on them [api-reference](/docs/esp32-platform-firmware/esp32-app-development/api-reference/) (they might not
-be all fully up-to-date, but good enough for a start). In addition there is
-also a `mch22` module that offers a few badge-specific APIs. Finding out about
-it's features is left as an exercise to the reader (hint: `import mch22`,
-`dir(mch22)`).
+You can find documentation on them
+[api-reference](/docs/esp32-platform-firmware/esp32-app-development/api-reference/)
+(they might not be all fully up-to-date, but good enough for a start). In
+addition there is also a `mch22` module that offers a few badge-specific APIs.
+Finding out about it's features is left as an exercise to the reader (hint:
+`import mch22`, `dir(mch22)`).
+
+## Try some of the other APIs
+
+Check in the [API
+Reference](/docs/esp32-platform-firmware/esp32-app-development/api-reference/)
+for a list of APIs that work on the MCH2022 Badge, Try some of these APIs out
+in the emulator. Please be aware that you can't expect APIs to work just
+because they have a green checkmark. It's only a suggestion!
 
 ## Develop microPython apps in the emulator
 
