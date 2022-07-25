@@ -16,11 +16,14 @@ you count:)
 - [Micropython](micropython) : write apps in Python! This is the easiest way to
   get started, with the additional benefit that you probably don't need to
   install anything (or much). Actually this _should_ be the easiest way, but
-  unfortunately has the fewest docs.
-- [ESP-IDF](esp-idf) : native EPS apps using the IDF (IoT Development Framework)
+  unfortunately has the fewest docs. Have a [look
+  here](/docs/esp32-platform-firmware/esp32-app-development/api-reference/#badgeteam-platform-apis)
+  for documentation of the Python modules on the Badge.
+- [ESP-IDF](esp-idf) : native EPS apps using the IDF (IoT Development
+  Framework)
 - [FPGA](fpga) : this is the special feature ... not happy with the Tensilica
-  CPU on the ESP? Just implement your own RISC-V core (or, to get
-  started, connect all the buttons together with an AND gate...)
+  CPU on the ESP? Just implement your own RISC-V core (or, to get started,
+  connect all the buttons together with an AND gate...)
 
 The other two plus (depending on how well you can count) :
 
@@ -43,6 +46,7 @@ The other two plus (depending on how well you can count) :
   The Forth includes a custom stack processor and besides being useful for
   interactice experiments with freshly soldered additions on the PMOD connector, it can run a game of
   [Snake](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Snake).
+- [Rust](rust): just a hint or two to get you started. Ask around the Telegram channel if you need support.
 
 
 ## Linux permissions
