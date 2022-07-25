@@ -35,7 +35,8 @@ Here are a few starting points:
 Start Python on your badge (`apps` -> `Python`). There should be a message on
 screen that an interactive Python console is availble on your USB serial
 connection. Baud rate is 115200. Connect to it using a serial terminal of your
-choice (e.g. `screen /dev/tty.<your_serial> 115200`, you may also use other
+choice (e.g. `screen /dev/tty<your_serial> 115200`. On MacOS, `your_serial`
+is probably `.usbmodem101`; on Linux probably `ACM0`. You may also use other
 terminal emulators such as `PuTTY` or `picocom` based on your OS and/or
 preference). The badge typically exposes two serial ports, simply try - one
 should give you access to a terminal. If terminal gives a totally black screen, **press enter** to see the prompt appear.
