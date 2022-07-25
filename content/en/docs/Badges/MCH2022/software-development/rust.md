@@ -10,7 +10,9 @@ description: >-
 
 * Rust toolchain from https://github.com/esp-rs/rust-build. Follow the
   instructions given there.
-* Install cargo-generate (`cargo install cargo-generate`). If this fails, try just running: `rustup update`
+* If you get an error concerning `virtualenv` try uninstalling via `pip` and
+  reinstalling via `apt` or vice versa ...
+* Install cargo-generate (`cargo install cargo-generate`). If *this* fails, try just running: `rustup update`
 * Install the [mch2022 webusb
   tools](https://github.com/badgeteam/mch2022-tools)
 
@@ -65,7 +67,7 @@ $ cargo espflash save-image ESP32 rust_esp.img
 
 * Upload the image using web USB:
 ```bash
-webusb_push.py --run rust rust_esp.img
+$ webusb_push.py --run rust rust_esp.img
 ```
 
 ## Limitations
@@ -75,6 +77,8 @@ access to the components added by the badge team. It's probably possible to use
 the version provided by the badge team, but I have not tried this.
 
 Also: this seems to work on some computers and not on others ... Please feel
-free to provide a PR to the documentation or a link to a sample app ...
+free to provide a PR to the documentation or a link to a sample app ... Make
+sure you're using the newest version of everything. Throw away your computer
+and by a Windows one ...
 
 
