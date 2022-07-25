@@ -51,8 +51,17 @@ $ cd argh
 * Generate an app image using:
 
 ```bash
+# Tell Rust which toolchain to use (you only need to do this once ...)
 $ rustup override set esp
-info: override toolchain for '/home/a2800276/projects/MCH2022/rust-build/rust-esp/argh' set to 'esp'
+info: override toolchain for '/home/<YOUR_USER_NAME>/projects/MCH2022/rust-build/rust-esp/argh' set to 'esp'
+
+# set some environment variables, so rust knows where to find its tools:
+# you will probably want to save this in a little 'source' scriptlet ...
+export PATH="/home/<YOUR_USER_NAME>/.espressif/tools/xtensa-esp32-elf-gcc/8_4_0-esp-2021r2-patch3-x86_64-unknown-linux-gnu/bin/:/home/<YOUR_USER_NAME>/.espressif/tools/xtensa-esp32s2-elf-gcc/8_4_0-esp-2021r2-patch3-x86_64-unknown-linux-gnu/bin/:/home/<YOUR_USER_NAME>/.espressif/tools/xtensa-esp32s3-elf-gcc/8_4_0-esp-2021r2-patch3-x86_64-unknown-linux-gnu/bin/:$PATH"
+export LIBCLANG_PATH="/home/<YOUR_USER_NAME>/.espressif/tools/xtensa-esp32-elf-clang/esp-14.0.0-20220415-x86_64-unknown-linux-gnu/lib/"
+
+
+# finally, build the image ...
 $ cargo espflash save-image ESP32 rust_esp.img                     
     Updating crates.io index      
   Downloaded filetime v0.2.17     
@@ -69,6 +78,18 @@ $ cargo espflash save-image ESP32 rust_esp.img
 ```bash
 $ webusb_push.py --run rust rust_esp.img
 ```
+
+## A more elaborate example.
+
+You can find a more elaborate example that drives the display a shows a nice
+rust screensaver in [The
+Hatchery](https://mch2022.badge.team/projects/small_rust_demo) and on
+[github](https://github.com/p2mate/mch2022-rust-app).
+
+I've been told there is some magic involved to [grab control of the
+screen](https://github.com/p2mate/mch2022-rust-app/blob/f32aa59a7452311401ac883183e3c6902af808de/src/main.rs#L321)
+
+![Rust Graphics](../rust_graphics.jpg)
 
 ## Limitations
 
