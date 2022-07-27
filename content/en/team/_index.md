@@ -27,7 +27,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
 ## [Launcher firmware](https://github.com/badgeteam/mch2022-firmware-esp32)
 
  - [Renze Nicolai](https://nicolaielectronics.nl)
- - Julian Scheffers (Robotman2412)
+ - [Julian Scheffers (Robotman2412)](https://robot.scheffers.net/)
  - Sylvain "tnt" Munaut
  - Frans Faase
  - Joris W. (jorisplusplus)
@@ -51,7 +51,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
  - Sylvain "tnt" Munaut
  - Jorai Rijsdijk (Erackron)
  - Pepijn de Vos
- - Julian Scheffers (Robotman2412)
+ - [Julian Scheffers (Robotman2412)](https://robot.scheffers.net/)
 
 ## [RP2040 co-processor firmware](https://github.com/badgeteam/mch2022-firmware-rp2040)
 
@@ -65,7 +65,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
  - Tim Becker (a2800276)
  - Matthias Koch (Mecrisp)
  - Pepijn de Vos
- - Julian Scheffers (Robotman2412)
+ - [Julian Scheffers (Robotman2412)](https://robot.scheffers.net/)
  - Sylvain "tnt" Munaut
  - TheRealProcyon
  - Pieter Vander Vennet
