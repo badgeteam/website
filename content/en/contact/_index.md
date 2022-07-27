@@ -4,7 +4,7 @@ type: contact
 menu:
   main:
     weight: 40
-    pre: <i class='fas fa-mail'></i>
+    pre: <i class='fas fa-address-card'></i>
 ---
 
 <!-- Basic page header is handled by a layout! -->
