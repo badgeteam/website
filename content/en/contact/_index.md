@@ -1,6 +1,6 @@
 ---
 title: Contact us
-type: team
+type: contact
 menu:
   main:
     weight: 40
