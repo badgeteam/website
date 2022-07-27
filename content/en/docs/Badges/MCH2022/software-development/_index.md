@@ -13,31 +13,27 @@ This is a shameless placeholder for the software development section.
 There are roughly 3 to 5 ways to develop for the Badge (depending on how
 you count:)
 
-- [Micropython](micropython) : write apps in Python! This is the easiest way to
+- [**Micropython**](micropython) : write apps in Python! This is the easiest way to
   get started, with the additional benefit that you probably don't need to
   install anything (or much). Actually this _should_ be the easiest way, but
   unfortunately has the fewest docs. Have a [look
   here](/docs/esp32-platform-firmware/esp32-app-development/api-reference/#badgeteam-platform-apis)
   for documentation of the Python modules on the Badge.
-- [ESP-IDF](esp-idf) : native EPS apps using the IDF (IoT Development
+- [**ESP-IDF**](esp-idf) : native EPS apps using the IDF (IoT Development
   Framework)
-- [FPGA](fpga) : this is the special feature ... not happy with the Tensilica
+- [**FPGA**](fpga) : this is the special feature ... not happy with the Tensilica
   CPU on the ESP? Just implement your own RISC-V core (or, to get started,
   connect all the buttons together with an AND gate...)
 
 The other two plus (depending on how well you can count) :
 
-- [Arduino](arduino): this was intended to be done and beautifully polished ...
-  but then we all got COVID and couldn't finish. You can try to develop apps
-  with Arduino if you think it will be easier, but it will probably cause some
-  pain. Of course, we would be ecstatic if you help getting it work smoothly.
-- [RP2040](rp2040): aka Raspberry Pico. This is an onboard conprocessor that we
+- [**RP2040**](rp2040): aka Raspberry Pico. This is an onboard conprocessor that we
   are using as our USB Lifeline to the outside world. As such, if you break
   stuff here, you can easily brick your badge. Feel free to play around with
   it, but be aware: THIS VOIDS YOUR WARRANTY ... and not in a fun way. It's
   very unlikely we'll have the resource to help you fix the badge during the
   camp.
-- [RISC-V](risc-v) and
+- [**RISC-V**](risc-v) and
   [Forth](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Forth):
   Because the badge contains an FPGA, you can turn it into anything you want.
   Technically the RISC-V and Forth projects are just FPGA projects, but the
@@ -46,7 +42,12 @@ The other two plus (depending on how well you can count) :
   The Forth includes a custom stack processor and besides being useful for
   interactice experiments with freshly soldered additions on the PMOD connector, it can run a game of
   [Snake](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects/Snake).
-- [Rust](rust): just a hint or two to get you started. Ask around the Telegram channel if you need support.
+- [**Rust**](rust): just a hint or two to get you started. Ask around the Telegram channel if you need support.
+- [**TinyGo**](tinygo): Some hints on getting started with TinyGo on the Badge and some samples ...
+- [Arduino](arduino): this was intended to be done and beautifully polished ...
+  but then we all got COVID and couldn't finish. You can try to develop apps
+  with Arduino if you think it will be easier, but it will probably cause some
+  pain. Of course, we would be ecstatic if you help getting it work smoothly.
 
 
 ## Linux permissions
