@@ -28,7 +28,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
 
  - [Renze Nicolai](https://nicolaielectronics.nl)
  - Julian Scheffers (Robotman2412)
- - Sylvian "tnt" Munaut
+ - Sylvain "tnt" Munaut
  - Frans Faase
  - Joris W. (jorisplusplus)
  - Reinier van der Leer (Pwuts)
@@ -39,7 +39,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
 
 ## [FPGA examples and tools](https://github.com/badgeteam/mch2022-firmware-ice40)
 
- - Sylvian "tnt" Munaut
+ - Sylvain "tnt" Munaut
  - Matthias Koch (Mecrisp)
  - Frans Faase
 
@@ -48,7 +48,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
  - Joris W. (jorisplusplus)
  - [Renze Nicolai](https://nicolaielectronics.nl)
  - Tom Clement
- - Sylvian "tnt" Munaut
+ - Sylvain "tnt" Munaut
  - Jorai Rijsdijk (Erackron)
  - Pepijn de Vos
  - Julian Scheffers (Robotman2412)
@@ -56,7 +56,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
 ## [RP2040 co-processor firmware](https://github.com/badgeteam/mch2022-firmware-rp2040)
 
  - [Renze Nicolai](https://nicolaielectronics.nl)
- - Sylvian "tnt" Munaut
+ - Sylvain "tnt" Munaut
  - Reinier van der Leer (Pwuts)
  - Jana Marie Hemsing
 
@@ -66,7 +66,7 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
  - Matthias Koch (Mecrisp)
  - Pepijn de Vos
  - Julian Scheffers (Robotman2412)
- - Sylvian "tnt" Munaut
+ - Sylvain "tnt" Munaut
  - TheRealProcyon
  - Pieter Vander Vennet
  - Jenny List
