@@ -60,6 +60,24 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
  - Reinier van der Leer (Pwuts)
  - Jana Marie Hemsing
 
+## [Documentation](https://github.com/badgeteam/website)
+
+ - Tim Becker (a2800276)
+ - Matthias Koch (Mecrisp)
+ - Pepijn de Vos
+ - Julian Scheffers (Robotman2412)
+ - Sylvian "tnt" Munaut
+ - TheRealProcyon
+ - Pieter Vander Vennet
+ - Jenny List
+ - Oskar Roesler (bionade24)
+ - Dominik (dloidolt)
+ - Manuel Dipolt (xeniter)
+ - p2mate
+ - Sietse Ringers
+ - Yvo de Haas
+ - Marble (cyber-murmel)
+
 # CampZone 2020
 
 (tbd)
