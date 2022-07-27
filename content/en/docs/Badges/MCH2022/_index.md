@@ -10,7 +10,7 @@ this badge is a powerhouse filled with cool technology.
 
 Once assembled, you can use the badge to display your name, write Python
 code and maybe play a game or find an Easter Egg, but don't forget: the
-real fun starts when you hack it to make it your own!
+real fun starts when you [hack it](software-development) to make it your own!
 
 ![MCH2022 badge](overview.jpg)
 
