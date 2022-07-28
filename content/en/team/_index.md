@@ -96,4 +96,16 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
 
 # SHA2017
 
-(tbd)
+Team leads: Niek Blankers, Sebastian Oort
+
+Team members:
+ - Anne Jan Brouwer
+ - Bas van Sisseren
+ - Gavan Fantom
+ - Jeroen Domburg
+ - Markus Bechtold
+ - Niek Blankers
+ - Sebastian Oort
+ - Thomas Roos
+ - Renze Nicolai
+ - Arnout Engelen
