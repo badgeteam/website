@@ -40,8 +40,10 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
 ## [FPGA examples and tools](https://github.com/badgeteam/mch2022-firmware-ice40)
 
  - Sylvain "tnt" Munaut
- - Matthias Koch (Mecrisp)
+ - Matthias Koch [Mecrisp](http://mecrisp.sourceforge.net/)
  - Frans Faase
+ - Carlos Venegas [@cavearr](https://twitter.com/cavearr)
+ - Sylvain Lefebvre [@sylefeb](https://twitter.com/sylefeb)
 
 ## [BadgePython](https://github.com/badgeteam/badgePython/)
 
