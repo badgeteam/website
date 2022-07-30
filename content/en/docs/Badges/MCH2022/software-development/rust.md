@@ -102,4 +102,16 @@ free to provide a PR to the documentation or a link to a sample app ... Make
 sure you're using the newest version of everything. Throw away your computer
 and by a Windows one ...
 
+## Raw notes
 
+### main.bin
+
+Snippet from `IRC`:
+```text
+13:32 < p2mate> <p2mate> "i formatted both internal..." <- renamed the image to main.bin and now it works.. maybe something to highlight in the documentation?
+13:37 < stappers> p2mate: What is your tool chain?
+13:38 < stappers> (What is the reason that you need an additional rename?)
+13:39 < p2mate> @stappers: https://badge.team/docs/badges/mch2022/software-development/rust/
+13:39 < stappers> :-)
+13:39 < p2mate> I have no idea why the binary needs to be called main.bin
+```
