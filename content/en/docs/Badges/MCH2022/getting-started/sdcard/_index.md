@@ -4,6 +4,11 @@ linkTitle: "SD Card"
 nodateline: true
 weight: 1
 ---
+# I inserted the card correctly, but it doesn't work.
+
+Format the card as `FAT32` *not* `exFAT`, please. And if you are using a
+humongous 12TB Super SD Card, maybe try a cheap, small one from the grocery
+store :)
 
 # Oh Noes! I broke off the little metal thingie of the SD Card holder!
 
