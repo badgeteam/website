@@ -37,6 +37,10 @@ project](https://github.com/badgeteam/website) to create a Pull Request!
 Better yet, check out the repo for [The
 Hatchery](https://github.com/badgeteam/hatchery) itself and make improvements.
 
+In case you are experiencing issues receiving 419 errors, [clear
+cookies](../../support/troubleshooting_faq/#i-keep-getting-419-errors-in-the-hatchery)
+and try again.
+
 ## Find an App
 
 This will probably be the challenging part. We recommend you do this on a big computer, like a laptop. Something with a keyboard.

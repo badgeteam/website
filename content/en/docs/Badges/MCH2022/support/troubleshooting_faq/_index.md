@@ -9,29 +9,6 @@ This page is intended to collect answers to questions that pop up frequently and
 solutions to common problems...
 
 
-# The wifi doesn't work!
-
-Your battery is probably too close to the ESP32 "tin can". Try moving it over :)
-
-![Move battery in this direction](battery.jpg)
-
-
-# The kite in the front is flashing RED!? Am I in danger!?
-
-You're probably fine. But be sure to drink plenty of water.
-But you will need to:
-
-- Download the the [RP2040 coprocessor firmware U2F](https://github.com/badgeteam/ota/blob/master/mch2022-rp2040/mch2022.uf2)
-- Turn the Badge off ( with the switch labeled ON-OFF)
-- Hold the `SELECT` button while turning the switch back to ON
-- Make sure a USB cable is connected to your computer
-- The Badge will mount as a mass storage device (MSD, a.k.a USB thumbdrive)
-- Drag-n-drop (or whatever it is you Linux-from-Scratch folks do ...) the U2F firmware onto the drive
-
-This sounds way more complicated than it is, you'll figure it out. In case you
-don't that means we msessed up something else as well, please bring your Badge
-to the [Badge tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) so we can
-have a look to see what went wrong.
 
 # MicroPython crashes every time I connect to it ...
 ## Apparently I'm disturbing the Guru's Meditation
@@ -65,7 +42,39 @@ We are [working on it](https://github.com/badgeteam/badgePython/issues/25):
 If none of this helps, here's an easy work around ... Connect to the serial console *before* you start Python. While you're still in the launcher, connect, you will see some of the logging of the launcher application, when you start Python, you will see the boot messages. If the serial console is already attached when Python starts, it doesn't crash. WTF!? ¯\\_ (ツ)_/¯
 
 
+# I keep getting 419 errors in the Hatchery!
 
+If you can't log in to the Hatchery (or create an account) or whatever because you are getting `419 Expired` errors, you need to either clear all cookies for the Hatchery, use incognito mode to connect or try a different browser. Please also report your experience, inlcuding time of occurance in the [issue concerning this behavior](https://github.com/badgeteam/Hatchery/issues/163) to help figure this out.
+
+# My SD-Card is not being recognized
+
+Try formatting the card as FAT32. Unfortunately exFAT is currently not supported.
+
+# The wifi doesn't work!
+
+Your battery is probably too close to the ESP32 "tin can". Try moving it over
+:) The black strip on top of the can is the wifi antenna, you need to make sure
+that bit is not covered by anything.
+
+![Move battery in this direction](battery.jpg)
+
+
+# The kite in the front is flashing RED!? Am I in danger!?
+
+You're probably fine. But be sure to drink plenty of water.
+But you will need to:
+
+- Download the the [RP2040 coprocessor firmware U2F](https://github.com/badgeteam/ota/blob/master/mch2022-rp2040/mch2022.uf2)
+- Turn the Badge off ( with the switch labeled ON-OFF)
+- Hold the `SELECT` button while turning the switch back to ON
+- Make sure a USB cable is connected to your computer
+- The Badge will mount as a mass storage device (MSD, a.k.a USB thumbdrive)
+- Drag-n-drop (or whatever it is you Linux-from-Scratch folks do ...) the U2F firmware onto the drive
+
+This sounds way more complicated than it is, you'll figure it out. In case you
+don't that means we msessed up something else as well, please bring your Badge
+to the [Badge tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0) so we can
+have a look to see what went wrong.
 # The badge doesn't connect to the computer
 
 If you have followed the instructions concerning [`udev`
@@ -96,12 +105,11 @@ a Badge is connected.
 If this is not the case, try out a friend's cable.
 
 
-
-
 # Button presses are glitching/bouncing‽
 
 Your badge is probably not broken. Try updating the OS first. Choose "OS
 Update" in the main menu.
+
 
 # OMGWTFBBQ "FAIL"!?
 

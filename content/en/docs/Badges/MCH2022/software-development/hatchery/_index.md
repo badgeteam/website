@@ -38,6 +38,10 @@ First off, we're having our _best_ UX experts work day and night to tweak the
 Hatchery Website to make it even easier to use! So expect some of the
 screenshot to be a bit out of date. Don't worry, you'll figure it out.
 
+In case you are experiencing issues regarding [`419
+Expired`](../../support/troubleshooting_faq/#i-keep-getting-419-errors-in-the-hatchery)
+errors, try deleting Hatchery cookies from your browser.
+
 ### Create an Account
 
 Go to [mch2022.badge.team](https://mch2022.badge.team/) and sign up for
