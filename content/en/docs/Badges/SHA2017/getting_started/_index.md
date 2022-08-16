@@ -49,11 +49,11 @@ To get started [install the driver](../driver_installation), download a terminal
 
 ![menu](menu.png)
 
-For more information on the serial console of your badge please have a look at the [USB-serial connection](/docs/esp32-app-development/usb_connection/) article of the [App development](/docs/esp32-app-development/) section.
+For more information on the serial console of your badge please have a look at the [USB-serial connection](/docs/esp32-platform-firmware/esp32-app-development/usb_connection/) article of the [App development](/docs/esp32-platform-firmware/esp32-app-development/) section.
 
 ### And now?
 Congratulations! You should now be on our new platform firmware. Note that not everything works yet and that you might experience some problems.
 
 Having problems? We have a [troubleshooting](../troubleshooting) page just for that.
 
-Want to start developing apps? check out out [App development](/docs/esp32-app-development/) section.
+Want to start developing apps? check out out [App development](/docs/esp32-platform-firmware/esp32-app-development/) section.
