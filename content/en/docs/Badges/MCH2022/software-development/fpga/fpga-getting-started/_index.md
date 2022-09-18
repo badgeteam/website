@@ -211,7 +211,7 @@ expanded upon or left abandoned with good intentions of finishing it up
 before MCH2022. \*cough\*
 
 If it's not done, either read the [more about advanced
-examples](../fpga) or head over to the [fpga
+examples](https://www.badge.team/docs/badges/mch2022/software-development/fpga) or head over to the [fpga
 repo](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects),
 there is a lot of information there. Also, come by the workshops at the
 camp to chat.
