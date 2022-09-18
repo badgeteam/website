@@ -94,6 +94,46 @@ for a list of APIs that work on the MCH2022 Badge, Try some of these APIs out
 in the emulator. Please be aware that you can't expect APIs to work just
 because they have a green checkmark. It's only a suggestion!
 
+## Use the `mch22` module
+
+There is an `mch22` module with a lot of convenience functionality.
+
+### GPIO
+
+The badge has 4 GPIO pins, 2 on the SAO header and 2 more near the prototype area.
+|Silkscreen Label         |RP2040 GPIO|MicroPython GPIO   |
+|-------------------------|-----------|-------------------|
+|16 (May Contain Hardware)|GPIO 16    |`mch22.PROTO_0_PIN`|
+|17 (May Contain Hardware)|GPIO 17    |`mch22.PROTO_1_PIN`|
+|GPIO1 (Shitty Add-On)    |GPIO 18    |`mch22.SAO_IO0_PIN`|
+|GPIO2 (Shitty Add-On)    |GPIO 19    |`mch22.SAO_IO1_PIN`|
+
+For example, to turn on a simple led on a Shitty Add-On:
+```python
+import mch22
+mch22.set_gpio_dir(mch22.SAO_IO0_PIN, True)
+mch22.set_gpio_value(mch22.SAO_IO0_PIN, True)
+```
+
+### Display Brightness
+
+You can set the LCD backlight brightness in 255 steps. `0` is completely off.
+
+```python
+import mch22
+mch22.set_brightness(255)
+print(mch22.get_brightness())
+# 255
+```
+
+### Read USB and battery voltages
+
+```python
+import mch22
+print(f'USB: {mch22.read_vusb():.3f}V    Battery: {mch22.read_vbat():.3f}V')
+# USB: 4.868V    Battery: 4.123V
+```
+
 ## Develop microPython apps in the emulator
 
 Uri Shaked a.k.a [Wokwi](https://wokwi.com/projects/335445228923126356) built
