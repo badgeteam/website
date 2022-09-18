@@ -106,7 +106,7 @@ $ source toolchain/$WHATEVER/environment
 ```
 
 Awesome you're ready. Let's get started for real. All the examples are
-in the [`projects` subdirectory](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects)
+in the [`projects` subdirectory](https://github.com/badgeteam/mch2022-firmware-ice40/tree/master/projects) in the mch2022-firmware-ice40 folder that you cloned from Git.
 
 - `_common`          : stuff needed everywhere 
 - `Buttons`          : ~fairly simple example that wires together all the buttons to change the RGB LED colors
