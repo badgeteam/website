@@ -9,7 +9,13 @@ menu:
 
 <!-- Basic page header is handled by a layout! -->
 
-Our team changes continuously, on this incomplete page you will find a list of the people who helped make the badges possible.
+Each event badge has it's own team, this page lists all badge teams making your awesome event badges possible.
+
+# Hackerhotel 2023
+
+ - Pim: Team lead, hardware and software development
+ - Sake: Challenges
+ - [Nikolett S.](https://ankhaneko.art): Artwork
 
 # MCH2022
 
@@ -20,7 +26,7 @@ Component sponsors: Espressif, Lattice Semiconductor, Bosch, Allnet and Raspberr
 ## [Hardware](https://github.com/badgeteam/mch2022-badge-hardware)
 
  - [Renze Nicolai](https://nicolaielectronics.nl): Circuit diagram and PCB routing
- - [Nikolett S.](https://tilde.industries): Artwork
+ - [Nikolett S.](https://ankhaneko.art): Artwork
 
 With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul Honig, Sylvain Munaut, Tom Clement, Fuchsia (f0x) and Sander de Haan.
 
@@ -82,32 +88,38 @@ With the help of Anne Jan Brouwer, Kliment Yanev, Kuristian, Martin Ling, Paul H
 
 # CampZone 2020
 
-(tbd)
+ - Tom Clement: hardware
 
 # Hackerhotel 2020
 
-(tbd)
+ - [Renze Nicolai](https://nicolaielectronics.nl): Circuit diagram and PCB routing
+ - [Nikolett S.](https://ankhaneko.art): Artwork
+ - Sake: Challenges
+ - Glu: audio
 
 # CampZone 2019
 
-(tbd)
+ - Tom Clement: hardware
+ - Roel Harbers
 
 # Hackerhotel 2019
 
-(tbd)
+ - Tom Clement: hardware
+ - Raboof: hardware, software
+ - [Renze Nicolai](https://nicolaielectronics.nl): software
+ - Anne Jan Brouwer: software
+ - Bas van Sisseren: software, audio fix
 
 # SHA2017
 
 Team leads: Niek Blankers, Sebastian Oort
 
-Team members:
+ - Markus Bechtold: hardware
  - Anne Jan Brouwer
- - Bas van Sisseren
+ - Bas van Sisseren: epaper display driver, software
  - Gavan Fantom
  - Jeroen Domburg
- - Markus Bechtold
  - Niek Blankers
  - Sebastian Oort
- - Thomas Roos
  - Renze Nicolai
  - Arnout Engelen
