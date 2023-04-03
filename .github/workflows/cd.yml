@@ -1,0 +1,44 @@
+name: Build+deploy website
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '.gitignore'
+      - '.travis.yml'
+      - 'README.md'
+      - '*.sh'
+      - '*.json'
+
+  pull_request:
+    branches: [master]
+    types: [merged]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment: 'Badge.team website'
+    steps:
+      - name: Git Checkout (with submodules)
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.91.2'
+          # extended: true- name: Cache Primes
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy with Rsync
+        uses: SamKirkland/web-deploy@v1
+        with:
+          source-path: './public'
+          target-server: ${{ vars.HOST }}
+          ssh-port:      ${{ vars.SSH_PORT }}
+          remote-user:   ${{ vars.SSH_USER }}
+          private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          destination-path: ${{ vars.WEBROOT }}
