@@ -1,5 +1,5 @@
 ---
-title: BADGE.TEAM documentation
+title: Badge.team documentation
 linkTitle: "Documentation"
 menu:
   main:

@@ -100,4 +100,4 @@ message("Press the A button!")
 If your badge does not have the ```A``` button then you can substitute that button with any other button. The Python prompt on your badge has tab completion. Just enter ```buttons.BTN_``` and press ```TAB``` on your keyboard for a list of available buttons.
 
 ## And further?
-Documenting is hard and a very slow process for us hackers. Therefore we suggest you take a look at one of the many apps published in the [Hatchery](https://badge.team) to gain some inspiration and to publish your own app.
+Documenting is hard and a very slow process for us hackers. Therefore we suggest you take a look at one of the many apps published in the [Hatchery](https://Badge.team) to gain some inspiration and to publish your own app.

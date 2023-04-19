@@ -4,11 +4,11 @@ nodateline: true
 weight: 5
 ---
 
-Welcome to the API reference for the BADGE.TEAM platform firmware.
+Welcome to the API reference for the Badge.team platform firmware.
 
 This reference describes all officially supported APIs of our platform. We try to keep these APIs as stable as possible. There are many more (undocumented) APIs in the firmware, all of which may change at any time!
 
-Our platform firmware uses MicroPython at it's core. Most of the libraries and APIs from the upstream MicroPython project are available in the BADGE.TEAM firmware.
+Our platform firmware uses MicroPython at it's core. Most of the libraries and APIs from the upstream MicroPython project are available in the Badge.team firmware.
 
 The [MicroPython documentation](https://docs.micropython.org/en/latest) describes the builtin [libraries](https://docs.micropython.org/en/latest/library) and [functions](https://docs.micropython.org/en/latest/library/builtins.html).
 
@@ -29,7 +29,7 @@ If you want to help with firmware development please tell us! We're always happy
 
 Should you have ideas, problems or observations but no means to act on them then you can always [create an issue on Github](https://github.com/badgeteam/ESP32-platform-firmware/issues).
 
-## BADGE.TEAM platform APIs
+## Badge.team platform APIs
 
 | Library                | Function                                                                           | MCH 2022 |SHA2017      | Disobey 2019 | HackerHotel 2019 | CampZone 2019 | CampZone 2020 |
 |------------------------|------------------------------------------------------------------------------------|----------|-------------|--------------|------------------|---------------|---------------|
@@ -92,7 +92,7 @@ This section lists most of the other libraries that you can use in your apps.
 | _thread      | Multithreading support                                                           | [MicroPython](https://docs.micropython.org/en/latest/library/_thread.html)      |
 | gc           | Control the garbage collector                                                    | [MicroPython](https://docs.micropython.org/en/latest/library/gc.html)           |
 | sys          | System specific functions                                                        | [MicroPython](https://docs.micropython.org/en/latest/library/sys.html)          |
-| machine      | Functions related to the hardware  (Note: different from upstream version)       | [BADGE.TEAM]](machine)                                                          |
+| machine      | Functions related to the hardware  (Note: different from upstream version)       | [Badge.team]](machine)                                                          |
 | micropython  | Access and control MicroPython internals                                         | [MicroPython](https://docs.micropython.org/en/latest/library/micropython.html)  |
 | network      | Network configuration (Please use the ```wifi``` library instead when possible)  | [MicroPython](https://docs.micropython.org/en/latest/library/network.html)      |
 | esp          | ESP32 specific functions (Note: direct flash access has been disabled)           | [MicroPython](https://docs.micropython.org/en/latest/library/esp.html)          |

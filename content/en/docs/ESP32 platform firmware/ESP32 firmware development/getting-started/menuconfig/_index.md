@@ -34,7 +34,7 @@ The ```bootloader config``` menu allows configuration of the bootloader. Changin
 The ```security features``` menu allows for configuring secure boot by encrypting the flash and signing the firmware. Use of these features on a badge would defeat the purpose of a hackable device and is thus not supported. Do not attempt to enable any of the options in this menu: you will brick your device!
 
 ## Serial flasher config
-This is the first interesting item in the list. In the ```serial flasher config``` menu you can configure the serial port to use when executing ```make flash```, as well as the baudrate. This menu also allows you to tell the bootloader about the flash chip mode, speed an size. Most of the BADGE.TEAM badges have a 16MB flash chip, the CampZone2019 has a 8MB chip and most chinese boards have 4MB.
+This is the first interesting item in the list. In the ```serial flasher config``` menu you can configure the serial port to use when executing ```make flash```, as well as the baudrate. This menu also allows you to tell the bootloader about the flash chip mode, speed an size. Most of the Badge.team badges have a 16MB flash chip, the CampZone2019 has a 8MB chip and most chinese boards have 4MB.
 
 ## Firmware & device configuration
 This menu allows you to configure the identity of your device.
@@ -46,7 +46,7 @@ This menu allows you to configure the identity of your device.
 | Name of the device                                          | Human readable name of the device                                                                                        |
 | MicroPython modules directory                               | subdirectory of ```/firmware/python_modules``` to use for the built-in MicroPython modules                               |
 | Name of the badge on the app hatchery                       | Name of your device or a compatible device supported by our Hatchery, lowercase and without spaces or special characters |
-| Hostname of server for OTA updates                          | Domain name of the server used for OTA updating (Example: "badge.team")                                                  |
+| Hostname of server for OTA updates                          | Domain name of the server used for OTA updating (Example: "Badge.team")                                                  |
 | Use HTTPS for OTA updates                                   | If enabled HTTPS can be used with a Letsencrypt SSL certificate. Other certificate authorities are not supported.        |
 | Port of server for OTA updates                              | Port to use for OTA updates. Usually 443 for HTTPS or 80 for HTTP                                                        |
 | Path on the server for OTA updates                          | Path of the OTA firmware binary on the server, starting with a ```/```                                                   |
@@ -74,7 +74,7 @@ The ```component config``` submenu allows for configuring various components fo 
 To-do
 
 # Device driver configuration
-The BADGE.TEAM firmware contains drivers for multiple devices such as displays and sensors. These drivers are written in C and part of the firmware itself, but they can be accessed from withing MicroPython using the bindings provided.
+The Badge.team firmware contains drivers for multiple devices such as displays and sensors. These drivers are written in C and part of the firmware itself, but they can be accessed from withing MicroPython using the bindings provided.
 
 Is a menu empty? Does a feature not work?
  - To be able to use I2C based devices you have to enable the I2C bus driver first.

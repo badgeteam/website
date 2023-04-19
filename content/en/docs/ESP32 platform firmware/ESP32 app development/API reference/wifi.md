@@ -30,7 +30,7 @@ else:
 | ntp        | \[only-if-needed\], \[server\] | Synchronize the Real-Time-Clock with the network. Normally the synchronisation is only started when the system clock has not yet been set since the last reset. This can be overruled by setting the only-if-needed parameter to False. By default the "'pool.ntp.org" server pool is used.                                     |
 
 # Wait, is that all you can do with WiFi?!
-No, of course not. The whole network API from the mainline MicroPython project is available on the badge.team firmware.
+No, of course not. The whole network API from the mainline MicroPython project is available on the Badge.team firmware.
 Here are some examples for doing the stuff you're probably looking for:
 
 ## Connecting to a WiFi network, the hard way...

@@ -10,7 +10,7 @@ This badge has been produced for participants, sponsors, and organizers of the F
 
 ## Getting started
 
-Attendees received the badge along with 2 alkaline AAA 1.5V batteries, provided separately. First step was to insert the batteries, and see the badge boot. It was supposed to start up first time during the event at the venue, so it could connect to the wireless network called "badge" and download most recent version of the software. As the wireless credentials were hardcoded into the firmware, anyone who missed that window of opportunity would have to manually re-flash the badge with badge.team's micropython configured for Disobey 2019 badge. After booting correctly, the badge would allow changing the configuration of the wireless network.
+Attendees received the badge along with 2 alkaline AAA 1.5V batteries, provided separately. First step was to insert the batteries, and see the badge boot. It was supposed to start up first time during the event at the venue, so it could connect to the wireless network called "badge" and download most recent version of the software. As the wireless credentials were hardcoded into the firmware, anyone who missed that window of opportunity would have to manually re-flash the badge with Badge.team's micropython configured for Disobey 2019 badge. After booting correctly, the badge would allow changing the configuration of the wireless network.
 
 The badge needs a wireless connection to access the Hatchery, where micropython applications (called eggs) are stored. Badges can be used to download the eggs directly and use them without needing to connect to a computer.
 
@@ -26,9 +26,9 @@ This badge has buttons, a small screen with backlight, a buzzer, and both an inf
 
 ## Programming API
 
-Most of the API is provided by the micropython and the modded version of the badge.team. For most basic micropython development, official documentation will suffice.
+Most of the API is provided by the micropython and the modded version of the Badge.team. For most basic micropython development, official documentation will suffice.
 
-To program hardware-specific features, please see the following code examples that are valid for the software that badges were flashed with in 2019 before and during the event. This could have changed, if the badge has been flashed with updated badge.team micropython.
+To program hardware-specific features, please see the following code examples that are valid for the software that badges were flashed with in 2019 before and during the event. This could have changed, if the badge has been flashed with updated Badge.team micropython.
 
 ```
 import badge

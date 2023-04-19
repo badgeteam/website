@@ -4,7 +4,7 @@ nodateline: true
 weight: 3
 ---
 
-This section describes the API of the BADGE.TEAM ESP32 platform firmware and serves as a reference for developing apps for our ESP32 based badges.
+This section describes the API of the Badge.team ESP32 platform firmware and serves as a reference for developing apps for our ESP32 based badges.
 
 # [<i class="fa fa-question-circle" aria-hidden="true"></i> Getting started](getting-started)
 The [getting started section](getting-started) will help you get started with all this awesomeness..

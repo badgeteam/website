@@ -59,7 +59,7 @@ Some mistakes were made both in the design and during assembly, which we couldn'
 ## Troubleshooting
 ### 3 red lights
 ![redlights](3redlights.png)
-Two red eyes and a red diamond an an unresponsive badge are the notification that the EEprom has been corrupted. Either you broke it, the code broke it, or it was another fault. No worries, visit a friendly badge.team member and they can program that chip for you in under 15 seconds!
+Two red eyes and a red diamond an an unresponsive badge are the notification that the EEprom has been corrupted. Either you broke it, the code broke it, or it was another fault. No worries, visit a friendly Badge.team member and they can program that chip for you in under 15 seconds!
  
 
 ### SAO

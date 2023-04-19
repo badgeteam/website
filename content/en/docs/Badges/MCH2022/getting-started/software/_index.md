@@ -30,7 +30,7 @@ As shipped, the badge has seven options on the main menu:
 
 - **Name Tag**. This is the usual name tag app for an event Badge.
 - **Apps**. This takes you to the user-installed apps on The Badge, including a
-  Python launcher for backwards compatibility with previous badge.team badges
+  Python launcher for backwards compatibility with previous Badge.team badges
   going back to the SHA 2017 badge.
 - [**Hatchery**](../hatchery). This is the app store for The Badge. Explore it to find new apps
   written by other MCH attendees.

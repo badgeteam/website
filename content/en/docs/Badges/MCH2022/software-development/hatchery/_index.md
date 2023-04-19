@@ -92,7 +92,7 @@ hatchery](https://mch2022.badge.team/projects/create)
     preinstalled
   - Collaborators - this lists other Hatchery users who are allowed to
     edit the app details
-  - checkbox "Allow badge.team to apply fixes to code" if you like other
+  - checkbox "Allow Badge.team to apply fixes to code" if you like other
     random strangers to poke around in your app to "fix bugs"
 
 ![More app details!](egg_details.png)
