@@ -13,16 +13,16 @@ Add styles or override variables from the theme here.
 }
 
 .homepage_badges {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 25px;
     display: grid;
     grid-template-columns: auto auto;
 }
 
-@media only screen and (max-width: 768px) {
-.homepage_badges {
-    grid-template-columns: auto !important;
-}
+@media only screen and (max-width: 1000px) {
+    .homepage_badges {
+        grid-template-columns: auto !important;
+    }
 }
 
 .homepage_badges img {
