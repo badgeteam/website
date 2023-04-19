@@ -66,7 +66,7 @@ archived_version = false
 version = "0.0"
 url_latest_version = "https://badge.team"
 github_repo = "https://github.com/badgeteam/website"
-github_project_repo = "https://github.com/badgeteam"
+github_project_repo = "https://github.com/badgeteam/feedback"
 github_branch = "master"
 
 algolia_docsearch = false
