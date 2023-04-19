@@ -11,3 +11,18 @@ Add styles or override variables from the theme here.
 .navbar-brand__name {
     visibility: hidden;
 }
+
+.homepage_badges {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+
+}
+
+.homepage_badges img {
+    margin: 30px;
+    filter: drop-shadow(3px 5px 2px rgb(0, 0, 0 / 0.4));
+}
+
+.homepage_badges svg {
+  filter: drop-shadow(3px 5px 2px rgb(0, 0, 0 / 0.4));
+}
