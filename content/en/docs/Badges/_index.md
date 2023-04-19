@@ -7,23 +7,21 @@ weight: 2
 ## Badge.team badges
 
 ### ESP32 based
-| Badge                                                                     |                                                                           |
-|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| [MCH2022](mch2022)                                            | [<img src="mch2022/mch2022.svg" width="300" />](mch2022)        |
-| [CampZone 2020](campzone-2020)                                            | [<img src="campzone-2020/badge.png" width="300" />](campzone-2020)        |
-| [Disobey 2020](disobey-2020)                                              | [<img src="disobey-2020/badge.jpg" width="300" />](disobey-2020)          |
-| [CampZone 2019](campzone-2019)                                            | [<img src="campzone-2019/cz2019.svg" width="300" />](campzone-2019)       |
-| [HackerHotel 2019](hackerhotel-2019)                                      | [<img src="hackerhotel-2019/hh2019.svg" width="150" />](hackerhotel-2019) |
-| [Disobey 2019](disobey-2019)                                              | [<img src="disobey-2019/disobey2019.svg" width="230" />](disobey-2019)    |
-| [SHA2017](sha2017)                                                        | [<img src="sha2017/sha2017.svg" width="250" />](sha2017)                  |
-
-
+<div class="homepage_badges">
+<div><a href="mch2022/"><img src="mch2022/mch2022.svg" style="height: 300px !important;" /></a></div>
+<div><a href="sha2017/"><img src="sha2017/sha2017.svg" style="height: 300px !important;" /></a></div>
+<div><a href="hackerhotel-2019/"><img src="hackerhotel-2019/hh2019.svg" style="height: 500px !important;" /></a></div>
+<div><a href="campzone-2020/"><img src="campzone-2020/badge.png" style="height: 300px !important;" /></a></div>
+<div><a href="campzone-2019/"><img src="campzone-2019/cz2019.svg" style="width: 400px !important;" /></a></div>
+<div><a href="disobey-2020/"><img src="disobey-2020/badge.jpg" style="height: 300px !important;" /></a></div>
+<div><a href="disobey-2019/"><img src="disobey-2019/disobey2019.svg" style="height: 300px !important;" /></a></div>
+</div>
 
 ### Other badges
-| Badge                                                                     |                                                                                    |
-|---------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| [ETH0](eth0-2019)                                                         | [<img src="eth0-2019/eth0.png" width="200" />](eth0-2019)                          |
-| [HackerHotel 2020](hackerhotel-2020)                                      | [<img src="hackerhotel-2020/hackerhotel2020.gif" width="200" />](hackerhotel-2020) |
+<div class="homepage_badges">
+<div><a href="hackerhotel-2020/"><img src="hackerhotel-2020/hackerhotel2020.gif" style="height: 300px !important;" /></a></div>
+<div><a href="eth0-2019/"><img src="eth0-2019/eth0.png" style="height: 300px !important;" /></a></div>
+</div>
 
 ## Collaborations
 
