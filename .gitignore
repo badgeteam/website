@@ -5,3 +5,4 @@ content/agenda.md.DS_Store
 .DS_Store
 .hugo_build.lock
 node_modules
+resources/_gen

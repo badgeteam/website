@@ -2,9 +2,6 @@
 
 set -e
 set -u
-
 git submodule update --init --recursive
-
 npm install
-
-hugo server
+hugo server --disableFastRender

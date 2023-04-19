@@ -1,5 +1,5 @@
 {
-  "name": "website-docs",
+  "name": "badgeteam-website",
   "version": "1.0.0",
   "main": "none.js",
   "scripts": {
@@ -7,16 +7,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/badgeteam/website-docs.git"
+    "url": "git+https://github.com/badgeteam/website.git"
   },
   "author": "Badge.team",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/badgeteam/website-docs/issues"
+    "url": "https://github.com/badgeteam/website/issues"
   },
-  "homepage": "https://github.com/badgeteam/website-docs#readme",
+  "homepage": "https://badge.team",
   "devDependencies": {
-    "autoprefixer": "^10.4.2",
-    "postcss-cli": "^9.1.0"
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.3.7",
+    "postcss-cli": "^9.0.2"
   }
 }
