@@ -27,16 +27,16 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.91.2'
-          # extended: true- name: Cache Primes
+          hugo-version: '0.111.3'
+          extended: true
 
       - name: Build
-        run: hugo --minify
+        run: bash build.sh
 
       - name: Deploy with Rsync
         uses: SamKirkland/web-deploy@v1
         with:
-          source-path: './public'
+          source-path: './public/'
           target-server: ${{ vars.HOST }}
           ssh-port:      ${{ vars.SSH_PORT }}
           remote-user:   ${{ vars.SSH_USER }}
