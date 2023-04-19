@@ -1,5 +1,5 @@
 ---
-title: BADGE.TEAM
+title: Badge.team
 linkTitle: "Home"
 menu:
   main:
@@ -7,7 +7,7 @@ menu:
     pre: <i class='fas fa-home'></i>
 ---
 
-{{< blocks/cover title="BADGE.TEAM" image_anchor="top" height="full" color="primary" >}}
+{{< blocks/cover title="Badge.team" image_anchor="top" height="full" color="primary" >}}
 <div class="mx-auto">
 	<p class="font-weight-bold">Open source event badges for hacker events such as SHA2017, HackerHotel, CampZone, Disobey.fi, MCH2022 and more...</p>
     <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">

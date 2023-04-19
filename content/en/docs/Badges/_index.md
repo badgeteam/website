@@ -4,7 +4,7 @@ nodateline: true
 weight: 2
 ---
 
-## BADGE.TEAM badges
+## Badge.team badges
 
 ### ESP32 based
 | Badge                                                                     |                                                                           |
@@ -27,7 +27,7 @@ weight: 2
 
 ## Collaborations
 
-These badges were made in collaboration with BADGE.TEAM
+These badges were made in collaboration with Badge.team
 
  - [The Disobey 2019 badge](disobey-2019)
  - [The Disobey 2020 badge](disobey-2020)
@@ -45,7 +45,7 @@ The CARD10 uses the hatchery as it's app repository. For all other details about
 ## (An incomplete) list of badges
 An incomplete but slowly growing list of event badges and their derrivatives. Help us extend this list by pointing us towards badges that are missing.
 
-| Name                                                                         | Event                                                                               | Year | Architecture      | ESP32 platform support                              | Hatchery support                              | Supported by BADGE.TEAM                              |
+| Name                                                                         | Event                                                                               | Year | Architecture      | ESP32 platform support                              | Hatchery support                              | Supported by Badge.team                              |
 |------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|------|-------------------|-----------------------------------------------------|-----------------------------------------------|------------------------------------------------------|
 | [TR11](http://warrantyvoidifremoved.com/troopers)                            | [Troopers](https://www.troopers.de/troopers11/)                                     | 2011 |                   | <i class="fas fa-times"></i> No                     | <i class="fas fa-times"></i> No               | <i class="fas fa-times"></i> No                      |
 | [TiLDA MK1](https://wiki-archive.emfcamp.org/2012/articles/b/a/d/Badge.html) | [EMF](https://wiki-archive.emfcamp.org/2012/)                                       | 2012 |                   | <i class="fas fa-times"></i> No                     | <i class="fas fa-times"></i> No               | <i class="fas fa-times"></i> No                      |

@@ -94,8 +94,8 @@ screen](https://github.com/p2mate/mch2022-rust-app/blob/f32aa59a7452311401ac8831
 ## Limitations
 
 These instructions use the esp-idf as provided by Espressif so you won't have
-access to the components added by the badge team. It's probably possible to use
-the version provided by the badge team, but I have not tried this.
+access to the components added by the Badge.team. It's probably possible to use
+the version provided by the Badge.team, but I have not tried this.
 
 Also: this seems to work on some computers and not on others ... Please feel
 free to provide a PR to the documentation or a link to a sample app ... Make

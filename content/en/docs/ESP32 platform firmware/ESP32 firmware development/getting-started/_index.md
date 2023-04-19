@@ -4,7 +4,7 @@ nodateline: true
 weight: 1
 ---
 
-Welcome developer! This section describes how to get your development environment set-up so that you can build the BADGE.TEAM ESP32 platform firmware for any of the supported targets.
+Welcome developer! This section describes how to get your development environment set-up so that you can build the Badge.team ESP32 platform firmware for any of the supported targets.
 
 ## Introduction
 

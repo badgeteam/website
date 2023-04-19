@@ -26,7 +26,7 @@ If you want to store large(er) amounts of data we suggest you use the filesystem
 
 # NVS settings used by the firmware
 
-The following list describes the settings stored by the BADGE.TEAM firmware.
+The following list describes the settings stored by the Badge.team firmware.
 
 | Space  | Key         | Type    | Function                               |
 |--------|-------------|---------|----------------------------------------|
@@ -53,6 +53,6 @@ print("Your nickname is '{}'!".format(nickname))
 
 ```
 import nvs
-nvs.nvs_setstr("owner", "nickname", "badge.team")
+nvs.nvs_setstr("owner", "nickname", "Badge.team")
 ```
 

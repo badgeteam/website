@@ -4,7 +4,7 @@ nodateline: true
 weight: 2
 ---
 
-## [badge.team](https://hatchery.badge.team)
+## [Badge.team](https://hatchery.badge.team)
 
 The hatchery lives at [hatchery.badge.team](https://hatchery.badge.team) and is a repository of apps for use on your badge.
 
@@ -50,7 +50,7 @@ There's an api available, used by [[github/woezel|woezel]] ([[github/woezel-exam
 /eggs/category/[cat]/json  - json data for category [cat]
 ```
 
-Since the badge.team merger there are now baskets for different badges
+Since the Badge.team merger there are now baskets for different badges
 ```
 /basket/[badge]/list/json           - a list of all eggs for specific [badge]
 /basket/[badge]/search/json         - [badge] specific search for [words]

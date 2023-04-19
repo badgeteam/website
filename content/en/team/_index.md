@@ -9,7 +9,7 @@ menu:
 
 <!-- Basic page header is handled by a layout! -->
 
-Each event badge has it's own team, this page lists all badge teams making your awesome event badges possible.
+Each event badge has it's own team, this page lists all Badge.teams making your awesome event badges possible.
 
 # Hackerhotel 2023
 

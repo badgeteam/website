@@ -8,7 +8,7 @@ The *machine* API makes it possible to access certain hardware interfaces direct
 
 This API is variation on the standard MicroPython *machine* API which has been extended and modified.
 
-Not all features described in the official MicroPython documentation are available on the BADGE.TEAM platform firmware. And additionally some functions will differ in syntax from the official MicroPython for ESP32 firmware.
+Not all features described in the official MicroPython documentation are available on the Badge.team platform firmware. And additionally some functions will differ in syntax from the official MicroPython for ESP32 firmware.
 
 # [<i class="fa fa-hdd" aria-hidden="true"></i> Non Volitile Storage (NVS)](nvs)
 
@@ -22,4 +22,4 @@ The *Pin* API can be used to directly control GPIOs of your badge.
 The *machine* API for I2C allows you to control the system I2C bus of your badge, the I2C bus exposed on the SAO, Grove, Qwiic or other extension ports as well as a second I2C bus on any two broken out GPIOs of your choice.
 
 # [<i class="fa fa-plug" aria-hidden="true"></i> SPI bus](#)
-Direct control over the SPI bus is currently not supported on the BADGE.TEAM platform firmware. Sorry!
+Direct control over the SPI bus is currently not supported on the Badge.team platform firmware. Sorry!

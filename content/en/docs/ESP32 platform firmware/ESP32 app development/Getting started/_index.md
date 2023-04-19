@@ -4,7 +4,7 @@ nodateline: true
 weight: 1
 ---
 
-One of the aims of the BADGE.TEAM project is to ensure that as many people as possible can develop software for the platform. This ensures that badges and other hardware running our firmware are more likely to have a life beyond the event for which they were created.
+One of the aims of the Badge.team project is to ensure that as many people as possible can develop software for the platform. This ensures that badges and other hardware running our firmware are more likely to have a life beyond the event for which they were created.
 
 The problem with many event badges has been that the learning curve for new developers is too steep and the acceptance process for new software too difficult. When detailed knowledge of a toolchain is required to write code and each addition must wait to be built into a fresh badge firmware update, most would-be developers go away and enjoy the event instead.
 
