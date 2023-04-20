@@ -43,7 +43,7 @@ anchor = "smart"
 
 [languages]
 [languages.en]
-title = "BADGE.TEAM"
+title = "Badge.team"
 description = "Badges and badgers"
 languageName ="English"
 weight = 1
