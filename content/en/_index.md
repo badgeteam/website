@@ -21,6 +21,7 @@ menu:
 <div><a href="/docs/badges/campzone-2019/"><img src="/docs/badges/campzone-2019/cz2019.svg"/></a></div>
 <div><a href="/docs/badges/disobey-2020/"><img src="/docs/badges/disobey-2020/badge.jpg"/></a></div>
 <div><a href="/docs/badges/disobey-2019/"><img src="/docs/badges/disobey-2019/disobey2019.svg"/></a></div>
+<div><a href="/docs/badges/eth0-2019/"><img src="/docs/badges/eth0-2019/eth0.svg"/></a></div>
 </div>
 <p>&nbsp;</p>
 <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
