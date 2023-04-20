@@ -13,14 +13,14 @@ menu:
 <p>&nbsp;</p>
 <p class="font-weight-bold">Open source event badges for hacker events</p>
 <div class="homepage_badges">
-<div><a href="/docs/badges/mch2022/"><img src="/docs/badges/mch2022/mch2022.svg" height="300" /></a></div>
-<div><a href="/docs/badges/sha2017/"><img src="/docs/badges/sha2017/sha2017.svg" height="300" /></a></div>
-<div><a href="/docs/badges/hackerhotel-2020/"><img src="/docs/badges/hackerhotel-2020/hackerhotel2020.gif" height="500" /></a></div>
-<div><a href="/docs/badges/hackerhotel-2019/"><img src="/docs/badges/hackerhotel-2019/hh2019.svg" height="500" /></a></div>
-<div><a href="/docs/badges/campzone-2020/"><img src="/docs/badges/campzone-2020/badge.png" height="300" /></a></div>
-<div><a href="/docs/badges/campzone-2019/"><img src="/docs/badges/campzone-2019/cz2019.svg" width="400" /></a></div>
-<div><a href="/docs/badges/disobey-2020/"><img src="/docs/badges/disobey-2020/badge.jpg" height="300" /></a></div>
-<div><a href="/docs/badges/disobey-2019/"><img src="/docs/badges/disobey-2019/disobey2019.svg" height="300" /></a></div>
+<div><a href="/docs/badges/mch2022/"><img src="/docs/badges/mch2022/mch2022.svg"/></a></div>
+<div><a href="/docs/badges/sha2017/"><img src="/docs/badges/sha2017/sha2017.svg"/></a></div>
+<div><a href="/docs/badges/hackerhotel-2020/"><img src="/docs/badges/hackerhotel-2020/hackerhotel2020.gif"/></a></div>
+<div><a href="/docs/badges/hackerhotel-2019/"><img src="/docs/badges/hackerhotel-2019/hh2019.svg"/></a></div>
+<div><a href="/docs/badges/campzone-2020/"><img src="/docs/badges/campzone-2020/cz2020.svg"/></a></div>
+<div><a href="/docs/badges/campzone-2019/"><img src="/docs/badges/campzone-2019/cz2019.svg"/></a></div>
+<div><a href="/docs/badges/disobey-2020/"><img src="/docs/badges/disobey-2020/badge.jpg"/></a></div>
+<div><a href="/docs/badges/disobey-2019/"><img src="/docs/badges/disobey-2019/disobey2019.svg"/></a></div>
 </div>
 <p>&nbsp;</p>
 <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
