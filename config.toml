@@ -1,5 +1,5 @@
 baseURL = "/"
-title = "BADGE.TEAM"
+title = "Badge.team"
 
 enableRobotsTXT = true
 canonifyURLs = true
