@@ -19,12 +19,6 @@ Add styles or override variables from the theme here.
     grid-template-columns: auto auto;
 }
 
-@media only screen and (max-width: 1000px) {
-    .homepage_badges {
-        grid-template-columns: auto !important;
-    }
-}
-
 .homepage_badges img {
     margin: 30px;
     filter: drop-shadow(3px 5px 2px rgb(0, 0, 0 / 0.4));
@@ -37,4 +31,17 @@ Add styles or override variables from the theme here.
 
 .homepage_badges div {
     margin: auto;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .homepage_badges {
+        grid-template-columns: auto !important;
+    }
+    .homepage_badges img {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
 }
