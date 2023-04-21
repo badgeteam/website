@@ -1,5 +1,5 @@
 ---
-title: The team
+title: The teams
 type: team
 menu:
   main:
@@ -11,7 +11,7 @@ menu:
 
 {{< blocks/section color="dark" >}}
 
-Each event badge has it's own team, this page lists all Badge.teams making your awesome event badges possible.
+<h3>Each event badge has it's own team. This page lists the names of the volunteers that helped make your awesome event badges possible.</h3>
 
 {{< /blocks/section >}}
 
