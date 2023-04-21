@@ -20,3 +20,13 @@ In addition to the SHA2017 badge the HackerHotel 2019 badge has the following ne
  
  ## Problems with the audio jack
 The audio jack is mounted in reverse due to a design error. To make the audio output function properly the first and third ring of the jack need to be swapped. Without this fix one of the channels is wired to ground while the ground of your speakers is wired to one of the audio channels.
+
+## The team
+
+The HackerHotel 2019 badge would not have been possible without the help of these amazing volunteers.
+
+ - Tom Clement: hardware
+ - Raboof: hardware, software
+ - [Renze Nicolai](https://nicolaielectronics.nl): software
+ - Anne Jan Brouwer: software
+ - Bas van Sisseren: software, audio fix

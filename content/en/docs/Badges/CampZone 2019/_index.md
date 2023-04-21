@@ -332,3 +332,11 @@ then connect and switch on the badge.
 Then in the terminal execute the following:
 
 <code> screen /dev/ttyUSB0 115200 </code>
+
+
+## The team
+
+The CampZone 2019 badge would not have been possible without the help of these amazing volunteers.
+
+ - Tom Clement: hardware
+ - Roel Harbers

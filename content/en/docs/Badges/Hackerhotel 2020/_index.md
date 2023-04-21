@@ -77,3 +77,13 @@ You can find a manual for fully reworking your badge [here](rework-manual).
 
 ### CYBER SCARAB
 Our friends at Tilde Industries made a very nice addon for the badge. [Find out more on their website.](https://tilde.industries/cyber-scarab/)
+
+
+## The team
+
+The HackerHotel 2020 badge would not have been possible without the help of these amazing volunteers.
+
+ - [Renze Nicolai](https://nicolaielectronics.nl): Circuit diagram and PCB routing
+ - [Nikolett S.](https://ankhaneko.art): Artwork
+ - Sake: Challenges
+ - Glu: audio

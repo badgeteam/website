@@ -4,7 +4,7 @@ nodateline: true
 weight: -8
 ---
 
-### Available Python API modules:
+## Available Python API modules
 
 * [Keypad](/docs/esp32-app-development/api-reference/keypad/)
 * [Display](/docs/esp32-app-development/api-reference/display/)
@@ -19,3 +19,9 @@ weight: -8
 * [Consts](/docs/esp32-app-development/api-reference/consts/)
 * [uMQTT](/docs/esp32-app-development/api-reference/umqtt/)
 * [Sndmixer](/docs/esp32-app-development/api-reference/sndmixer/)
+
+## The team
+
+The CampZone 2020 badge would not have been possible without the help of these amazing volunteers.
+
+ - Tom Clement

@@ -2,4 +2,6 @@
 title: ESP32 platform firmware
 ---
 
-This section of the documentation describes the ESP32 platform firmware used on the SHA2017 and many other ESP32 related badges. For the MCH2022 badge new, modernized firmware will be developed which will of course be made available for the earlier badges at a later date. For MCH2022 related documentation please check out the MCH2022 section of the documentation.
+{{% alert title="Warning" color="warning" %}}
+This section describes the now deprecated "ESP32 platform firmware". For most of our ESP32 based badges this firmware is the latest available while we're working on adding support for all our older badges. The MCH2022 badge shipped with a more recent MicroPython fork we call BadgePython. If you're looking for information on Python for the MCH2022 badge please check the BadgePython section instead.
+{{% /alert %}}
