@@ -35,22 +35,44 @@ Hatchery <i class="fa fa-shopping-bag ml-2 "></i>
 {{< /blocks/cover >}}
 
 
-{{% blocks/lead color="secondary" %}}
+{{% blocks/lead color="dark" %}}
 We're a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you interested in helping out, part of an event badge team looking for some help or just curious? Join our [Telegram group](https://t.me/+StQpEWyhnb96Y88p) or [Discord channel](https://discord.gg/xuhw3Ws6BJ).
 {{% /blocks/lead %}}
 
+
 {{< blocks/section color="dark" >}}
-{{% blocks/feature icon="fa-puzzle-piece" title="Platform firmware" %}}
-Our ESP32 platform firmware was used on **7** event badge designs.
+<a href="https://t.me/+StQpEWyhnb96Y88p" style="color: #FFFFFF;">
+{{% blocks/feature icon="fab fa-telegram" title="Telegram group" %}}
+Our main communication channel. Do you have a question? Want to help? Get in contact? Click here to join the Telegram group!
+</a>
 {{% /blocks/feature %}}
 
-
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/badgeteam" %}}
-Our soft- and hardware designs are fully open source and can be found on **GitHub**.
+<a href="https://discord.gg/xuhw3Ws6BJ" style="color: #FFFFFF;">
+{{% blocks/feature icon="fab fa-discord" title="Discord group" %}}
+</a>
+Do you have a question? Want to help? Get in contact? Click here to join the Discord group!
 {{% /blocks/feature %}}
 
-
-{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/BadgeteamNL" %}}
-For announcement of latest features etc.
+<a href="https://github.com/badgeteam" style="color: #FFFFFF;">
+{{% blocks/feature icon="fab fa-github" title="Github" %}}
+Contributions welcome! Our soft- and hardware designs are fully open source.
+</a>
 {{% /blocks/feature %}}
-{{< /blocks/section >}}
+
+{{% /blocks/section %}}
+
+{{< blocks/section color="secondary" >}}
+
+<a href="https://twitter.com/BadgeteamNL" style="color: #000000;">
+{{% blocks/feature icon="fab fa-twitter" title="Twitter" %}}
+Follow us on Twitter to be kept up-to-date on Badge.team related announcements and information
+</a>
+{{% /blocks/feature %}}
+
+<a href="https://hatchery.badge.team" style="color: #000000;">
+{{% blocks/feature icon="fa fa-shopping-bag" title="Hatchery" %}}
+Do you want to publish an app? Look no further.
+</a>
+{{% /blocks/feature %}}
+
+{{% /blocks/section %}}
