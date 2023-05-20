@@ -10,7 +10,7 @@ This reference describes all officially supported APIs of our platform. We try t
 
 BadgePython uses MicroPython at it's core.The libraries and APIs from the upstream MicroPython project are available in BadgePython.
 
-The [MicroPython documentation](https://docs.micropython.org/en/v1.18/) describes the builtin [libraries](https://docs.micropython.org/en/latest/library) and [functions](https://docs.micropython.org/en/latest/library/builtins.html).
+The [MicroPython documentation](https://docs.micropython.org/en/v1.18/) describes the builtin [libraries](https://docs.micropython.org/en/v1.18/library/index.html) and [functions](https://docs.micropython.org/en/latest/library/builtins.html).
 
 
 We've added some badge specific APIs for efficiently controlling hardware like the display and reading the buttons. By implementing the resource intensive parts of driving the hardware in C. This allows for a much more speedy experience and a lot more possibilities and flexibility.
