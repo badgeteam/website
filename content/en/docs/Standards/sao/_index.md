@@ -54,9 +54,9 @@ Ignoring the first byte read from the EEPROM is done to allow for identifying ad
 
 ### Header identifiers
 
-| 1 | 2 | 3 | 4 | Description          |
-|---|---|---|---|----------------------|
-| L | I | F | E | Binary descriptor    |
-| J | S | O | N | JSON text descriptor |
-| T | E | A | M | Reserved :smile:     |
+| 1 | 2 | 3 | 4 | Description                 | Documentation                      |
+|---|---|---|---|-----------------------------|------------------------------------|
+| L | I | F | E | Binary descriptor           | [On this site](binary_descriptor) |
+| J | S | O | N | JSON text descriptor        |                                    |
+| T | E | A | M | Reserved for Badge.team use |                                    |
 
