@@ -26,6 +26,10 @@ Reread the instructions if something isn't working. Then go to our
 
 Check out [these resources](./support) if you run into trouble.
 
+# Case and frontpanel
+
+You can find a 3D printable case and a lasercuttable frontpanel in this [GIT repository](https://github.com/badgeteam/mch2022-housing/tree/master).
+
 
 # The Hardware
 
