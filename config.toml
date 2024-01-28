@@ -91,25 +91,25 @@ enable = false
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
-  name = "Hatchery (app market)"
+  name = "Hatchery"
   url = "https://hatchery.badge.team"
   icon = "fa fa-shopping-bag"
   desc = ""
 [[params.links.user]]
-  name ="Twitter"
-  url = "https://twitter.com/BadgeteamNL"
-  icon = "fab fa-twitter"
-  desc = "Follow us on Twitter to get the latest news!"
+  name ="Mastodon"
+  url = "https://hsnl.social/@badgeteam"
+  icon = "fab fa-mastodon"
+  desc = "Follow us on Mastodon to get the latest news!"
 [[params.links.user]]
 	name = "Telegram chat group"
 	url = "https://t.me/+StQpEWyhnb96Y88p"
 	icon = "fab fa-telegram"
   desc = "Get in contact"
-[[params.links.user]]
-	name = "Discord chat group"
-	url = "https://discord.gg/xuhw3Ws6BJ"
-	icon = "fab fa-discord"
-  desc = "Get in contact"
+#[[params.links.user]]
+#	name = "Discord chat group"
+#	url = "https://discord.gg/xuhw3Ws6BJ"
+#	icon = "fab fa-discord"
+#  desc = "Get in contact"
 [[params.links.developer]]
   name = "GitHub"
   url = "https://github.com/badgeteam"
