@@ -15,7 +15,7 @@ menu:
 Documentation <i class="fas fa-arrow-alt-circle-right ml-2"></i>
 </a>
 <a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://t.me/+StQpEWyhnb96Y88p">
-Need help? Want to voluneer? <i class="fab fa-telegram ml-2 "></i>
+Need help? Want to volunteer? <i class="fab fa-telegram ml-2 "></i>
 </a>
 <!--<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://hatchery.badge.team">
 Hatchery <i class="fa fa-shopping-bag ml-2 "></i>
