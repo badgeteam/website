@@ -20,7 +20,7 @@ The HackerHotel 2024 badge would not have been possible without the help of the 
  - [Nikolett](https://ankhaneko.art)
  - [Guru-san](https://tilde.industries)
  - [Renze](https://nicolaielectronics.nl)
- - Tom Clement](https://curious.supplies)
+ - [Tom Clement](https://curious.supplies)
  - CH32
  - [Norbert](https://allnetchina.cn)
  - Zac
