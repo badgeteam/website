@@ -1,7 +1,7 @@
 ---
 title: "ETH0 2019"
 nodateline: true
-weight: -5
+weight: -2019
 ---
 
 ![badge](eth0.svg)

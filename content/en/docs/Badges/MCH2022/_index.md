@@ -2,8 +2,10 @@
 title: "MCH2022 badge"
 linkTitle: "MCH2022"
 nodateline: true
-weight: -10
+weight: -2022
 ---
+
+![MCH2022 badge](mch2022.svg)
 
 The MCH2022 badge is our most advanced badge yet. Shaped like a game console
 this badge is a powerhouse filled with cool technology. 
@@ -12,7 +14,7 @@ Once assembled, you can use the badge to display your name, write Python
 code and maybe play a game or find an Easter Egg, but don't forget: the
 real fun starts when you [hack it](software-development) to make it your own!
 
-![MCH2022 badge](overview.jpg)
+![MCH2022 badge overview](overview.jpg)
 
 # Getting Started
 

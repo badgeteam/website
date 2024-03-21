@@ -1,8 +1,10 @@
 ---
 title: "CampZone 2019"
 nodateline: true
-weight: -4
+weight: -2019
 ---
+
+![Campzone 2019 badge](cz2019.svg)
 
 ## Intro
 Welcome, and congratulations with your brand new CampZone 2019 "I-Pane" event badge! This year's badge features an eye-killing RGB LED matrix, an extended 8MB flash ESP32 WiFi/BL microcontroller, and the wonderful multi-badge firmware platform by badge.team.

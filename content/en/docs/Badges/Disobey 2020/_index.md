@@ -1,8 +1,10 @@
 ---
 title: "Disobey 2020"
 nodateline: true
-weight: -6
+weight: -2020
 ---
+
+![Disobey 2020 badge](badge.jpg)
 
 ## Getting started
 

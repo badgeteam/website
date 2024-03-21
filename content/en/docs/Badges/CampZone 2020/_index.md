@@ -1,8 +1,10 @@
 ---
 title: "CampZone 2020"
 nodateline: true
-weight: -8
+weight: -2020
 ---
+
+![Campzone 2020 badge](cz2020.svg)
 
 ## Available Python API modules
 
