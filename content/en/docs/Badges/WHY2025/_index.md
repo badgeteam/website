@@ -27,6 +27,10 @@ The brand-new ESP32-P4 will be the star of the show, with it's dual-core 400MHz 
 
 WiFi, Bluetooth and even 802.15.4 mesh networking are available thanks to the ESP32-C6 module included on the board.
 
+## The plan
+
+![Blockdiagram](blockdiagram.png)
+
 # Hardware sponsors
 
 <p align="justify">
