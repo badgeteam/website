@@ -10,6 +10,7 @@ The badge:
 <p align="justify">
   <img src="badge1.jpg" width="30%"/>
   <img src="badge2.jpg" width="30%"/>
+  <img src="engine_room.jpg" width="30%">
 </p>
 
 During the event a dot-matrix printer was busy printing all of the messages sent via the billboard messaging system.
