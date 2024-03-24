@@ -94,7 +94,7 @@ display.flush() # Write the contents of the buffer to the display
 ```
 import display, time
 display.drawFill(display.BLACK) # Fill the screen with black before drawing the line
-displau.flush() # Write the color to the screen before drawing the line
+display.flush() # Write the color to the screen before drawing the line
 for i in range(80): # Loop for the X axis
     display.drawPixel(i, 1, 0x00FF00) # Set 1 pixel on the X axis i, and the Y axis 1 to 100% green 
     display.flush() # Write the pixel output to the screen
