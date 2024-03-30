@@ -4,13 +4,12 @@ nodateline: true
 weight: -2024
 ---
 
-![badge](hackerhotel2024.svg)
+<p align="justify">
+  <img src="hackerhotel2024.svg" width="40%"/>
+  <img src="badge1.jpg" width="32%"/>
+</p>
 
 The Telegraph badge made for the event Hackerhotel 2024 is an interactive badge with puzzles themed telegraphs and the Victorian historical setting they were developed in. It is inspired from the Cooke and Wheatstone telegraph for the rather unusual input system. 
-
-<p align="justify">
-  <img src="badge1.jpg" width="40%"/>
-</p>
 
 # Hardware
 
@@ -21,6 +20,17 @@ The Telegraph badge made for the event Hackerhotel 2024 is an interactive badge 
  - SAO connector
  - QWIIC connector
  - Addressable LED used as status indicator
+
+# Get started
+
+First turn the badge by sliding the switch down on the left hand side or plugging in a cable in the USB C port (this also recharges the battery).
+
+⚠️ The display is e-paper and its behavior can be confusing under some conditions:
+- The screen state does not change when turned off, so it will show its current screen until it is powered up again.
+- When sliding the switch down to turn the device on (while unplugged) the top right corner LED should flash. If it does not then the battery is discharged and the screen will remained unchanged.
+- The screen will sometimes cycle the ink before displaying the image, this can be changed for most menus in the "engine room".
+
+All the different applications and games are accessible via the map menu, which is accessible from the nametag application (landing screen).
 
 # Hardware sponsors
 
