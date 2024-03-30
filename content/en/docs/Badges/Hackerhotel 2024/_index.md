@@ -6,7 +6,11 @@ weight: -2024
 
 ![badge](hackerhotel2024.svg)
 
-The Hackerhotel 2024 badge is a challenge badge with puzzles themed around ... and shaped like a telegraph machine.
+The Telegraph badge made for the event Hackerhotel 2024 is an interactive badge with puzzles themed telegraphs and the Victorian historical setting they were developed in. It is inspired from the Cooke and Wheatstone telegraph for the rather unusual input system. 
+
+<p align="justify">
+  <img src="badge1.jpg" width="40%"/>
+</p>
 
 # Hardware
 
