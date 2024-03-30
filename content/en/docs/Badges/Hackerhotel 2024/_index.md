@@ -21,7 +21,7 @@ The Telegraph badge made for the event Hackerhotel 2024 is an interactive badge 
  - QWIIC connector
  - Addressable LED used as status indicator
 
-# Get started
+# Handbook
 
 First turn the badge by sliding the switch down on the left hand side or plugging in a cable in the USB C port (this also recharges the battery).
 
@@ -30,7 +30,10 @@ First turn the badge by sliding the switch down on the left hand side or pluggin
 - When sliding the switch down to turn the device on (while unplugged) the top right corner LED should flash. If it does not then the battery is discharged and the screen will remained unchanged.
 - The screen will sometimes cycle the ink before displaying the image, this can be changed for most menus in the "engine room".
 
-All the different applications and games are accessible via the map menu, which is accessible from the nametag application (landing screen).
+All the different applications and games are accessible via the map menu, which is accessible from the nametag application (landing screen):
+<p align="justify">
+  <img src="screen1.jpg" width="40%"/>
+</p>
 
 # Hardware sponsors
 
