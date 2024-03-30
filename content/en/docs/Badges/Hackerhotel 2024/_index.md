@@ -23,6 +23,7 @@ The Telegraph badge made for the event Hackerhotel 2024 is an interactive badge 
 
 # Handbook
 
+### First steps
 First turn the badge by sliding the switch down on the left hand side or plugging in a cable in the USB C port (this also recharges the battery).
 
 ⚠️ The display is e-paper and its behavior can be confusing under some conditions:
@@ -30,7 +31,13 @@ First turn the badge by sliding the switch down on the left hand side or pluggin
 - When sliding the switch down to turn the device on (while unplugged) the top right corner LED should flash. If it does not then the battery is discharged and the screen will remained unchanged.
 - The screen will sometimes cycle the ink before displaying the image, this can be changed for most menus in the "engine room".
 
-All the different applications and games are accessible via the map menu, which is accessible from the nametag application (landing screen):
+### Using the input system
+The inputs consist of 5 switches located at the bottom of the badge, each having 3 actions: rotate left, rotate right and press in. The effect of those actions is often described by the boxes at the bottom of the screen.
+
+If you enter the typing mode, the device then function as a [Cooke & Wheatstone telegraph]([url](https://en.wikipedia.org/wiki/Cooke_and_Wheatstone_telegraph#Operation)): Each switch represent one of the needles, and the led line shows the needle orientation. when 2 needles point towards the same letter, it is registered.
+
+### Navigating the apps
+All the different applications and games are accessible via the map menu, rotate the left switch to change "location" (aka apps) on the map, and select by pressing in the right switch in:
 <p align="justify">
   <img src="screen1.jpg" width="40%"/>
 </p>
