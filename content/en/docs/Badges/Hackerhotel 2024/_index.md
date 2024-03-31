@@ -36,6 +36,10 @@ The inputs consist of 5 switches located at the bottom of the badge, each having
 
 If you enter the typing mode, the device then function as a [Cooke & Wheatstone telegraph]([url](https://en.wikipedia.org/wiki/Cooke_and_Wheatstone_telegraph#Operation)): Each switch represent one of the needles, and the led line shows the needle orientation. when 2 needles point towards the same letter, it is registered.
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=OJWbZAmNXz4" target="_blank">
+ <img src="badge2.jpg" alt="Watch the video" width="40%" border="10" />
+</a>
+
 ### Navigating the apps
 All the different applications and games are accessible via the map menu, rotate the left switch to change "location" (aka apps) on the map, and select by pressing in the right switch in:
 <p align="justify">
