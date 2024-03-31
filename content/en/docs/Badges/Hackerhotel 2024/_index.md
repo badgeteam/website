@@ -81,3 +81,29 @@ The HackerHotel 2024 badge would not have been possible without the help of the 
  - Julian
  - [Dimitri](https://hackerhotel.nl)
  - [Yvo](https://ytec3d.com)
+   
+ # Reporting bugs
+ If you find any bug, help us by filling [an issue.](https://github.com/badgeteam/hackerhotel-2024-firmware-esp32c6/issues)
+
+# Ready, set, hack!
+Hack your badge and build cool applications on the ESP32-C6! Here are some basic instructions to get you started:
+
+
+## Add and display an image png
+First the convert your image (input.png) by running <samp>convert</samp> using the mascot.png in the ressource folder as a reference, example:
+```
+convert input.png -map mascot.png output.png
+```
+Then open main/CMakeLists.txt and add your new file:
+```
+EMBED_FILES ${project_dir}/resources/output.png
+```
+Add in your file:
+```
+extern const uint8_t output_png_start[] asm("_binary_output_png_start");
+extern const uint8_t output_png_end[] asm("_binary_output_png_end");
+```
+And use <samp>pax_insert_png_buf</samp> in your code to add the image to the screen buffer:
+```
+pax_insert_png_buf(&gfx, output_png_start, output_png_end - output_png_start, 0, 0, 0);
+```
