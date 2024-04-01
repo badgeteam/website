@@ -83,13 +83,19 @@ The HackerHotel 2024 badge would not have been possible without the help of the 
  - [Yvo](https://ytec3d.com)
    
  # Reporting bugs
- If you find any bug, help us by filling [an issue.](https://github.com/badgeteam/hackerhotel-2024-firmware-esp32c6/issues)
+ If you find any bug, help us by filling in [an issue.](https://github.com/badgeteam/hackerhotel-2024-firmware-esp32c6/issues)
 
 # Ready, set, hack!
 Hack your badge and build cool applications on the ESP32-C6! Here are some basic instructions to get you started:
 
+## Main firmware/ESP32-C6
+Follow the instructions on the [ESP32-C6](https://github.com/badgeteam/hackerhotel-2024-firmware-esp32c6), we recommand VScode as an IDE.
 
-## Add and display an image png
+## CH32V003 co-processor
+
+Follow the instructions on the [CH32V003 repo](https://github.com/badgeteam/hackerhotel-2024-firmware-ch32v003), the J5 contains all the pins necessary to connect to a WCH link.
+
+## Add and display an image
 First the convert your image (input.png) by running <samp>convert</samp> using the mascot.png in the ressource folder as a reference, example:
 ```
 convert input.png -map mascot.png output.png
