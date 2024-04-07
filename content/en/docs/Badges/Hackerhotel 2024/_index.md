@@ -4,9 +4,12 @@ nodateline: true
 weight: -2024
 ---
 
-![badge](hackerhotel2024.svg)
+<p align="justify">
+  <img src="hackerhotel2024.svg" width="40%"/>
+  <img src="badge1.jpg" width="32%"/>
+</p>
 
-The Hackerhotel 2024 badge is a challenge badge with puzzles themed around ... and shaped like a telegraph machine.
+The Telegraph badge made for the event Hackerhotel 2024 is an interactive badge with puzzles themed telegraphs and the Victorian historical setting they were developed in. It is inspired from the Cooke and Wheatstone telegraph for the rather unusual input system. 
 
 # Hardware
 
@@ -17,6 +20,31 @@ The Hackerhotel 2024 badge is a challenge badge with puzzles themed around ... a
  - SAO connector
  - QWIIC connector
  - Addressable LED used as status indicator
+
+# Handbook
+
+### First steps
+First turn the badge by sliding the switch down on the left hand side or plugging in a cable in the USB C port (this also recharges the battery).
+
+⚠️ The display is e-paper and its behavior can be confusing under some conditions:
+- The screen state does not change when turned off, so it will show its current screen until it is powered up again.
+- When sliding the switch down to turn the device on (while unplugged) the top right corner LED should flash. If it does not then the battery is discharged and the screen will remained unchanged.
+- The screen will sometimes cycle the ink before displaying the image, this can be changed for most menus in the "engine room".
+
+### Using the input system
+The inputs consist of 5 switches located at the bottom of the badge, each having 3 actions: rotate left, rotate right and press in. The effect of those actions is often described by the boxes at the bottom of the screen.
+
+If you enter the typing mode, the device then function as a [Cooke & Wheatstone telegraph]([url](https://en.wikipedia.org/wiki/Cooke_and_Wheatstone_telegraph#Operation)): Each switch represent one of the needles, and the led line shows the needle orientation. when 2 needles point towards the same letter, it is registered.
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=OJWbZAmNXz4" target="_blank">
+ <img src="badge2.jpg" alt="Watch the video" width="40%" border="10" />
+</a>
+
+### Navigating the apps
+All the different applications and games are accessible via the map menu, rotate the left switch to change "location" (aka apps) on the map, and select by pressing in the right switch in:
+<p align="justify">
+  <img src="screen1.jpg" width="40%"/>
+</p>
 
 # Hardware sponsors
 
@@ -53,3 +81,35 @@ The HackerHotel 2024 badge would not have been possible without the help of the 
  - Julian
  - [Dimitri](https://hackerhotel.nl)
  - [Yvo](https://ytec3d.com)
+   
+ # Reporting bugs
+ If you find any bug, help us by filling in [an issue.](https://github.com/badgeteam/hackerhotel-2024-firmware-esp32c6/issues)
+
+# Ready, set, hack!
+Hack your badge and build cool applications on the ESP32-C6! Here are some basic instructions to get you started:
+
+## Main firmware/ESP32-C6
+Follow the instructions on the [ESP32-C6](https://github.com/badgeteam/hackerhotel-2024-firmware-esp32c6), we recommand VScode as an IDE.
+
+## CH32V003 co-processor
+
+Follow the instructions on the [CH32V003 repo](https://github.com/badgeteam/hackerhotel-2024-firmware-ch32v003), the J5 contains all the pins necessary to connect to a WCH link.
+
+## Add and display an image
+First the convert your image (input.png) by running <samp>convert</samp> using the mascot.png in the ressource folder as a reference, example:
+```
+convert input.png -map mascot.png output.png
+```
+Then open main/CMakeLists.txt and add your new file:
+```
+EMBED_FILES ${project_dir}/resources/output.png
+```
+Add in your file:
+```
+extern const uint8_t output_png_start[] asm("_binary_output_png_start");
+extern const uint8_t output_png_end[] asm("_binary_output_png_end");
+```
+And use <samp>pax_insert_png_buf</samp> in your code to add the image to the screen buffer:
+```
+pax_insert_png_buf(&gfx, output_png_start, output_png_end - output_png_start, 0, 0, 0);
+```
