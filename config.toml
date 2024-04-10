@@ -44,9 +44,10 @@ anchor = "smart"
 [languages]
 [languages.en]
 title = "Badge.team"
-description = "Badges and badgers"
 languageName ="English"
 weight = 1
+[languages.en.params]
+description = "Badges and badgers"
 
 [markup]
   [markup.goldmark]
