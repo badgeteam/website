@@ -12,10 +12,12 @@ following methods for developing software:
 
 - **Stock firmware build-IDF** : native EPS apps using the IDF (IoT Development
   Framework)
-- **ESP-IDF with Platformio** : 
+- **ESP-IDF with Platformio** : Use the HH2024 badge as a generic dev board.
 - **EspHome**: The easy way to program devices for Home-Assistant.
 
-See more information below.
+The badge also has a coprossor for extra IO. 
+
+See more information [below](#ch32v003-co-processor).
 
 
 ## Linux permissions
@@ -55,6 +57,9 @@ make build
 make install
 ```
 
+If you want to make some modifications check out this page on modifying the
+standard [firmware](modify-standard-firmware). To try as a first hack.
+
 ### ESP-IDF with Platformio
 
 Jhaand ported the `Hello World` application for ESP-IDF to Platformio and made
@@ -80,5 +85,9 @@ It displays a `Hello Badge Team!` on the display.
 
 More information on install EspHome you can find here:   
 https://esphome.io/guides/getting_started_command_line
+
+### CH32V003 co-processor
+
+Follow the instructions on the [CH32V003 repo](https://github.com/badgeteam/hackerhotel-2024-firmware-ch32v003), the J5 contains all the pins necessary to connect to a WCH link.
 
 
