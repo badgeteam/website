@@ -33,12 +33,13 @@ jobs:
       - name: Build
         run: bash build.sh
 
-      - name: Deploy with Rsync
-        uses: SamKirkland/web-deploy@v1
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
         with:
-          source-path: './public/'
-          target-server: ${{ vars.HOST }}
-          ssh-port:      ${{ vars.SSH_PORT }}
-          remote-user:   ${{ vars.SSH_USER }}
-          private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          destination-path: ${{ vars.WEBROOT }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: './public/'
+          REMOTE_HOST: ${{ vars.HOST }}
+          REMOTE_USER: ${{ vars.SSH_USER }}
+          REMOTE_PORT: ${{ vars.SSH_PORT }}
+          TARGET: ${{ vars.WEBROOT }}
