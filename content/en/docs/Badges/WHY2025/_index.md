@@ -5,7 +5,7 @@ nodateline: true
 weight: -2025
 ---
 
-<img src="why2025.svg" width="30%"/>
+<img src="why2025.svg" width="60%"/>
 
 # WHY2025
 
