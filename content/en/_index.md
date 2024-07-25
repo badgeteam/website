@@ -9,7 +9,8 @@ menu:
 
 {{< blocks/cover title="" image_anchor="top" height="full" color="primary" >}}
 <div class="mx-auto">
-<img src="logo_white.svg" />
+<!--<img src="logo_white.svg" />-->
+<img src="stamp_80s.svg" />
 <p>&nbsp;</p>
 <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
 Documentation <i class="fas fa-arrow-alt-circle-right ml-2"></i>
