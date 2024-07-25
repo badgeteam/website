@@ -45,3 +45,17 @@ Add styles or override variables from the theme here.
         margin-bottom: 30px;
     }
 }
+
+@-webkit-keyframes greenfade {
+  0% { background-color: #CCCCCC; }
+  50% { background-color: #00FF00; }
+  100% { background-color: #CCCCCC; }
+}
+
+#led1 {
+    height: 100px;
+    background-color: black;
+    -webkit-animation-name: greenfade;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 2s;
+}

@@ -5,7 +5,7 @@ nodateline: true
 weight: -2025
 ---
 
-<img src="why2025.svg" width="60%"/>
+<img src="why2025.svg" style="display: block; margin-left: auto; margin-right: auto; width: 60%;"/>
 
 # WHY2025
 
@@ -53,3 +53,5 @@ All of our sponsors helped us out in a time when sourcing capable chips was a ne
 The WHY2025 badge would not have been possible without the help of these amazing volunteers.
 
 ...
+
+<img src="why2025_mascots.svg" width="80%"/>
