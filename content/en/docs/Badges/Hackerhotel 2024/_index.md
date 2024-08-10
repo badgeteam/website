@@ -119,7 +119,6 @@ pax_insert_png_buf(&gfx, output_png_start, output_png_end - output_png_start, 0,
 
 OTA update over WiFi
 
-First configure WiFi
 Use the left most switch to enter the Map by pushing the first switch (from the left)
 Push the left most switch to the right, until you see Engine Room appear in the display
 Push the fifth button to select the engine room
