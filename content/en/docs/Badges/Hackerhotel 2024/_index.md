@@ -113,3 +113,19 @@ And use <samp>pax_insert_png_buf</samp> in your code to add the image to the scr
 ```
 pax_insert_png_buf(&gfx, output_png_start, output_png_end - output_png_start, 0, 0, 0);
 ```
+# Updating the badge firmware
+OTA update over WiFi
+
+Use the left most switch to enter the Map by pushing the first switch (from the left)
+Push the left most switch to the right, until you see Engine Room appear in the display
+Push the fifth button to select the engine room
+Select the OTA menu using the fourth button
+The badge will try and connect to wifi and update if an update is available
+
+OTA Dev update over WiFi
+
+Use the left most switch to enter the Map by pushing the first switch (from the left)
+Push the left most switch to the right, until you see Engine Room appear in the display
+Push the fifth button to select the engine room
+Select the OTA menu using the fifth button
+The badge will try and connect to wifi and update if an update is available
