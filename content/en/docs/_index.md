@@ -9,7 +9,7 @@ menu:
 
 # MCH2022 is over, but The Badge lives on!
 
-To [everyone who worked on the project](http://localhost:1313/team/), be it in
+To [everyone who worked on the project](/team/), be it in
 the past months or 1,5 years ago when we were still aiming for MCH2021: you
 rock! We have received so many compliments on the design, the soft-/firmware,
 the day 1 readiness, the website & docs, the specs and the overall end result:
