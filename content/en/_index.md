@@ -38,7 +38,7 @@ Need help? Want to volunteer? <i class="fab fa-telegram ml-2 "></i>
 {{< /blocks/cover >}}
 
 {{% blocks/lead color="dark" %}}
-We're a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you interested in helping out, part of an event badge team looking for some help or just curious? Join our [Telegram group](https://t.me/+StQpEWyhnb96Y88p) or [Discord channel](https://discord.gg/xuhw3Ws6BJ).
+We're a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you interested in helping out, part of an event badge team looking for some help or just curious? Join our [Telegram group](https://t.me/+StQpEWyhnb96Y88p).
 {{% /blocks/lead %}}
 
 
@@ -46,29 +46,16 @@ We're a constantly changing group of volunteers that aims to take creating event
 
 {{% blocks/feature icon="fab fa-telegram" title="Chat with us on **Telegram**" %}}
 Our main communication channel. Do you have a question? Want to help? Get in contact?<br />
-<a href="https://t.me/+StQpEWyhnb96Y88p" style="color: #FFFFFF;">Click here to join the Telegram group!</a>
+<a href="https://t.me/+StQpEWyhnb96Y88p">Click here to join the Telegram group!</a>
 {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-discord" title="Discord group" %}}
-Do you have a question? Want to help? Get in contact?<br />
-<a href="https://discord.gg/xuhw3Ws6BJ">Click here to join the Discord group!</a>
+{{% blocks/feature icon="fab fa-mastodon" title="Mastodon" %}}
+Follow us on <a href="https://hsnl.social/@badgeteam">Mastodon</a> to be kept up-to-date on Badge.team related announcements and information
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fab fa-github" title="GitHub" %}}
 Contributions welcome!<br />
 <a href="https://github.com/badgeteam">Our soft- and hardware designs are fully open source!</a>
-{{% /blocks/feature %}}
-
-{{% /blocks/section %}}
-
-{{< blocks/section type="row" color="secondary" >}}
-
-{{% blocks/feature icon="fab fa-mastodon" title="Mastodon" %}}
-<a href="https://hsnl.social/@badgeteam" style="color: #000000;">Follow us on Mastodon to be kept up-to-date on Badge.team related announcements and information</a>
-{{% /blocks/feature %}}
-
-{{% blocks/feature icon="fa fa-shopping-bag" title="Hatchery" %}}
-<a href="https://hatchery.badge.team" style="color: #000000;">Do you want to publish an app? Look no further.</a>
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}

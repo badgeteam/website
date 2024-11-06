@@ -9,7 +9,7 @@ weight: -2025
 
 # WHY2025
 
-The badge of the upcoming [WHY2025 hacker conference camp](https://why2025.org) is currently in the process of being designed. If you're interested in helping please contact us by joining our telegram group and asking for Lukas (@dalu).
+The badge of the upcoming [WHY2025 hacker conference camp](https://why2025.org).
 
 The camp is organized for and by volunteers from and around all facets of the international hacker community. It attracts about 3500 hackers from all around the globe. Knowledge sharing, technological advancement, experimentation, connecting with your hacker peers and of course hacking are some of the core values of this event. During the camp there are hundreds of talks and activities to participate in.
 
@@ -39,19 +39,16 @@ WiFi, Bluetooth and even 802.15.4 mesh networking are available thanks to the ES
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 </p>
 
-* **ALLNET China** was our production partner, for which we are more than grateful. They took care of sourcing most components and oversaw the production process [in China][ALLNET China], saving us a lot of work and potential headaches and allowing us to focus on the product!
-* **Espressif** was very generous to donate us all of the [ESP32-WROVER-E][ESP32] modules we needed. The ESP32 has proven itself to be a solid basis for badges in the past, and for related projects such as the [PocketSprite]. Espressifs continued support means a lot to us as it allows us to continue expanding our existing ESP32-based ecosystem!
+* [**ALLNET China**][ALLNET China] is our reliable production partner. They took care of sourcing most components and oversaw the production process in China, saving us a lot of work and potential headaches and allowing us to focus on the product!
+* [**Espressif**][Espressif] has very generously sponsored ESP32-P4 chips, ESP32-C6 modules as well as the flash chips to store the firwmare. The ESP32 has proven itself to be a solid basis for badges in the past. Espressifs continued support means a lot to us as it allows us to continue expanding our existing ESP32-based ecosystem!
 
 All of our sponsors helped us out in a time when sourcing capable chips was a near-impossible task. Without them, this project would not have been possible. We are grateful to all of them for their help and sponsorship, and we hope to work with them again in future badge projects!
 
 [ALLNET China]: https://www.allnet.de/en/allnet-brand/unternehmen/weltweit/
-[ESP32]: https://www.espressif.com/en/products/modules/esp32
-[PocketSprite]: https://pocketsprite.com
+[Espressif]: https://www.espressif.com/en
 
 ## The team
 
-The WHY2025 badge would not have been possible without the help of these amazing volunteers.
-
-...
+The WHY2025 badge would not have been possible without the help of our amazing volunteers.
 
 <img src="why2025_mascots.svg" width="80%"/>

@@ -7,8 +7,6 @@ menu:
     pre: <i class='fas fa-user'></i>
 ---
 
-<!-- Basic page header is handled by a layout! -->
-
 {{< blocks/section color="dark" >}}
 
 <h3>Each event badge has it's own team. This page lists the names of the volunteers that helped make your awesome event badges possible.</h3>
@@ -16,137 +14,153 @@ menu:
 {{< /blocks/section >}}
 
 {{< blocks/section color="light" >}}
+<h1 id="hackerhotel-2023">Hackerhotel 2023</h1>
+<ul>
+  <li>Pim: Team lead, hardware and software development</li>
+  <li>Sake: Challenges</li>
+  <li><a href="https://ankhaneko.art">Nikolett S.</a>: Artwork</li>
+</ul>
+{{< /blocks/section >}}
 
-# Hackerhotel 2023
+{{< blocks/section color="dark" >}}
+<h1 id="mch2022">MCH2022</h1>
 
- - Pim: Team lead, hardware and software development
- - Sake: Challenges
- - [Nikolett S.](https://ankhaneko.art): Artwork
-
- {{< /blocks/section >}}
-
- {{< blocks/section color="dark" >}}
-
-# MCH2022
-
- - Team lead
-    - Reinier van der Leer
- - [Hardware](https://github.com/badgeteam/mch2022-badge-hardware)
-    - [Renze Nicolai](https://nicolaielectronics.nl): Circuit diagram and PCB routing
-    - [Nikolett S.](https://ankhaneko.art): Artwork
-    - Anne Jan Brouwer
-    - Kliment Yanev
-    - Kuristian
-    - Martin Ling
-    - Paul Honig
-    - Sylvain Munaut
-    - Tom Clement
-    - Fuchsia (f0x)
-    - Sander de Haan
- - [Launcher firmware](https://github.com/badgeteam/mch2022-firmware-esp32)
-    - [Renze Nicolai](https://nicolaielectronics.nl)
-    - [Julian Scheffers (Robotman2412)](https://robot.scheffers.net/)
-    - Sylvain "tnt" Munaut
-    - Frans Faase
-    - Joris W. (jorisplusplus)
-    - Reinier van der Leer (Pwuts)
-    - [Jeroen Domburg (spritetm)](https://spritesmods.com)
-    - Arnold (Alt4arnold)
-    - Pepijn de Vos
-    - Andrejs Bondarevs (abondarevs)
- - [FPGA examples and tools](https://github.com/badgeteam/mch2022-firmware-ice40)
-    - Sylvain "tnt" Munaut
-    - Matthias Koch [Mecrisp](http://mecrisp.sourceforge.net/)
-    - Frans Faase
-    - Carlos Venegas [@cavearr](https://twitter.com/cavearr)
-    - Sylvain Lefebvre [@sylefeb](https://twitter.com/sylefeb)
- - [BadgePython](https://github.com/badgeteam/badgePython/)
-    - Joris W. (jorisplusplus)
-    - [Renze Nicolai](https://nicolaielectronics.nl)
-    - Tom Clement
-    - Sylvain "tnt" Munaut
-    - Jorai Rijsdijk (Erackron)
-    - Pepijn de Vos
-    - [Julian Scheffers (Robotman2412)](https://robot.scheffers.net/)
- - [RP2040 co-processor firmware](https://github.com/badgeteam/mch2022-firmware-rp2040)
-    - [Renze Nicolai](https://nicolaielectronics.nl)
-    - Sylvain "tnt" Munaut
-    - Reinier van der Leer (Pwuts)
-    - Jana Marie Hemsing
- - [Documentation](https://github.com/badgeteam/website)
-    - Tim Becker (a2800276)
-    - Matthias Koch (Mecrisp)
-    - Pepijn de Vos
-    - [Julian Scheffers (Robotman2412)](https://robot.scheffers.net/)
-    - Sylvain "tnt" Munaut
-    - TheRealProcyon
-    - Pieter Vander Vennet
-    - Jenny List
-    - Oskar Roesler (bionade24)
-    - Dominik (dloidolt)
-    - Manuel Dipolt (xeniter)
-    - p2mate
-    - Sietse Ringers
-    - Yvo de Haas
-    - Marble (cyber-murmel)
-
+<ul>
+  <li>Teamlead<ul><li>Reinier van der Leer</li></ul></li>
+  <li><a href="https://github.com/badgeteam/mch2022-badge-hardware">Hardware</a>
+    <ul>
+      <li><a href="https://nicolaielectronics.nl">Renze Nicolai</a>: Circuit diagram and PCB routing</li>
+      <li><a href="https://ankhaneko.art">Nikolett S.</a>: Artwork</li>
+      <li>Anne Jan Brouwer</li>
+      <li>Kliment Yanev</li>
+      <li>Kuristian</li>
+      <li>Martin Ling</li>
+      <li>Paul Honig</li>
+      <li>Sylvain Munaut</li>
+      <li>Tom Clement</li>
+      <li>Fuchsia (f0x)</li>
+      <li>Sander de Haan</li>
+    </ul>
+  </li>
+<li><a href="https://github.com/badgeteam/mch2022-firmware-esp32">Launcher firmware</a><ul>
+<li><a href="https://nicolaielectronics.nl">Renze Nicolai</a></li>
+<li><a href="https://robot.scheffers.net/">Julian Scheffers (Robotman2412)</a></li>
+<li>Sylvain &quot;tnt&quot; Munaut</li>
+<li>Frans Faase</li>
+<li>Joris W. (jorisplusplus)</li>
+<li>Reinier van der Leer (Pwuts)</li>
+<li><a href="https://spritesmods.com">Jeroen Domburg (spritetm)</a></li>
+<li>Arnold (Alt4arnold)</li>
+<li>Pepijn de Vos</li>
+<li>Andrejs Bondarevs (abondarevs)</li>
+</ul>
+</li>
+<li><a href="https://github.com/badgeteam/mch2022-firmware-ice40">FPGA examples and tools</a><ul>
+<li>Sylvain &quot;tnt&quot; Munaut</li>
+<li>Matthias Koch <a href="http://mecrisp.sourceforge.net/">Mecrisp</a></li>
+<li>Frans Faase</li>
+<li>Carlos Venegas <a href="https://twitter.com/cavearr">@cavearr</a></li>
+<li>Sylvain Lefebvre <a href="https://twitter.com/sylefeb">@sylefeb</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/badgeteam/badgePython/">BadgePython</a><ul>
+<li>Joris W. (jorisplusplus)</li>
+<li><a href="https://nicolaielectronics.nl">Renze Nicolai</a></li>
+<li>Tom Clement</li>
+<li>Sylvain &quot;tnt&quot; Munaut</li>
+<li>Jorai Rijsdijk (Erackron)</li>
+<li>Pepijn de Vos</li>
+<li><a href="https://robot.scheffers.net/">Julian Scheffers (Robotman2412)</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/badgeteam/mch2022-firmware-rp2040">RP2040 co-processor firmware</a><ul>
+<li><a href="https://nicolaielectronics.nl">Renze Nicolai</a></li>
+<li>Sylvain &quot;tnt&quot; Munaut</li>
+<li>Reinier van der Leer (Pwuts)</li>
+<li>Jana Marie Hemsing</li>
+</ul>
+</li>
+<li><a href="https://github.com/badgeteam/website">Documentation</a><ul>
+<li>Tim Becker (a2800276)</li>
+<li>Matthias Koch (Mecrisp)</li>
+<li>Pepijn de Vos</li>
+<li><a href="https://robot.scheffers.net/">Julian Scheffers (Robotman2412)</a></li>
+<li>Sylvain &quot;tnt&quot; Munaut</li>
+<li>TheRealProcyon</li>
+<li>Pieter Vander Vennet</li>
+<li>Jenny List</li>
+<li>Oskar Roesler (bionade24)</li>
+<li>Dominik (dloidolt)</li>
+<li>Manuel Dipolt (xeniter)</li>
+<li>p2mate</li>
+<li>Sietse Ringers</li>
+<li>Yvo de Haas</li>
+<li>Marble (cyber-murmel)</li>
+</ul>
+</li>
+</ul>
 {{< /blocks/section >}}
 
 {{< blocks/section color="light" >}}
 
 
-# CampZone 2020
+<h1>CampZone 2020</h1>
 
- - Tom Clement: hardware
+<ul>
+<li>Hardware<ul><li>Tom Clement</ul></li></ul>
 
 {{< /blocks/section >}}
 
 {{< blocks/section color="dark" >}}
 
-# Hackerhotel 2020
-
- - [Renze Nicolai](https://nicolaielectronics.nl): Circuit diagram and PCB routing
- - [Nikolett S.](https://ankhaneko.art): Artwork
- - Sake: Challenges
- - Glu: audio
+<h1 id="hackerhotel-2020">Hackerhotel 2020</h1>
+<ul>
+<li><a href="https://nicolaielectronics.nl">Renze Nicolai</a>: Circuit diagram and PCB routing</li>
+<li><a href="https://ankhaneko.art">Nikolett S.</a>: Artwork</li>
+<li>Sake: Challenges</li>
+<li>Glu: audio</li>
+</ul>
 
 {{< /blocks/section >}}
 
 {{< blocks/section color="light" >}}
 
-# CampZone 2019
-
- - Tom Clement: hardware
- - Roel Harbers
+<h1 id="campzone-2019">CampZone 2019</h1>
+<ul>
+<li>Tom Clement: hardware</li>
+<li>Roel Harbers</li>
+</ul>
 
 {{< /blocks/section >}}
 
 {{< blocks/section color="dark" >}}
 
-# Hackerhotel 2019
-
- - Tom Clement: hardware
- - Raboof: hardware, software
- - [Renze Nicolai](https://nicolaielectronics.nl): software
- - Anne Jan Brouwer: software
- - Bas van Sisseren: software, audio fix
+<h1 id="hackerhotel-2019">Hackerhotel 2019</h1>
+<ul>
+<li>Tom Clement: hardware</li>
+<li>Raboof: hardware, software</li>
+<li><a href="https://nicolaielectronics.nl">Renze Nicolai</a>: software</li>
+<li>Anne Jan Brouwer: software</li>
+<li>Bas van Sisseren: software, audio fix</li>
+</ul>
 
 {{< /blocks/section >}}
 
 {{< blocks/section color="light" >}}
 
-# SHA2017
-
- - Sebastian Oort
- - Niek Blankers
- - Markus Bechtold
- - Anne Jan Brouwer
- - Bas van Sisseren
- - Gavan Fantom
- - Jeroen Domburg
- - Niek Blankers
- - Sebastian Oort
- - Renze Nicolai
- - Arnout Engelen
+<h1 id="sha2017">SHA2017</h1>
+<ul>
+<li>Sebastian Oort</li>
+<li>Niek Blankers</li>
+<li>Markus Bechtold</li>
+<li>Anne Jan Brouwer</li>
+<li>Bas van Sisseren</li>
+<li>Gavan Fantom</li>
+<li>Jeroen Domburg</li>
+<li>Niek Blankers</li>
+<li>Sebastian Oort</li>
+<li>Renze Nicolai</li>
+<li>Arnout Engelen</li>
+</ul>
 
 {{< /blocks/section >}}
