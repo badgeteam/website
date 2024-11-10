@@ -1,8 +1,8 @@
 ---
-title: "WHY2025 badge specifications"
-linkTitle: "Specifications"
+title: "BadgeHub"
+linkTitle: "BadgeHub"
 nodateline: true
-weight: -30
+weight: 3
 ---
 
 (work in progress, please check this page again later)
