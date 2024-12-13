@@ -8,7 +8,6 @@ weight: 2
 
 ### ESP32 based
 <div class="homepage_badges">
-<div><a href="why2025/"><img src="why2025/why2025.svg" width="400"/></a></div>
 <div><a href="mch2022/"><img src="mch2022/mch2022.svg"/></a></div>
 <div><a href="sha2017/"><img src="sha2017/sha2017.svg"/></a></div>
 <div><a href="hackerhotel-2019/"><img src="hackerhotel-2019/hh2019.svg"/></a></div>
