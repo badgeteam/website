@@ -1,10 +1,12 @@
 {
     "cSpell.words": [
         "appconfig",
+        "Blockdiagram",
         "Emiel",
         "Espressif",
         "gperf",
         "Haandrikma",
+        "Haandrikman",
         "Henk",
         "Honig",
         "Jhaand",
@@ -15,12 +17,23 @@
         "menuconfig",
         "microcontroller",
         "Micropython",
+        "Nikolett",
         "nodateline",
+        "Noor",
         "Pinout",
         "Ranzbak",
         "rgba",
+        "Scheffers",
         "sdkconfig",
         "Vbatt",
         "xtensa"
-    ]
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:website}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }
