@@ -20,7 +20,7 @@ Need help? Want to volunteer? <i class="fab fa-telegram ml-2 "></i>
 <p>&nbsp;</p>
 <p class="font-weight-bold">Open source event badges for hacker events</p>
 <div class="homepage_badges">
-<div><a href="/docs/badges/Konsool/"><img src="/docs/badges/Konsool/konsool.svg"/></a></div>
+<div><a href="/docs/badges/konsool/"><img src="/docs/badges/konsool/konsool.svg"/></a></div>
 <div><a href="/docs/badges/hackerhotel-2024/"><img src="/docs/badges/hackerhotel-2024/hackerhotel2024.svg"/></a></div>
 <div><a href="/docs/badges/mch2022/"><img src="/docs/badges/mch2022/mch2022.svg"/></a></div>
 <div><a href="/docs/badges/sha2017/"><img src="/docs/badges/sha2017/sha2017.svg"/></a></div>
