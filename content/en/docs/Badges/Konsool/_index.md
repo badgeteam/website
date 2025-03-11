@@ -23,9 +23,8 @@ WiFi, Bluetooth and even 802.15.4 mesh networking are available thanks to the ES
 
 ![Blockdiagram](blockdiagram.png)
 
+# Hardware sponsors
 
-<<<<<<< HEAD
-=======
 <p align="justify">
   <a href="https://www.allnet.de/en/"><img src="m_logo_allnet.png" width="19%"/></a>
   <a href="https://www.espressif.com/"><img src="m_logo_espressif.png" width="19%"/></a>
@@ -39,25 +38,10 @@ All of our sponsors helped us out in a time when sourcing capable chips was a ne
 
 [ALLNET China]: https://www.allnet.de/en/allnet-brand/unternehmen/weltweit/
 [Espressif]: https://www.espressif.com/en
->>>>>>> 104754e (Fixed typo)
 
 ## The team
 
 The Konsool would not have been possible without the help of our amazing volunteers.
-<<<<<<< HEAD
-<ul>
-<li>r3nz3 (Renze Nicolai) - Hardware and Software development
-<li>Ranzbak (Paul Honig) - Hardware, Testing and Documentation
-<li>Jhaand (Jelle Haandrikman - Testing and more
-<li>RobotMan2412 (Julian Scheffers) - Software and Testing
-<li>Schrodinger'sFestiveKat (Nikolett) - Artwork and more
-<li>Orange Murker (Luna) - Software and Testing
-<li>NightOwlNL (Emiel Bart) - Documentation
-<li>Noor
-<li>Joyce NG
-<li>Anus (Anne Jan Brouwer)
-<ul>
-=======
 
 r3nz3 (Renze Nicolai) - Hardware and Software development
 Ranzbak (Paul Honig) - Hardware, Testing and Documentation
@@ -69,6 +53,5 @@ NightOwlNL (Emiel Bart) - Documentation
 Noor
 Joyce NG
 Anus (Anne Jan Brouwer)
->>>>>>> 104754e (Fixed typo)
 
 <img src="konsool_mascots.svg" width="80%"/>
