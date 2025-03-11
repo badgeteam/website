@@ -9,7 +9,7 @@ weight: 10
 
 ##Specs
 
-##usecase
+##use-case
 
 
 (work in progress, please check this page again later)
