@@ -23,22 +23,21 @@ WiFi, Bluetooth and even 802.15.4 mesh networking are available thanks to the ES
 
 ![Blockdiagram](blockdiagram.png)
 
-
-
 ## The team
 
 The Konsool would not have been possible without the help of our amazing volunteers.
-<ul>
-<li>r3nz3 (Renze Nicolai) - Hardware and Software development
-<li>Ranzbak (Paul Honig) - Hardware, Testing and Documentation
-<li>Jhaand (Jelle Haandrikman - Testing and more
-<li>RobotMan2412 (Julian Scheffers) - Software and Testing
-<li>Schrodinger'sFestiveKat (Nikolett) - Artwork and more
-<li>Orange Murker (Luna) - Software and Testing
-<li>NightOwlNL (Emiel Bart) - Documentation
-<li>Noor
-<li>Joyce NG
-<li>Anus (Anne Jan Brouwer)
-<ul>
+
+| Nick                    | Name              | Role                                |
+| ----------------------- | ----------------- | ----------------------------------- |
+| r3nz3                   | Renze Nicolai     | Hardware and Software development   |
+| Ranzbak                 | Paul Honig        | Hardware, Testing and Documentation |
+| Jhaand                  | Jelle Haandrikman | Testing and more                    |
+| RobotMan2412            | Julian Scheffers  | Software and Testing                |
+| Schrodinger'sFestiveKat | Nikolett          | Artwork and more                    |
+| Orange Murker           | Luna              | Software and Testing                |
+| NightOwlNL              | Emiel Bart        | Documentation                       |
+| Noor                    |                   |                                     |
+| Joyce NG                |                   |                                     |
+| Anus                    | Anne Jan Brouwer  |                                     |
 
 <img src="konsool_mascots.svg" width="80%"/>
