@@ -23,22 +23,6 @@ WiFi, Bluetooth and even 802.15.4 mesh networking are available thanks to the ES
 
 ![Blockdiagram](blockdiagram.png)
 
-# Hardware sponsors
-
-<p align="justify">
-  <a href="https://www.allnet.de/en/"><img src="m_logo_allnet.png" width="19%"/></a>
-  <a href="https://www.espressif.com/"><img src="m_logo_espressif.png" width="19%"/></a>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-</p>
-
-* [**ALLNET China**][ALLNET China] is our reliable production partner. They took care of sourcing most components and oversaw the production process in China, saving us a lot of work and potential headaches and allowing us to focus on the product!
-* [**Espressif**][Espressif] has very generously sponsored ESP32-P4 chips, ESP32-C6 modules as well as the flash chips to store the firwmare. The ESP32 has proven itself to be a solid basis for badges in the past. Espressifs continued support means a lot to us as it allows us to continue expanding our existing ESP32-based ecosystem!
-
-All of our sponsors helped us out in a time when sourcing capable chips was a near-impossible task. Without them, this project would not have been possible. We are grateful to all of them for their help and sponsorship, and we hope to work with them again in future badge projects!
-
-[ALLNET China]: https://www.allnet.de/en/allnet-brand/unternehmen/weltweit/
-[Espressif]: https://www.espressif.com/en
-
 ## The team
 
 The Konsool would not have been possible without the help of our amazing volunteers.
