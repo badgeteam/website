@@ -37,7 +37,7 @@ And if you're reading this at MCH2022, just come by our [tent](https://map.mch20
 You can find the sources and hardware files for all Badge artefacts
 files under the [Badge.team](https://github.com/badgeteam) organization:
 
-- [mch2022-badge-hardware](https://github.com/badgeteam/mch2022-badge-hardware) The Kicad design files, look here for
+- [mch2022-badge-hardware](https://github.com/badgeteam/mch2022-badge-hardware) The KiCad design files, look here for
   schematics, etc.
 - [mch2022-firmware-esp32](https://github.com/badgeteam/mch2022-firmware-esp32) The main launcher firmware.
 - [Hatchery]()
