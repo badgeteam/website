@@ -5,23 +5,25 @@ nodateline: true
 weight: -2025
 ---
 
+<img src="konsool-logo.svg" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 2rem; width: 60%">
+
 <img src="konsool.svg" style="display: block; margin-left: auto; margin-right: auto; width: 60%;"/>
 
-# Konsool
+# Introduction
 
 Back in 2022 we built you a handy games console, pushing the limit's of what is possible using the original ESP32 microcontroller and even going above and beyond by adding an FPGA into the mix.
 
 This time Konsool will be completely different of course! The device will be the portable computer you wish you had in the 80s. Complete with on-device programming environment, a big screen and a full QWERTY keyboard this device is all the computing power you will need during the event.
 
-## The brain
+## The Konsool brain
 
 The brand-new ESP32-P4 will be the star of the show, with it's dual-core 400MHz RISC-V processor, 32MB of RAM and plenty of peripherals for communication the badge will be a showcase of state of the art IOT technology.
 
 WiFi, Bluetooth and even 802.15.4 mesh networking are available thanks to the ESP32-C6 module included on the board.
 
-## The plan
+## The hardware
 
-![Blockdiagram](blockdiagram.png)
+You can find out all about the hardware [Here](./hardware/_index.md).
 
 ## The team
 
