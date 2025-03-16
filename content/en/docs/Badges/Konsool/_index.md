@@ -35,7 +35,7 @@ The Konsool would not have been possible without the help of our amazing volunte
 | Ranzbak                 | Paul Honig        | Hardware, Testing and Documentation |
 | Jhaand                  | Jelle Haandrikman | Testing and more                    |
 | RobotMan2412            | Julian Scheffers  | Software and Testing                |
-| Schrodinger'sFestiveKat | Nikolett          | Artwork and more                    |
+| Ankhaneko               | Nikolett          | Artwork and more                    |
 | Orange Murker           | Luna              | Software and Testing                |
 | NightOwlNL              | Emiel Bart        | Documentation                       |
 | Noor                    |                   |                                     |
