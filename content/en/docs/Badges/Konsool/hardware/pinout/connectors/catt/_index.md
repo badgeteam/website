@@ -23,7 +23,7 @@ Because of this multi functional nature, the name for the connector is CATT (Con
 
 
 - *DET: Detect, when pulled down during power up, JTAG functionality is provided
-- *3V3: Not connected by default, jumper the PCB needs to be closed to supply 3V3
+- *3V3: Not connected by default, jumper on the PCB needs to be closed to supply 3V3
 
 ## Schematic
 
