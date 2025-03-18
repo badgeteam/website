@@ -1,11 +1,14 @@
 ---
 title: "Internal expansion port"
-linkTitle: "Internal expansion port"
+linkTitle: "Expansion port"
 nodateline: true
 weight: 0
 ---
 
-## Internal expansion port
+## Back expansion port
+
+This port is not exposed by default, and modified back covers need to be used to make it accessible.
+For this reason the port is also named "Internal expansion port".
 
 |Pin|Type |Power domain  |Maximum current                                |Name      |P4 GPIO                                                                                                                                                                                                                      |Function                                                                                                                                                                                                                     |
 |---|-----|--------------|-----------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

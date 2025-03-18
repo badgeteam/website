@@ -1,6 +1,6 @@
 ---
 title: "Konsool connectors"
-linkTitle: "Connectors"
+linkTitle: "Diagram"
 nodateline: true
 weight: -10
 ---
