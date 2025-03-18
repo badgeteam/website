@@ -5,6 +5,8 @@ nodateline true
 weight -10
 ---
 
+<img src="./pinoutesp32c6.svg" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 100%">
+
 ## ESP32 C6
 
 | Name | No. | Type1 | Function                                                                                        |
