@@ -1,11 +1,11 @@
 ---
-title: "CH32V003 pinout"
-linkTitle: "CH32V003"
+title: "CH32V203 pinout"
+linkTitle: "CH32V203"
 nodateline: true
 weight: -10
 ---
 
-## CH32V003
+## CH32V203
 
 | Pin Number | Pin Name  | Net Name               | Direction     | Notes                                      |
 | ---------- | --------- | ---------------------- | ------------- | ------------------------------------------ |
@@ -42,7 +42,7 @@ weight: -10
 | 31         | PA10      | KB_ROW2                | Bidirectional | Keyboard IO                                |
 | 32         | PA11      | LED_DATA               | Output        | Serial data to SK6805 LEDs                 |
 | 33         | PA12      | POWER_BTN              | Input         | Power button IO                            |
-| 34         | PA13      | SWDIO                  | Bidirectional | Debug Interface CH32V003                   |
+| 34         | PA13      | SWDIO                  | Bidirectional | Debug Interface CH32V203                   |
 | 35         | VSS2      | GND                    | Power         | Ground                                     |
 | 36         | VDD2      | +3.3V                  | Power         | Power Supply                               |
 | 37         | PA14      | SWCLK                  | Output        | Debug Clock                                |
