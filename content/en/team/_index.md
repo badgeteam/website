@@ -7,10 +7,27 @@ menu:
     pre: <i class='fas fa-user'></i>
 ---
 
-{{< blocks/section color="dark" >}}
+{{< blocks/section color="light" >}}
 
 <h3>Each event badge has it's own team. This page lists the names of the volunteers that helped make your awesome event badges possible.</h3>
 
+{{< /blocks/section >}}
+
+{{< blocks/section color="dark" >}}
+<h1 id="konsool 2025">Konsool 2025</h1>
+
+<ul>
+  <li>r3nz3 - Renze Nicolai - Hardware and Software development</li>
+  <li>Ranzbak - Paul Honig - Hardware, Testing and Documentation</li>
+  <li>Jhaand - Jelle Haandrikman - Testing and more</li>
+  <li>RobotMan2412 - Julian Scheffers - Software and Testing</li>
+  <li>Ankhaneko - Nikolett - Artwork and more</li>
+  <li>Orange Murker - Luna - Software and Testing</li>
+  <li>NightOwlNL - Emiel Bart - Documentation</li>
+  <li>Noor - Testing</li>
+  <li>Joyce NG</li>
+  <li>Anus - Anne Jan Brouwer - Software</li>
+</ul?>
 {{< /blocks/section >}}
 
 {{< blocks/section color="light" >}}

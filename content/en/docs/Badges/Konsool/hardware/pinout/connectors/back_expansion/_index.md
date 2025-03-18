@@ -5,6 +5,12 @@ nodateline: true
 weight: 0
 ---
 
+## Back Expansion layout
+
+<div style="background-color: white; padding: 1.5rem; width: 60%; display: inline-block;">
+  <img src="back-expansion.png" alt="Back Expansion pinout">
+</div>
+
 ## Back expansion port
 
 This port is not exposed by default, and modified back covers need to be used to make it accessible.
