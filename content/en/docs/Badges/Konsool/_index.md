@@ -36,8 +36,8 @@ The Konsool would not have been possible without the help of our amazing volunte
 | Ankhaneko               | Nikolett          | Artwork and more                    |
 | Orange Murker           | Luna              | Software and Testing                |
 | NightOwlNL              | Emiel Bart        | Documentation                       |
-| Noor                    |                   |                                     |
+| Noor                    |                   | Testing                             |
 | Joyce NG                |                   |                                     |
-| Anus                    | Anne Jan Brouwer  |                                     |
+| Anus                    | Anne Jan Brouwer  | Software                            |
 
 <img src="konsool_mascots.svg" width="80%"/>
