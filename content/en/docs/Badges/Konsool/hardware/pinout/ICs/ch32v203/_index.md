@@ -29,7 +29,7 @@ weight: -10
 | 18         | PB0       | KB_COL7                | Bidirectional | Keyboard IO                                |
 | 19         | PB1       | KB_COL2                | Bidirectional | Keyboard IO                                |
 | 20         | PB2/BOOT1 | KB_COL6                | Bidirectional | Keyboard IO                                |
-| 21         | PB10      | PM_SCL                 | Bidirectional | I2C Clock PMIC (Power controller)          |
+| 21         | PB10      | PM_SCL                 | Output        | I2C Clock PMIC (Power controller)          |
 | 22         | PB11      | PM_SDA                 | Bidirectional | I2C Data PMIC                              |
 | 23         | VSS1      | GND                    | Power         | Ground                                     |
 | 24         | VDDIO1    | +3.3V                  | Power         | Power Supply                               |
@@ -50,7 +50,7 @@ weight: -10
 | 39         | PB3       | KEYBOARD_BL            | Output        | Backlight enable Keyboard                  |
 | 40         | PB4       | DISPLAY_BL             | Output        | Backlight enable display                   |
 | 41         | PB5       | HP_DET                 | Input         | Head phone detect                          |
-| 42         | PB6       | SCL                    | Output        | I2C Clock shared bus                       |
+| 42         | PB6       | SCL                    | input         | I2C Clock shared bus                       |
 | 43         | PB7       | SDA                    | Bidirectional | I2C Data shared bus                        |
 | 44         | BOOT0     | DCAM_IO0               | Output        | When camera module is connected enable LED |
 | 45         | PB8       | RADIO_ENABLE / CAM_IO0 | Output        | Enable C6 and MIPI_CSI camera IO 0         |
