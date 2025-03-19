@@ -5,38 +5,40 @@ nodateline: true
 weight: -10
 ---
 
-<img src="./pinoutesp32c6.svg" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 100%">
+## Schematic
 
-## ESP32 C6
+<img src="./esp32c6-schematic.png" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 100%">
 
-| Name | No. | Type1 | Function                    |
-| ---- | --- | ----- | --------------------------- |
-| GND  | 1   | P     | Ground                      |
-| 3V3  | 2   | P     | Power supply                |
-| EN   | 3   | I     | Enable                      |
-| IO4  | 4   | IOT   | MTMS, GPIO4, ADC1_CH4       |
-| IO5  | 5   | IOT   | MTDI, GPIO5, ADC1_CH5       |
-| IO6  | 6   | IOT   | MTCK, GPIO6, ADC1_CH6       |
-| IO7  | 7   | IOT   | MTDO, GPIO7                 |
-| IO0  | 8   | IOT   | GPIO0, XTAL_32K_P, ADC1_CH0 |
-| IO1  | 9   | IOT   | GPIO1, XTAL_32K_N, ADC1_CH1 |
-| IO8  | 10  | IOT   | GPIO8                       |
-| IO10 | 11  | IOT   | GPIO10                      |
-| IO11 | 12  | IOT   | GPIO11                      |
-| IO12 | 13  | IOT   | GPIO12, USB_D+              |
-| IO13 | 14  | IOT   | GPIO13, USB_D+              |
-| IO9  | 15  | IOT   | GPIO9                       |
-| IO18 | 16  | IOT   | GPIO18                      |
-| IO19 | 17  | IOT   | GPIO19                      |
-| IO20 | 18  | IOT   | GPIO20                      |
-| IO21 | 19  | IOT   | GPIO21                      |
-| IO22 | 20  | IOT   | GPIO22                      |
-| IO23 | 21  | IOT   | GPIO23                      |
-| NC   | 22  | —     | NC                          |
-| IO15 | 23  | IOT   | GPIO15                      |
-| RXD0 | 24  | IOT   | U0RXD, GPIO17               |
-| TXD0 | 25  | IOT   | U0TXD, GPIO16               |
-| IO3  | 26  | IOT   | GPIO3, ADC1_CH3             |
-| IO2  | 27  | IOT   | GPIO2, ADC1_CH2             |
-| GND  | 28  | P     | Ground                      |
-| EPAD | 29  | P     | Ground                      |
+## ESP32 Pin table
+
+| Pin | Name | Net        | Direction     | Function                                            |
+| --- | ---- | ---------- | ------------- | --------------------------------------------------- |
+| 1   | GND  | Power      |               |                                                     |
+| 2   | 3V3  | Power      |               |                                                     |
+| 3   | EN   | EN         | Input         | Enable signal from the CH32V203                     |
+| 4   | IO4  | LORA_DIO1  | Input         | LoRa IRQ (Interrupt)                                |
+| 5   | IO5  | LORA_BUSY  | Input         | LoRa Busy Signal                                    |
+| 6   | IO6  | I2C_SDA    | Bidirectional | I2C Data Line                                       |
+| 7   | IO7  | I2C_SCL    | Input         | I2C Clock Line                                      |
+| 8   | IO0  | LORA_SCK   | Input         | LoRa SPI Clock                                      |
+| 9   | IO1  | LORA_CS    | Output        | LoRa SPI Chip Select                                |
+| 10  | IO8  | INT        | Output        | Interrupt line to ESP32-P4                          |
+| 11  | IO10 | LORA_RESET | Output        | LoRa Reset                                          |
+| 12  | GND  | Power      |               |                                                     |
+| 13  | IO12 | C6_USB1_N  | Bidirectional | Via USB hub to USB-C port                           |
+| 14  | IO13 | C6_USB1_P  | Bidirectional | Via USB hub to USB-C port                           |
+| 15  | IO9  | BOOT       | Input         | BOOT mode select and VUSB (USB-A power) enable line |
+| 16  | IO18 | SDIO_CMD   | Bidirectional | SDIO bus to P4 Command                              |
+| 17  | IO19 | SDIO_CLK   | Output        | SDIO bus to P4 Clock                                |
+| 18  | IO20 | SDIO_DATA0 | Bidirectional | SDIO bus to P4 Data Line 0                          |
+| 19  | IO21 | SDIO_DATA1 | Bidirectional | SDIO bus to P4 Data Line 1                          |
+| 20  | IO22 | SDIO_DATA2 | Bidirectional | SDIO bus to P4 Data Line 2                          |
+| 21  | IO23 | SDIO_DATA3 | Bidirectional | SDIO bus to P4 Data Line 3                          |
+| 22  | NC   |            |               |                                                     |
+| 23  | IO15 | IR_LED     | Output        | Infrared LED Control                                |
+| 24  | RXD0 | RX         | Input         | UART to P4 Receive                                  |
+| 25  | TXD0 | TX         | Output        | UART to P4 Transmit                                 |
+| 26  | IO3  | LORA_MISO  | Input         | LoRa SPI MISO                                       |
+| 27  | IO2  | LORA_MOSI  | Output        | LoRa SPI MOSI                                       |
+| 28  | GND  | Power      |               |                                                     |
+| 29  | GND  | Power      |               |                                                     |
