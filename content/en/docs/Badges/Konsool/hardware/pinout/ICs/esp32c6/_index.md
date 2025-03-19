@@ -1,8 +1,8 @@
 ---
-title ESP32C6 pinout
-linkTitle ESP32 C6
-nodateline true
-weight -10
+title: "ESP32C6 pinout"
+linkTitle: "ESP32 C6"
+nodateline: true
+weight: -10
 ---
 
 <img src="./pinoutesp32c6.svg" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 100%">
