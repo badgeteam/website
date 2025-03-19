@@ -8,7 +8,7 @@ weight: 0
 ## Back Expansion layout
 
 <div style="background-color: white; padding: 1.5rem; width: 60%; display: inline-block;">
-  <img src="back-expansion.png" alt="Back Expansion pinout">
+  <img src="back-expansion.svg" alt="Back Expansion pinout">
 </div>
 
 ## Back expansion port
