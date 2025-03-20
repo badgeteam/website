@@ -11,17 +11,32 @@ weight: -2025
 
 # Introduction
 
-Back in 2022 we built you a handy games console, pushing the limit's of what is possible using the original ESP32 microcontroller and even going above and beyond by adding an FPGA into the mix.
-
-This time Konsool will be completely different of course! 
 The device will be the portable computer you wish you had in the 80s. 
-Complete with on-device programming environment, a big screen and a full QWERTY keyboard this device is all the computing power you will need during the event.
+Complete with on-device programming environment, a high resolution 60Hz screen and a full QWERTY keyboard this device is all the computing power you will need on a hand held hackable device!
+
+The connectivity of this device is unparalleled, since the SHA badge WIFI and Bluetooth connectivity have been the norm, this badge adds long range low speed connectivity (LoRa) allowing for long range mesh networking! 
+Who doesn't want to talk to chat with friends over a kilometer away, no infrastructure needed!
+
+Did we mention the dual core 400MHz Risc-V ESP32-P4 CPU?
+
+## Tanmatsu or Konsool?
+
+The **open-source badge design** is released under the **BSD license** and an **open hardware license**. This applies to both **Konsool** and **Tanmatsu**, which are essentially the same device.
+
+- **Konsool** is an open design, freely available for anyone to modify, extend, and use as they see fit.  
+- **Tanmatsu** is the **pre-assembled version** sold by **Nicolai Electronics**, eliminating the hassle of sourcing components and manufacturing the PCB.
+
+Selling electronic devices involves additional requirements, such as **safety and environmental certifications**. **Badge.Team** appreciates that **Nicolai Electronics** takes on these responsibilities, offering the badge **practically at cost**.
+
+By providing both an **open design** and **ready-to-use devices**, we aim to foster a **thriving ecosystem**, ensuring ongoing support and updates for the community.
 
 ## The Konsool brain
 
-The brand-new ESP32-P4 will be the star of the show, with it's dual-core 400MHz RISC-V processor, 32MB of RAM and plenty of peripherals for communication the badge will be a showcase of state of the art IOT technology.
+The brand-new ESP32-P4 will be the star of the show, with it's **dual core 400MHz RISC-V** processor, **32MB** of RAM and plenty of peripherals for communication the badge will be a showcase of state of the art IOT technology.
 
-WiFi, Bluetooth and even 802.15.4 mesh networking are available thanks to the ESP32-C6 module included on the board.
+**WiFi, Bluetooth** and even **802.15.4** mesh networking are available thanks to the ESP32-C6 module included on the board.
+
+The P4 also supports hardware accelerated encoding and decoding of h264, in combination with MIPI DSI / CSI so it is powerful enough to record video via a Raspberry pi camera, encoded it, and streamed over wifi to the internet!
 
 ## The team
 
