@@ -7,6 +7,8 @@ weight: -10
 
 ## CH32V203
 
+<a href="ch32v203.svg" target="_blank"><img src="ch32v203.svg" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 80%"></a>
+
 | Pin Number | Pin Name  | Net Name               | Direction     | Notes                                   |
 | ---------- | --------- | ---------------------- | ------------- | --------------------------------------- |
 | 1          | VBAT      | VBAT                   | Power         | Regulated 2.5V supply                   |
