@@ -1,19 +1,18 @@
 ---
-title: "Zero expansion boards"
-linkTitle: "Zero"
+title: "Konsool Zero expansion"
+linkTitle: "Konsool Zero"
 nodateline: true
 weight: 10
 ---
-
-# Zero expansion board
 
 ## Introduction
 
 The Konsool has al lot of capabilities already in a pretty handy form factor.
 To take advantage of the keyboard, powerful CPU to for example play with technologies
 like NFC, RFID and sub GHz radio extra circuitry is required.
+
 Even though this idea is not my own (thanks Renze) I do feel motivated to make this
-board given my interest in lock picking sports.
+board given my interest in lock and security related subjects.
 
 ## Disclaimer
 
@@ -83,9 +82,9 @@ At the moment of writing work needs to be done stabilizing the RFID analog circu
 
 ## Contributors
 
-| Nick    | Name       | Role                       |
-| ------- | ---------- | -------------------------- |
-| Ranzbak | Paul Honig | PCB design / test software |
+| Nick    | Role                       |
+| ------- | -------------------------- |
+| Ranzbak | PCB design / test software |
 
 ## Work in progress pictures
 
