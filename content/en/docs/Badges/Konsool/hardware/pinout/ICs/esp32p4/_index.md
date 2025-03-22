@@ -5,6 +5,9 @@ nodateline: true
 weight: -10
 ---
 
+<a href="esp32p4.svg" target="_blank"><img src="esp32p4.svg" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 80%"></a>
+
+
 ## ESP32-P4 (U8)
 
 ### LDO
