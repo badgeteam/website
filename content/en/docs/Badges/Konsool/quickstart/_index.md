@@ -9,7 +9,7 @@ weight: -20
 
 ## Peripherals  
 
-<img src="./konsool-frontpanel.svg" style="display: block; margin: 0 auto 4rem auto; padding: -1rem; width: 60%">
+<a href="./konsool-frontpanel.svg" target="_blank"><img src="./konsool-frontpanel.svg" style="display: block; margin: 0 auto 4rem auto; padding: -1rem; width: 60%"></a>
 
 # Navigation
 
