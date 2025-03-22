@@ -21,7 +21,7 @@ Did we mention the dual core 400MHz Risc-V ESP32-P4 CPU?
 
 ## Tanmatsu or Konsool?
 
-The **open-source badge design** is released under the **BSD license** and an **open hardware license**. This applies to both **Konsool** and **Tanmatsu**, which are essentially the same device.
+The **open-source badge design** is released under the **[CERN-OHL-P license](https://cern-ohl.web.cern.ch/home)**. This applies to both **Konsool** and **Tanmatsu**, which are essentially the same device.
 
 - **Konsool** is an open design, freely available for anyone to modify, extend, and use as they see fit.  
 - **Tanmatsu** is the **pre-assembled version** sold by **Nicolai Electronics**, eliminating the hassle of sourcing components and manufacturing the PCB.
