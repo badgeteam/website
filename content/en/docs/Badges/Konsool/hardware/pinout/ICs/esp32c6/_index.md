@@ -7,7 +7,7 @@ weight: -10
 
 ## Schematic
 
-<img src="./esp32c6-schematic.png" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 100%">
+<a href="./esp32c6-schematic.png" target="_blank"><img src="./esp32c6-schematic.png" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 4rem; width: 100%"></a>
 
 ## ESP32 Pin table
 
