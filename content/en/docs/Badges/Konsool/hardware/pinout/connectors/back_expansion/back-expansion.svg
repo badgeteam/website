@@ -28,12 +28,12 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.52933623"
-     inkscape:cx="416.55943"
-     inkscape:cy="652.70423"
+     inkscape:cx="395.77869"
+     inkscape:cy="680.09703"
      inkscape:window-width="1920"
-     inkscape:window-height="1005"
+     inkscape:window-height="1050"
      inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -907,7 +907,7 @@
     </g>
     <g
        aria-label="E3"
-       transform="rotate(90)"
+       transform="rotate(90,-1.4776659,-1.2523621)"
        id="text12008-3-6-3"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -919,7 +919,7 @@
     </g>
     <g
        aria-label="E2"
-       transform="rotate(90)"
+       transform="rotate(90,-1.4912849,-1.2659821)"
        id="text12008-3-6-2-9-7"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -931,14 +931,14 @@
     </g>
     <g
        aria-label="INT_SDA"
-       transform="rotate(90)"
+       transform="rotate(90,-0.81065493,-0.58535107)"
        id="text12008-3-6-2-9-8-6"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
          d="m 92.852779,-262.31244 h -4.368791 v -0.88053 l 1.422397,-0.32173 v -9.66892 l -1.422397,-0.33866 v -0.88054 h 4.368791 v 0.88054 l -1.422397,0.33866 v 9.66892 l 1.422397,0.32173 z"
          id="path17209" />
       <path
-         d="m 104.77383,-262.31244 h -1.77799 l -6.468523,-10.04145 h -0.06773 q 0.03387,0.59267 0.08467,1.4732 0.0508,0.88053 0.0508,1.81186 v 6.75639 h -1.405464 v -12.09038 h 1.761063 l 6.45159,10.00759 h 0.0677 q -0.0169,-0.27094 -0.0508,-0.8128 -0.0169,-0.54187 -0.0508,-1.18533 -0.0169,-0.64347 -0.0169,-1.18534 v -6.82412 h 1.42239 z"
+         d="m 104.77383,-262.31244 h -1.77799 l -6.468523,-10.04145 h -0.06773 q 0.03387,0.59267 0.08467,1.4732 0.0508,0.88053 0.0508,1.81186 v 6.75639 h -1.405464 v -12.09038 h 1.761063 l 6.451594,10.00759 h 0.0677 q -0.0169,-0.27094 -0.0508,-0.8128 -0.0169,-0.54187 -0.0508,-1.18533 -0.0169,-0.64347 -0.0169,-1.18534 v -6.82412 h 1.42239 z"
          id="path17211" />
       <path
          d="m 111.88582,-262.31244 h -1.52399 v -10.75264 h -3.77613 v -1.33774 h 9.05932 v 1.33774 h -3.7592 z"
@@ -958,7 +958,7 @@
     </g>
     <g
        aria-label="HUB_USB1_P"
-       transform="rotate(90)"
+       transform="rotate(90,-0.69585993,-0.47055607)"
        id="text12008-3-6-2-9-8-4-8"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -994,7 +994,7 @@
     </g>
     <g
        aria-label="HUB_USB1_N"
-       transform="rotate(90)"
+       transform="rotate(90,-0.72452793,-0.49928407)"
        id="text4477-3"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1030,7 +1030,7 @@
     </g>
     <g
        aria-label="GND"
-       transform="rotate(90)"
+       transform="rotate(90,-1.3628509,-1.1375571)"
        id="text4481-4"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1045,7 +1045,7 @@
     </g>
     <g
        aria-label="3.3V"
-       transform="rotate(90)"
+       transform="rotate(90,-1.3746289,-1.1493251)"
        id="text4485-2"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1063,7 +1063,7 @@
     </g>
     <g
        aria-label="E5"
-       transform="rotate(90)"
+       transform="rotate(90,-1.5486889,-1.3233851)"
        id="text4489-6"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1075,7 +1075,7 @@
     </g>
     <g
        aria-label="EXT_INT"
-       transform="rotate(90)"
+       transform="rotate(90,-0.96778693,-0.74248307)"
        id="text4493-9"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1102,7 +1102,7 @@
     </g>
     <g
        aria-label="E7"
-       transform="rotate(90)"
+       transform="rotate(90,-1.6484179,-1.4231141)"
        id="text4497-6"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1114,7 +1114,7 @@
     </g>
     <g
        aria-label="EXT_USB_P"
-       transform="rotate(90)"
+       transform="rotate(90,-0.98284893,-0.75754507)"
        id="text4501-4"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1146,38 +1146,8 @@
          id="path17323" />
     </g>
     <g
-       aria-label="EXT_USBN"
-       transform="rotate(90)"
-       id="text4505-5"
-       style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
-      <path
-         d="m 83.691847,-151.87103 h -6.756386 v -12.09038 h 6.756386 v 1.33773 h -5.232389 v 3.77613 h 4.92759 v 1.3208 h -4.92759 v 4.31799 h 5.232389 z"
-         id="path17326" />
-      <path
-         d="m 94.563022,-151.87103 h -1.727197 l -3.200394,-5.24933 -3.251193,5.24933 h -1.608664 l 4.013192,-6.29919 -3.759192,-5.79119 h 1.69333 l 2.963327,4.74133 2.980261,-4.74133 h 1.608663 l -3.742259,5.75732 z"
-         id="path17328" />
-      <path
-         d="m 100.10022,-151.87103 h -1.523999 v -10.75265 h -3.776126 v -1.33773 h 9.059315 v 1.33773 h -3.75919 z"
-         id="path17330" />
-      <path
-         d="m 111.59793,-149.2633 h -7.58612 v -1.08374 h 7.58612 z"
-         id="path17332" />
-      <path
-         d="m 122.40137,-156.13822 q 0,1.25306 -0.508,2.26906 -0.508,0.99906 -1.55786,1.59173 -1.03293,0.57573 -2.6416,0.57573 -2.25212,0 -3.43746,-1.2192 -1.16839,-1.23613 -1.16839,-3.25119 v -7.78932 h 1.52399 v 7.84012 q 0,1.4732 0.77894,2.28599 0.79586,0.8128 2.38759,0.8128 1.64253,0 2.37066,-0.8636 0.74507,-0.88053 0.74507,-2.25212 v -7.82319 h 1.50706 z"
-         id="path17334" />
-      <path
-         d="m 132.44283,-155.10529 q 0,1.60866 -1.16839,2.50613 -1.1684,0.89746 -3.1496,0.89746 -1.01599,0 -1.87959,-0.1524 -0.8636,-0.1524 -1.43933,-0.42333 v -1.45627 q 0.6096,0.27094 1.50706,0.49107 0.9144,0.22013 1.8796,0.22013 1.35466,0 2.03199,-0.52493 0.69427,-0.52493 0.69427,-1.4224 0,-0.59266 -0.254,-0.99906 -0.254,-0.4064 -0.88053,-0.74507 -0.6096,-0.3556 -1.71027,-0.74506 -1.54093,-0.5588 -2.33679,-1.3716 -0.77893,-0.8128 -0.77893,-2.21826 0,-0.9652 0.49106,-1.64253 0.49107,-0.69427 1.35467,-1.0668 0.88053,-0.37253 2.01506,-0.37253 0.99906,0 1.82879,0.18626 0.82974,0.18627 1.50707,0.49107 l -0.47413,1.30386 q -0.62654,-0.27093 -1.3716,-0.45719 -0.72813,-0.18627 -1.524,-0.18627 -1.13453,0 -1.71026,0.49106 -0.57573,0.47414 -0.57573,1.27 0,0.6096 0.254,1.016 0.254,0.4064 0.82973,0.72813 0.57573,0.32173 1.55786,0.69427 1.0668,0.38946 1.79493,0.84666 0.74507,0.44027 1.1176,1.0668 0.38946,0.62653 0.38946,1.5748 z"
-         id="path17336" />
-      <path
-         d="m 138.33562,-163.96141 q 2.26906,0 3.42053,0.67733 1.16839,0.6604 1.16839,2.31987 0,1.06679 -0.59266,1.77799 -0.59267,0.69427 -1.71026,0.89747 v 0.0847 q 0.76199,0.11854 1.37159,0.44027 0.62654,0.32173 0.98213,0.9144 0.3556,0.59266 0.3556,1.54093 0,1.64253 -1.13453,2.53999 -1.1176,0.89747 -3.06492,0.89747 h -4.25026 v -12.09038 z m 0.3048,5.14772 q 1.55786,0 2.1336,-0.49106 0.57573,-0.508 0.57573,-1.49013 0,-0.99907 -0.7112,-1.4224 -0.69427,-0.44026 -2.2352,-0.44026 h -1.99813 v 3.84385 z m -2.2352,1.27 v 4.38573 h 2.4384 q 1.60866,0 2.23519,-0.62654 0.62654,-0.62653 0.62654,-1.64253 0,-0.94826 -0.6604,-1.52399 -0.64347,-0.59267 -2.31986,-0.59267 z"
-         id="path17338" />
-      <path
-         d="m 155.47212,-151.87103 h -1.778 l -6.46852,-10.04145 h -0.0677 q 0.0339,0.59267 0.0847,1.4732 0.0508,0.88053 0.0508,1.81186 v 6.75639 h -1.40546 v -12.09038 h 1.76106 l 6.45159,10.00758 h 0.0677 q -0.0169,-0.27093 -0.0508,-0.8128 -0.0169,-0.54186 -0.0508,-1.18533 -0.0169,-0.64346 -0.0169,-1.18533 v -6.82412 h 1.4224 z"
-         id="path17340" />
-    </g>
-    <g
        aria-label="P4_TX"
-       transform="rotate(90)"
+       transform="rotate(90,-1.0656499,-0.84034607)"
        id="text4509-4"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1198,7 +1168,7 @@
     </g>
     <g
        aria-label="P4_RX"
-       transform="rotate(90)"
+       transform="rotate(90,-1.0943479,-0.86904407)"
        id="text4513-7"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1219,7 +1189,7 @@
     </g>
     <g
        aria-label="I2S_LRCK"
-       transform="rotate(90)"
+       transform="rotate(90,-1.0976459,-0.87234207)"
        id="text4517-7"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1249,7 +1219,7 @@
     </g>
     <g
        aria-label="I2S_SCLK"
-       transform="rotate(90)"
+       transform="rotate(90,-1.1263429,-0.90103907)"
        id="text4521-7"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1279,7 +1249,7 @@
     </g>
     <g
        aria-label="I3C_SDA"
-       transform="rotate(90)"
+       transform="rotate(90,-1.1550439,-0.92974007)"
        id="text4525-2"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1306,7 +1276,7 @@
     </g>
     <g
        aria-label="I3C_SCL"
-       transform="rotate(90)"
+       transform="rotate(90,-0.69585993,-0.47055607)"
        id="text4529-1"
        style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
       <path
@@ -1736,6 +1706,48 @@
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,35.089811,38.83226)"
        id="text17174"
-       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:ralaway;font-style:normal;font-weight:normal;font-size:64px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:ralaway;font-stretch:normal;font-variant:normal;white-space:pre;shape-inside:url(#rect17176)" />
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect17176);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <g
+       aria-label="EXT_USB_N"
+       transform="rotate(90)"
+       id="text18486"
+       style="font-size:16.9333px;line-height:1.25;font-family:ralaway;-inkscape-font-specification:ralaway;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583px">
+      <path
+         d="m 83.006949,-150.4754 h -6.193358 v -11.08285 h 6.193358 v 1.22625 h -4.79636 v 3.46145 h 4.51696 v 1.21073 h -4.51696 v 3.95816 h 4.79636 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18488" />
+      <path
+         d="m 92.972197,-150.4754 h -1.583264 l -2.933696,-4.81188 -2.980262,4.81188 h -1.474609 l 3.678761,-5.77426 -3.445928,-5.30859 h 1.55222 l 2.716385,4.34621 2.731907,-4.34621 h 1.474609 l -3.430406,5.27754 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18490" />
+      <path
+         d="m 98.047965,-150.4754 h -1.396998 v -9.8566 h -3.461451 v -1.22625 h 8.304374 v 1.22625 h -3.445925 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18492" />
+      <path
+         d="m 108.58753,-148.08498 h -6.95394 v -0.99342 h 6.95394 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18494" />
+      <path
+         d="m 118.4907,-154.387 q 0,1.14865 -0.46567,2.07998 -0.46566,0.91581 -1.42804,1.45908 -0.94685,0.52776 -2.42146,0.52776 -2.06445,0 -3.15101,-1.1176 -1.07103,-1.13312 -1.07103,-2.98026 v -7.14021 h 1.397 v 7.18678 q 0,1.35043 0.71402,2.09549 0.72954,0.74507 2.18863,0.74507 1.50565,0 2.17311,-0.79163 0.68297,-0.80716 0.68297,-2.06446 v -7.17125 h 1.38148 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18496" />
+      <path
+         d="m 127.69538,-153.44014 q 0,1.47461 -1.07103,2.29728 -1.07103,0.82268 -2.88713,0.82268 -0.93133,0 -1.72296,-0.1397 -0.79164,-0.1397 -1.31939,-0.38806 v -1.3349 q 0.5588,0.24835 1.38147,0.45014 0.8382,0.20179 1.72297,0.20179 1.24177,0 1.86266,-0.48119 0.63641,-0.48119 0.63641,-1.30387 0,-0.54327 -0.23283,-0.91581 -0.23283,-0.37253 -0.80715,-0.68297 -0.5588,-0.32597 -1.56775,-0.68298 -1.41252,-0.51223 -2.14206,-1.2573 -0.71402,-0.74506 -0.71402,-2.03341 0,-0.88476 0.45014,-1.50565 0.45015,-0.63641 1.24178,-0.9779 0.80715,-0.34149 1.84714,-0.34149 0.91581,0 1.6764,0.17075 0.76059,0.17074 1.38147,0.45014 l -0.43462,1.19521 q -0.57432,-0.24835 -1.2573,-0.4191 -0.66745,-0.17074 -1.39699,-0.17074 -1.03999,0 -1.56775,0.45014 -0.52775,0.43462 -0.52775,1.16417 0,0.5588 0.23283,0.93133 0.23283,0.37253 0.76059,0.66745 0.52775,0.29493 1.42804,0.63641 0.9779,0.35701 1.64535,0.77611 0.68298,0.40358 1.02447,0.9779 0.35701,0.57432 0.35701,1.44357 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18498" />
+      <path
+         d="m 133.0971,-161.55825 q 2.07998,0 3.13549,0.62088 1.07103,0.60537 1.07103,2.12655 0,0.97789 -0.54328,1.62983 -0.54328,0.63641 -1.56774,0.82267 v 0.0776 q 0.6985,0.10866 1.2573,0.40358 0.57432,0.29492 0.90028,0.8382 0.32597,0.54328 0.32597,1.41252 0,1.50565 -1.03999,2.32833 -1.02446,0.82268 -2.80952,0.82268 h -3.89607 v -11.08285 z m 0.2794,4.71875 q 1.42804,0 1.9558,-0.45015 0.52775,-0.46566 0.52775,-1.36595 0,-0.91581 -0.65193,-1.30387 -0.63641,-0.40357 -2.04893,-0.40357 h -1.83162 v 3.52354 z m -2.04893,1.16416 v 4.02025 h 2.2352 q 1.47461,0 2.04893,-0.57432 0.57432,-0.57432 0.57432,-1.50565 0,-0.86925 -0.60537,-1.397 -0.58984,-0.54328 -2.12654,-0.54328 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18500" />
+      <path
+         d="m 145.43724,-148.08498 h -6.95394 v -0.99342 h 6.95394 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18502" />
+      <path
+         d="m 155.69742,-150.4754 h -1.62983 l -5.92948,-9.20467 h -0.0621 q 0.031,0.54328 0.0776,1.35043 0.0466,0.80716 0.0466,1.66088 v 6.19336 h -1.28834 v -11.08285 h 1.61431 l 5.91395,9.17362 h 0.0621 q -0.0155,-0.24836 -0.0466,-0.74507 -0.0155,-0.49671 -0.0466,-1.08655 -0.0155,-0.58985 -0.0155,-1.08656 v -6.25544 h 1.30386 z"
+         style="font-size:15.5222px;-inkscape-font-specification:'ralaway, Normal'"
+         id="path18504" />
+    </g>
   </g>
 </svg>
