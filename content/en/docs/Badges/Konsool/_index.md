@@ -41,7 +41,7 @@ Additionally, an [ESP32-C6](https://www.espressif.com/sites/default/files/docume
 
 A [LoRa](https://en.wikipedia.org/wiki/LoRa) radio module enables communication over LoRa networks, including long-range mesh services and classic (G)FSK modulation at either 433, 868 or 915MHz, depending on the module installed.
 
-The device includes 16Mb/32Mb of built-in flash storage for firmware and applications, expandable via a micro SD card slot. This slot supports SD cards at both standard and high-speed ([SDIO 3.0](https://www.sdcard.org/cms/wp-content/themes/sdcard-org/dl.php?f=PartE1_SDIO_Simplified_Specification_Ver3.00.pdf)).
+The device includes 16Mb of built-in flash storage for firmware and applications, expandable via a micro SD card slot. This slot supports SD cards at both standard and high-speed ([SDIO 3.0](https://www.sdcard.org/cms/wp-content/themes/sdcard-org/dl.php?f=PartE1_SDIO_Simplified_Specification_Ver3.00.pdf)).
 
 User interaction is provided through a QWERTY keyboard and a [MIPI](https://en.wikipedia.org/wiki/MIPI_Alliance) DSI display.
 
