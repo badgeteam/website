@@ -41,7 +41,7 @@ Additionally, an [ESP32-C6](https://www.espressif.com/sites/default/files/docume
 
 A [LoRa](https://en.wikipedia.org/wiki/LoRa) radio module enables communication over LoRa networks, including long-range mesh services and classic (G)FSK modulation at either 433, 868 or 915MHz, depending on the module installed.
 
-The device includes 16Mb of built-in flash storage for firmware and applications, expandable via a micro SD card slot. This slot supports SD cards at both standard and high-speed ([SDIO 3.0](https://www.sdcard.org/cms/wp-content/themes/sdcard-org/dl.php?f=PartE1_SDIO_Simplified_Specification_Ver3.00.pdf)).
+The device includes 16MB of built-in flash storage for firmware and applications, expandable via a micro SD card slot. This slot supports SD cards at both standard and high-speed ([SDIO 3.0](https://www.sdcard.org/cms/wp-content/themes/sdcard-org/dl.php?f=PartE1_SDIO_Simplified_Specification_Ver3.00.pdf)).
 
 User interaction is provided through a QWERTY keyboard and a [MIPI](https://en.wikipedia.org/wiki/MIPI_Alliance) DSI display.
 
@@ -52,7 +52,7 @@ The side-facing [CATT](./hardware/pinout/connectors/catt/) port provides connect
 
 A [QWIIC](https://www.sparkfun.com/qwiic) compatible connector allows the device to interface with [numerous](https://www.sparkfun.com/qwiic#products) sensors from manufacturers like Sparkfun and Adafruit.
 
-The ESP32-P4 also includes hardware-accelerated encoding and decoding of [h264](https://en.wikipedia.org/wiki/Advanced_Video_Coding) video through its MIPI DSI and CSI interfaces. This powerful CPU can record video from devices such as a Raspberry Pi camera, encode it, and stream it wirelessly over WiFi.
+The ESP32-P4 also includes hardware-accelerated encoding of [h264](https://en.wikipedia.org/wiki/Advanced_Video_Coding) video through its MIPI DSI and CSI interfaces. This powerful CPU can record video from devices such as a Raspberry Pi camera, encode it, and stream it wirelessly over WiFi.
 
 Custom front panels are feasible using the [provided information](/docs/badges/konsool/hardware/frontpanel/), and 3D printable case designs are also available for those interested in additional customization. (A Case design in FreeCAD format coming soon)
 
