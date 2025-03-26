@@ -32,27 +32,47 @@ By providing both an **open design** and **ready-to-use devices**, we aim to fos
 
 ## The Konsool brain
 
-The brand-new ESP32-P4 will be the star of the show, with it's **dual core 400MHz RISC-V** processor, **32MB** of RAM and plenty of peripherals for communication the badge will be a showcase of state of the art IOT technology.
+Konsool is powered by the Espressif ESP32-P4 SoC, their powerhouse RISC-V microcontroller. 
+With its 400MHz dual-core processor and 32MB of built-in PSRAM it's the ideal microcontroller for powerful processing in a microcontroller package.
 
-**WiFi, Bluetooth** and even **802.15.4** mesh networking are available thanks to the ESP32-C6 module included on the board.
+Next to that an ESP32-C6 for WiFi, Bluetooth Low Energy, and IEEE802.15.4 wireless radio module. 
+This module enables wireless internet access, as well as access to local mesh networking like Thread and ZigBee in a hacker friendly way.
+
+A LoRa radio module provides access to LoRa networks such as long distance mesh network services and (G)FSK modulated classic 433 or 868MHz communication, depending on the LoRa module installed.
+
+The device has 16MB of built-in flash storage for firmware and applications. Using a micro SD card, even more storage can be added.
+The micro SD card socket supports SD cards at 3.3v and 1.8v voltage levels (SDIO 3) for extra fast transfer speeds.
+
+The user interface consists of a QWERTY keyboard and a MIPI DSI display.
+
+Two expansion ports enable the user to add extra functionality. 
+For example a battery expansion on the back while the side facing expansion port allows for easily connecting a wide variety of PMOD and SAO compatible accessories.
+
+A QWIIC style expansion connector allows connecting the device to a wide range of sensors available from manufacturers such as Sparkfun and Adafruit, it supports both the I2C and the new I3C communication bus standards.
+
 
 The P4 also supports hardware accelerated encoding and decoding of **h264**, in combination with MIPI DSI / CSI interfaces. This CPU is powerful enough to record video via a Raspberry pi camera, encoded it, and streamed over wifi to the internet!
+
+Using the provided information, custom front panels are a viable option.
+And if a case is something you like, 3D printable designs are available.
 
 ## The team
 
 The Konsool would not have been possible without the help of our amazing volunteers.
 
-| Nick                    | Name              | Role                                |
-| ----------------------- | ----------------- | ----------------------------------- |
-| r3nz3                   | Renze Nicolai     | Hardware and Software development   |
-| Ranzbak                 | Paul Honig        | Hardware, Testing and Documentation |
-| Jhaand                  | Jelle Haandrikman | Testing and more                    |
-| RobotMan2412            | Julian Scheffers  | Software and Testing                |
-| Ankhaneko               | Nikolett          | Artwork and more                    |
-| Orange Murker           | Luna              | Software and Testing                |
-| NightOwlNL              | Emiel Bart        | Documentation                       |
-| Noor                    |                   | Testing                             |
-| Joyce NG                |                   |                                     |
-| Anus                    | Anne Jan Brouwer  | Software                            |
+| Nick          | Name              | Role                                |
+| ------------- | ----------------- | ----------------------------------- |
+| r3nz3         | Renze Nicolai     | Hardware and Software development   |
+| Ranzbak       | Paul Honig        | Hardware, Testing and Documentation |
+| Jhaand        | Jelle Haandrikman | Testing and review                  |
+| RobotMan2412  | Julian Scheffers  | Software and Testing                |
+| Ankhaneko     | Nikolett          | Artwork and more                    |
+| Orange Murker | Luna              | Software and Testing                |
+| NightOwlNL    | Emiel Bart        | Documentation                       |
+| Noor          |                   | Testing                             |
+| Jay           | Jay Visschedijk   | Ergonomic board outline             |
+| Wietsman      | Wietse Boonstra   | Component footprints                |
+| Kliment       | Kliment Yanev     | Review hardware                     |
+| Anus          | Anne Jan Brouwer  | Software                            |
 
 <img src="konsool_mascots.svg" width="80%"/>
