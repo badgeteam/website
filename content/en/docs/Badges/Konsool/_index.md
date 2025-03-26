@@ -30,31 +30,31 @@ Selling electronic devices involves additional requirements, such as **safety an
 
 By providing both an **open design** and **ready-to-use devices**, we aim to foster a **thriving ecosystem**, ensuring ongoing support and updates for the community.
 
-## The Konsool brain
+## The Konsool hardware
 
-Konsool is powered by the Espressif ESP32-P4 SoC, their powerhouse RISC-V microcontroller. 
-With its 400MHz dual-core processor and 32MB of built-in PSRAM it's the ideal microcontroller for powerful processing in a microcontroller package.
+​The Konsool is powered by the [ESP32-P4](https://en.wikipedia.org/wiki/ESP32#ESP32-P4) which is a high-performance system-on-chip (SoC) from Espressif, featuring a dual-core [RISC-V](https://en.wikipedia.org/wiki/RISC-V) CPU running up to 400 MHz with AI instruction extensions. 
+It integrates high-speed peripherals, including [USB OTG](https://en.wikipedia.org/wiki/USB_On-The-Go) 2.0 HS and Ethernet. 
+The ESP32-P4 is tailored for applications requiring rich [human](https://en.wikipedia.org/wiki/Human)-machine interfaces and power efficient computing. 
+Making it (in our humble opinion) a good choice for a battery held device that humans interact with.
 
-Next to that an ESP32-C6 for WiFi, Bluetooth Low Energy, and IEEE802.15.4 wireless radio module. 
-This module enables wireless internet access, as well as access to local mesh networking like Thread and ZigBee in a hacker friendly way.
+Additionally, an [ESP32-C6](https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_en.pdf) module provides WiFi, Bluetooth Low Energy, and [IEEE802.15.4](https://en.wikipedia.org/wiki/IEEE_802.15.4) wireless connectivity. This allows for internet access as well as compatibility with local mesh networks like [Thread](https://en.wikipedia.org/wiki/Thread_(network_protocol)) and [ZigBee](https://en.wikipedia.org/wiki/Zigbee), ideal for developers and enthusiasts.
 
-A LoRa radio module provides access to LoRa networks such as long distance mesh network services and (G)FSK modulated classic 433 or 868MHz communication, depending on the LoRa module installed.
+A [LoRa](https://en.wikipedia.org/wiki/LoRa) radio module enables communication over LoRa networks, including long-range mesh services and classic (G)FSK modulation at either 433, 868 or 915MHz, depending on the module installed.
 
-The device has 16MB of built-in flash storage for firmware and applications. Using a micro SD card, even more storage can be added.
-The micro SD card socket supports SD cards at 3.3v and 1.8v voltage levels (SDIO 3) for extra fast transfer speeds.
+The device includes 16Mb/32Mb of built-in flash storage for firmware and applications, expandable via a micro SD card slot. This slot supports SD cards at both standard and high-speed ([SDIO 3.0](https://www.sdcard.org/cms/wp-content/themes/sdcard-org/dl.php?f=PartE1_SDIO_Simplified_Specification_Ver3.00.pdf)).
 
-The user interface consists of a QWERTY keyboard and a MIPI DSI display.
+User interaction is provided through a QWERTY keyboard and a [MIPI](https://en.wikipedia.org/wiki/MIPI_Alliance) DSI display.
 
-Two expansion ports enable the user to add extra functionality. 
-For example a battery expansion on the back while the side facing expansion port allows for easily connecting a wide variety of PMOD and SAO compatible accessories.
+The expansion port enhance Konsool's versatility by supporting expansion an board on the back of the the device.
+Exposing SPI, I2C, USB (2.0) and GPIO to the expansion board provides ample connectivity options for expansion board designs. 
 
-A QWIIC style expansion connector allows connecting the device to a wide range of sensors available from manufacturers such as Sparkfun and Adafruit, it supports both the I2C and the new I3C communication bus standards.
+The side-facing [CATT](./hardware/pinout/connectors/catt/) port provides connectivity to a [JTAG](https://en.wikipedia.org/wiki/JTAG) debugger, and various [PMOD](https://en.wikipedia.org/wiki/Pmod_Interface) and [SAO](https://hackaday.io/project/52950-shitty-add-ons)-compatible accessories.
 
+A [QWIIC](https://www.sparkfun.com/qwiic) compatible connector allows the device to interface with [numerous](https://www.sparkfun.com/qwiic#products) sensors from manufacturers like Sparkfun and Adafruit.
 
-The P4 also supports hardware accelerated encoding and decoding of **h264**, in combination with MIPI DSI / CSI interfaces. This CPU is powerful enough to record video via a Raspberry pi camera, encoded it, and streamed over wifi to the internet!
+The ESP32-P4 also includes hardware-accelerated encoding and decoding of [h264](https://en.wikipedia.org/wiki/Advanced_Video_Coding) video through its MIPI DSI and CSI interfaces. This powerful CPU can record video from devices such as a Raspberry Pi camera, encode it, and stream it wirelessly over WiFi.
 
-Using the provided information, custom front panels are a viable option.
-And if a case is something you like, 3D printable designs are available.
+Custom front panels are feasible using the [provided information](/docs/badges/konsool/hardware/frontpanel/), and 3D printable case designs are also available for those interested in additional customization. (A Case design in FreeCAD format coming soon)
 
 ## The team
 
