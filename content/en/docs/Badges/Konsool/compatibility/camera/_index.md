@@ -5,24 +5,21 @@ nodateline: true
 weight: -10
 ---
 
-# Camera Compatibility List
+# Software
 
-| Camera                              | Sensor | Connector                                   | Lens                        | "Night vision" | Flashlight | Autofocus |
-| ----------------------------------- | ------ | ------------------------------------------- | --------------------------- | -------------- | ---------- | --------- |
-| Camera Module for Raspberry Pi Zero | OV5647 | 22 pin Pi Zero/5 style                      | 120 degree fixed            | No             | No         | No        |
-| Camera Module for Raspberry Pi Zero | OV5647 | 22 pin Pi Zero/5 style                      | 72 degree fixed             | Yes            | No         | No        |
-| Camera Module for Raspberry Pi Zero | OV5647 | 22 pin Pi Zero/5 style                      | 72 degree fixed             | No             | No         | No        |
-| Camera Module for Raspberry Pi Zero | OV5647 | 22 pin Pi Zero/5 style                      | 160 degree fixed            | No             | No         | No        |
-| Camera Module for Raspberry Pi Zero | OV5647 | 22 pin Pi Zero/5 style                      | 120 degree fixed (big lens) | No             | No         | No        |
-| Camera Module for Raspberry Pi Zero | OV5647 | 22 pin Pi Zero/5 style                      | 120 degree motorized        | No             | No         | Yes       |
-| Camera Module for Raspberry Pi Zero | OV5647 | 22 pin Pi Zero/5 style                      | 72 degree motorized         | No             | No         | Yes       |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | FF 69                       | No             | No         | No        |
-| Raspberry Pi 5 camera               | IMX519 | Comes with cable to  22 pin Pi Zero/5 style | Unknown                     | No             | No         | Yes       |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | AF 65"                      | No             | No         | Yes       |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | IR-CUT 175 2                | Yes            | IR         | No        |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | IR-CUT 175                  | Yes            | No         | No        |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | IR-CUT 75 2"                | Yes            | IR         | No        |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | IR-CUT 75                   | Yes            | No         | No        |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | MF 220                      | No             | No         | No        |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | MF 175                      | No             | No         | No        |
-| Raspberry Pi 5 camera               | OV5647 | Comes with cable to  22 pin Pi Zero/5 style | MF 130 Night 2              | Yes            | IR         | No        |
+Konsool applications can use the [esp_cam_sensor](https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor) driver to read frames from a MIPI CSI camera module.
+
+The camera connector on Konsool has the same pinout as the 22 pin MIPI CSI connector found on the Raspberry Pi Zero and Raspberry Pi 5.
+
+# Supported sensors
+
+| Sensor           | Max resolution | Output format                                                |
+|------------------|----------------|--------------------------------------------------------------|
+| GC2145           | 1600 x 1200    | RGB565<br/>YCbCr422<br/>8bit Raw RGB data                    |
+| OV2710           | 1920 x 1080    | Raw RGB data                                                 |
+| OV5645           | 2592 x 1944    | 8/10-bit Raw RGB data<br/>RGB565<br/>YUV/YCbCr422<br/>YUV420 |
+| OV5647           | 2592 x 1944    | 8/10-bit Raw RGB data                                        |
+| SC035HGS         | 640 x 480      | Raw MONO<br/>Raw RGB data                                    |
+| SC202CS (SC2356) | 1600 x 1200    | 8/10-bit Raw RGB data                                        |
+| SC2336           | 1920 x 1080    | 8/10-bit Raw RGB data                                        |
+
