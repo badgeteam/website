@@ -1,6 +1,6 @@
 [![Build and deployment](https://github.com/badgeteam/website/actions/workflows/cd.yml/badge.svg?branch=master)](https://github.com/badgeteam/website/actions/workflows/cd.yml)
 
-# Badge.team website
+# Badge.Team website
 
 You can find our website and the documentation website at [badge.team/docs](https://badge.team/docs/). This repository contains the Markdown files with content, the theme files and the configuration needed to build our website using Hugo.
 
