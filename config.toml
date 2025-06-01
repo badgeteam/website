@@ -59,8 +59,8 @@ description = "Badges and badgers"
 section = ["HTML", "print", "RSS"]
 
 [params]
-copyright = ""
-privacy_policy = ""
+copyright = "Badge.Team"
+company = "KVK: 97292931"
 version_menu = "Releases"
 archived_version = false
 version = "0.0"
