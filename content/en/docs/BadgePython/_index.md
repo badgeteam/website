@@ -1,5 +1,7 @@
 ---
 title: BadgePython
+nodateline: true
+weight: 100
 ---
 
 {{% alert title="Info" color="info" %}}
