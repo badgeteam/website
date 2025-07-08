@@ -6,7 +6,7 @@ weight: 200
 
 Stichting Badge.Team is a foundation registered in the Netherlands under KVK entry number 97292931.
 
-We’re a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you planning on making an event badge for a volunteer run hacker community event? We'd love to work with you. Stichting Badge.Team helps badge development teams by providing legal, financial and archival support for these community projects. We aim to facilitate the creation of high quality event badge gadgets while preventing burnt out hero situations like we've seen too many times in the past.
+Badge.Team is a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you planning on making an event badge for a volunteer run hacker community event? We'd love to work with you. Stichting Badge.Team helps badge development teams by providing technical, financial and archival support for these community projects. We aim to facilitate the creation of high quality event badge gadgets while preventing burnt out hero situations like we've seen too many times in the past.
 
 ## How can Badge.Team help you and your team?
 
