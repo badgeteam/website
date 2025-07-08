@@ -22,7 +22,7 @@ Postal Address:
 
 KVK: 97292931
 
-Back account: (still working on this one)
+Bank account: (still working on this one)
 
 VAT / BTW-ID: NL867988691B01
 
