@@ -38,7 +38,12 @@ Need help? Want to volunteer? <i class="fab fa-telegram ml-2 "></i>
 {{< /blocks/cover >}}
 
 {{% blocks/lead color="dark" %}}
+<h1>Who are Badge.Team?</h1>
+
 We're a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you interested in helping out, part of an event badge team looking for some help or just curious? Join our [Telegram group](https://t.me/+StQpEWyhnb96Y88p).
+
+Curious about who were involved with each badge listed on this website?<br />
+Simply click on the badge you're interested in and scroll down on the index page of each badges documentation to find a section with a list of the awesome people involved.
 {{% /blocks/lead %}}
 
 
