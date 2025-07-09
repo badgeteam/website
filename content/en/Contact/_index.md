@@ -14,7 +14,7 @@ weight: 200
 
 For more informal contact we have a big community group on
 [Telegram](https://t.me/+StQpEWyhnb96Y88p). You can ask @ranzbak, @r3nz3
-Nicolai or @jhaand for direct contact with the foundation.
+Nicolai, @jhaand or @NightOwlNL for direct contact with the foundation.
 
 ## The board
 
