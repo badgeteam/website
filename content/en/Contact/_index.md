@@ -12,7 +12,7 @@ weight: 200
 
 ## Get in touch
 
-For more informal contact we a big community group on
+For more informal contact we have a big community group on
 [Telegram](https://t.me/+StQpEWyhnb96Y88p). You can ask @ranzbak, @r3nz3
 Nicolai or @jhaand for direct contact with the foundation.
 
