@@ -37,6 +37,28 @@ Need help? Want to volunteer? <i class="fab fa-telegram ml-2 "></i>
 </div>
 {{< /blocks/cover >}}
 
+{{% blocks/section color="white" %}}
+
+{{% blocks/project img="bornhack.png" title="**Bornhack** 2026" %}}
+In collaboration with [**Thomas Flummer**](https://thomasflummer.com/) we've started work on a badge for [**Bornhack**](https://bornhack.dk) 2026.
+
+BornHack is a 7 day outdoor tent camp where hackers, makers and people with an interest in technology or security come together to celebrate technology, socialise, learn and have fun.
+{{% /blocks/project %}}
+
+{{% /blocks/section %}}
+
+{{% blocks/section color="black" %}}
+
+{{% blocks/project img="hackerhotel.png" phase="2" title="**HackerHotel** 2027" %}}
+
+With **LoRa**, a **keyboard**, a **big screen** and the powerhouse **ESP32-P4** microcontroller you can guess how big our ambitions are! Our next challenge is fitting it all into the **budget**.
+
+[**HackerHotel**](https://hackerhotel.nl) is a yearly event taking place in February at hotel de Werelt on the Veluwe. Thanks to its overwhelming success and unobtainium tickets some people are convinced this event doesn't even exist. Though shrouded with misteries HackerHotel **is** the place to be.
+
+{{% /blocks/project %}}
+
+{{% /blocks/section %}}
+
 {{% blocks/lead color="dark" %}}
 <h1>Who are Badge.Team?</h1>
 
