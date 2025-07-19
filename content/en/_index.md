@@ -1,5 +1,5 @@
 ---
-title: Badge.team
+title: Badge.Team
 linkTitle: "Home"
 menu:
   main:
@@ -14,8 +14,8 @@ menu:
 <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
 Documentation <i class="fas fa-arrow-alt-circle-right ml-2"></i>
 </a>
-<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://t.me/+StQpEWyhnb96Y88p">&nbsp;
-Need help? Want to volunteer? <i class="fab fa-telegram ml-2 "></i>
+<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://discord.gg/7m5NTezkmR">&nbsp;
+Need help? Want to volunteer? <i class="fab fa-discord ml-2 "></i>
 </a>
 <p>&nbsp;</p>
 <p class="font-weight-bold">Open source event badges for hacker events</p>
@@ -62,7 +62,7 @@ With **LoRa**, a **keyboard**, a **big screen** and the powerhouse **ESP32-P4** 
 {{% blocks/lead color="dark" %}}
 <h1>Who are Badge.Team?</h1>
 
-We're a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you interested in helping out, part of an event badge team looking for some help or just curious? Join our [Telegram group](https://t.me/+StQpEWyhnb96Y88p).
+We're a constantly changing group of volunteers that aims to take creating event badges to the next level! Are you interested in helping out, part of an event badge team looking for some help or just curious? Join our [Discord](https://discord.gg/7m5NTezkmR).
 
 Curious about who were involved with each badge listed on this website?<br />
 Simply click on the badge you're interested in and scroll down on the index page of each badges documentation to find a section with a list of the awesome people involved.
@@ -71,9 +71,9 @@ Simply click on the badge you're interested in and scroll down on the index page
 
 {{% blocks/section type="row" color="dark" %}}
 
-{{% blocks/feature icon="fab fa-telegram" title="Chat with us on **Telegram**" %}}
+{{% blocks/feature icon="fab fa-discord" title="Chat with us on **Discord**" %}}
 Our main communication channel. Do you have a question? Want to help? Get in contact?<br />
-<a href="https://t.me/+StQpEWyhnb96Y88p">Click here to join the Telegram group!</a>
+<a href="https://discord.gg/7m5NTezkmR">Click here to join our Discord!</a>
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fab fa-mastodon" title="Mastodon" %}}

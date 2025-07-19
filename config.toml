@@ -99,16 +99,16 @@ enable = false
   icon = "fab fa-mastodon"
   desc = "Follow us on Mastodon to get the latest news!"
 [[params.links.user]]
-	name = "Telegram chat group"
-	url = "https://t.me/+StQpEWyhnb96Y88p"
-	icon = "fab fa-telegram"
+  name = "Telegram chat group"
+  url = "https://t.me/+StQpEWyhnb96Y88p"
+  icon = "fab fa-telegram"
   desc = "Get in contact"
-#[[params.links.user]]
-#	name = "Discord chat group"
-#	url = "https://discord.gg/xuhw3Ws6BJ"
-#	icon = "fab fa-discord"
-#  desc = "Get in contact"
-[[params.links.developer]]
+[[params.links.user]]
+	name = "Discord chat group"
+	url = "https://discord.gg/7m5NTezkmR"
+	icon = "fab fa-discord"
+  desc = "Get in contact"
+[[params.links.user]]
   name = "GitHub"
   url = "https://github.com/badgeteam"
   icon = "fab fa-github"
