@@ -12,9 +12,9 @@ weight: 200
 
 ## Get in touch
 
-For more informal contact we have a big community group on
-[Telegram](https://t.me/+StQpEWyhnb96Y88p). You can ask @ranzbak, @r3nz3
-Nicolai, @jhaand or @NightOwlNL for direct contact with the foundation.
+We primarily use [Discord](https://discord.gg/7m5NTezkmR), feel free to join and say hi!
+
+If you don't want to use Discord we can also be reached on [Telegram](https://t.me/+tjHw6Rtao19jODM8), [Matrix](https://matrix.to/#/#oftc_#badgeteam:pixie.town) (`#oftc_#badgeteam:pixie.town`) and IRC (`badgeteam` on `irc.oftc.net`).
 
 ## The board
 
