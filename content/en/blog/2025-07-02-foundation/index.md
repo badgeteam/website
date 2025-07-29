@@ -29,6 +29,6 @@ The portable computer you wish you had in the 80\`s. Complete with on-device pro
 ### Kami
 A modern, completely redesigned and modernized version of the first project we did: the SHA2017 badge.
 
-For inquiries, [join our Telegram group](https://t.me/+StQpEWyhnb96Y88p) and ask or send us an email at contact@badge.team
+For inquiries, [join our Discord](https://discord.gg/7m5NTezkmR) and ask or send us an email at contact@badge.team
 
 ### — With ❤️ Badge.Team
