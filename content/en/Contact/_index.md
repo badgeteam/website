@@ -43,7 +43,7 @@ KVK: 97292931
 
 VAT / BTW-ID: NL867988691B01
 
-Bank account: (still working on this one)
+Bank account: NL14 ABNA 0145 7084 70
 
 ## Social media
 
