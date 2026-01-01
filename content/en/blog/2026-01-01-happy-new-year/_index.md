@@ -1,15 +1,15 @@
 ---
-date: 2025-07-02
-title: Badge.Team Thanks our sponsors
-linkTitle: Badge.Team Foundation
+date: 2026-01-01
+title: Happy new year
+linkTitle: Happy new year
 description: >-
-  Badge.Team thanks their sponsors. 
+  Badge.Team thanks their sponsors.
 shorttext: >-
   Badge.Team thanks our awesome sponsors for their commitment.
 author: Badge.Team ([@badgeteam](https://hsnl.social/@badgeteam))
 ---
 
-# Happy New year
+# Happy new year
 
 A huge thank you to our sponsors – You help make Badge.Team possible!
 
