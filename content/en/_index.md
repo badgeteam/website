@@ -20,6 +20,7 @@ Need help? Want to volunteer? <i class="fab fa-discord ml-2 "></i>
 <p>&nbsp;</p>
 <p class="font-weight-bold">Open source event badges for hacker events</p>
 <div class="homepage_badges">
+<div><a href="/docs/badges/bornhack-2026/"><img src="/docs/badges/bornhack-2026/bornhack2026.svg"/></a></div>
 <div><a href="/docs/badges/konsool/"><img src="/docs/badges/konsool/konsool.svg"/></a></div>
 <div><a href="/docs/badges/hackerhotel-2024/"><img src="/docs/badges/hackerhotel-2024/hackerhotel2024.svg"/></a></div>
 <div><a href="/docs/badges/mch2022/"><img src="/docs/badges/mch2022/mch2022.svg"/></a></div>
@@ -39,7 +40,7 @@ Need help? Want to volunteer? <i class="fab fa-discord ml-2 "></i>
 
 {{% blocks/section color="white" %}}
 
-{{% blocks/project img="bornhack.png" title="**Bornhack** 2026" %}}
+{{% blocks/project img="bornhack.png" phase="2" title="**Bornhack** 2026" %}}
 In collaboration with [**Thomas Flummer**](https://thomasflummer.com/) we've started work on a badge for [**Bornhack**](https://bornhack.dk) 2026.
 
 BornHack is a 7 day outdoor tent camp where hackers, makers and people with an interest in technology or security come together to celebrate technology, socialise, learn and have fun.
@@ -49,7 +50,7 @@ BornHack is a 7 day outdoor tent camp where hackers, makers and people with an i
 
 {{% blocks/section color="black" %}}
 
-{{% blocks/project img="hackerhotel.png" phase="2" title="**HackerHotel** 2027" %}}
+{{% blocks/project img="hackerhotel.png" phase="1" title="**HackerHotel** 2027" %}}
 
 With **LoRa**, a **keyboard**, a **big screen** and the powerhouse **ESP32-P4** microcontroller you can guess how big our ambitions are! Our next challenge is fitting it all into the **budget**.
 
