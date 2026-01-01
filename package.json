@@ -5,16 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/badgeteam/website.git"
-  },
-  "author": "Badge.Team",
+  "author": "Nicolai Electronics",
   "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/badgeteam/website/issues"
-  },
-  "homepage": "https://badge.team",
   "devDependencies": {
     "autoprefixer": "^10.4.0",
     "postcss": "^8.3.7",
