@@ -1,9 +1,6 @@
 ---
 title: Blog
-menu:
-  main:
-    weight: 3
-    pre: <i class='fas fa-rss'></i>
+menu: {main: {weight: 30}}
 ---
 
 Badge.Team **blog**
