@@ -40,10 +40,12 @@ Need help? Want to volunteer? <i class="fab fa-discord ml-2 "></i>
 
 {{% blocks/section color="white" %}}
 
-{{% blocks/project img="bornhack.png" phase="2" title="**Bornhack** 2026" %}}
+{{% blocks/project img="bornhack.png" phase="3" title="**Bornhack** 2026" %}}
 In collaboration with [**Thomas Flummer**](https://thomasflummer.com/) we've started work on a badge for [**Bornhack**](https://bornhack.dk) 2026.
 
 BornHack is a 7 day outdoor tent camp where hackers, makers and people with an interest in technology or security come together to celebrate technology, socialise, learn and have fun.
+
+More information about the badge will soon be published [here](/docs/badges/bornhack-2026/).
 {{% /blocks/project %}}
 
 {{% /blocks/section %}}
