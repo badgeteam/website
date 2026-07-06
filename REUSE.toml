@@ -1,7 +1,7 @@
 version = 1
 
 # ---------------------------------------------------------------------------
-# Badge.team website — REUSE / SPDX metadata (spec 3.3)
+# Stichting Badge.Team website — REUSE / SPDX metadata (spec 3.3)
 #
 # Buckets:
 #   * Code (theme, config, scripts, tooling) .......... MIT
@@ -29,13 +29,13 @@ path = [
     ".gitignore",
     ".gitmodules",
 ]
-SPDX-FileCopyrightText = "Badge.team"
+SPDX-FileCopyrightText = "Stichting Badge.Team"
 SPDX-License-Identifier = "MIT"
 
 # ---- Root license file (the CC-BY-4.0 text itself) ------------------------
 [[annotations]]
 path = "LICENSE"
-SPDX-FileCopyrightText = "Badge.team"
+SPDX-FileCopyrightText = "Stichting Badge.Team"
 SPDX-License-Identifier = "CC-BY-4.0"
 
 # ---- Content: documentation, blog, own images and badge artwork (CC-BY) ---
@@ -45,7 +45,7 @@ path = [
     "static/**",
     "assets/icons/**",
 ]
-SPDX-FileCopyrightText = "Badge.team"
+SPDX-FileCopyrightText = "Stichting Badge.Team"
 SPDX-License-Identifier = "CC-BY-4.0"
 
 # ---------------------------------------------------------------------------
