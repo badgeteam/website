@@ -5,7 +5,7 @@ nodateline: true
 weight: -2026
 ---
 
-<img src="badge-front.png" style="display: block; margin-left: auto; margin-right: auto; width: 45%;"/>
+<img src="bornhack2026.svg" style="display: block; margin-left: auto; margin-right: auto; width: 45%;"/>
 
 # Introduction
 
@@ -13,8 +13,11 @@ The BornHack 2026 badge is the **Cyber Ægg**: an egg-shaped, low-power hacker b
 
 Under the playful shell it is a serious little radio computer. A Nordic nRF52840 drives a 1.54 inch black/red/white e-paper display, talks Bluetooth Low Energy to your phone, emulates an NFC tag on its back, and reaches the wider [MeshCore](https://meshcore.co.uk/) network through a dedicated SX1262 LoRa radio. To keep you entertained between messages there is **BornPets**, a virtual pet with a handful of mini-games.
 
-<img src="badge-back.png" style="display: block; margin-left: auto; margin-right: auto; width: 45%;"/>
-<p align="center"><em>The back of the badge: the nRF52840, QWIIC and USB-C connectors, and the NFC coil.</em></p>
+<p align="center">
+  <img src="badge-front.png" style="width: 45%; margin: 0 1%;"/>
+  <img src="badge-back.png" style="width: 45%; margin: 0 1%;"/>
+</p>
+<p align="center"><em>Front (display and buttons) and back (nRF52840, QWIIC and USB-C connectors, NFC coil).</em></p>
 
 ## Features
 
