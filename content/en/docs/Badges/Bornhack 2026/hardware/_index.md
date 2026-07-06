@@ -18,7 +18,7 @@ At the time of writing the design is still at prototype stage. Some of the RF ci
 | Component | Part | Interface |
 | --------- | ---- | --------- |
 | Microcontroller | Nordic **nRF52840** | — |
-| Display | 1.54" black/red/white e-paper, 152 × 152, SSD1680-class controller | SPI |
+| Display | 1.54" black/red/white e-paper, 152 × 152, SSD1675 / SSD1675B controller | SPI |
 | LoRa radio | Semtech **SX1262** | SPI |
 | Bluetooth Low Energy | nRF52840 built-in radio | — |
 | NFC | nRF52840 NFC tag PHY + on-PCB coil | — |
@@ -29,7 +29,7 @@ At the time of writing the design is still at prototype stage. Some of the RF ci
 
 ## Display
 
-The badge uses a 1.54 inch tri-colour (black / red / white) e-paper display with a resolution of **152 × 152** pixels, driven by an SSD1680-class controller. E-paper keeps the badge readable in bright camp sunlight and draws no power to hold an image, which is a big help for the week-long battery goal.
+The badge uses a 1.54 inch tri-colour (black / red / white) e-paper display with a resolution of **152 × 152** pixels, driven by an SSD1675 / SSD1675B controller. E-paper keeps the badge readable in bright camp sunlight and draws no power to hold an image, which is a big help for the week-long battery goal.
 
 ## Manual input
 
