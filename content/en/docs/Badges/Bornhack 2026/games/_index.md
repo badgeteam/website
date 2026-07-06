@@ -2,7 +2,7 @@
 title: "Games"
 linkTitle: "Games"
 nodateline: true
-weight: 3
+weight: 6
 ---
 
 The **Game** screen runs **BornPets** — a virtual pet inspired by the 90's Tamagotchi — plus a set of mini-games you launch from the pet's *Play* menu.

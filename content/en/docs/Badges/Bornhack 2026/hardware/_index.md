@@ -2,7 +2,7 @@
 title: "Hardware"
 linkTitle: "Hardware"
 nodateline: true
-weight: 2
+weight: 7
 ---
 
 The Cyber Ægg is a low-power LoRa badge built around a Nordic **nRF52840** microcontroller. The design goal is to run for the entire week of BornHack on a single battery charge, so a lot of care goes into keeping the power consumption down in both hardware and firmware.
