@@ -23,6 +23,7 @@ These are the badges where Badge.Team volunteers were involved in during their c
 
 ### Other badges
 <div class="homepage_badges">
+<div><a href="bornhack-2026/"><img src="bornhack-2026/bornhack2026.svg" width="400"/></a></div>
 <div><a href="hackerhotel-2020/"><img src="hackerhotel-2020/hackerhotel2020.gif"/></a></div>
 <div><a href="eth0-2019/"><img src="eth0-2019/eth0.svg" /></a></div>
 </div>
