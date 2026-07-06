@@ -94,6 +94,18 @@ precedence = "override"
 SPDX-FileCopyrightText = "ProcoliX B.V."
 SPDX-License-Identifier = "LicenseRef-Procolix"
 
+[[annotations]]
+path = "**/m_logo_defeest.png"
+precedence = "override"
+SPDX-FileCopyrightText = "deFEEST"
+SPDX-License-Identifier = "LicenseRef-deFEEST"
+
+[[annotations]]
+path = "**/m_logo_mollerup.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Mollerup Automation ApS"
+SPDX-License-Identifier = "LicenseRef-Mollerup"
+
 # ---------------------------------------------------------------------------
 # Third-party component datasheets / application notes (SHA2017 hardware).
 # Redistributed as hardware reference; copyright of the chip manufacturers.

@@ -1,0 +1,9 @@
+LicenseRef-Mollerup
+
+The "Mollerup Automation ApS" name and logo are trademarks of Mollerup Automation ApS.
+The logo image file(s) in this repository are the property of Mollerup Automation ApS and are
+included solely to identify Mollerup Automation ApS as a sponsor/partner of Stichting Badge.Team.
+All rights reserved by the trademark owner. They are NOT covered by the
+project's own license (CC-BY-4.0 / MIT) and may not be reused, modified or
+redistributed outside this documentation context without permission from the
+owner.
