@@ -1,0 +1,10 @@
+LicenseRef-AllRightsReserved
+
+Copyright (c) Stichting Badge.Team and contributors.
+
+All rights reserved.
+
+No license is granted for the use, copying, modification or distribution of
+these files. They are published for transparency and reference only. A formal
+open-source license may be applied in the future, once the copyright status of
+all contributions has been confirmed.

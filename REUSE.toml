@@ -1,16 +1,20 @@
 version = 1
 
 # ---------------------------------------------------------------------------
-# Badge.team website — REUSE / SPDX metadata (spec 3.3)
+# Stichting Badge.Team website — REUSE / SPDX metadata (spec 3.3)
 #
 # Buckets:
-#   * Code (theme, config, scripts, tooling) .......... MIT
-#   * Content (docs, blog, own images, badge art) ..... CC-BY-4.0
+#   * Own files (code, content, images, badge art) .... LicenseRef-AllRightsReserved
 #   * Third-party sponsor logos ....................... per-owner LicenseRef-*
 #   * Third-party component datasheets ................ per-owner LicenseRef-*
+#
+# Own files are "all rights reserved" for now: no open-source license is
+# asserted until the copyright status of all contributions is confirmed.
+# Copyright is held by Stichting Badge.Team together with all contributors
+# (listed below, derived from the git history).
 # ---------------------------------------------------------------------------
 
-# ---- Code: Hugo theme, layouts, styles, config, tooling (MIT) -------------
+# ---- Own code: Hugo theme, layouts, styles, config, tooling --------------
 [[annotations]]
 path = [
     "layouts/**",
@@ -29,24 +33,106 @@ path = [
     ".gitignore",
     ".gitmodules",
 ]
-SPDX-FileCopyrightText = "Badge.team"
-SPDX-License-Identifier = "MIT"
+SPDX-FileCopyrightText = [
+    "Stichting Badge.Team",
+    "Anne Jan Brouwer",
+    "Arnout Engelen",
+    "Arun Bahl",
+    "Bas Oort",
+    "Bertrik Sikken",
+    "Carlos Venegas Arrabé",
+    "cyber-murmel",
+    "Dominik",
+    "Emiel Bart",
+    "Evils",
+    "Govert Combee",
+    "Heikki Juva",
+    "jaga-the-curious",
+    "Jelle Haandrikman",
+    "Jenny List",
+    "Joel Haasnoot",
+    "Jozef Izso",
+    "Kuristian",
+    "larsmm",
+    "Manuel Dipolt",
+    "Matthias Koch",
+    "Matthias Krauss",
+    "mattikra",
+    "Niek Blankers",
+    "Oskar Roesler (bionade24)",
+    "p2mate",
+    "Paul Honig",
+    "Pepijn de Vos",
+    "Peter",
+    "Pieter Vander Vennet",
+    "polyfloyd",
+    "Reinier van der Leer",
+    "Renze Nicolai",
+    "RobotMan2412",
+    "Sake Blok",
+    "Sietse Ringers",
+    "Sylvain Munaut",
+    "TheRealProcyon",
+    "Tim Becker",
+    "Tom Clement",
+    "Valentin Ochs",
+    "yvodehaas",
+]
+SPDX-License-Identifier = "LicenseRef-AllRightsReserved"
 
-# ---- Root license file (the CC-BY-4.0 text itself) ------------------------
-[[annotations]]
-path = "LICENSE"
-SPDX-FileCopyrightText = "Badge.team"
-SPDX-License-Identifier = "CC-BY-4.0"
-
-# ---- Content: documentation, blog, own images and badge artwork (CC-BY) ---
+# ---- Own content: documentation, blog, own images and badge artwork ------
 [[annotations]]
 path = [
     "content/**",
     "static/**",
     "assets/icons/**",
 ]
-SPDX-FileCopyrightText = "Badge.team"
-SPDX-License-Identifier = "CC-BY-4.0"
+SPDX-FileCopyrightText = [
+    "Stichting Badge.Team",
+    "Anne Jan Brouwer",
+    "Arnout Engelen",
+    "Arun Bahl",
+    "Bas Oort",
+    "Bertrik Sikken",
+    "Carlos Venegas Arrabé",
+    "cyber-murmel",
+    "Dominik",
+    "Emiel Bart",
+    "Evils",
+    "Govert Combee",
+    "Heikki Juva",
+    "jaga-the-curious",
+    "Jelle Haandrikman",
+    "Jenny List",
+    "Joel Haasnoot",
+    "Jozef Izso",
+    "Kuristian",
+    "larsmm",
+    "Manuel Dipolt",
+    "Matthias Koch",
+    "Matthias Krauss",
+    "mattikra",
+    "Niek Blankers",
+    "Oskar Roesler (bionade24)",
+    "p2mate",
+    "Paul Honig",
+    "Pepijn de Vos",
+    "Peter",
+    "Pieter Vander Vennet",
+    "polyfloyd",
+    "Reinier van der Leer",
+    "Renze Nicolai",
+    "RobotMan2412",
+    "Sake Blok",
+    "Sietse Ringers",
+    "Sylvain Munaut",
+    "TheRealProcyon",
+    "Tim Becker",
+    "Tom Clement",
+    "Valentin Ochs",
+    "yvodehaas",
+]
+SPDX-License-Identifier = "LicenseRef-AllRightsReserved"
 
 # ---------------------------------------------------------------------------
 # Third-party sponsor logos — trademarks of their respective owners.
