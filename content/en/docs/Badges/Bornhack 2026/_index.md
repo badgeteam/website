@@ -5,7 +5,7 @@ nodateline: true
 weight: -2026
 ---
 
-<img src="bornhack2026.svg" style="display: block; margin-left: auto; margin-right: auto; width: 45%;"/>
+<img src="bornhack2026.svg" style="display: block; margin-left: auto; margin-right: auto; width: 42%;"/>
 
 # Introduction
 
