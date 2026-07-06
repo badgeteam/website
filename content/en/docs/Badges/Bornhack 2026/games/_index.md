@@ -13,7 +13,7 @@ Hatch a snail or a cat, then keep it fed, healthy, rested and entertained.
 
 ### Hatching
 
-The first time you open the Game screen you see the hatchery. Push **Execute / Fire** to start, pick **Snail** or **Cat**, then wait about a minute for the egg to hatch. After hatching you name your pet — up to 12 characters via the on-screen keyboard. The save persists across reboots.
+The first time you open the Game screen you see the hatchery. Push **Execute / Fire** to start, pick a pet from the roster (the built-ins are **Bartholomeus**, **Cat** and **Slug**), then wait about a minute for the egg to hatch. After hatching you name your pet — up to 12 characters via the on-screen keyboard. The save persists across reboots. You can rename the roster or add your own pets — see [Custom pet roster](#custom-pet-roster-petscfg) below.
 
 ### Stats
 
@@ -83,7 +83,30 @@ With it you can:
 
 ### Installing a custom pet
 
-The badge exposes a USB drive when plugged in over USB-C (see [Getting started](../getting-started/#usb-drag-and-drop)). Unzip the export from the Pet Maker and copy the sprite files — and, if you made one, `BORNPETS.CFG` — into the root of the `CYBR<4 hex>` drive, then reboot the badge.
+The badge exposes a USB drive when plugged in over USB-C (see [Getting started](../getting-started/#usb-drag-and-drop)). Unzip the export from the Pet Maker and copy the sprite files — plus `PETS.CFG`, and `BORNPETS.CFG` if you made one — into the root of the `CYBR<4 hex>` drive, then reboot the badge.
+
+## Custom pet roster: `PETS.CFG`
+
+`PETS.CFG` is the pet roster shown in "Choose your Pet". It is a plain-text file with one `PREFIX=NAME` per line, editable without reflashing the firmware:
+
+```
+# --- current pets (rename if you like) ---
+0=Bartholomeus
+1=Cat
+2=Slug
+
+# --- add your own (needs 05xxxx.PCX / 06xxxx.PCX sprites) ---
+5=Dragon
+6=Ghost
+```
+
+* **PREFIX** is the pet's sprite-prefix byte (decimal):
+  * `0`, `1`, `2` — the built-in pets (listing them just renames them)
+  * `3`, `4` — reserved (sponsors, menu icons) and ignored
+  * `5`–`7` — your own custom pets
+* **NAME** is up to 16 ASCII characters.
+
+A pet's sprites are the matching `PPAAFF.PCX` files on the badge — `PP` is the prefix, `AA` the animation part, `FF` the frame. The firmware just counts the PCX files present (for example `050100`…`050104` = five idle frames), so there is no fixed frame count or header to maintain. Export sprites at the pet's prefix from the [Pet Maker](https://scene.rs/pets/) and drop them next to `PETS.CFG` on the drive. Lines beginning with `#`, and reserved or malformed rows, are ignored.
 
 ## Custom balance: `BORNPETS.CFG`
 
