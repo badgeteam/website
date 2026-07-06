@@ -49,7 +49,7 @@ Bluetooth Low Energy is provided directly by the nRF52840. It operates in the 2.
 
 ## LoRa
 
-Long-range connectivity is provided by a dedicated Semtech **SX1262** radio with the matching/balun circuit specified in the Semtech application note *AN1200.54*. The LoRa antenna is a Texas Instruments design documented in [SWRA416](https://www.ti.com/lit/an/swra416/swra416.pdf). On the network side the badge speaks [MeshCore](https://meshcore.co.uk/), so it can join the wider camp mesh out of the box.
+Long-range connectivity is provided by a dedicated Semtech **SX1262** radio with the matching/balun circuit specified in the Semtech application note *AN1200.54*. The LoRa antenna is a Texas Instruments design documented in [SWRA416](https://www.ti.com/lit/an/swra416/swra416.pdf). On the network side the badge speaks [MeshCore](https://meshcore.io/), so it can join the wider camp mesh out of the box.
 
 ## NFC
 

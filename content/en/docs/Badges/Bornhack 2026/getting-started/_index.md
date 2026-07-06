@@ -49,7 +49,7 @@ The interface is a carousel — **Left** / **Right** cycles through the top-leve
 
 ## Pair with the MeshCore app
 
-The badge speaks the [MeshCore](https://meshcore.co.uk/) companion protocol over Bluetooth Low Energy. Install the **MeshCore** app on Android / iOS, or open <https://app.meshcore.nz/> in a browser that supports Web Bluetooth (Chrome / Edge on desktop or Android).
+The badge speaks the [MeshCore](https://meshcore.io/) companion protocol over Bluetooth Low Energy. Install the **MeshCore** app on Android / iOS, or open <https://app.meshcore.nz/> in a browser that supports Web Bluetooth (Chrome / Edge on desktop or Android).
 
 1. Power the badge with USB **unplugged** — Bluetooth is disabled while USB is connected.
 2. In the app, scan for devices. Your badge advertises as **`Cyber Ægg XXYY`**, where `XXYY` is four hex characters unique to your badge.

@@ -5,7 +5,7 @@ nodateline: true
 weight: 3
 ---
 
-The badge has a LoRa SX1262 radio and speaks the **[MeshCore](https://meshcore.co.uk/)** mesh protocol. Other badges, MeshCore phones and standalone repeaters all appear as peers. Four carousel screens are mesh-related: **PMs**, **Channel**, **Adverts** and **My QR**, backed by the **Contacts** list.
+The badge has a LoRa SX1262 radio and speaks the **[MeshCore](https://meshcore.io/)** mesh protocol. Other badges, MeshCore phones and standalone repeaters all appear as peers. Four carousel screens are mesh-related: **PMs**, **Channel**, **Adverts** and **My QR**, backed by the **Contacts** list.
 
 ## Getting on the same network
 

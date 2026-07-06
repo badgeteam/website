@@ -11,7 +11,7 @@ weight: -2026
 
 The BornHack 2026 badge is the **Cyber Ægg**: an egg-shaped, low-power hacker badge inspired by the 90's Tamagotchi. It is designed to run for the entire duration of the BornHack camp on a single battery charge, while keeping you connected to everyone else on the field over a long-range LoRa mesh.
 
-Under the playful shell it is a serious little radio computer. A Nordic nRF52840 drives a 1.54 inch black/red/white e-paper display, talks Bluetooth Low Energy to your phone, emulates an NFC tag on its back, and reaches the wider [MeshCore](https://meshcore.co.uk/) network through a dedicated SX1262 LoRa radio. To keep you entertained between messages there is **BornPets**, a virtual pet with a handful of mini-games.
+Under the playful shell it is a serious little radio computer. A Nordic nRF52840 drives a 1.54 inch black/red/white e-paper display, talks Bluetooth Low Energy to your phone, emulates an NFC tag on its back, and reaches the wider [MeshCore](https://meshcore.io/) network through a dedicated SX1262 LoRa radio. To keep you entertained between messages there is **BornPets**, a virtual pet with a handful of mini-games.
 
 <p align="center">
   <img src="badge-front.png" style="width: 45%; margin: 0 1%;"/>
@@ -24,7 +24,7 @@ Under the playful shell it is a serious little radio computer. A Nordic nRF52840
 * Egg-shaped badge inspired by the classic Tamagotchi
 * Nordic **nRF52840** microcontroller (BLE + USB + NFC)
 * 1.54" **152 × 152** black/red/white e-paper display
-* **SX1262** LoRa radio, part of the [MeshCore](https://meshcore.co.uk/) mesh network
+* **SX1262** LoRa radio, part of the [MeshCore](https://meshcore.io/) mesh network
 * Bluetooth Low Energy companion connection to the MeshCore app
 * NFC tag on the back for location-based games and station taps
 * 5-way joystick, `Select` / `Execute` / `Cancel` buttons, RGB LED and a piezo buzzer
