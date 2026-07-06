@@ -20,8 +20,8 @@ weight: -2026
 * **Nordic Semiconductor** sponsored their low power yet very capable and fast [NRF52840][NRF52840] microcontroller with Bluetooth Low Energy and NFC, making it possible for us to build a device that runs on one battery charge, the whole camp long!
 * **ALLNET China** is our production partner, they take care of sourcing most components and oversee the production process [in China][ALLNET China], saving us a lot of work and potential headaches and allowing us to focus on the product!
 * **Procolix** sponsored the SX1262 LoRa radio chips, converting the badge into a capable LoRa communications device. Check out their [managed hosting solutions][hosting] for a truely sovereign cloud built on European open source solutions!
-* **deFEEST** supported the Bornhack 2026 badge project. Find out more at [defeest.nl][deFEEST]!
-* **Mollerup Automation** supported the Bornhack 2026 badge project. They are automation, robotics and PLC specialists from Odense, Denmark — see [mollerup.info][Mollerup]!
+* **deFEEST** sponsored part of the badge hardware, helping us get the components we needed to build it. Find out more at [defeest.nl][deFEEST]!
+* **Mollerup Automation** sponsored the 3D printed housing for the badge. They are automation, robotics and PLC specialists from Odense, Denmark — see [mollerup.info][Mollerup]!
 
 [NRF52840]: https://www.nordicsemi.com/Products/nRF52840
 [ALLNET China]: https://www.allnet.de/en/allnet-brand/unternehmen/weltweit/
