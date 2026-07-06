@@ -32,6 +32,13 @@ Under the playful shell it is a serious little radio computer. A Nordic nRF52840
 
 New to the badge? Start with the [Getting started](./getting-started/) guide. Want to know what is inside? See the [Hardware](./hardware/) page.
 
+## Source code
+
+The Cyber Ægg is open source. Both the hardware design and the firmware live on Codeberg:
+
+* Hardware (KiCad) — [Ranzbak/bornhack2026-hardware](https://codeberg.org/Ranzbak/bornhack2026-hardware)
+* Firmware (Rust / Embassy) — [Ranzbak/bornhack-firmware-2026](https://codeberg.org/Ranzbak/bornhack-firmware-2026)
+
 # Hardware sponsors
 
 <p align="justify">

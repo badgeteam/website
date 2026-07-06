@@ -89,3 +89,5 @@ Hold **Execute** while plugging in USB to enter the bootloader (DFU) mode — th
 ```
 dfu-util -d 1915:521f -D cyber-aegg.bin
 ```
+
+The firmware is open source and built with Rust / Embassy — see [Ranzbak/bornhack-firmware-2026](https://codeberg.org/Ranzbak/bornhack-firmware-2026) for source, build instructions and pre-built images.
