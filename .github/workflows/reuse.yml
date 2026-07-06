@@ -1,0 +1,26 @@
+name: "REUSE compliance"
+
+# Repository-wide licensing check - no path filter so any newly added file
+# (docs, images, scripts, assets) is caught if it lacks SPDX info.
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+  merge_group:
+
+permissions: {}
+
+jobs:
+  reuse:
+    name: REUSE lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: REUSE compliance check
+        uses: fsfe/reuse-action@v6.0.0

@@ -1,0 +1,127 @@
+version = 1
+
+# ---------------------------------------------------------------------------
+# Badge.team website — REUSE / SPDX metadata (spec 3.3)
+#
+# Buckets:
+#   * Code (theme, config, scripts, tooling) .......... MIT
+#   * Content (docs, blog, own images, badge art) ..... CC-BY-4.0
+#   * Third-party sponsor logos ....................... per-owner LicenseRef-*
+#   * Third-party component datasheets ................ per-owner LicenseRef-*
+# ---------------------------------------------------------------------------
+
+# ---- Code: Hugo theme, layouts, styles, config, tooling (MIT) -------------
+[[annotations]]
+path = [
+    "layouts/**",
+    "assets/scss/**",
+    "build.sh",
+    "config.toml",
+    "data/**",
+    "go.mod",
+    "go.sum",
+    "package.json",
+    "package-lock.json",
+    "README.md",
+    ".github/**",
+    ".vscode/**",
+    ".cspell/**",
+    ".gitignore",
+    ".gitmodules",
+]
+SPDX-FileCopyrightText = "Badge.team"
+SPDX-License-Identifier = "MIT"
+
+# ---- Root license file (the CC-BY-4.0 text itself) ------------------------
+[[annotations]]
+path = "LICENSE"
+SPDX-FileCopyrightText = "Badge.team"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# ---- Content: documentation, blog, own images and badge artwork (CC-BY) ---
+[[annotations]]
+path = [
+    "content/**",
+    "static/**",
+    "assets/icons/**",
+]
+SPDX-FileCopyrightText = "Badge.team"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# ---------------------------------------------------------------------------
+# Third-party sponsor logos — trademarks of their respective owners.
+# These override the broad content/** rule above.
+# ---------------------------------------------------------------------------
+[[annotations]]
+path = "**/m_logo_allnet.png"
+precedence = "override"
+SPDX-FileCopyrightText = "ALLNET GmbH Computersysteme"
+SPDX-License-Identifier = "LicenseRef-Allnet"
+
+[[annotations]]
+path = "**/m_logo_bosch.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Robert Bosch GmbH"
+SPDX-License-Identifier = "LicenseRef-Bosch"
+
+[[annotations]]
+path = "**/m_logo_espressif.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Espressif Systems (Shanghai) Co., Ltd."
+SPDX-License-Identifier = "LicenseRef-Espressif"
+
+[[annotations]]
+path = "**/m_logo_lattice.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Lattice Semiconductor Corporation"
+SPDX-License-Identifier = "LicenseRef-Lattice"
+
+[[annotations]]
+path = "**/m_logo_nordic.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Nordic Semiconductor ASA"
+SPDX-License-Identifier = "LicenseRef-Nordic"
+
+[[annotations]]
+path = "**/m_logo_rpi.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Raspberry Pi Ltd"
+SPDX-License-Identifier = "LicenseRef-RaspberryPi"
+
+[[annotations]]
+path = "**/m_logo_procolix.png"
+precedence = "override"
+SPDX-FileCopyrightText = "ProcoliX B.V."
+SPDX-License-Identifier = "LicenseRef-Procolix"
+
+# ---------------------------------------------------------------------------
+# Third-party component datasheets / application notes (SHA2017 hardware).
+# Redistributed as hardware reference; copyright of the chip manufacturers.
+# ---------------------------------------------------------------------------
+[[annotations]]
+path = [
+    "content/en/docs/Badges/SHA2017/hardware/AN3891.pdf",
+    "content/en/docs/Badges/SHA2017/hardware/AN3894.pdf",
+    "content/en/docs/Badges/SHA2017/hardware/MPR121.pdf",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "Freescale Semiconductor, Inc. (now NXP Semiconductors)"
+SPDX-License-Identifier = "LicenseRef-Freescale"
+
+[[annotations]]
+path = "content/en/docs/Badges/SHA2017/hardware/AP2114.pdf"
+precedence = "override"
+SPDX-FileCopyrightText = "Diodes Incorporated"
+SPDX-License-Identifier = "LicenseRef-Diodes"
+
+[[annotations]]
+path = "content/en/docs/Badges/SHA2017/hardware/DEPG0290B01V3.0.pdf"
+precedence = "override"
+SPDX-FileCopyrightText = "Dalian Good Display Co., Ltd."
+SPDX-License-Identifier = "LicenseRef-GoodDisplay"
+
+[[annotations]]
+path = "content/en/docs/Badges/SHA2017/hardware/TP4056.pdf"
+precedence = "override"
+SPDX-FileCopyrightText = "NanJing Top Power ASIC Corp."
+SPDX-License-Identifier = "LicenseRef-TopPower"

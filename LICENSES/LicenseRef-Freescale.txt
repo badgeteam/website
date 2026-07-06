@@ -1,0 +1,7 @@
+LicenseRef-Freescale
+
+This is a third-party component datasheet / application note, copyright Freescale Semiconductor, Inc. (now NXP Semiconductors).
+It is redistributed here as hardware reference documentation for a Badge.team
+badge. All rights reserved by Freescale Semiconductor, Inc. (now NXP Semiconductors). This document is NOT covered by the
+project's own license (CC-BY-4.0 / MIT). Redistribution terms are those of the
+original manufacturer.
