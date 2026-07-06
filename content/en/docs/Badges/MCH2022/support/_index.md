@@ -23,15 +23,6 @@ repository](https://github.com/badgeteam/website)
 - [Mastodon Badge.team](https://hsnl.social/@badgeteam)
 - [MCH2022 Wiki Badge Page](https://wiki.mch2022.org/Badge)
 
-
-## But I want to chat with somebody ... 
-
-- Try the Telegram channel[Badge.team](https://t.me/+tjHw6Rtao19jODM8)
-- IRC: `badgeteam` on irc.oftc.net
-- Matrix: [#oftc_#badgeteam:pixie.town](https://matrix.to/#/#oftc_#badgeteam:pixie.town)
-
-And if you're reading this at MCH2022, just come by our [tent](https://map.mch2022.org/#map=20/5.5274/52.2839/0)
-
 # Overview of the main github Repos you can contribute to ...
 
 You can find the sources and hardware files for all Badge artefacts

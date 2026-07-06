@@ -1,0 +1,23 @@
+{{ $img := .Get "img" | default "" -}}
+{{ $phase := .Get "phase" | default "1" -}}
+<div class="col-lg-0 mb-0 mb-lg-0 text-center">
+<div class="mb-4 h1">
+  <img style="max-width: 100%;" src="{{ $img }}" />
+</div>
+<h4 class="h3">
+  {{- .Get "title" | markdownify -}}
+</h4>
+<div class="mb-0">
+{{ .Inner }}
+</div>
+<div class="mb-0">
+<h3>Project progress</h3>
+<ul class="list-group list-group-horizontal d-flex justify-content-center">
+  <li class="list-group-item{{ if eq $phase "1" }} active{{ end }}"><h3>Phase 1</h3>Collecting ideas &amp; formulating requirements</li>
+  <li class="list-group-item{{ if eq $phase "2" }} active{{ end }}"><h3>Phase 2</h3>Research, prototyping &amp; working out finances</li>
+  <li class="list-group-item{{ if eq $phase "3" }} active{{ end }}"><h3>Phase 3</h3>Electronic design &amp; Firmware development</li>
+  <li class="list-group-item{{ if eq $phase "4" }} active{{ end }}"><h3>Phase 4</h3>Delivery</li>
+</ul>
+</div>
+{{ with .Get "url" }}<p><a href="{{ . }}">{{ with $.Get "url_text" }}{{ . }}{{ else }}{{ T "ui_read_more" }}{{ end }}</a></p>{{ end }}
+</div>

@@ -1,5 +1,7 @@
 ---
 title: ESP32 platform firmware
+nodateline: true
+weight: 100
 ---
 
 {{% alert title="Warning" color="warning" %}}
