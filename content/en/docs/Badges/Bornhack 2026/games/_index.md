@@ -119,3 +119,9 @@ DRAINED_INTERVAL=180
 ```
 
 Eject the drive and reboot. When a config is active a small `*` appears after the pet's name. Delete the file and reboot to return to a preset. The Pet Maker can generate this file for you, and the firmware's [`USER_GAMES.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/USER_GAMES.md) documents every supported key and its range.
+
+A few gotchas:
+
+* **Edits apply at boot only.** Eject the drive properly (so the write is flushed), then power-cycle. No `*` after the pet name = no override was applied.
+* **The parser is silent.** Unknown keys are skipped, and a value that isn't a plain whole number (no units, decimals or minus sign) drops the whole line without any on-screen error.
+* **The documented "reasonable range" is advice, not a limit.** Values are only clamped to the raw integer type — `HUNGER_RATE=1000` really does make hunger fill ~300× faster, and your pet will be starving before you've unplugged the cable. If a wild value wrecked your pet, delete the file and reboot to fall back to the preset.

@@ -69,6 +69,7 @@ Plug in USB-C — the badge mounts as the **`CYBR<4 hex>`** drive.
 | `ALARMS.ICS` | Imports alarms + calendar events |
 | `030000.PCX` … `030009.PCX` | Sponsor slides |
 | `<6 hex>.PCX` | Game sprite asset |
+| `PETS.CFG` | Add / rename pets (with sprite PCX files) |
 | `BORNPETS.CFG` | Custom pet balance (`KEY=VALUE`) |
 | `LUT.CFG` | Custom e-paper waveform (advanced) |
 

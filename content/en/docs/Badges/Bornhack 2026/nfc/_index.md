@@ -26,6 +26,8 @@ A phone running the **BadgeCtl** companion app, loaded with the matching event k
 
 A short toast on the badge confirms what happened. Each command has a **5-minute cooldown** — tapping twice in quick succession does nothing the second time.
 
+Station commands need an **active game**: pick a pet first (the egg countdown already counts). If your pet has left, start a new egg — a tap with no active pet is silently ignored.
+
 ## Tokens
 
 Tokens you collect from station taps (and from other badges) land on the **Tokens** carousel screen. The badge collects **many** tokens and keeps them until the next reboot, so it is a running record of the stations and badges you tapped during the camp.
@@ -40,7 +42,9 @@ The default `badge.team` URL is not fixed — you can make the badge hand out **
 * **vCard** — write a Contact / vCard record; phones tapping you then get your contact card.
 * **Wi-Fi**, or any other record — served verbatim.
 
-The rule is simple: **anything you write sticks and survives a reboot — except a `token:`, which lands on your Tokens screen instead.** Keep it short; records are capped at ~127 bytes (fine for a URL or a compact vCard).
+The rule is simple: **anything you write sticks and survives a reboot — except a `token:`, which lands on your Tokens screen instead.** Keep it short; records are capped at ~127 bytes (fine for a URL or a compact vCard). Long URLs sent via the `set:` text form are additionally clamped to ~118 characters after the scheme — for anything longer, write a plain URI record instead, or use a link shortener.
+
+There is no NFC "erase" back to the factory default: an empty write (or a writer app's "format tag") doesn't restore the `badge.team` URL — it just leaves your current profile in place (or stores the empty record). To change what you broadcast, simply write the new record over it.
 
 Setting this is **unauthenticated** — anyone who can physically tap your badge with a writer app can change it. It is your badge in your pocket; treat physical access accordingly.
 
