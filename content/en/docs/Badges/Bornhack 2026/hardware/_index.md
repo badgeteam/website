@@ -31,6 +31,8 @@ At the time of writing the design is still at prototype stage. Some of the RF ci
 
 The badge uses a 1.54 inch tri-colour (black / red / white) e-paper display with a resolution of **152 × 152** pixels, driven by an SSD1675 / SSD1675B controller. E-paper keeps the badge readable in bright camp sunlight and draws no power to hold an image, which is a big help for the week-long battery goal.
 
+By default the panel is driven with the waveform LUT stored in its own OTP. Advanced users can override this with a calibrated waveform (for example a faster refresh) by dropping a `LUT.CFG` file on the USB drive — see the firmware's [`LUT.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/LUT.md). Holding *Fire* while booting always forces the safe built-in waveform.
+
 ## Manual input
 
 Because the Cyber Ægg is inspired by the 90's Tamagotchi egg-shaped toy, the buttons carry the same names:

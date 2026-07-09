@@ -69,6 +69,8 @@ Set your timezone once under **Main → Settings → Timezone** — that setting
 
 Plug any USB-C cable into the badge to charge it. Charge state is shown on the on-screen battery icon (there is no dedicated charge LED). Remember that Bluetooth is off while USB is connected, so unplug the badge when you want to pair.
 
+Two things that look like faults but aren't: the charge bolt disappearing while USB is still plugged means charging is **complete** (it returns by itself if the cell drains), and the battery icon can lag up to a minute behind reality — it is only re-sampled every 60 seconds.
+
 ## USB drag-and-drop
 
 When plugged in over USB-C the badge appears as a small drive named **`CYBR<4 hex>`**. You can drop these files into its root:
@@ -78,9 +80,13 @@ When plugged in over USB-C the badge appears as a small drive named **`CYBR<4 he
 | `ALARMS.ICS` | iCalendar file — imports alarms and calendar events |
 | `030000.PCX` … `030009.PCX` | Sponsor slides shown on the splash carousel |
 | `<6 hex>.PCX` | Game sprites |
+| `PETS.CFG` | Add / rename pets (with their sprite PCX files) — see [Games](../games/#custom-pet-roster-petscfg) |
 | `BORNPETS.CFG` | Override the BornPets game balance |
+| `LUT.CFG` | Custom e-paper waveform (advanced — calibrated display LUT) |
 
 Reboot the badge after copying files (re-plug USB) for the changes to take effect.
+
+`LUT.CFG` is an advanced tweak: it overrides the panel's built-in display waveform with a calibrated one (e.g. faster refresh). If a custom LUT ever renders badly, **hold *Fire* (joystick press) while booting** to force the safe built-in waveform for that boot, then delete or fix the file. A malformed or wrong-panel `LUT.CFG` is rejected automatically.
 
 ## Firmware update
 
