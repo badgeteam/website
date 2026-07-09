@@ -79,8 +79,11 @@ When plugged in over USB-C the badge appears as a small drive named **`CYBR<4 he
 | `030000.PCX` … `030009.PCX` | Sponsor slides shown on the splash carousel |
 | `<6 hex>.PCX` | Game sprites |
 | `BORNPETS.CFG` | Override the BornPets game balance |
+| `LUT.CFG` | Custom e-paper waveform (advanced — calibrated display LUT) |
 
 Reboot the badge after copying files (re-plug USB) for the changes to take effect.
+
+`LUT.CFG` is an advanced tweak: it overrides the panel's built-in display waveform with a calibrated one (e.g. faster refresh). If a custom LUT ever renders badly, **hold *Fire* (joystick press) while booting** to force the safe built-in waveform for that boot, then delete or fix the file. A malformed or wrong-panel `LUT.CFG` is rejected automatically.
 
 ## Firmware update
 
