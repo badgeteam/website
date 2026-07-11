@@ -36,10 +36,19 @@ Don't reformat. The badge only understands its own FAT12 layout; if boot finds a
 **The charge bolt disappeared while USB is still plugged in.**
 Charging is **complete** — the bolt returns by itself if the cell drains. Also, the battery icon can lag up to a minute behind reality; it is only re-sampled every 60 seconds.
 
+**The red LED keeps flashing, especially on the BornPet screen.**
+The LED does a short one-shot flash every time the e-paper repaints. Most screens are static so this is rare — but the pet has a slow idle animation, so the badge repaints (and flashes) every few seconds even when the frames look almost identical. It's not a fault and usually not an incoming message. Note the **Ignore blink** setting (under MeshCore) only mutes the flash for *incoming mesh messages* — it does not stop the per-repaint flash. To stop it, sit on a static screen.
+
+**Which screen makes the battery last longest?**
+The e-paper costs almost nothing to *hold* an image — the power goes into repaints. So the thriftiest screens are the ones that never repaint on their own: **My QR**, **Name**, **Tokens** and **Calendar** sit idle until you press a button. **Main** and **Watch** repaint once a minute for the clock; **BornPet** repaints every few seconds for its animation (most power). To stretch a charge, park on **My QR** or **Name** — idle, no flashing, and My QR is the handy one to leave up so people can scan you into the mesh.
+
 ## Display (e-paper)
 
 **Red only shows up sometimes — e.g. after switching screens.**
 Working as designed. Staying on one screen uses fast black/white refreshes that don't repaint the red plane; red repaints on a **full refresh** (a screen switch, or periodically). It isn't disabled — it just refreshes less often than black/white.
+
+**The whole screen looks inverted (colours swapped) and stays that way.**
+A full refresh briefly cycles the whole panel; if it gets cut short the image can latch inverted. Flip to another screen and back to force a clean redraw. Persistent inversion on the red-capable ("B") panels was a firmware bug — make sure you are on current firmware.
 
 **No red at all / washed-out screen after adding a custom LUT.**
 Your `LUT.CFG` is a fast waveform that skips red. Delete `LUT.CFG` from the badge's USB drive, or **hold *Fire* (joystick press) while booting** to force the built-in tri-colour waveform for that boot. See [Hardware → Display](../hardware/#display).
