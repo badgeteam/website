@@ -4,7 +4,7 @@ nodateline: true
 weight: 30
 ---
 
-We use the [JST S2B-ZR-SM4A-TF](https://www.lcsc.com/product-detail/Wire-To-Board-Wire-To-Wire-Connector_JST-Sales-America-S2B-ZR-SM4A-TF-LF-SN_C265329.html) connector on our badges. This connector has two pins at 1.5mm pitch.
+The MCH2022 badge uses the [JST S2B-ZR-SM4A-TF](https://www.lcsc.com/product-detail/Wire-To-Board-Wire-To-Wire-Connector_JST-Sales-America-S2B-ZR-SM4A-TF-LF-SN_C265329.html) connector for the battery. This connector has two pins at 1.5mm pitch.
 
 ## Pinout
 
