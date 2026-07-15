@@ -26,7 +26,7 @@ At the time of writing the design is still at prototype stage. Some of the RF ci
 | Feedback | RGB LED, piezo buzzer | GPIO / PWM |
 | Power | Li-ion battery, USB-C for power and data | — |
 
-{{% alert title="Expansion connector pinout" color="primary" %}}
+{{% alert title="Expansion connector pinout" color="danger" %}}
 There is a QWIIC like I2C expansion connector on the board. Be aware that we made a small design mistake: the 3.3v and GND signals have been swapped around. Make sure to use a modified cable before connecting any QWIIC peripherals.
 {{% /alert %}}
 

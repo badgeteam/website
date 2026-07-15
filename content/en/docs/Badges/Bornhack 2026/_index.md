@@ -19,7 +19,7 @@ Under the playful shell it is a serious little radio computer. A Nordic nRF52840
 </p>
 <p align="center"><em>Front (display and buttons) and back (nRF52840, USB-C connectors, NFC coil).</em></p>
 
-{{% alert title="Expansion connector pinout" color="primary" %}}
+{{% alert title="Expansion connector pinout" color="danger" %}}
 There is a QWIIC like I2C expansion connector on the board. Be aware that we made a small design mistake: the 3.3v and GND signals have been swapped around. Make sure to use a modified cable before connecting any QWIIC peripherals.
 {{% /alert %}}
 
