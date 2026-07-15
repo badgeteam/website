@@ -22,10 +22,13 @@ At the time of writing the design is still at prototype stage. Some of the RF ci
 | LoRa radio | Semtech **SX1262** | SPI |
 | Bluetooth Low Energy | nRF52840 built-in radio | — |
 | NFC | nRF52840 NFC tag PHY + on-PCB coil | — |
-| Expansion | QWIIC (I²C) connector | I²C |
 | Input | 5-way joystick + `Execute` / `Cancel` buttons | GPIO |
 | Feedback | RGB LED, piezo buzzer | GPIO / PWM |
 | Power | Li-ion battery, USB-C for power and data | — |
+
+{{% alert title="Expansion connector pinout" color="primary" %}}
+There is a QWIIC like I2C expansion connector on the board. Be aware that we made a small design mistake: the 3.3v and GND signals have been swapped around. Make sure to use a modified cable before connecting any QWIIC peripherals.
+{{% /alert %}}
 
 ## Display
 
@@ -57,10 +60,12 @@ Long-range connectivity is provided by a dedicated Semtech **SX1262** radio with
 
 The nRF52840 includes an NFC PHY, used here to drive a resonant circuit consisting of an on-PCB coil (roughly 2.8 µH) and tuning capacitors, forming a tank circuit matched to **13.56 MHz**. The nRF52840 only supports **tag** functionality (not reader mode), which the firmware uses for location-based games and station taps.
 
-## QWIIC
+## Expansion connector
 
-The badge carries a [QWIIC](https://www.sparkfun.com/qwiic) connector — a standardised I²C connector used by a large range of SparkFun and third-party breakout boards. Two 10 kΩ pull-up resistors are fitted on the board, and the nRF52840's internal pull-ups can be enabled as well when the bus capacitance is high.
+There is a QWIIC like I2C expansion connector on the board. Be aware that we made a small design mistake: the 3.3v and GND signals have been swapped around. Make sure to use a modified cable before connecting any QWIIC peripherals.
+
+The badge carries a connector that should have been [QWIIC](https://www.sparkfun.com/qwiic) compatible. QWIIC is a standardised I²C connector used by a large range of SparkFun and third-party breakout boards. Two 10 kΩ pull-up resistors are fitted on the board, and the nRF52840's internal pull-ups can be enabled as well when the bus capacitance is high.
 
 ## Power
 
-The badge is powered by a Li-ion battery and charged over USB-C. Bluetooth is disabled while USB is connected to keep the charging path simple, so unplug the badge when you want to pair with the MeshCore app.
+The badge is powered by a LiPo battery and charged over USB-C. Bluetooth is disabled while USB is connected to keep the charging path simple, so unplug the badge when you want to pair with the MeshCore app.

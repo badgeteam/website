@@ -17,7 +17,11 @@ Under the playful shell it is a serious little radio computer. A Nordic nRF52840
   <img src="badge-front.png" style="width: 45%; margin: 0 1%;"/>
   <img src="badge-back.png" style="width: 45%; margin: 0 1%;"/>
 </p>
-<p align="center"><em>Front (display and buttons) and back (nRF52840, QWIIC and USB-C connectors, NFC coil).</em></p>
+<p align="center"><em>Front (display and buttons) and back (nRF52840, USB-C connectors, NFC coil).</em></p>
+
+{{% alert title="Expansion connector pinout" color="primary" %}}
+There is a QWIIC like I2C expansion connector on the board. Be aware that we made a small design mistake: the 3.3v and GND signals have been swapped around. Make sure to use a modified cable before connecting any QWIIC peripherals.
+{{% /alert %}}
 
 ## Features
 
@@ -28,7 +32,6 @@ Under the playful shell it is a serious little radio computer. A Nordic nRF52840
 * Bluetooth Low Energy companion connection to the MeshCore app
 * NFC tag on the back for location-based games and station taps
 * 5-way joystick, `Select` / `Execute` / `Cancel` buttons, RGB LED and a piezo buzzer
-* QWIIC (I²C) expansion connector
 * USB-C for charging and drag-and-drop file transfer
 
 New to the badge? Start with the [Getting started](./getting-started/) guide. Curious about the virtual pet? See [Games](./games/). Want to know what is inside? See the [Hardware](./hardware/) page.
