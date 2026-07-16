@@ -57,7 +57,7 @@ Your `LUT.CFG` is a fast waveform that skips red. Delete `LUT.CFG` from the badg
 A bad or wrong-panel `LUT.CFG` is rejected automatically, but if the screen is unreadable, **hold *Fire* while booting** to force the safe built-in waveform, then delete or fix the file.
 
 **The badge boots fine but ignores my `LUT.CFG`.**
-Rejection is silent. Common causes: wrong `variant` letter for your panel, the wrong key copied from the calibration tool (it wants the flat `band_lut` hex field, not `stage_luts`), a file over ~2.8 KB (trim comments and unneeded band overrides), or bad hex length (each LUT value must be exactly 214 hex characters). Holding *Fire* at boot also forces the built-in waveform for that boot. Details in the firmware's [`LUT.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/LUT.md).
+Rejection is silent. Common causes: wrong `variant` letter for your panel, the wrong key copied from the [ssd1675-calibration](https://codeberg.org/Ranzbak/ssd1675-calibration) tool (it wants the flat `band_lut` hex field, not `stage_luts`), a file over ~2.8 KB (trim comments and unneeded band overrides), or bad hex length (each LUT value must be exactly 214 hex characters). Holding *Fire* at boot also forces the built-in waveform for that boot. Details in the firmware's [`LUT.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/LUT.md).
 
 ## Mesh / Bluetooth
 
