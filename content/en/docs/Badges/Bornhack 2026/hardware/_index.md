@@ -66,6 +66,8 @@ There is a QWIIC like I2C expansion connector on the board. Be aware that we mad
 
 The badge carries a connector that should have been [QWIIC](https://www.sparkfun.com/qwiic) compatible. QWIIC is a standardised I²C connector used by a large range of SparkFun and third-party breakout boards. Two 10 kΩ pull-up resistors are fitted on the board, and the nRF52840's internal pull-ups can be enabled as well when the bus capacitance is high.
 
+The firmware can also drive an optional **Nicolai-Electronics I²C keyboard** on this bus for typing names and mesh messages — plug it in (with the corrected cable) and text entry uses the physical keys, with Shift / Alt one-shot toggles and an alt-symbol layer matching the silkscreen. Without a keyboard the badge falls back to the on-screen joystick picker automatically.
+
 ## Power
 
 The badge is powered by a LiPo battery and charged over USB-C. Bluetooth is disabled while USB is connected to keep the charging path simple, so unplug the badge when you want to pair with the MeshCore app.
