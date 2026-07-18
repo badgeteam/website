@@ -11,7 +11,7 @@ The back of the badge has an NFC antenna. Tap a phone or a station reader agains
 
 ### A phone reads your broadcast profile
 
-Any standard NFC reader (the built-in Android reader, iOS) sees whatever you have set as your **broadcast profile** — by default a `https://badge.team` URL, but you can replace it with your own vanity URL, a vCard and more (see [Set your own broadcast data](#set-your-own-broadcast-data)). Tapping with the OS reader simply reads it. Harmless.
+Any standard NFC reader (the built-in Android reader, iOS) sees whatever you have set as your **broadcast profile** — by default the badge's own docs page `https://badge.team/docs/badges/bornhack-2026/`, but you can replace it with your own vanity URL, a vCard and more (see [Set your own broadcast data](#set-your-own-broadcast-data)). Tapping with the OS reader simply reads it. Harmless.
 
 ### BadgeCtl runs a station command
 
@@ -36,7 +36,7 @@ When someone pushes a `token:` onto your badge it shows for about **10 seconds**
 
 ## Set your own broadcast data
 
-The default `badge.team` URL is not fixed — you can make the badge hand out **anything you like**. Use any NFC-writer app on your phone (e.g. *NFC Tools*) and write to the back of the badge:
+The default docs-page URL is not fixed — you can make the badge hand out **anything you like**. Use any NFC-writer app on your phone (e.g. *NFC Tools*) and write to the back of the badge:
 
 * **Vanity URL** — write a URL / URI record (e.g. `annejan.com`). A **Text** record `set:https://your.link` also works for writer apps that only emit text.
 * **vCard** — write a Contact / vCard record; phones tapping you then get your contact card.
@@ -44,7 +44,7 @@ The default `badge.team` URL is not fixed — you can make the badge hand out **
 
 The rule is simple: **anything you write sticks and survives a reboot — except a `token:`, which lands on your Tokens screen instead.** Keep it short; records are capped at ~127 bytes (fine for a URL or a compact vCard). Long URLs sent via the `set:` text form are additionally clamped to ~118 characters after the scheme — for anything longer, write a plain URI record instead, or use a link shortener.
 
-There is no NFC "erase" back to the factory default: an empty write (or a writer app's "format tag") doesn't restore the `badge.team` URL — it just leaves your current profile in place (or stores the empty record). To change what you broadcast, simply write the new record over it.
+There is no NFC "erase" back to the factory default: an empty write (or a writer app's "format tag") doesn't restore the built-in docs URL — it just leaves your current profile in place (or stores the empty record). To change what you broadcast, simply write the new record over it.
 
 Setting this is **unauthenticated** — anyone who can physically tap your badge with a writer app can change it. It is your badge in your pocket; treat physical access accordingly.
 

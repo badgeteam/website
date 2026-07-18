@@ -11,6 +11,8 @@ Welcome to the BornHack 2026 **Cyber Ægg** badge. This guide takes you from "un
 
 A fresh badge runs a built-in factory self-test on the very first boot. You will see a `FACTORY TEST` screen with a small PASS/FAIL grid, followed by `ALL PASS`. After that the badge goes straight to the application on every boot; the self-test never runs again unless the firmware is wiped.
 
+The very first boot then plays a short one-time sponsor slideshow (the event logos, then the badge-sponsor logos, a couple of seconds each) before dropping you on the Main screen. It only runs once per badge — you can replay it any time from **Main → Badge sponsors**.
+
 The LED sequence at every boot is:
 
 1. Pulsing **orange** — hardware initialisation
@@ -37,7 +39,7 @@ The interface is a carousel — **Left** / **Right** cycles through the top-leve
 | Screen | What it is |
 | ------ | ---------- |
 | **Game** | BornPets — virtual pet, mini-games and hatchery |
-| **Main** | Root menu: Bornagotchi · Settings · About |
+| **Main** | Root menu: Bornagotchi · Settings · About · Badge sponsors |
 | **PMs** | Private mesh messages inbox |
 | **Channel** | Group / room mesh chat |
 | **Adverts** | Recently heard mesh adverts |

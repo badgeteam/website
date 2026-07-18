@@ -51,6 +51,10 @@ Two difficulty presets, picked via **Main → Bornagotchi → Mode**:
 
 The setting persists in flash. A `*` next to the mode name means the change is queued — **reboot the badge** for it to take effect.
 
+### Turning the pet off
+
+Not a pet person? **Main → Bornagotchi → Disable Game** hides the whole Game screen from the carousel. The toggle persists across reboots (the label flips to *Enable Game* once off) and, while disabled, an NFC station tap can no longer jump you into the pet. Flip it back to *Enable Game* to bring the pet screen back.
+
 ## Mini-games
 
 Open the bottom-row **Play** menu in BornPets and pick a game. Each win reduces the *drained* stat without raising hunger, so they are free entertainment. **Cancel** always exits a mini-game.
@@ -84,6 +88,14 @@ With it you can:
 ### Installing a custom pet
 
 The badge exposes a USB drive when plugged in over USB-C (see [Getting started](../getting-started/#usb-drag-and-drop)). Unzip the export from the Pet Maker and copy the sprite files — plus `PETS.CFG`, and `BORNPETS.CFG` if you made one — into the root of the `CYBR<4 hex>` drive, then reboot the badge.
+
+### Hand-editing sprites (GIMP etc.)
+
+The badge only accepts a very specific PCX flavour (2 bits-per-pixel, single plane, RLE). Editors like GIMP happily export 16- or 256-colour PCX instead, which the badge silently skips. The firmware's [`scripts/`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts) folder has helpers for exactly this:
+
+* [`fix_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/fix_badge_pcx.py) — re-packs a wrong-depth PCX (e.g. a 4bpp/8bpp GIMP export) back to the badge's 2bpp format, preserving dimensions.
+* [`png_to_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/png_to_badge_pcx.py) — converts a PNG straight to a 152×152 badge PCX.
+* [`check_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/check_badge_pcx.py) — validates a file before you copy it over, so you catch a bad export on your computer instead of on the badge.
 
 ## Custom pet roster: `PETS.CFG`
 

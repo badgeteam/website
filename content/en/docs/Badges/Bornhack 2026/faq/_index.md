@@ -57,7 +57,7 @@ Your `LUT.CFG` is a fast waveform that skips red. Delete `LUT.CFG` from the badg
 A bad or wrong-panel `LUT.CFG` is rejected automatically, but if the screen is unreadable, **hold *Fire* while booting** to force the safe built-in waveform, then delete or fix the file.
 
 **The badge boots fine but ignores my `LUT.CFG`.**
-Rejection is silent. Common causes: wrong `variant` letter for your panel, the wrong key copied from the [ssd1675-calibration](https://codeberg.org/Ranzbak/ssd1675-calibration) tool (it wants the flat `band_lut` hex field, not `stage_luts`), a file over ~2.8 KB (trim comments and unneeded band overrides), or bad hex length (each LUT value must be exactly 214 hex characters). Holding *Fire* at boot also forces the built-in waveform for that boot. Details in the firmware's [`LUT.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/LUT.md).
+Rejection is silent. Common causes: wrong `variant` letter for your panel, the wrong key copied from the [ssd1675-calibration](https://codeberg.org/Ranzbak/ssd1675-calibration) tool (it wants the flat `band_lut` hex field, not `stage_luts`), or bad hex length (each LUT value must be exactly 214 hex characters). File size is *not* a limit — the file is streamed off flash, so a full 16-band export (~3.7 KB, comments and all) loads fine. Holding *Fire* at boot also forces the built-in waveform for that boot. Details in the firmware's [`LUT.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/LUT.md).
 
 ## Mesh / Bluetooth
 
@@ -87,7 +87,7 @@ Station commands only apply while you have an **active game**: pick a pet first 
 The boot scan found zero `.PCX` files — typical after a factory reset, a drive reformat, or a fresh flash without the asset set. Copy the sprite `.PCX` files back onto the `CYBR<hex>` drive and reboot.
 
 **A sprite I made shows wrong colours / doesn't show at all.**
-The badge needs a very specific PCX flavour: 2 bits-per-pixel, single plane, RLE, with the fixed palette order **0 = black, 1 = red, 2 = white, 3 = transparent** (the file's own palette is ignored). A normal 256-colour or 24-bit export is silently skipped. The [Pet Maker](https://scene.rs/pets/) and the firmware's asset tool get all of this right.
+The badge needs a very specific PCX flavour: 2 bits-per-pixel, single plane, RLE, with the fixed palette order **0 = black, 1 = red, 2 = white, 3 = transparent** (the file's own palette is ignored). A normal 256-colour or 24-bit export is silently skipped. The [Pet Maker](https://scene.rs/pets/) and the firmware's asset tool get all of this right. If you hand-edited a sprite in GIMP, re-pack it with the firmware's [`scripts/fix_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/fix_badge_pcx.py) (or check it first with `check_badge_pcx.py`) — see [Games → Hand-editing sprites](../games/#hand-editing-sprites-gimp-etc).
 
 **`BORNPETS.CFG` / a mode change seems to have no effect.**
 Both apply at **boot only** — eject the drive properly (so the file is flushed) and power-cycle. No `*` after the pet name = no override was applied. See [Games](../games/#custom-balance-bornpetscfg).
