@@ -1,0 +1,151 @@
+/*
+ * SPDX-FileCopyrightText: Stichting Badge.Team
+ * SPDX-License-Identifier: MIT
+ *
+ * Styles for the in-browser WebUSB flasher (/flash/). Scoped under
+ * .flasher so nothing here leaks into the rest of the site. Colours come
+ * from Bootstrap/Docsy custom properties where possible so the widget
+ * follows the active theme instead of hard-coding light-mode values.
+ */
+
+.flasher {
+  margin: 2rem 0;
+}
+
+.flasher-step {
+  border: 1px solid var(--bs-border-color, #dee2e6);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  background: var(--bs-body-bg, transparent);
+}
+
+.flasher-step h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+/* Step number bubble. */
+.flasher-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--bs-primary, #30638e);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.flasher-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.flasher-row .form-select {
+  width: auto;
+  min-width: min(100%, 22rem);
+}
+
+.flasher-single-badge {
+  font-weight: 600;
+}
+
+.flasher-docs-link {
+  margin-left: auto;
+  font-size: 0.9rem;
+}
+
+.flasher-hint {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.flasher-hint:empty {
+  display: none;
+}
+
+.flasher-status {
+  font-family: var(--bs-font-monospace, monospace);
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.flasher-status.connected {
+  color: #1a7f37;
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* Device details table. */
+.flasher-kv {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.15rem 1rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+
+.flasher-kv dt {
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.flasher-kv dd {
+  margin: 0;
+  font-family: var(--bs-font-monospace, monospace);
+  overflow-wrap: anywhere;
+}
+
+.flasher progress {
+  flex: 1 1 12rem;
+  height: 1.1rem;
+}
+
+.flasher-donot {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.flasher-diag summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.flasher-diag pre {
+  max-height: 18rem;
+  overflow: auto;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+/* Log severity colours — chosen to stay legible on the dark log pane. */
+.flasher-diag .ok {
+  color: #6ac36a;
+}
+.flasher-diag .warn {
+  color: #e0b341;
+}
+.flasher-diag .err {
+  color: #f07178;
+}
+
+/* Utility fallback: Docsy ships Bootstrap, but do not depend on it. */
+.flasher .d-none {
+  display: none !important;
+}

@@ -1,0 +1,46 @@
+# Registry for the in-browser WebUSB firmware flasher (/flash/).
+#
+# Consumed by layouts/_shortcodes/flasher.html, which serialises this file
+# to JSON into the page; static/flash/flasher.js reads it from there. There
+# is no backend and no runtime fetch of an index — adding a badge or an
+# image here is the only step needed.
+#
+# Firmware images must be served from this site (same origin). Cross-origin
+# downloads are blocked unless the host sends CORS headers, and neither
+# Codeberg nor GitHub release assets do for arbitrary origins. Put the file
+# in static/firmware/<badge-id>/ and reference it by its site-absolute path.
+#
+# USB IDs are strings because TOML has no hex integer literal; flasher.js
+# parses them with parseInt(..., 16).
+
+[[badge]]
+id = "cyber-aegg"
+name = "BornHack 2026 — Cyber Ægg"
+docsUrl = "/docs/badges/bornhack-2026/"
+# Shown when a connected badge turns out to be running the app, not the
+# bootloader. Rendered as HTML.
+dfuHint = "Unplug the badge, hold <strong>Execute</strong>, and plug it back in — the LED blinks red in DFU mode."
+# One nRF52840 flash page. Source: bootloader/src/dfu.rs.
+blockSize = 4096
+# Bootloader identity in DFU mode (bootloader/src/dfu.rs).
+bootloaderVid = "0x1915"
+bootloaderPid = "0x521f"
+# App-firmware identity — listed only so the badge still shows up in the
+# browser's device chooser when it is not in DFU mode, which lets us tell
+# the user *why* they cannot flash yet.
+appVid = "0x1209"
+appPid = "0x0001"
+
+  [[badge.firmware]]
+  label = "Cyber Ægg application (release)"
+  # Built with `make fw-bin-release` in Ranzbak/bornhack-firmware-2026.
+  file = "/firmware/cyber-aegg/cyber-aegg.bin"
+  # Optional integrity check — verified in the browser before writing.
+  # Generate with: sha256sum <file>
+  sha256 = "cb17f04f227e4d1c0e6e0861fbf06e3ecf86e68d79005159bfc21a387efafeb4"
+  notes = "The normal badge firmware: BornPets, mesh, clock and calendar."
+
+# Note: do NOT list `cyber-aegg-full.bin` here. That image starts at
+# 0x00000000 and contains the bootloader; it is an SWD / J-Link recovery
+# image. DFU writes the application partition only, so flashing the full
+# image over DFU would brick the badge.

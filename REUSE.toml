@@ -48,6 +48,24 @@ path = [
 SPDX-FileCopyrightText = "Stichting Badge.Team"
 SPDX-License-Identifier = "CC-BY-4.0"
 
+# ---- Web flasher: browser code, not prose (MIT, like the rest of our code) --
+[[annotations]]
+path = "static/flash/**"
+precedence = "override"
+SPDX-FileCopyrightText = "Stichting Badge.Team"
+SPDX-License-Identifier = "MIT"
+
+# ---------------------------------------------------------------------------
+# Flashable firmware images served by /flash/. These are build artefacts of
+# the badge firmware projects, redistributed here so the browser flasher can
+# fetch them same-origin; they are not our content.
+# ---------------------------------------------------------------------------
+[[annotations]]
+path = "static/firmware/cyber-aegg/**"
+precedence = "override"
+SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
 # ---------------------------------------------------------------------------
 # Third-party sponsor logos — trademarks of their respective owners.
 # These override the broad content/** rule above.

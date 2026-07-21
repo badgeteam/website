@@ -1,0 +1,106 @@
+{{- /*
+  In-browser WebUSB DFU flasher.
+
+  Renders the flasher UI and embeds data/firmwares.toml as JSON so
+  static/flash/flasher.js needs no backend and no runtime index fetch.
+
+  Usage in a page: call this shortcode by name, with no arguments.
+*/ -}}
+{{- $badges := (index site.Data "firmwares" | default dict).badge | default slice -}}
+
+<link rel="stylesheet" href="/flash/flasher.css">
+{{- /* safeJS: inside a <script> Go would otherwise escape this into a JS
+       string literal, and JSON.parse would hand back a string, not an array. */ -}}
+<script type="application/json" id="flasher-config">{{ $badges | jsonify | safeJS }}</script>
+
+<div id="flasher" class="flasher">
+
+  <noscript>
+    <div class="alert alert-warning">
+      The flasher needs JavaScript. To flash without it, use
+      <code>dfu-util</code> — see the badge documentation.
+    </div>
+  </noscript>
+
+  <div id="flasher-unsupported" class="alert alert-danger d-none">
+    <strong>This browser cannot flash.</strong> WebUSB is required, and only
+    Chromium-family browsers ship it (Chrome, Edge, Brave, Opera, Arc).
+    Firefox and Safari do not. You can still flash from a terminal with
+    <code>dfu-util</code>.
+  </div>
+
+  {{- if not $badges }}
+  <div class="alert alert-warning">
+    No firmware images are published yet. Add them to
+    <code>data/firmwares.toml</code>.
+  </div>
+  {{- else }}
+
+  <section class="flasher-step">
+    <h3><span class="flasher-num">1</span> Pick your badge</h3>
+    <div class="flasher-row">
+      <select id="badge-select" class="form-select"{{ if eq (len $badges) 1 }} hidden{{ end }}>
+        {{- range $i, $b := $badges }}
+        <option value="{{ $i }}">{{ $b.name }}</option>
+        {{- end }}
+      </select>
+      {{- if eq (len $badges) 1 }}
+      <span class="flasher-single-badge">{{ (index $badges 0).name }}</span>
+      {{- end }}
+      <a id="badge-docs" class="flasher-docs-link" href="#">Badge documentation →</a>
+    </div>
+  </section>
+
+  <section class="flasher-step">
+    <h3><span class="flasher-num">2</span> Put the badge in DFU mode, then connect</h3>
+    <p id="dfu-hint" class="flasher-hint"></p>
+    <div class="flasher-row">
+      <button id="btn-connect" class="btn btn-primary">Connect</button>
+      <span id="device-status" class="flasher-status">disconnected</span>
+    </div>
+
+    <dl id="device-info" class="flasher-kv d-none">
+      <dt>Product</dt><dd id="info-product">—</dd>
+      <dt>Serial</dt><dd id="info-serial">—</dd>
+      <dt>VID:PID</dt><dd id="info-vidpid">—</dd>
+      <dt>Mode</dt><dd id="info-mode">—</dd>
+    </dl>
+
+    <div id="mode-warning" class="alert alert-warning d-none"></div>
+  </section>
+
+  <section class="flasher-step">
+    <h3><span class="flasher-num">3</span> Choose the firmware</h3>
+    <div class="flasher-row">
+      <select id="firmware-select" class="form-select"></select>
+    </div>
+    <p id="firmware-notes" class="flasher-hint"></p>
+  </section>
+
+  <section class="flasher-step">
+    <h3><span class="flasher-num">4</span> Flash</h3>
+    <div class="flasher-row">
+      <button id="btn-flash" class="btn btn-primary" disabled>Flash firmware</button>
+      <progress id="progress" max="100" value="0"></progress>
+      <span id="progress-label" class="flasher-status">idle</span>
+    </div>
+    <div class="alert alert-danger flasher-donot">
+      Do <strong>not</strong> unplug the badge while it is writing. The
+      bootloader writes straight to the application partition — there is no
+      backup slot — so an interrupted flash leaves the badge in DFU mode
+      until you flash it again. That is recoverable; just re-run the flash.
+    </div>
+  </section>
+
+  <details class="flasher-diag">
+    <summary>Diagnostics</summary>
+    <div class="flasher-row">
+      <button id="btn-clear-log" class="btn btn-secondary btn-sm">Clear</button>
+    </div>
+    <pre id="log" aria-live="polite"></pre>
+  </details>
+
+  {{- end }}
+</div>
+
+<script src="/flash/flasher.js" type="module"></script>
