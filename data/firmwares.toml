@@ -61,16 +61,13 @@ appPid = "0x0001"
   # The Community Edition lives at
   # https://github.com/ShadowSquad-org/BornHack-Cyberegg
   #
-  # Built with `make fw-bin-release` from bd5918d (v0.2.0, 2026-07-21).
-  # Note that commit came from the annejan fork, where the edition is
-  # developed and from which changes are synced upstream in batches: at
-  # build time it was two commits ahead of ShadowSquad-org/main (6e046b8),
-  # carrying "label both fighters with their pet names". Rebuild from
-  # ShadowSquad-org/main instead if this site should only ever serve
-  # images that exist upstream.
+  # Built from v0.2.0 @ 4604c1b (2026-07-21). The edition is developed on
+  # the annejan fork and synced upstream in batches, so this is ahead of
+  # ShadowSquad-org/main (6e046b8) by seven commits — the screen lock and
+  # the battle fighter names. Take new builds from the fork's main.
   file = "/firmware/cyber-aegg/cyber-aegg-community.bin"
-  sha256 = "a1db38eb67c2a776cead7798896e71ded5a9aa361ef0359b36f7a0d58d8098cb"
-  notes = "A community fork of the badge firmware. Everything the standard image does, plus extra BornPets mechanics: weight and exercise, food and drink choices, the HAX in-game economy, mesh Battles and a fourth pet."
+  sha256 = "9d80eeff4cb95a716812936763ed6cfa12812faaaa83e1358ce21c5d300b226e"
+  notes = "A community fork of the badge firmware. Everything the standard image does, plus extra BornPets mechanics: weight and exercise, food and drink choices, the HAX in-game economy, mesh Battles and a fourth pet — and a screen lock, held on Cancel for three seconds."
 
   # The Community Edition draws far more sprites (menu icons, the extra
   # actions, the Panda pet), so it needs its own, larger asset set.
