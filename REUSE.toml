@@ -68,6 +68,15 @@ SPDX-License-Identifier = "Apache-2.0"
 
 # The DOOM image is a different beast: it links the prBoom / next-hack DOOM
 # engine, so the linked binary is GPL rather than Apache-2.0.
+# The CircuitPython image is mostly the CircuitPython/MicroPython core (MIT),
+# with the badge port and its patches from the cyberaegg-circuitpython project
+# (Apache-2.0) built in.
+[[annotations]]
+path = "static/firmware/cyber-aegg/cyberaegg-circuitpython.bin"
+precedence = "override"
+SPDX-FileCopyrightText = "Adafruit Industries, the CircuitPython and MicroPython contributors, and the CyberÆgg CircuitPython contributors"
+SPDX-License-Identifier = "MIT AND Apache-2.0"
+
 [[annotations]]
 path = "static/firmware/cyber-aegg/cyber-aegg-doom.bin"
 precedence = "override"

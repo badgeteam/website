@@ -242,16 +242,16 @@ function refresh() {
   const assets = currentAssets();
   const fw = currentFirmware();
 
-  // An image whose data lives in QSPI rather than on the USB drive has no
-  // asset zip. Say where that data comes from instead of just dropping the
-  // step and leaving a gap in the numbering.
-  if (!assets && fw?.wad && el.elsewhere) {
+  // Some images have no asset zip because their data lives somewhere else
+  // entirely — DOOM's in QSPI, CircuitPython's on its own CIRCUITPY drive.
+  // Say where, instead of dropping the step and leaving a gap in the
+  // numbering.
+  if (!assets && fw?.nextStep && el.elsewhere) {
     card.classList.add("d-none");
     el.elsewhere.classList.remove("d-none");
-    el.elsewhereText.textContent =
-      `${fw.label} keeps its game data in the badge's QSPI flash, not on the USB drive, so there is nothing to copy here. It is uploaded over a serial connection instead — and until you do that, the badge has no game to run.`;
-    el.elsewhereLink.href = fw.moreUrl || "../doom/";
-    el.elsewhereLink.textContent = fw.moreLabel || "Upload the game data →";
+    el.elsewhereText.textContent = fw.nextStep;
+    el.elsewhereLink.href = fw.moreUrl || "#";
+    el.elsewhereLink.textContent = fw.moreLabel || "Read more →";
     return;
   }
   el.elsewhere?.classList.add("d-none");

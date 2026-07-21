@@ -81,10 +81,23 @@ appPid = "0x0001"
   # Rendered as a link under the notes, and in place of the asset step.
   moreUrl = "../doom/"
   moreLabel = "How to upload the WAD →"
+  nextStep = "DOOM keeps its game data in the badge's QSPI flash, not on the USB drive, so there is nothing to copy here. It is uploaded over a serial connection instead — and until you do that, the badge has no game to run."
   # No `assets` table: DOOM ignores the FAT12 drive. Its game data lives in
   # the 2 MB QSPI flash and is uploaded separately over serial, so the asset
   # step hides itself for this image.
   wad = true
+
+  [[badge.firmware]]
+  label = "CircuitPython"
+  # Prebuilt image from https://codeberg.org/rarenerd/cyberaegg-circuitpython
+  # (firmware/cyberaegg-circuitpython.bin @ 23bdac4); the hash matches that
+  # repository's own firmware/SHA256SUMS.
+  file = "/firmware/cyber-aegg/cyberaegg-circuitpython.bin"
+  sha256 = "c062f8ac7772275594fea8ffef1c9dbf2984f77a814a6a80356a277753ec4fa7"
+  notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa and NFC are all exposed as ordinary CircuitPython modules. Bluetooth is not, and it replaces the badge firmware — no BornPets, mesh or clock until you flash one of those back."
+  moreUrl = "../circuitpython/"
+  moreLabel = "Getting started with CircuitPython →"
+  nextStep = "CircuitPython has no asset bundle to copy. Once it is flashed the badge mounts as a CIRCUITPY drive instead, and you drop your own Python files onto that — starting with a library and an example."
 
 # Prepared WAD blobs offered by the loader at ../doom/. Users can always pick
 # a file of their own instead; these are a convenience so nobody has to run
