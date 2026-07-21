@@ -102,7 +102,19 @@ appPid = "0x0001"
   notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa and NFC are all exposed as ordinary CircuitPython modules. Bluetooth is not, and it replaces the badge firmware — no BornPets, mesh or clock until you flash one of those back."
   moreUrl = "../circuitpython/"
   moreLabel = "Getting started with CircuitPython →"
-  nextStep = "CircuitPython has no asset bundle to copy. Once it is flashed the badge mounts as a CIRCUITPY drive instead, and you drop your own Python files onto that — starting with a library and an example."
+  # Support libraries for the CIRCUITPY drive. Declared as this image's asset
+  # payload so the flasher offers them at step 5 like any other, and repeated
+  # as `pylib` below for the installer on the CircuitPython page.
+  #
+  # `drive` names the volume to pick. CircuitPython's is not the badge's own
+  # CYBR volume: that one only exists in DFU mode, while CIRCUITPY appears
+  # once the badge has been reset into the new firmware.
+  [badge.firmware.assets]
+  file = "/assets/cyber-aegg/cyberaegg-circuitpython-lib.zip"
+  sha256 = "8905601ff13fa069770ded3a6007a96f2e88475e7f31714a46fc41d5bd734bf5"
+  label = "8 files — the e-paper and LoRa drivers, plus adafruit_display_text for drawing labels."
+  drive = "CIRCUITPY"
+  intro = "CircuitPython needs its support libraries before any of the examples will run. They go in a lib folder on the CIRCUITPY drive, which appears once you have flashed the firmware and reset the badge — it is not the CYBR drive you flashed from."
 
   # Support libraries for the CIRCUITPY drive, offered by the installer on
   # ../circuitpython/. Unlike the badge's own asset archives this one has
