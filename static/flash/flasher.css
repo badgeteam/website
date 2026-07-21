@@ -133,12 +133,19 @@
 }
 
 /* Serial console. Focusable, so give it a visible focus ring — you have to
-   click into it before typing reaches the badge. */
-.repl-term {
+   click into it before typing reaches the badge.
+ *
+ * Selector deliberately over-qualified: Docsy styles `.td-content pre` with a
+ * light background, which outranks a bare `.repl-term` and left the console
+ * grey-on-grey (it sets background-color but not color, so only half of it
+ * lost). `.flasher pre.repl-term` outranks it. Same reason for the
+ * diagnostics pane below. */
+.flasher pre.repl-term {
   height: 22rem;
   overflow: auto;
   margin: 0.75rem 0 0;
   padding: 0.75rem;
+  border: 0;
   border-radius: 0.375rem;
   background: #1e1e1e;
   color: #d4d4d4;
@@ -148,7 +155,7 @@
   overflow-wrap: anywhere;
 }
 
-.repl-term:focus-visible {
+.flasher pre.repl-term:focus-visible {
   outline: 2px solid var(--bs-primary, #30638e);
   outline-offset: 2px;
 }
@@ -158,10 +165,11 @@
   font-weight: 600;
 }
 
-.flasher-diag pre {
+.flasher .flasher-diag pre {
   max-height: 18rem;
   overflow: auto;
   padding: 0.75rem;
+  border: 0;
   border-radius: 0.375rem;
   background: #1e1e1e;
   color: #d4d4d4;
