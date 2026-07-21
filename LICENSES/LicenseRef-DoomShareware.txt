@@ -1,0 +1,21 @@
+LicenseRef-DoomShareware
+
+DOOM, the DOOM logo and the game data in doom1.wad are the property of
+id Software LLC (a ZeniMax Media company). All rights reserved by the
+copyright owner.
+
+The asset blob distributed here is derived from the freely distributable
+DOOM shareware episode ("Knee-Deep in the Dead", doom1.wad): the level and
+graphics lumps for E1M1 have been trimmed, re-packed and compressed by the
+CyberAegg DOOM asset pipeline (tools/wad*.py in
+https://github.com/annejan/cyberaegg-doom) so that they fit the badge's
+2 MB QSPI flash. It contains no data from the commercial DOOM episodes.
+
+id Software's shareware terms permit the shareware episode to be copied and
+distributed freely. This blob is provided on that basis, solely so that
+owners of the BornHack 2026 CyberAegg badge can load the game onto their own
+hardware. It is NOT covered by this project's own licenses (CC-BY-4.0 / MIT)
+and remains subject to id Software's rights. Anyone wishing to redistribute
+it further, or to use it outside this documentation context, should satisfy
+themselves as to id Software's terms or build their own blob from a copy of
+doom1.wad they already have.
