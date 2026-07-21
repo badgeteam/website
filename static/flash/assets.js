@@ -36,6 +36,9 @@ const el = {
   progress: $("assets-progress"),
   progLabel: $("assets-progress-label"),
   log: $("log"),
+  elsewhere: $("assets-elsewhere"),
+  elsewhereText: $("assets-elsewhere-text"),
+  elsewhereLink: $("assets-elsewhere-link"),
 };
 
 let badge = badges[0];
@@ -231,8 +234,28 @@ function syncWipeLabel() {
   el.btnCopy.classList.toggle("btn-primary", !el.chkWipe.checked);
 }
 
+function currentFirmware() {
+  return badge?.firmware?.[Number(el.fwSelect.value)] || null;
+}
+
 function refresh() {
   const assets = currentAssets();
+  const fw = currentFirmware();
+
+  // An image whose data lives in QSPI rather than on the USB drive has no
+  // asset zip. Say where that data comes from instead of just dropping the
+  // step and leaving a gap in the numbering.
+  if (!assets && fw?.wad && el.elsewhere) {
+    card.classList.add("d-none");
+    el.elsewhere.classList.remove("d-none");
+    el.elsewhereText.textContent =
+      `${fw.label} keeps its game data in the badge's QSPI flash, not on the USB drive, so there is nothing to copy here. It is uploaded over a serial connection instead — and until you do that, the badge has no game to run.`;
+    el.elsewhereLink.href = fw.moreUrl || "../doom/";
+    el.elsewhereLink.textContent = fw.moreLabel || "Upload the game data →";
+    return;
+  }
+  el.elsewhere?.classList.add("d-none");
+
   if (!assets) {
     card.classList.add("d-none");
     return;
