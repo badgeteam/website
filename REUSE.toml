@@ -66,17 +66,25 @@ precedence = "override"
 SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors"
 SPDX-License-Identifier = "Apache-2.0"
 
-# Asset payload for the badge's USB drive, built from assets/to-badge/ in the
-# CyberÆgg firmware repository. NOTE: besides the project's own artwork this
-# archive embeds 16 sponsor slides (030000–03000F) reproducing the logos of
-# the BornHack and badge sponsors. Those remain the trademarks of their
-# respective owners and are redistributed here, as in the firmware project,
-# with their permission — the identifier below covers the archive as a whole,
-# not the sponsors' marks.
+# Asset payloads for the badge's USB drive, built from assets/to-badge/ in the
+# respective firmware repositories.
+#
+# NOTE on the standard archive: besides the project's own artwork it embeds 16
+# sponsor slides (030000–03000F) reproducing the logos of the BornHack and
+# badge sponsors. Those remain the trademarks of their respective owners and
+# are redistributed here, as in the firmware project, with their permission —
+# the identifier below covers the archive as a whole, not the sponsors' marks.
 [[annotations]]
-path = "static/assets/cyber-aegg/**"
+path = "static/assets/cyber-aegg/cyber-aegg-assets.zip"
 precedence = "override"
 SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors and the BornHack badge sponsors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# The Community Edition archive carries no sponsor slides — own artwork only.
+[[annotations]]
+path = "static/assets/cyber-aegg/cyber-aegg-community-assets.zip"
+precedence = "override"
+SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors"
 SPDX-License-Identifier = "Apache-2.0"
 
 # ---------------------------------------------------------------------------
