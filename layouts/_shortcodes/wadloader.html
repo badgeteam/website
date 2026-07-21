@@ -1,0 +1,91 @@
+{{- /*
+  WAD uploader for the DOOM firmware.
+
+  Shares the flasher's registry and stylesheet, but talks Web Serial rather
+  than WebUSB: DOOM's game data goes into the badge's QSPI flash over YMODEM,
+  not onto the FAT12 drive.
+
+  Usage in a page: call this shortcode by name, with no arguments.
+*/ -}}
+{{- $badges := (index site.Data "firmwares" | default dict).badge | default slice -}}
+{{- $wads := (index ($badges | default slice) 0).wads | default slice -}}
+
+<link rel="stylesheet" href="/flash/flasher.css">
+{{- /* safeJS: see the flasher shortcode — Go would otherwise escape this
+       into a JS string literal rather than leaving it as JSON. */ -}}
+<script type="application/json" id="flasher-config">{{ $badges | jsonify | safeJS }}</script>
+
+<div id="wadloader" class="flasher">
+
+  <noscript>
+    <div class="alert alert-warning">
+      The uploader needs JavaScript. Without it, send the blob yourself with
+      any YMODEM tool, for example <code>sb --ymodem-1k blob /dev/ttyACM0</code>.
+    </div>
+  </noscript>
+
+  <div id="wad-unsupported" class="alert alert-danger d-none">
+    <strong>This browser cannot upload.</strong> Web Serial is required, and
+    only Chromium-family browsers ship it (Chrome, Edge, Brave, Opera, Arc).
+    Firefox and Safari do not. You can still send the blob from a terminal
+    with a YMODEM tool such as <code>sb</code> or <code>lrzsz</code>.
+  </div>
+
+  <section class="flasher-step">
+    <h3><span class="flasher-num">1</span> Choose a WAD</h3>
+    {{- if $wads }}
+    <div class="flasher-row">
+      <select id="wad-select" class="form-select">
+        {{- range $i, $w := $wads }}
+        <option value="{{ $i }}">{{ $w.label }}</option>
+        {{- end }}
+        <option value="">— use a file of my own —</option>
+      </select>
+    </div>
+    {{- end }}
+    <div class="flasher-row">
+      <input type="file" id="wad-file" class="form-control" accept=".blob,.bin,.wad">
+    </div>
+    <p id="wad-info" class="flasher-hint">No WAD chosen yet.</p>
+  </section>
+
+  <section class="flasher-step">
+    <h3><span class="flasher-num">2</span> Put the badge in upload mode</h3>
+    <p>
+      Reset the badge while holding <strong>Cancel</strong>. It does this on
+      its own too, whenever no WAD has been uploaded yet. The screen says it is
+      waiting for a transfer.
+    </p>
+    <div class="flasher-row">
+      <button id="btn-wad-connect" class="btn btn-primary">
+        Connect to the badge
+      </button>
+      <span id="wad-status" class="flasher-status">disconnected</span>
+    </div>
+    <p class="flasher-hint">
+      Pick the badge's serial port when the browser asks — on Linux it is
+      usually <code>/dev/ttyACM0</code>, on macOS a <code>usbmodem</code>
+      entry, on Windows a <code>COM</code> port.
+    </p>
+  </section>
+
+  <section class="flasher-step">
+    <h3><span class="flasher-num">3</span> Upload</h3>
+    <div class="flasher-row">
+      <button id="btn-wad-send" class="btn btn-primary" disabled>Send the WAD</button>
+      <progress id="wad-progress" max="100" value="0"></progress>
+      <span id="wad-progress-label" class="flasher-status">idle</span>
+    </div>
+    <p class="flasher-hint">
+      Nearly two megabytes over a serial line takes a few minutes. Leave the
+      tab in the foreground and do not unplug the badge.
+    </p>
+  </section>
+
+  <details class="flasher-diag">
+    <summary>Diagnostics</summary>
+    <pre id="wad-log" aria-live="polite"></pre>
+  </details>
+</div>
+
+<script src="/flash/ymodem.js" type="module"></script>

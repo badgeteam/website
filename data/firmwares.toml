@@ -12,6 +12,10 @@
 #
 # USB IDs are strings because TOML has no hex integer literal; flasher.js
 # parses them with parseInt(..., 16).
+#
+# A firmware entry may also carry `wad = true`, meaning its game data is not
+# on the FAT12 drive but in the badge's QSPI flash, uploaded over serial from
+# the WAD loader page rather than by the asset step.
 
 [[badge]]
 id = "cyber-aegg"
@@ -66,6 +70,33 @@ appPid = "0x0001"
   file = "/assets/cyber-aegg/cyber-aegg-community-assets.zip"
   sha256 = "992fee1ed791be4e65fe1e0b56553be1880546f3a5fd1bce5cb984ee43e36fb9"
   label = "265 files — everything the standard set has, plus the Community Edition's menu icons, extra action sprites and the Panda pet."
+
+  [[badge.firmware]]
+  label = "DOOM"
+  # Built with `make -f Makefile.doom` in annejan/cyberaegg-doom,
+  # from main @ dbad849 (2026-07-21). Links at 0x10000 like the others.
+  file = "/firmware/cyber-aegg/cyber-aegg-doom.bin"
+  sha256 = "c470cc78b6bf70348c0cd3f0f56e5c9e729867d16c91bfd8d06f18e36d8a4161"
+  notes = "DOOM E1M1, rendered on the e-paper panel at a couple of frames per second, with the level's music on the buzzer. It replaces the badge firmware entirely — no BornPets, mesh or clock until you flash one of those back."
+  # No `assets` table: DOOM ignores the FAT12 drive. Its game data lives in
+  # the 2 MB QSPI flash and is uploaded separately over serial, so the asset
+  # step hides itself for this image.
+  wad = true
+
+# Prepared WAD blobs offered by the loader at ../doom/. Users can always pick
+# a file of their own instead; these are a convenience so nobody has to run
+# the asset pipeline at camp.
+#
+# The blob is *derived* from the freely distributable DOOM shareware episode
+# (trimmed and compressed to fit 2 MB of QSPI) — see
+# LICENSES/LicenseRef-DoomShareware.txt. Do not add blobs built from the
+# commercial episodes or from doom2.wad.
+[[badge.wads]]
+label = "DOOM shareware — E1M1, Knee-Deep in the Dead"
+file = "/doom/cyber-aegg/e1m1.blob"
+size = 1921948
+sha256 = "7fef28876b45cef0563761ca26df0a1cc989e7d20c32f09d71273bbd5df75115"
+notes = "Built from the shareware doom1.wad with the CyberAegg asset pipeline. Roughly 1.8 MiB — about 92% of the badge's QSPI flash, which is why only one level fits."
 
 # Note: do NOT list `cyber-aegg-full.bin` here. That image starts at
 # 0x00000000 and contains the bootloader; it is an SWD / J-Link recovery
