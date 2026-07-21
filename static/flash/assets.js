@@ -11,10 +11,11 @@
 //   B. Write the files straight onto the badge drive with the File System
 //      Access API, so there is no download-and-unzip step at all.
 //
-// For (B) the zip is unpacked in the browser. Rather than ship a zip library,
-// we walk the central directory by hand and inflate each entry with the
-// platform's DecompressionStream — the archive is plain deflate with flat,
-// stored-name entries, which is the easy case.
+// For (B) the zip is unpacked in the browser — see zip.js. This payload is
+// deliberately flat: the badge's FAT12 volume wants every file in its root, so
+// entry names are reduced to their basename on the way out.
+
+import { readCentralDirectory, inflateEntry, sha256Hex } from "./zip.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -56,84 +57,8 @@ const logOk = (m) => logLine(m, "ok");
 const logErr = (m) => logLine(m, "err");
 
 // --------------------------------------------------------------------------
-// Minimal ZIP reader (no zip64 — these archives are a few hundred KiB).
-// --------------------------------------------------------------------------
-
-const SIG_EOCD = 0x06054b50;
-const SIG_CENTRAL = 0x02014b50;
-const SIG_LOCAL = 0x04034b50;
-
-function findEocd(view) {
-  // The EOCD is at the very end, but a trailing comment can push it back by
-  // up to 64 KiB. Scan backwards for the signature.
-  const maxBack = Math.min(view.byteLength, 0xffff + 22);
-  for (let i = view.byteLength - 22; i >= view.byteLength - maxBack; i--) {
-    if (i >= 0 && view.getUint32(i, true) === SIG_EOCD) return i;
-  }
-  throw new Error("not a zip file (no end-of-central-directory record)");
-}
-
-/** @returns {Array<{name: string, method: number, start: number, compressedSize: number}>} */
-function readCentralDirectory(buf) {
-  const view = new DataView(buf);
-  const eocd = findEocd(view);
-  const count = view.getUint16(eocd + 10, true);
-  let ptr = view.getUint32(eocd + 16, true);
-
-  const entries = [];
-  const decoder = new TextDecoder();
-  for (let i = 0; i < count; i++) {
-    if (view.getUint32(ptr, true) !== SIG_CENTRAL) {
-      throw new Error(`corrupt central directory at entry ${i}`);
-    }
-    const method = view.getUint16(ptr + 10, true);
-    const compressedSize = view.getUint32(ptr + 20, true);
-    const nameLen = view.getUint16(ptr + 28, true);
-    const extraLen = view.getUint16(ptr + 30, true);
-    const commentLen = view.getUint16(ptr + 32, true);
-    const localOffset = view.getUint32(ptr + 42, true);
-    const name = decoder.decode(new Uint8Array(buf, ptr + 46, nameLen));
-
-    // The local header repeats the name and may carry a *different* extra
-    // field length, so the data offset has to come from the local header.
-    if (view.getUint32(localOffset, true) !== SIG_LOCAL) {
-      throw new Error(`corrupt local header for ${name}`);
-    }
-    const localNameLen = view.getUint16(localOffset + 26, true);
-    const localExtraLen = view.getUint16(localOffset + 28, true);
-    const start = localOffset + 30 + localNameLen + localExtraLen;
-
-    // Directory entries are stored with a trailing slash and no content.
-    if (!name.endsWith("/")) {
-      entries.push({ name, method, start, compressedSize });
-    }
-    ptr += 46 + nameLen + extraLen + commentLen;
-  }
-  return entries;
-}
-
-async function inflateEntry(buf, entry) {
-  const raw = new Uint8Array(buf, entry.start, entry.compressedSize);
-  if (entry.method === 0) return raw; // stored
-  if (entry.method !== 8) {
-    throw new Error(`${entry.name}: unsupported compression method ${entry.method}`);
-  }
-  const stream = new Blob([raw])
-    .stream()
-    .pipeThrough(new DecompressionStream("deflate-raw"));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
-}
-
-// --------------------------------------------------------------------------
 // Copying to the badge drive
 // --------------------------------------------------------------------------
-
-async function sha256Hex(bytes) {
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return [...new Uint8Array(digest)]
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-}
 
 async function wipeDirectory(dir) {
   const names = [];

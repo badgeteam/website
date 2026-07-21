@@ -35,10 +35,17 @@ reboot it. The battery keeps the badge powered when USB is unplugged, so a reset
 is the reliable way to hand off to the new firmware.
 {{% /alert %}}
 
+## Install the libraries
+
+None of the examples run without the support libraries — importing
+`cyberaegg_epd` or the LoRa driver fails until they are in `CIRCUITPY/lib`. Put
+them there first:
+
+{{< pylib >}}
+
 ## Your first program
 
-Copy `lib/cyberaegg_epd.py` into `CIRCUITPY/lib/`, then save this as
-`CIRCUITPY/code.py`:
+With the libraries installed, save this as `CIRCUITPY/code.py`:
 
 ```python
 import cyberaegg_epd
@@ -121,8 +128,8 @@ The SX1262 radio has a driver in the repository's `lib/`, configured for
 MeshCore-compatible EU settings: 869.618 MHz, SF8, 62.5 kHz bandwidth, coding
 rate 4/5, sync word `0x1424`, no TCXO.
 
-Copy `cyberaegg_lora.py` along with `sx1262.py`, `sx126x.py` and `_sx126x.py`
-into `CIRCUITPY/lib/`:
+The driver and the SX126x files it needs are part of the library set installed
+[above](#install-the-libraries), so there is nothing more to copy:
 
 ```python
 import cyberaegg_lora

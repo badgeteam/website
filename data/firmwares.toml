@@ -104,6 +104,18 @@ appPid = "0x0001"
   moreLabel = "Getting started with CircuitPython →"
   nextStep = "CircuitPython has no asset bundle to copy. Once it is flashed the badge mounts as a CIRCUITPY drive instead, and you drop your own Python files onto that — starting with a library and an example."
 
+  # Support libraries for the CIRCUITPY drive, offered by the installer on
+  # ../circuitpython/. Unlike the badge's own asset archives this one has
+  # structure — it carries lib/ and lib/adafruit_display_text/ — so the paths
+  # are preserved on extraction rather than flattened.
+  #
+  # Built from the repository root so the paths come out right:
+  #   zip -rX -9 <out>.zip lib
+  [badge.firmware.pylib]
+  file = "/assets/cyber-aegg/cyberaegg-circuitpython-lib.zip"
+  sha256 = "8905601ff13fa069770ded3a6007a96f2e88475e7f31714a46fc41d5bd734bf5"
+  label = "The e-paper and LoRa drivers, plus adafruit_display_text for drawing labels."
+
 # Prepared WAD blobs offered by the loader at ../doom/. Users can always pick
 # a file of their own instead; these are a convenience so nobody has to run
 # the asset pipeline at camp.
