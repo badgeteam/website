@@ -1,0 +1,70 @@
+{{- /*
+  Installs the CircuitPython support libraries onto the CIRCUITPY drive.
+
+  Reads the `pylib` table from whichever firmware entry in data/firmwares.toml
+  declares one, so the archive and its checksum live with the rest of the
+  payload registry.
+
+  Usage in a page: call this shortcode by name, with no arguments.
+*/ -}}
+{{- $badges := (index site.Data "firmwares" | default dict).badge | default slice -}}
+{{- $payload := dict -}}
+{{- range $badges }}
+  {{- range .firmware }}
+    {{- with .pylib }}{{ $payload = . }}{{ end }}
+  {{- end }}
+{{- end }}
+
+{{- if $payload }}
+<link rel="stylesheet" href="/flash/flasher.css">
+{{- /* safeJS: see the flasher shortcode — otherwise Go escapes this into a JS
+       string literal and JSON.parse hands back a string. */ -}}
+<script type="application/json" id="pylib-config">{{ $payload | jsonify | safeJS }}</script>
+
+<div id="pylib" class="flasher">
+  <section class="flasher-step">
+    <h3>Install the libraries</h3>
+    <p>
+      {{ $payload.label }} They go in a <code>lib</code> folder in the root of
+      the <code>CIRCUITPY</code> drive, which this creates for you.
+    </p>
+
+    <div class="flasher-row">
+      <button id="btn-pylib-copy" class="btn btn-primary">
+        Copy the libraries to CIRCUITPY
+      </button>
+      <progress id="pylib-progress" max="1" value="0"></progress>
+      <span id="pylib-progress-label" class="flasher-status">idle</span>
+    </div>
+
+    <div id="pylib-fs-warning" class="alert alert-warning d-none">
+      This browser has no File System Access API, so it cannot write to the
+      drive directly. Download the zip instead and unpack it into the root of
+      the drive — it already contains the <code>lib</code> folder.
+    </div>
+
+    <div class="flasher-row">
+      <a id="pylib-zip" class="btn btn-secondary" href="#" download>
+        Download the library zip
+      </a>
+    </div>
+    <p class="flasher-hint">
+      Pick the <code>CIRCUITPY</code> drive when the browser asks — not the
+      <code>CYBR…</code> drive, which is the badge's own storage and only
+      appears in DFU mode.
+    </p>
+
+    <details class="flasher-diag">
+      <summary>Diagnostics</summary>
+      <pre id="pylib-log" aria-live="polite"></pre>
+    </details>
+  </section>
+</div>
+
+<script src="/flash/pylib.js" type="module"></script>
+{{- else }}
+<div class="alert alert-warning">
+  No library archive is registered. Add a <code>pylib</code> table to
+  <code>data/firmwares.toml</code>.
+</div>
+{{- end }}
