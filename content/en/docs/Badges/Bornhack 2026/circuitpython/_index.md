@@ -57,6 +57,23 @@ For text, the firmware includes `terminalio` and `fontio`, so
 `adafruit_display_text` can draw labels — it is bundled in the repository's
 `lib/`.
 
+## The serial console
+
+CircuitPython prints `print()` output and tracebacks to a USB serial console,
+and offers a REPL there. That console is where you find out *why* a program did
+not run — errors never appear on the display.
+
+You can open it right here, without installing a terminal program:
+
+{{< repl >}}
+
+**Ctrl-C** interrupts whatever is running and gives you the `>>>` prompt, where
+you can poke at the hardware a line at a time. **Ctrl-D** restarts `code.py`
+from the top, which is the quickest way to re-run after an edit.
+
+The console is only available while CircuitPython is installed — it is the
+firmware that provides it, not the bootloader.
+
 ## Working with the e-paper display
 
 E-paper is the one part that does not behave like a normal screen, and most

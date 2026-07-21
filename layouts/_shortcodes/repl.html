@@ -1,0 +1,51 @@
+{{- /*
+  Serial console for CircuitPython on the badge.
+
+  Web Serial, like the WAD loader — but a plain terminal rather than a file
+  transfer. Needs no firmware registry, so it takes no data and no arguments.
+
+  Usage in a page: call this shortcode by name, with no arguments.
+*/ -}}
+
+<link rel="stylesheet" href="/flash/flasher.css">
+
+<div id="repl" class="flasher">
+
+  <noscript>
+    <div class="alert alert-warning">
+      The console needs JavaScript. Any serial terminal will do instead, for
+      example <code>screen /dev/ttyACM0 115200</code>.
+    </div>
+  </noscript>
+
+  <div id="repl-unsupported" class="alert alert-danger d-none">
+    <strong>This browser has no serial support.</strong> Web Serial is required,
+    and only Chromium-family browsers ship it (Chrome, Edge, Brave, Opera, Arc).
+    Firefox and Safari do not. Use a terminal program instead —
+    <code>screen /dev/ttyACM0 115200</code>, <code>picocom</code>, or PuTTY on
+    Windows.
+  </div>
+
+  <div class="flasher-row">
+    <button id="btn-repl-connect" class="btn btn-primary">Connect to the badge</button>
+    <span id="repl-status" class="flasher-status">disconnected</span>
+    <button id="btn-repl-ctrlc" class="btn btn-secondary btn-sm" disabled
+            title="Interrupt the running program and get a REPL prompt">Ctrl-C</button>
+    <button id="btn-repl-ctrld" class="btn btn-secondary btn-sm" disabled
+            title="Soft reboot: re-run code.py from the start">Ctrl-D</button>
+    <button id="btn-repl-clear" class="btn btn-secondary btn-sm">Clear</button>
+  </div>
+
+  {{- /* tabindex makes the terminal focusable so it can take key events. */}}
+  <pre id="repl-term" class="repl-term" tabindex="0" role="log" aria-live="polite"
+       aria-label="CircuitPython serial console"></pre>
+
+  <p class="flasher-hint">
+    Click the console to type into it. <strong>Ctrl-C</strong> stops the running
+    program and drops you at the <code>&gt;&gt;&gt;</code> prompt;
+    <strong>Ctrl-D</strong> restarts <code>code.py</code> from the top. Paste
+    works as usual.
+  </p>
+</div>
+
+<script src="/flash/repl.js" type="module"></script>
