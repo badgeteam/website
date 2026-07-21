@@ -33,12 +33,22 @@ appPid = "0x0001"
 
   [[badge.firmware]]
   label = "Cyber Ægg application (release)"
-  # Built with `make fw-bin-release` in Ranzbak/bornhack-firmware-2026.
+  # Built with `make fw-bin-release` in Ranzbak/bornhack-firmware-2026,
+  # from main @ 392ed6d (2026-07-21).
   file = "/firmware/cyber-aegg/cyber-aegg.bin"
   # Optional integrity check — verified in the browser before writing.
   # Generate with: sha256sum <file>
-  sha256 = "cb17f04f227e4d1c0e6e0861fbf06e3ecf86e68d79005159bfc21a387efafeb4"
+  sha256 = "9d23b50eab3797b49e632e97c159a8416168e6853bcd43fc9f685aab1ffe0004"
   notes = "The normal badge firmware: BornPets, mesh, clock and calendar."
+
+  # Asset payload for the badge's USB drive. Built from assets/to-badge/ in
+  # the firmware repository:  cd assets/to-badge && zip -rX -9 <out>.zip .
+  # Flat deflate entries only — static/flash/assets.js unpacks it in the
+  # browser with DecompressionStream and cannot handle zip64.
+  [badge.assets]
+  file = "/assets/cyber-aegg/cyber-aegg-assets.zip"
+  sha256 = "92bd4c269feb7988cf7855e863f06a8ce9b1a87203233382cacec078a594df77"
+  label = "171 files — pet sprites, sponsor slides, menu icons and the BornHack programme."
 
 # Note: do NOT list `cyber-aegg-full.bin` here. That image starts at
 # 0x00000000 and contains the bootloader; it is an SWD / J-Link recovery

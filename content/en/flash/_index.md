@@ -11,7 +11,8 @@ weight: 25
 
 Flash firmware onto your badge straight from this page — no toolchain, no
 drivers, no command line. The browser talks to the badge over USB and writes
-the image itself.
+the image itself, and it can install the badge's asset files in the same
+sitting.
 
 {{% alert title="Chromium-family browsers only" color="warning" %}}
 This uses [WebUSB](https://developer.mozilla.org/en-US/docs/Web/API/USB), which
@@ -45,6 +46,17 @@ badge sitting in DFU mode. Reconnect and flash again.
 it and was refused before anything was written. Reload the page and retry; if it
 persists, report it.
 
+**The badge says "No sprites on flash".** The firmware is installed but the
+asset files are not. Do step 5 above, then power-cycle.
+
+**No drive appears to copy assets onto.** The badge only exposes its USB drive
+in DFU mode, the same mode you flash from. If you already power-cycled to boot
+the new firmware, go back into DFU mode.
+
+**The copy finished but the badge still looks empty.** Eject the drive in your
+file manager before unplugging. Until you do, the writes may still be sitting in
+your operating system's cache rather than on the badge.
+
 ## Flashing without a browser
 
 Every image offered here is a plain `.bin` for the application partition, so
@@ -60,6 +72,14 @@ The flasher is driven entirely by `data/firmwares.toml` in the
 [website repository](https://github.com/badgeteam/website). Add the image under
 `static/firmware/<badge-id>/`, record it in that file together with its
 `sha256sum`, and it appears here — there is no backend to deploy.
+
+Asset payloads work the same way. Build the archive with flat, deflate-compressed
+entries, drop it in `static/assets/<badge-id>/`, and point the badge's `assets`
+entry at it:
+
+```
+cd assets/to-badge && zip -rX -9 cyber-aegg-assets.zip .
+```
 
 Two constraints worth knowing:
 

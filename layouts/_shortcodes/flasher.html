@@ -92,6 +92,51 @@
     </div>
   </section>
 
+  <section class="flasher-step" id="assets-card">
+    <h3><span class="flasher-num">5</span> Add the asset files</h3>
+    <p>
+      Firmware alone leaves the badge without artwork. In DFU mode it also
+      appears as a small USB drive named <code>CYBR</code> followed by four hex
+      digits; the sprites, sponsor slides and the event programme belong in the
+      root of that drive.
+    </p>
+    <p id="assets-summary" class="flasher-hint"></p>
+
+    <h4 class="flasher-sub">Copy them straight to the drive</h4>
+    <p class="flasher-hint">
+      Pick the <code>CYBR…</code> drive when your browser asks, and the files
+      are written for you — no download, no unzipping.
+    </p>
+    <div class="flasher-row">
+      <button id="btn-copy-assets" class="btn btn-primary">
+        Copy assets to the badge drive
+      </button>
+      <label class="flasher-check">
+        <input type="checkbox" id="chk-wipe">
+        Erase everything on the drive first
+      </label>
+    </div>
+    <div class="flasher-row">
+      <progress id="assets-progress" max="1" value="0"></progress>
+      <span id="assets-progress-label" class="flasher-status">idle</span>
+    </div>
+    <div id="assets-fs-warning" class="alert alert-warning d-none">
+      This browser has no File System Access API, so it cannot write to the
+      drive directly. Download the zip below instead.
+    </div>
+
+    <h4 class="flasher-sub">Or download the zip</h4>
+    <div class="flasher-row">
+      <a id="assets-zip" class="btn btn-secondary" href="#" download>
+        Download the asset zip
+      </a>
+    </div>
+    <p class="flasher-hint">
+      Unpack it into the <em>root</em> of the badge drive, not into a
+      subfolder. Eject the drive when you are done, then power-cycle the badge.
+    </p>
+  </section>
+
   <details class="flasher-diag">
     <summary>Diagnostics</summary>
     <div class="flasher-row">
@@ -104,3 +149,4 @@
 </div>
 
 <script src="/flash/flasher.js" type="module"></script>
+<script src="/flash/assets.js" type="module"></script>
