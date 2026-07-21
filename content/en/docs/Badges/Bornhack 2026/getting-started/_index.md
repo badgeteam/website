@@ -92,7 +92,9 @@ Reboot the badge after copying files (re-plug USB) for the changes to take effec
 
 ## Firmware update
 
-Hold **Execute** while plugging in USB to enter the bootloader (DFU) mode — the LED blinks red. You can then flash a new firmware image with [`dfu-util`](https://dfu-util.sourceforge.net/):
+The easiest route is the [Flash page](../flash/): it writes the firmware and the badge's asset files straight from a Chromium-family browser, with no toolchain to install.
+
+To do it by hand, hold **Execute** while plugging in USB to enter the bootloader (DFU) mode — the LED blinks red. You can then flash a new firmware image with [`dfu-util`](https://dfu-util.sourceforge.net/):
 
 ```
 dfu-util -d 1915:521f -D cyber-aegg.bin

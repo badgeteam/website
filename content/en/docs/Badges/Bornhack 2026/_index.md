@@ -37,7 +37,7 @@ There is a QWIIC like I2C expansion connector on the board. Be aware that we mad
 New to the badge? Start with the [Getting started](./getting-started/) guide. Curious about the virtual pet? See [Games](./games/). Want to know what is inside? See the [Hardware](./hardware/) page.
 
 {{% alert title="Update your badge from the browser" color="info" %}}
-The [**Flash** page](/flash/) installs firmware and the badge's asset files straight from a Chromium-family browser over USB — no toolchain and no command line. It offers both the standard firmware and the Community Edition, a fork with extra BornPets mechanics.
+The [**Flash** page](./flash/) installs firmware and the badge's asset files straight from a Chromium-family browser over USB — no toolchain and no command line. It offers both the standard firmware and the Community Edition, a fork with extra BornPets mechanics.
 {{% /alert %}}
 
 ## Source code
