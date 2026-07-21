@@ -48,6 +48,37 @@ path = [
 SPDX-FileCopyrightText = "Stichting Badge.Team"
 SPDX-License-Identifier = "CC-BY-4.0"
 
+# ---- Web flasher: browser code, not prose (MIT, like the rest of our code) --
+[[annotations]]
+path = "static/flash/**"
+precedence = "override"
+SPDX-FileCopyrightText = "Stichting Badge.Team"
+SPDX-License-Identifier = "MIT"
+
+# ---------------------------------------------------------------------------
+# Flashable firmware images served by /flash/. These are build artefacts of
+# the badge firmware projects, redistributed here so the browser flasher can
+# fetch them same-origin; they are not our content.
+# ---------------------------------------------------------------------------
+[[annotations]]
+path = "static/firmware/cyber-aegg/**"
+precedence = "override"
+SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# Asset payload for the badge's USB drive, built from assets/to-badge/ in the
+# CyberÆgg firmware repository. NOTE: besides the project's own artwork this
+# archive embeds 16 sponsor slides (030000–03000F) reproducing the logos of
+# the BornHack and badge sponsors. Those remain the trademarks of their
+# respective owners and are redistributed here, as in the firmware project,
+# with their permission — the identifier below covers the archive as a whole,
+# not the sponsors' marks.
+[[annotations]]
+path = "static/assets/cyber-aegg/**"
+precedence = "override"
+SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors and the BornHack badge sponsors"
+SPDX-License-Identifier = "Apache-2.0"
+
 # ---------------------------------------------------------------------------
 # Third-party sponsor logos — trademarks of their respective owners.
 # These override the broad content/** rule above.
