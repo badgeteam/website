@@ -11,11 +11,17 @@
 //   B. Write the files straight onto the badge drive with the File System
 //      Access API, so there is no download-and-unzip step at all.
 //
-// For (B) the zip is unpacked in the browser — see zip.js. This payload is
-// deliberately flat: the badge's FAT12 volume wants every file in its root, so
-// entry names are reduced to their basename on the way out.
+// For (B) the zip is unpacked in the browser — see zip.js. The badge's own
+// archives are flat, since its FAT12 volume wants everything in the root, but
+// CircuitPython's libraries live under lib/, so any directories in the archive
+// are recreated. safePath() keeps that from escaping the chosen folder.
 
-import { readCentralDirectory, inflateEntry, sha256Hex } from "./zip.js";
+import {
+  readCentralDirectory,
+  inflateEntry,
+  safePath,
+  sha256Hex,
+} from "./zip.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -37,12 +43,18 @@ const el = {
   progress: $("assets-progress"),
   progLabel: $("assets-progress-label"),
   log: $("log"),
+  intro: $("assets-intro"),
+  driveHint: $("assets-drive-hint"),
   elsewhere: $("assets-elsewhere"),
   elsewhereText: $("assets-elsewhere-text"),
   elsewhereLink: $("assets-elsewhere-link"),
 };
 
 let badge = badges[0];
+
+// Kept so the wording can be restored when switching back to an image that
+// does not override it.
+const DEFAULT_INTRO = el.intro ? el.intro.textContent : "";
 
 function logLine(msg, cls) {
   if (!el.log) return;
@@ -59,6 +71,15 @@ const logErr = (m) => logLine(m, "err");
 // --------------------------------------------------------------------------
 // Copying to the badge drive
 // --------------------------------------------------------------------------
+
+/** Walk down, creating as needed, to the directory an entry belongs in. */
+async function ensureDir(root, dirs) {
+  let handle = root;
+  for (const part of dirs) {
+    handle = await handle.getDirectoryHandle(part, { create: true });
+  }
+  return handle;
+}
 
 async function wipeDirectory(dir) {
   const names = [];
@@ -125,16 +146,18 @@ async function copyToBadge() {
 
     for (let i = 0; i < entries.length; i++) {
       const entry = entries[i];
+      const path = safePath(entry.name);
+      if (!path) {
+        logErr(`skipped a suspicious path: ${entry.name}`);
+        continue;
+      }
       const data = await inflateEntry(buf, entry);
-      // Entries are flat filenames; guard anyway so a crafted archive cannot
-      // escape the directory the user picked.
-      const name = entry.name.split("/").pop();
-      if (!name || name === "." || name === "..") continue;
-      const handle = await root.getFileHandle(name, { create: true });
+      const dir = await ensureDir(root, path.dirs);
+      const handle = await dir.getFileHandle(path.name, { create: true });
       const writable = await handle.createWritable();
       await writable.write(data);
       await writable.close();
-      setProgress(i + 1, entries.length, `${i + 1}/${entries.length} ${name}`);
+      setProgress(i + 1, entries.length, `${i + 1}/${entries.length} ${path.name}`);
     }
 
     setProgress(entries.length, entries.length, "done — now eject the drive");
@@ -188,6 +211,16 @@ function refresh() {
   card.classList.remove("d-none");
   el.zipLink.href = assets.file;
   el.summary.textContent = assets.label || "";
+
+  // CircuitPython's libraries go to CIRCUITPY, not the badge's own CYBR
+  // volume, so let the payload override the wording rather than sending
+  // people to the wrong drive.
+  if (assets.intro) el.intro.textContent = assets.intro;
+  else el.intro.textContent = DEFAULT_INTRO;
+  const drive = assets.drive ? `${assets.drive}` : "CYBR…";
+  el.driveHint.textContent =
+    `Pick the ${drive} drive when your browser asks, and the files are written for you — no download, no unzipping.`;
+
   setProgress(0, 1, "idle");
 }
 
