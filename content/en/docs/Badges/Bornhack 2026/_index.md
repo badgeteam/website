@@ -47,6 +47,11 @@ The Cyber Ægg is open source. Both the hardware design and the firmware live on
 * Hardware (KiCad) — [Ranzbak/bornhack2026-hardware](https://codeberg.org/Ranzbak/bornhack2026-hardware)
 * Firmware (Rust / Embassy) — [Ranzbak/bornhack-firmware-2026](https://codeberg.org/Ranzbak/bornhack-firmware-2026)
 
+The [Flash page](./flash/) also offers two alternative images, each with its own home:
+
+* Community Edition — [ShadowSquad-org/BornHack-Cyberegg](https://github.com/ShadowSquad-org/BornHack-Cyberegg), a fork with extra BornPets mechanics
+* [DOOM](./doom/) — [rarenerd/cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom), a bare-metal port of the DOOM engine
+
 # Hardware sponsors
 
 <p align="justify">
