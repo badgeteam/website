@@ -66,6 +66,25 @@ precedence = "override"
 SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors"
 SPDX-License-Identifier = "Apache-2.0"
 
+# The DOOM image is a different beast: it links the prBoom / next-hack DOOM
+# engine, so the linked binary is GPL rather than Apache-2.0.
+[[annotations]]
+path = "static/firmware/cyber-aegg/cyber-aegg-doom.bin"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Kristian Vlaardingerbroek, id Software LLC and the prBoom, GBADoom and next-hack contributors"
+SPDX-License-Identifier = "GPL-2.0-or-later"
+
+# ---------------------------------------------------------------------------
+# DOOM game data. Derived from the freely distributable shareware episode and
+# offered so badge owners can load the game onto their own hardware; it is not
+# ours and is not covered by the project's licenses. See the LicenseRef text.
+# ---------------------------------------------------------------------------
+[[annotations]]
+path = "static/doom/**"
+precedence = "override"
+SPDX-FileCopyrightText = "id Software LLC"
+SPDX-License-Identifier = "LicenseRef-DoomShareware"
+
 # Asset payloads for the badge's USB drive, built from assets/to-badge/ in the
 # respective firmware repositories.
 #

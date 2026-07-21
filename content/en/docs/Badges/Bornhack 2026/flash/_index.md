@@ -45,6 +45,10 @@ persists, report it.
 **The badge says "No sprites on flash".** The firmware is installed but the
 asset files are not. Do step 5 above, then power-cycle.
 
+**I flashed DOOM and step 5 disappeared.** Expected: DOOM ignores the USB drive
+entirely. Its game data goes into the badge's QSPI flash instead — see
+[DOOM](../doom/) for the WAD upload.
+
 **Sprites are missing or wrong after switching edition.** Each firmware image
 ships its own asset set, and the Community Edition draws a good deal more than
 the standard one. Install the assets that belong to the image you flashed —
