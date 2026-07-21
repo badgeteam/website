@@ -74,9 +74,39 @@ function feed(text) {
     }
   }
   render();
+  noteOutput(text);
 }
 
 const sysMsg = (msg) => feed(`\r\n[${msg}]\r\n`);
+
+// Lets the paste path wait for something the badge prints back. Matching is
+// done on a rolling tail rather than the whole buffer, so a phrase left over
+// from an earlier paste cannot satisfy a later wait.
+let watcher = null;
+let recentOutput = "";
+
+function noteOutput(text) {
+  if (!watcher) return;
+  recentOutput = (recentOutput + text).slice(-256);
+  if (recentOutput.includes(watcher.needle)) {
+    const w = watcher;
+    watcher = null;
+    w.resolve(true);
+  }
+}
+
+function waitForText(needle, timeoutMs) {
+  recentOutput = "";
+  return new Promise((resolve) => {
+    watcher = { needle, resolve };
+    setTimeout(() => {
+      if (watcher?.resolve === resolve) {
+        watcher = null;
+        resolve(false);
+      }
+    }, timeoutMs);
+  });
+}
 
 // --------------------------------------------------------------------------
 // Web Serial
@@ -95,6 +125,43 @@ function setConnected(on) {
   el.btnCtrlC.disabled = !on;
   el.btnCtrlD.disabled = !on;
   el.btnPaste.disabled = !on;
+}
+
+// The REPL takes carriage return as Enter and ignores a bare line feed, so
+// clipboard text pasted verbatim arrives as one run-on line. Translate every
+// flavour of line ending to CR.
+const toCr = (text) => text.replace(/\r\n|\r|\n/g, "\r");
+
+/**
+ * Paste text as a human would, but without the damage.
+ *
+ * Sending multi-line code straight at the prompt gets it mangled: the REPL
+ * echoes its own indentation after `if x:` and friends, which compounds with
+ * the indentation already in the text. CircuitPython has paste mode for
+ * exactly this — Ctrl-E in, Ctrl-D to run — where it takes the text literally.
+ *
+ * Ctrl-D only means "execute" *inside* paste mode; at a normal prompt it is a
+ * soft reboot. So we confirm the badge really entered paste mode before
+ * sending it, and fall back to a plain paste if it did not.
+ */
+async function sendPaste(text) {
+  const body = toCr(text);
+  if (!body.includes("\r")) {
+    await send(body); // single line — nothing to protect it from
+    return;
+  }
+
+  await send("\x05"); // Ctrl-E
+  if (await waitForText("paste mode", 750)) {
+    await send(body);
+    await send("\x04"); // Ctrl-D — runs it, because we are in paste mode
+    return;
+  }
+
+  // No paste mode: maybe a program is running, or this is not a REPL at all.
+  // Send the text as-is and leave the trailing Ctrl-D well alone.
+  sysMsg("could not enter paste mode — pasting line by line instead");
+  await send(body);
 }
 
 // Ctrl-V already works once the terminal has focus, via the paste event. The
@@ -117,7 +184,7 @@ async function pasteFromClipboard() {
     sysMsg("the clipboard is empty");
     return;
   }
-  await send(text);
+  await sendPaste(text);
   term.focus();
 }
 
@@ -239,7 +306,7 @@ term.addEventListener("keydown", (e) => {
 term.addEventListener("paste", (e) => {
   if (!connected) return;
   e.preventDefault();
-  send(e.clipboardData.getData("text"));
+  sendPaste(e.clipboardData.getData("text"));
 });
 
 // --------------------------------------------------------------------------
