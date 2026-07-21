@@ -505,6 +505,16 @@ function updateFlashButton() {
 function renderFirmwareNotes() {
   const fw = selectedFirmware();
   el.fwNotes.textContent = fw?.notes || "";
+  // Some images need a follow-up step elsewhere (DOOM wants its WAD), so let
+  // the registry attach a link. Built as an element rather than injected as
+  // markup, so the notes stay plain text.
+  if (fw?.moreUrl) {
+    el.fwNotes.appendChild(document.createTextNode(" "));
+    const a = document.createElement("a");
+    a.href = fw.moreUrl;
+    a.textContent = fw.moreLabel || "Read more →";
+    el.fwNotes.appendChild(a);
+  }
 }
 
 function selectBadge(idx) {
