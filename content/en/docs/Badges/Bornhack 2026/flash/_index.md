@@ -1,12 +1,8 @@
 ---
 title: "Flash your badge"
 linkTitle: "Flash"
-menu:
-  main:
-    weight: 25
-    pre: <i class='fas fa-bolt'></i>
 nodateline: true
-weight: 25
+weight: 9
 ---
 
 Flash firmware onto your badge straight from this page — no toolchain, no
