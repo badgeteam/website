@@ -73,7 +73,7 @@ appPid = "0x0001"
 
   [[badge.firmware]]
   label = "DOOM"
-  # Built with `make -f Makefile.doom` in annejan/cyberaegg-doom,
+  # Built with `make -f Makefile.doom` in rarenerd/cyberaegg-doom,
   # from main @ dbad849 (2026-07-21). Links at 0x10000 like the others.
   file = "/firmware/cyber-aegg/cyber-aegg-doom.bin"
   sha256 = "c470cc78b6bf70348c0cd3f0f56e5c9e729867d16c91bfd8d06f18e36d8a4161"

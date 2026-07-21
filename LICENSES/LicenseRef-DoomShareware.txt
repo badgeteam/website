@@ -8,7 +8,7 @@ The asset blob distributed here is derived from the freely distributable
 DOOM shareware episode ("Knee-Deep in the Dead", doom1.wad): the level and
 graphics lumps for E1M1 have been trimmed, re-packed and compressed by the
 CyberAegg DOOM asset pipeline (tools/wad*.py in
-https://github.com/annejan/cyberaegg-doom) so that they fit the badge's
+https://codeberg.org/rarenerd/cyberaegg-doom) so that they fit the badge's
 2 MB QSPI flash. It contains no data from the commercial DOOM episodes.
 
 id Software's shareware terms permit the shareware episode to be copied and

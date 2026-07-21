@@ -77,7 +77,7 @@ sb --ymodem-1k e1m1.blob < /dev/ttyACM0 > /dev/ttyACM0
 Only one level fits: the blob offered above is about 1.8 MiB, roughly 92% of the
 badge's QSPI flash. It is built from the freely distributable **shareware**
 `doom1.wad`, trimmed and compressed by the asset pipeline in the
-[cyberaegg-doom](https://github.com/annejan/cyberaegg-doom) repository. DOOM and
+[cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom) repository. DOOM and
 its game data remain the property of id Software.
 
 To build your own from a copy of `doom1.wad` you already have:
@@ -90,7 +90,7 @@ Then pick that file in the loader instead of the prepared one.
 
 ## Source
 
-The port lives at [annejan/cyberaegg-doom](https://github.com/annejan/cyberaegg-doom).
+The port lives at [rarenerd/cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom).
 It is a fork of [next-hack/nRF52840Doom](https://github.com/next-hack/nRF52840Doom)
 (of prBoom and GBADoom lineage), re-fitted to the badge's e-paper display,
 buttons and power budget. The DOOM engine is licensed under the GPL.
