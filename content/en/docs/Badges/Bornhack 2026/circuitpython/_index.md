@@ -51,7 +51,13 @@ display = cyberaegg_epd.get_display()
 
 The example `epd_hello.py` draws a bordered white field with a black and a red
 square; `hwtest.py` walks through the LED, buzzer, charger, battery, I²C and all
-the buttons. Both are in the repository's `examples/` directory.
+the buttons.
+
+**→ [Browse all the examples](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/examples)**
+· [the libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/lib)
+
+Copy any of them into the console below with **Paste**, or save one as
+`code.py` on the drive.
 
 For text, the firmware includes `terminalio` and `fontio`, so
 `adafruit_display_text` can draw labels — it is bundled in the repository's
@@ -169,7 +175,10 @@ last one and the request is ignored. Wait out the interval, or use
 ## Source
 
 The firmware, library and examples live at
-[rarenerd/cyberaegg-circuitpython](https://codeberg.org/rarenerd/cyberaegg-circuitpython).
+[rarenerd/cyberaegg-circuitpython](https://codeberg.org/rarenerd/cyberaegg-circuitpython)
+— go straight to the
+[examples](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/examples)
+or the [libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/lib).
 The image offered on the Flash page is that repository's prebuilt binary, byte
 for byte — its checksum matches the `SHA256SUMS` published alongside it. Build
 instructions are in the repository's `docs/BUILDING.md`.
