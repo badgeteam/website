@@ -49,6 +49,11 @@ persists, report it.
 **The badge says "No sprites on flash".** The firmware is installed but the
 asset files are not. Do step 5 above, then power-cycle.
 
+**Sprites are missing or wrong after switching edition.** Each firmware image
+ships its own asset set, and the Community Edition draws a good deal more than
+the standard one. Install the assets that belong to the image you flashed —
+step 5 follows your choice in step 3 automatically.
+
 **No drive appears to copy assets onto.** The badge only exposes its USB drive
 in DFU mode, the same mode you flash from. If you already power-cycled to boot
 the new firmware, go back into DFU mode.

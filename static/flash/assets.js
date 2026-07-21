@@ -27,6 +27,7 @@ if (badges.length === 0) throw new Error("assets: no badges registered");
 
 const el = {
   badgeSelect: $("badge-select"),
+  fwSelect: $("firmware-select"),
   zipLink: $("assets-zip"),
   summary: $("assets-summary"),
   btnCopy: $("btn-copy-assets"),
@@ -149,8 +150,17 @@ function setProgress(value, max, label) {
   el.progLabel.textContent = label;
 }
 
+/**
+ * Assets belong to a firmware image, not to the badge: editions ship
+ * different sprite sets, and installing the wrong one leaves gaps.
+ */
+function currentAssets() {
+  const fw = badge?.firmware?.[Number(el.fwSelect.value)];
+  return fw?.assets || null;
+}
+
 async function copyToBadge() {
-  const assets = badge.assets;
+  const assets = currentAssets();
   if (!assets) return;
 
   // Ask for the directory *first*: the picker must be opened directly from
@@ -221,10 +231,8 @@ function syncWipeLabel() {
   el.btnCopy.classList.toggle("btn-primary", !el.chkWipe.checked);
 }
 
-function selectBadge(idx) {
-  badge = badges[idx] || badges[0];
-  const assets = badge.assets;
-
+function refresh() {
+  const assets = currentAssets();
   if (!assets) {
     card.classList.add("d-none");
     return;
@@ -244,9 +252,14 @@ if (!haveFsAccess) {
 }
 
 el.chkWipe.addEventListener("change", syncWipeLabel);
-el.badgeSelect.addEventListener("change", (e) =>
-  selectBadge(Number(e.target.value)),
-);
+el.fwSelect.addEventListener("change", refresh);
+// flasher.js repopulates the firmware list on a badge change; it registers
+// its listener first (its module loads first), so by the time this one runs
+// the new list is already in place.
+el.badgeSelect.addEventListener("change", (e) => {
+  badge = badges[Number(e.target.value)] || badges[0];
+  refresh();
+});
 
 syncWipeLabel();
-selectBadge(0);
+refresh();

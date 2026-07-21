@@ -41,14 +41,31 @@ appPid = "0x0001"
   sha256 = "9d23b50eab3797b49e632e97c159a8416168e6853bcd43fc9f685aab1ffe0004"
   notes = "The normal badge firmware: BornPets, mesh, clock and calendar."
 
-  # Asset payload for the badge's USB drive. Built from assets/to-badge/ in
-  # the firmware repository:  cd assets/to-badge && zip -rX -9 <out>.zip .
+  # Asset payload for the badge's USB drive, tied to this image — editions
+  # ship different sprite sets, so flashing one and installing the other's
+  # assets leaves gaps. Built from assets/to-badge/ in the firmware
+  # repository:  cd assets/to-badge && zip -rX -9 <out>.zip .
   # Flat deflate entries only — static/flash/assets.js unpacks it in the
   # browser with DecompressionStream and cannot handle zip64.
-  [badge.assets]
+  [badge.firmware.assets]
   file = "/assets/cyber-aegg/cyber-aegg-assets.zip"
   sha256 = "92bd4c269feb7988cf7855e863f06a8ce9b1a87203233382cacec078a594df77"
   label = "171 files — pet sprites, sponsor slides, menu icons and the BornHack programme."
+
+  [[badge.firmware]]
+  label = "Cyber Ægg Community Edition (release)"
+  # Built with `make fw-bin-release` in annejan/BornHack-Cyberegg,
+  # from main @ bd5918d (v0.2.0, 2026-07-21).
+  file = "/firmware/cyber-aegg/cyber-aegg-community.bin"
+  sha256 = "a1db38eb67c2a776cead7798896e71ded5a9aa361ef0359b36f7a0d58d8098cb"
+  notes = "A community fork of the badge firmware. Everything the standard image does, plus extra BornPets mechanics: weight and exercise, food and drink choices, the HAX in-game economy, mesh Battles and a fourth pet."
+
+  # The Community Edition draws far more sprites (menu icons, the extra
+  # actions, the Panda pet), so it needs its own, larger asset set.
+  [badge.firmware.assets]
+  file = "/assets/cyber-aegg/cyber-aegg-community-assets.zip"
+  sha256 = "992fee1ed791be4e65fe1e0b56553be1880546f3a5fd1bce5cb984ee43e36fb9"
+  label = "265 files — everything the standard set has, plus the Community Edition's menu icons, extra action sprites and the Panda pet."
 
 # Note: do NOT list `cyber-aegg-full.bin` here. That image starts at
 # 0x00000000 and contains the bootloader; it is an SWD / J-Link recovery
