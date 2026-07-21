@@ -24,6 +24,7 @@ const el = {
   btnConnect: $("btn-repl-connect"),
   btnCtrlC: $("btn-repl-ctrlc"),
   btnCtrlD: $("btn-repl-ctrld"),
+  btnPaste: $("btn-repl-paste"),
   btnClear: $("btn-repl-clear"),
 };
 
@@ -93,6 +94,31 @@ function setConnected(on) {
   el.btnConnect.textContent = on ? "Disconnect" : "Connect to the badge";
   el.btnCtrlC.disabled = !on;
   el.btnCtrlD.disabled = !on;
+  el.btnPaste.disabled = !on;
+}
+
+// Ctrl-V already works once the terminal has focus, via the paste event. The
+// button covers the case where it does not — you have just copied an example
+// from the page, and focus is still wherever you selected it.
+async function pasteFromClipboard() {
+  if (!navigator.clipboard?.readText) {
+    sysMsg("this browser will not hand over the clipboard — click the console and press Ctrl-V");
+    return;
+  }
+  let text;
+  try {
+    text = await navigator.clipboard.readText();
+  } catch {
+    // Denied, or no permission prompt was possible.
+    sysMsg("clipboard access was refused — click the console and press Ctrl-V");
+    return;
+  }
+  if (!text) {
+    sysMsg("the clipboard is empty");
+    return;
+  }
+  await send(text);
+  term.focus();
 }
 
 async function send(str) {
@@ -235,6 +261,7 @@ if (!("serial" in navigator)) {
     send("\x04");
     term.focus();
   });
+  el.btnPaste.addEventListener("click", pasteFromClipboard);
   navigator.serial.addEventListener?.("disconnect", () => disconnect(true));
 }
 

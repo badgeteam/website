@@ -33,6 +33,8 @@
             title="Interrupt the running program and get a REPL prompt">Ctrl-C</button>
     <button id="btn-repl-ctrld" class="btn btn-secondary btn-sm" disabled
             title="Soft reboot: re-run code.py from the start">Ctrl-D</button>
+    <button id="btn-repl-paste" class="btn btn-secondary btn-sm" disabled
+            title="Send the clipboard to the badge">Paste</button>
     <button id="btn-repl-clear" class="btn btn-secondary btn-sm">Clear</button>
   </div>
 
@@ -43,8 +45,10 @@
   <p class="flasher-hint">
     Click the console to type into it. <strong>Ctrl-C</strong> stops the running
     program and drops you at the <code>&gt;&gt;&gt;</code> prompt;
-    <strong>Ctrl-D</strong> restarts <code>code.py</code> from the top. Paste
-    works as usual.
+    <strong>Ctrl-D</strong> restarts <code>code.py</code> from the top.
+    <strong>Ctrl-V</strong> pastes into the console once it has focus, and the
+    <strong>Paste</strong> button does the same without needing focus — handy
+    for pasting an example straight from this page.
   </p>
 </div>
 
