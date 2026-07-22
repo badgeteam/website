@@ -26,6 +26,8 @@ const el = {
   btnCtrlD: $("btn-repl-ctrld"),
   btnPaste: $("btn-repl-paste"),
   btnClear: $("btn-repl-clear"),
+  btnFullscreen: $("btn-repl-fullscreen"),
+  shell: $("repl-shell"),
 };
 
 // --------------------------------------------------------------------------
@@ -338,5 +340,38 @@ el.btnClear.addEventListener("click", () => {
   curPos = 0;
   render();
 });
+
+// --------------------------------------------------------------------------
+// Fullscreen
+// --------------------------------------------------------------------------
+
+// Not every browser that ships Web Serial also allows the Fullscreen API in
+// every context (an iframe without allowfullscreen, for one). Hide the button
+// rather than offer one that throws.
+if (!el.shell.requestFullscreen) {
+  el.btnFullscreen.classList.add("d-none");
+} else {
+  el.btnFullscreen.addEventListener("click", async () => {
+    try {
+      if (document.fullscreenElement === el.shell) {
+        await document.exitFullscreen();
+      } else {
+        await el.shell.requestFullscreen();
+      }
+    } catch {
+      // A rejected request (denied, or not user-activated) is not worth an
+      // error in the log; the button simply did nothing.
+    }
+  });
+
+  // Keep the button label and pressed state in step with reality, including
+  // when the user leaves fullscreen with Esc rather than the button.
+  document.addEventListener("fullscreenchange", () => {
+    const on = document.fullscreenElement === el.shell;
+    el.btnFullscreen.textContent = on ? "Exit fullscreen" : "Fullscreen";
+    el.btnFullscreen.setAttribute("aria-pressed", String(on));
+    if (on) term.focus();
+  });
+}
 
 setConnected(false);

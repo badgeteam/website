@@ -140,10 +140,31 @@
  * grey-on-grey (it sets background-color but not color, so only half of it
  * lost). `.flasher pre.repl-term` outranks it. Same reason for the
  * diagnostics pane below. */
-.flasher pre.repl-term {
-  height: 22rem;
-  overflow: auto;
+/* The shell wraps the toolbar and terminal and owns the drag-to-resize handle;
+   the terminal flexes to fill whatever is left. Resizing the shell keeps the
+   corner grip clear of the terminal's own scrollbar, and lets fullscreen
+   restyle a single element that already contains the controls. */
+.flasher .repl-shell {
+  display: flex;
+  flex-direction: column;
   margin: 0.75rem 0 0;
+  height: 24rem;
+  min-height: 10rem;
+  /* Vertical only: horizontal scrolling a wrapped terminal gains nothing. */
+  resize: vertical;
+  overflow: hidden;
+}
+
+.flasher .repl-shell .repl-toolbar {
+  margin: 0 0 0.5rem;
+  flex: 0 0 auto;
+}
+
+.flasher pre.repl-term {
+  flex: 1 1 auto;
+  min-height: 0; /* let the terminal shrink inside the flex column */
+  margin: 0;
+  overflow: auto;
   padding: 0.75rem;
   border: 0;
   border-radius: 0.375rem;
@@ -157,7 +178,25 @@
 
 .flasher pre.repl-term:focus-visible {
   outline: 2px solid var(--bs-primary, #30638e);
-  outline-offset: 2px;
+  outline-offset: -2px;
+}
+
+/* Fullscreen: the shell fills the viewport and stops being resizable (the drag
+   handle would fight the screen edge). :fullscreen matches whichever element
+   the Fullscreen API promoted — always .repl-shell here. A background is set
+   because the promoted element is composited over black, and the toolbar row
+   would otherwise sit on it. */
+.flasher .repl-shell:fullscreen {
+  height: 100%;
+  width: 100%;
+  resize: none;
+  padding: 0.75rem;
+  background: var(--bs-body-bg, #fff);
+}
+
+.flasher .repl-shell:fullscreen pre.repl-term {
+  border-radius: 0.375rem;
+  font-size: 0.95rem;
 }
 
 .flasher-diag summary {
