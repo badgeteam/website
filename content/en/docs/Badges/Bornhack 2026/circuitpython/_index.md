@@ -30,8 +30,8 @@ and settings survive in flash.
 3. Copy the library and an example onto the drive, as below.
 
 {{% alert title="Power-cycle rather than reboot from the flasher" color="info" %}}
-After flashing, restart the badge with the **power switch** (slide it off, then
-back on), not by asking the tool to reboot it. The battery keeps the badge
+After flashing, restart the badge with the **ON/OFF** switch — top-left on the
+front — (slide it off, then back on), not by asking the tool to reboot it. The battery keeps the badge
 powered when USB is unplugged, so a clean power-cycle is the reliable way to
 hand off to the new firmware.
 {{% /alert %}}

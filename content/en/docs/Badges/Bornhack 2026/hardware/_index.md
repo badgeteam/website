@@ -24,7 +24,7 @@ At the time of writing the design is still at prototype stage. Some of the RF ci
 | NFC | nRF52840 NFC tag PHY + on-PCB coil | — |
 | Input | 5-way joystick + `Execute` / `Cancel` buttons | GPIO |
 | Feedback | RGB LED, piezo buzzer | GPIO / PWM |
-| Power | Li-ion battery, USB-C for power and data | — |
+| Power | Li-ion battery, USB-C for power and data, `ON/OFF` slide switch | — |
 
 {{% alert title="Expansion connector pinout" color="danger" %}}
 There is a QWIIC like I2C expansion connector on the board. Be aware that we made a small design mistake: the 3.3v and GND signals have been swapped around. Make sure to use a modified cable before connecting any QWIIC peripherals.
@@ -82,4 +82,4 @@ The firmware can also drive an optional **Nicolai-Electronics I²C keyboard** on
 
 ## Power
 
-The badge is powered by a LiPo battery and charged over USB-C.
+The badge is powered by a LiPo battery and charged over USB-C. An `ON/OFF` slide switch (top-left on the front) cuts battery power — sliding it off and back on is how you power-cycle the badge, since the battery otherwise keeps it running even with USB unplugged. Hold **Execute** while switching on to enter DFU mode for flashing.
