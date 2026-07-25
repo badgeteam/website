@@ -50,7 +50,7 @@ Left / Right cycles through them:
 
 ## Power-on combos
 
-Hold these while connecting USB / resetting:
+Hold these while powering on — slide the power switch off, then back on (the battery keeps the badge running, so unplugging USB will not restart it):
 
 | Hold | Result |
 | ---- | ------ |
@@ -85,4 +85,4 @@ Bootloader LEDs in DFU: red blink (idle) → solid blue (flashing) → solid gre
 
 ## Charging
 
-USB-C in any port charges the badge. There is no separate charge LED — the battery icon on the watch / status bar shows the level. Unplug USB to re-enable Bluetooth pairing.
+USB-C in any port charges the badge. There is no separate charge LED — the battery icon on the watch / status bar shows the level.

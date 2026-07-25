@@ -29,10 +29,11 @@ and settings survive in flash.
    Windows).
 3. Copy the library and an example onto the drive, as below.
 
-{{% alert title="Reset rather than reboot from the flasher" color="info" %}}
-After flashing, restart the badge with a **reset**, not by asking the tool to
-reboot it. The battery keeps the badge powered when USB is unplugged, so a reset
-is the reliable way to hand off to the new firmware.
+{{% alert title="Power-cycle rather than reboot from the flasher" color="info" %}}
+After flashing, restart the badge with the **power switch** (slide it off, then
+back on), not by asking the tool to reboot it. The battery keeps the badge
+powered when USB is unplugged, so a clean power-cycle is the reliable way to
+hand off to the new firmware.
 {{% /alert %}}
 
 ## Install the libraries

@@ -22,7 +22,7 @@ The cell measured below 3.0 V at power-on, so the firmware halts to protect it. 
 Expected — there is no battery-backed RTC. Pair over Bluetooth with the MeshCore app once per boot, or wait until you are near a synced mesh repeater. Note that on-air time is only accepted from a **trusted source** — a signature-verified repeater / companion advert or a channel you hold the key for. A crowd of other badges won't set your clock; a phone pairing always will.
 
 **Bluetooth isn't visible / I can't pair.**
-Two things to check: USB is plugged in (Bluetooth is disabled whenever USB is connected — unplug), or Bluetooth was switched off in **Main → Settings → Bluetooth** (the toggle persists across reboots; set it back to `BLE: ON`).
+Check that Bluetooth wasn't switched off in **Main → Settings → Bluetooth** — the toggle persists across reboots, so set it back to `BLE: ON`.
 
 **My alarm never fired.**
 The clock hasn't been set yet this boot — alarms only fire once the time is known. If the clock *is* set, check the alarm's **Days** field — `None` never fires, and a Weekdays / Weekends / Custom mask only fires on matching days (the header bell shows for any enabled alarm regardless of its day mask).

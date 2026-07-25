@@ -23,7 +23,7 @@ name = "BornHack 2026 — Cyber Ægg"
 docsUrl = "/docs/badges/bornhack-2026/"
 # Shown when a connected badge turns out to be running the app, not the
 # bootloader. Rendered as HTML.
-dfuHint = "Unplug the badge, hold <strong>Execute</strong>, and plug it back in — the LED blinks red in DFU mode."
+dfuHint = "Slide the power switch off, then back on while holding <strong>Execute</strong> — the LED blinks red in DFU mode. (The battery keeps it running, so unplugging USB will not restart it.)"
 # One nRF52840 flash page. Source: bootloader/src/dfu.rs.
 blockSize = 4096
 # Bootloader identity in DFU mode (bootloader/src/dfu.rs).

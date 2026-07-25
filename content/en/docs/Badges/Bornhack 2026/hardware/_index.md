@@ -82,4 +82,4 @@ The firmware can also drive an optional **Nicolai-Electronics I²C keyboard** on
 
 ## Power
 
-The badge is powered by a LiPo battery and charged over USB-C. Bluetooth is disabled while USB is connected to keep the charging path simple, so unplug the badge when you want to pair with the MeshCore app.
+The badge is powered by a LiPo battery and charged over USB-C.
