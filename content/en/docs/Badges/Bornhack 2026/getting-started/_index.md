@@ -53,7 +53,7 @@ The interface is a carousel — **Left** / **Right** cycles through the top-leve
 
 The badge speaks the [MeshCore](https://meshcore.io/) companion protocol over Bluetooth Low Energy. Install the **MeshCore** app on Android / iOS, or open <https://app.meshcore.nz/> in a browser that supports Web Bluetooth (Chrome / Edge on desktop or Android).
 
-1. Power the badge with USB **unplugged** — Bluetooth is disabled while USB is connected.
+1. Make sure Bluetooth is on — **Main → Settings → Bluetooth** should read `BLE: ON`.
 2. In the app, scan for devices. Your badge advertises as **`Cyber Ægg XXYY`**, where `XXYY` is four hex characters unique to your badge.
 3. The phone shows a passkey prompt and the badge shows a 6-digit passkey on its display. Type that number into the phone.
 4. Once bonded, the app can set the clock, manage contacts, send and receive mesh messages, change the LoRa preset and more.
@@ -69,7 +69,7 @@ Set your timezone once under **Main → Settings → Timezone** — that setting
 
 ## Charging
 
-Plug any USB-C cable into the badge to charge it. Charge state is shown on the on-screen battery icon (there is no dedicated charge LED). Remember that Bluetooth is off while USB is connected, so unplug the badge when you want to pair.
+Plug any USB-C cable into the badge to charge it. Charge state is shown on the on-screen battery icon (there is no dedicated charge LED).
 
 Two things that look like faults but aren't: the charge bolt disappearing while USB is still plugged means charging is **complete** (it returns by itself if the cell drains), and the battery icon can lag up to a minute behind reality — it is only re-sampled every 60 seconds.
 
@@ -94,7 +94,7 @@ Reboot the badge after copying files (re-plug USB) for the changes to take effec
 
 The easiest route is the [Flash page](../flash/): it writes the firmware and the badge's asset files straight from a Chromium-family browser, with no toolchain to install.
 
-To do it by hand, hold **Execute** while plugging in USB to enter the bootloader (DFU) mode — the LED blinks red. You can then flash a new firmware image with [`dfu-util`](https://dfu-util.sourceforge.net/):
+To do it by hand, slide the power switch off and then back on while holding **Execute** to enter the bootloader (DFU) mode — the LED blinks red. (The battery keeps the badge running, so unplugging USB will not restart it.) You can then flash a new firmware image with [`dfu-util`](https://dfu-util.sourceforge.net/):
 
 ```
 dfu-util -d 1915:521f -D cyber-aegg.bin
