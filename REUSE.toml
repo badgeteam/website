@@ -83,6 +83,15 @@ precedence = "override"
 SPDX-FileCopyrightText = "2026 Kristian Vlaardingerbroek, id Software LLC and the prBoom, GBADoom and next-hack contributors"
 SPDX-License-Identifier = "GPL-2.0-or-later"
 
+# The Bad Apple demo is MIT (annejan/aegg-apple). The baked-in video and beeper
+# score are the "Bad Apple!!" animation, a Touhou fan work redistributed here as
+# in the upstream project; the identifier covers the firmware, not that media.
+[[annotations]]
+path = "static/firmware/cyber-aegg/aegg-apple.bin"
+precedence = "override"
+SPDX-FileCopyrightText = "Anne Jan Brouwer and the aegg-apple contributors"
+SPDX-License-Identifier = "MIT"
+
 # ---------------------------------------------------------------------------
 # DOOM game data. Derived from the freely distributable shareware episode and
 # offered so badge owners can load the game onto their own hardware; it is not

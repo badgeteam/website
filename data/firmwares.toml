@@ -128,6 +128,18 @@ appPid = "0x0001"
   sha256 = "8905601ff13fa069770ded3a6007a96f2e88475e7f31714a46fc41d5bd734bf5"
   label = "The e-paper and LoRa drivers, plus adafruit_display_text for drawing labels."
 
+  [[badge.firmware]]
+  label = "Bad Apple!!"
+  # Prebuilt release from https://github.com/annejan/aegg-apple
+  # (v1.0.0, aegg-apple.bin). Links at 0x10000 like the others.
+  file = "/firmware/cyber-aegg/aegg-apple.bin"
+  sha256 = "ceff417a2ef1a9a1832ec1d184186b276feed379a36160a882d8e47c6291800d"
+  notes = "The Bad Apple!! animation on the e-paper panel, with the tune on the buzzer. A self-contained demo — the video and music are baked into the image, so there is nothing to copy to the drive. It leaves the USB volume and your saved data alone, so flashing one of the other images back restores the badge exactly as it was."
+  moreUrl = "https://github.com/annejan/aegg-apple"
+  moreLabel = "About this demo →"
+  # No `assets` table and no `wad`: nothing to install at step 5, which hides
+  # itself for this image.
+
 # Prepared WAD blobs offered by the loader at ../doom/. Users can always pick
 # a file of their own instead; these are a convenience so nobody has to run
 # the asset pipeline at camp.
