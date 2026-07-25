@@ -13,11 +13,15 @@ moment you save.
 The display, buttons, joystick, LEDs, buzzer, battery, LoRa radio and NFC are
 all reachable from ordinary CircuitPython modules.
 
-{{% alert title="It replaces the badge firmware" color="warning" %}}
+{{% alert title="It replaces the firmware and wipes your saved data" color="warning" %}}
 CircuitPython is a separate image, not an app inside the normal firmware. While
 it is installed there is no BornPets, mesh or clock — flash the standard
-firmware again from the [Flash page](../flash/) to get the badge back. Your pet
-and settings survive in flash.
+firmware again from the [Flash page](../flash/) to get the badge back.
+
+The CIRCUITPY drive lives on the same QSPI flash that holds your pet, settings
+(the KV store) and the badge's asset files, so switching to CircuitPython
+overwrites them. Your pet and settings are lost, and when you flash a normal
+firmware back you will need to re-install its assets before the sprites return.
 {{% /alert %}}
 
 ## Install it

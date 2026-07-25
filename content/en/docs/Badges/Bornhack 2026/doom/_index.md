@@ -11,11 +11,17 @@ level's music picked out on the piezo buzzer.
 
 It is a slideshow, and it is genuinely playable.
 
-{{% alert title="DOOM replaces the badge firmware" color="warning" %}}
+{{% alert title="DOOM replaces the firmware and wipes your saved data" color="warning" %}}
 This is a separate firmware image, not an app inside the normal one. While DOOM
 is installed there is no BornPets, no mesh, no clock — flash the standard
-firmware again from the [Flash page](../flash/) to get the badge back. Nothing
-is lost by switching; your pet and settings live in flash and survive.
+firmware again from the [Flash page](../flash/) to get the badge back.
+
+Switching to DOOM is **destructive**. The WAD fills nearly all of the badge's
+2 MB QSPI flash, and that same chip holds your pet and settings (the KV store)
+and the badge's asset files — uploading the WAD overwrites them. So your pet and
+settings are lost, and when you flash a normal firmware back you will need to
+re-install its assets from the [Flash page](../flash/) before the sprites show
+up again.
 {{% /alert %}}
 
 ## How to install it
