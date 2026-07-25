@@ -47,11 +47,12 @@ The Cyber Ægg is open source. Both the hardware design and the firmware live on
 * Hardware (KiCad) — [Ranzbak/bornhack2026-hardware](https://codeberg.org/Ranzbak/bornhack2026-hardware)
 * Firmware (Rust / Embassy) — [Ranzbak/bornhack-firmware-2026](https://codeberg.org/Ranzbak/bornhack-firmware-2026)
 
-The [Flash page](./flash/) also offers three alternative images, each with its own home:
+The [Flash page](./flash/) also offers four alternative images, each with its own home:
 
 * Community Edition — [ShadowSquad-org/BornHack-Cyberegg](https://github.com/ShadowSquad-org/BornHack-Cyberegg), a fork with extra BornPets mechanics
 * [DOOM](./doom/) — [rarenerd/cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom), a bare-metal port of the DOOM engine
 * [CircuitPython](./circuitpython/) — [rarenerd/cyberaegg-circuitpython](https://codeberg.org/rarenerd/cyberaegg-circuitpython), for programming the badge in Python
+* Bad Apple!! — [annejan/aegg-apple](https://github.com/annejan/aegg-apple), the animation on the e-paper panel with the tune on the buzzer
 
 # Hardware sponsors
 
