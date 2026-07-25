@@ -94,7 +94,7 @@ Reboot the badge after copying files (re-plug USB) for the changes to take effec
 
 The easiest route is the [Flash page](../flash/): it writes the firmware and the badge's asset files straight from a Chromium-family browser, with no toolchain to install.
 
-To do it by hand, slide the power switch off and then back on while holding **Execute** to enter the bootloader (DFU) mode — the LED blinks red. (The battery keeps the badge running, so unplugging USB will not restart it.) You can then flash a new firmware image with [`dfu-util`](https://dfu-util.sourceforge.net/):
+To do it by hand, slide the **ON/OFF** switch (top-left on the front of the badge) off and then back on while holding **Execute** to enter the bootloader (DFU) mode — the LED blinks red. (The battery keeps the badge running, so unplugging USB will not restart it.) You can then flash a new firmware image with [`dfu-util`](https://dfu-util.sourceforge.net/):
 
 ```
 dfu-util -d 1915:521f -D cyber-aegg.bin

@@ -25,9 +25,10 @@ otherwise the device appears in the chooser but fails to open.
 ## If something goes wrong
 
 **The device chooser is empty.** The badge is not in DFU mode. Put it in the
-bootloader first (for the Cyber Ægg: slide the power switch off, then back on
-while holding **Execute** — the LED blinks red), then click *Connect* again.
-The battery keeps the badge running, so unplugging USB does not restart it.
+bootloader first (for the Cyber Ægg: slide the **ON/OFF** switch — top-left on
+the front of the badge — off, then back on while holding **Execute**, and the
+LED blinks red), then click *Connect* again. The battery keeps the badge
+running, so unplugging USB does not restart it.
 
 **It connects but says "application firmware (CDC)".** Same cause: you reached
 the running firmware rather than the bootloader. Power-cycle into DFU mode.

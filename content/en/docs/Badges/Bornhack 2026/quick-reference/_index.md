@@ -50,7 +50,7 @@ Left / Right cycles through them:
 
 ## Power-on combos
 
-Hold these while powering on — slide the power switch off, then back on (the battery keeps the badge running, so unplugging USB will not restart it):
+Hold these while powering on — slide the **ON/OFF** switch (top-left on the front) off, then back on (the battery keeps the badge running, so unplugging USB will not restart it):
 
 | Hold | Result |
 | ---- | ------ |

@@ -82,7 +82,7 @@ The badge imports events at boot from a file named **`ALARMS.ICS`** in the root 
 2. Open the drive labelled `CYBR<4 hex>`.
 3. Drop your `.ics` file in the root, renamed to `ALARMS.ICS`.
 4. Eject the drive.
-5. Reboot the badge — slide the power switch off, then back on.
+5. Reboot the badge — slide the **ON/OFF** switch (top-left on the front) off, then back on.
 
 You can use the official BornHack programme `.ics` straight from <https://bornhack.dk/>.
 
