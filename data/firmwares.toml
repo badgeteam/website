@@ -82,7 +82,7 @@ appPid = "0x0001"
   # from main @ dbad849 (2026-07-21). Links at 0x10000 like the others.
   file = "/firmware/cyber-aegg/cyber-aegg-doom.bin"
   sha256 = "c470cc78b6bf70348c0cd3f0f56e5c9e729867d16c91bfd8d06f18e36d8a4161"
-  notes = "DOOM E1M1, rendered on the e-paper panel at a couple of frames per second, with the level's music on the buzzer. Flashing this is only half the job: the game data is far too big for the USB drive, so you have to upload a WAD separately before DOOM will start. It also replaces the badge firmware — no BornPets, mesh or clock until you flash one of those back, though your pet and settings survive in flash."
+  notes = "DOOM E1M1, rendered on the e-paper panel at a couple of frames per second, with the level's music on the buzzer. Flashing this is only half the job: the game data is far too big for the USB drive, so you have to upload a WAD separately before DOOM will start. It also replaces the badge firmware — no BornPets, mesh or clock until you flash one of those back. Uploading the WAD fills the QSPI flash that also holds your pet, settings and asset files, so those are wiped: switching back means re-installing the assets, and the pet starts over."
   # Rendered as a link under the notes, and in place of the asset step.
   moreUrl = "../doom/"
   moreLabel = "How to upload the WAD →"
