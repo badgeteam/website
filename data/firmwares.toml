@@ -95,11 +95,11 @@ appPid = "0x0001"
   [[badge.firmware]]
   label = "CircuitPython"
   # Prebuilt image from https://codeberg.org/rarenerd/cyberaegg-circuitpython
-  # (firmware/cyberaegg-circuitpython.bin @ 23bdac4); the hash matches that
-  # repository's own firmware/SHA256SUMS.
+  # (firmware/cyberaegg-circuitpython.bin @ d0fdd51, the Bluetooth build from
+  # pull request 1); the hash matches that repository's own firmware/SHA256SUMS.
   file = "/firmware/cyber-aegg/cyberaegg-circuitpython.bin"
-  sha256 = "c062f8ac7772275594fea8ffef1c9dbf2984f77a814a6a80356a277753ec4fa7"
-  notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa and NFC are all exposed as ordinary CircuitPython modules. Bluetooth is not, and it replaces the badge firmware — no BornPets, mesh or clock until you flash one of those back."
+  sha256 = "1c6b8ab105f42e8b7b612f12651bb83542fd1a70a2ec51a8f758c0084137d748"
+  notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa, NFC, deep sleep and Bluetooth Low Energy are all exposed as ordinary CircuitPython modules — the badge advertises and accepts connections, though it cannot scan. It replaces the badge firmware, so no BornPets, mesh or clock until you flash one of those back."
   moreUrl = "../circuitpython/"
   moreLabel = "Getting started with CircuitPython →"
   # Support libraries for the CIRCUITPY drive. Declared as this image's asset

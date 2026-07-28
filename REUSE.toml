@@ -70,12 +70,15 @@ SPDX-License-Identifier = "Apache-2.0"
 # engine, so the linked binary is GPL rather than Apache-2.0.
 # The CircuitPython image is mostly the CircuitPython/MicroPython core (MIT),
 # with the badge port and its patches from the cyberaegg-circuitpython project
-# (Apache-2.0) built in.
+# (Apache-2.0) built in. Since the Bluetooth build it also links Nordic's
+# SoftDevice Controller and MPSL from nrfxlib, plus the hci_internal sources
+# vendored from sdk-nrf: LicenseRef-Nordic-5-Clause, which permits binary
+# redistribution but only for use on Nordic silicon — which this is.
 [[annotations]]
 path = "static/firmware/cyber-aegg/cyberaegg-circuitpython.bin"
 precedence = "override"
-SPDX-FileCopyrightText = "Adafruit Industries, the CircuitPython and MicroPython contributors, and the CyberÆgg CircuitPython contributors"
-SPDX-License-Identifier = "MIT AND Apache-2.0"
+SPDX-FileCopyrightText = "Adafruit Industries, Nordic Semiconductor ASA, the CircuitPython and MicroPython contributors, and the CyberÆgg CircuitPython contributors"
+SPDX-License-Identifier = "MIT AND Apache-2.0 AND LicenseRef-Nordic-5-Clause"
 
 [[annotations]]
 path = "static/firmware/cyber-aegg/cyber-aegg-doom.bin"

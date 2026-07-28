@@ -10,8 +10,9 @@ something you program in Python with no toolchain at all. Flash it once and the
 badge mounts as a `CIRCUITPY` drive: drop a `code.py` on it, and it runs the
 moment you save.
 
-The display, buttons, joystick, LEDs, buzzer, battery, LoRa radio and NFC are
-all reachable from ordinary CircuitPython modules.
+The display, buttons, joystick, LEDs, buzzer, battery, LoRa radio, NFC,
+Bluetooth Low Energy and deep sleep are all reachable from ordinary
+CircuitPython modules.
 
 {{% alert title="It replaces the firmware and wipes your saved data" color="warning" %}}
 CircuitPython is a separate image, not an app inside the normal firmware. While
@@ -155,16 +156,79 @@ NFC is built into the firmware, so there is nothing to copy into `lib/`. The
 badge serves a read-only tag, so tapping a phone against it opens a URL. See
 `examples/nfc_tag.py` and the repository's `docs/NFC.md`.
 
-## What is not included
+## Bluetooth
 
-**Bluetooth.** CircuitPython's Bluetooth support needs Nordic's S140 SoftDevice,
-which has to live at flash address `0x1000` — inside the region owned by the
-badge's own bootloader. The DFU bootloader only writes the application area from
-`0x10000` upwards and cannot overwrite itself, so Bluetooth would mean
-reflashing the bootloader over SWD. This firmware does not do that.
+The badge advertises and accepts Bluetooth Low Energy connections from
+CircuitPython, through the standard `_bleio` API. It uses the factory address
+from `FICR.DEVICEADDR` — the same one the normal Rust firmware advertises with.
 
-That also means the MeshCore companion app cannot talk to the badge while
-CircuitPython is installed.
+```python
+import _bleio
+
+adapter = _bleio.adapter
+print(adapter.address)
+
+# Flags: LE General Discoverable, BR/EDR not supported, then the complete name.
+advertisement = bytes((2, 0x01, 0x06)) + bytes((10, 0x09)) + b"CyberAegg"
+adapter.start_advertising(advertisement, scan_response=None, connectable=True,
+                          anonymous=False, timeout=0, interval=0.1,
+                          tx_power=0, directed_to=None)
+```
+
+Any phone scanner will then show the badge, or on Linux:
+
+```
+bluetoothctl --timeout 20 scan le
+```
+
+`examples/ble_advertise.py` is the same thing with a loop that re-advertises
+after a central disconnects. GATT services and characteristics work too, through
+the usual `_bleio` classes.
+
+Two limits are worth knowing:
+
+* **Peripheral only.** The badge can be found and connected to, but it cannot
+  scan or connect to anything itself — so badge-to-badge does not work.
+* **Legacy advertising only**, so the payload has to fit in 31 bytes.
+
+Bluetooth also switches on the moment `_bleio` is first imported and stays on,
+which costs battery.
+
+{{% alert title="How it works without the SoftDevice" color="info" %}}
+CircuitPython's *native* nRF Bluetooth needs Nordic's S140 SoftDevice at flash
+address `0x1000`, which is inside the region the badge's bootloader owns — DFU
+writes only from `0x10000` up, so the S140 cannot be placed without an SWD
+reflash of the bootloader.
+
+That restriction belongs to the S140 binary, not to Bluetooth. This firmware
+links Nordic's SoftDevice Controller instead — the link layer on its own, as an
+ordinary library with no fixed address — and wires it to the HCI Bluetooth host
+CircuitPython already ships for boards with an off-chip radio. Host and
+controller end up on the same chip, the bootloader is untouched, and flashing
+stays plain USB DFU. The write-up is in the repository's
+[docs/BLUETOOTH.md](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/docs/BLUETOOTH.md).
+{{% /alert %}}
+
+The MeshCore companion app still cannot talk to the badge while CircuitPython is
+installed: MeshCore lives in the normal badge firmware, which this image
+replaces.
+
+## Deep sleep
+
+The `alarm` module works, with both pin and time wake-up, so a battery-powered
+program can idle between refreshes instead of spinning:
+
+```python
+import alarm
+import time
+
+alarm.exit_and_deep_sleep_until_alarms(
+    alarm.time.TimeAlarm(monotonic_time=time.monotonic() + 300)
+)
+```
+
+E-paper keeps its image with no power, so the display stays readable through the
+sleep.
 
 ## If something goes wrong
 
@@ -194,3 +258,8 @@ or the [libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/bra
 The image offered on the Flash page is that repository's prebuilt binary, byte
 for byte — its checksum matches the `SHA256SUMS` published alongside it. Build
 instructions are in the repository's `docs/BUILDING.md`.
+
+CircuitPython itself is MIT and the badge port is Apache-2.0, but the Bluetooth
+build also links Nordic's SoftDevice Controller and MPSL under
+`LicenseRef-Nordic-5-Clause`: redistributable, but only for use on Nordic
+silicon — which the badge's nRF52840 is.
