@@ -193,27 +193,52 @@ Nordic UART Service. Any BLE terminal app, such as nRF Connect or Adafruit
 Bluefruit Connect, connects to `CyberAegg`. The text you send arrives on the
 badge's serial console.
 
+### Talk to the badge from a phone
+
+Three examples use that same UART service, so they need no library and no app
+of your own.
+
+`examples/ble_remote.py` controls the badge. Send a color name to set the LED,
+or `beep` for the buzzer. The badge reports each button press back to the
+phone. `examples/ble_repl.py` gives you a Python prompt. Send a line, and the
+badge runs it and returns the result. Names stay for the whole session, so you
+build up state line by line. This is not the CircuitPython REPL. The REPL of the
+supervisor cannot run over Bluetooth on this firmware, because it starts before
+the MicroPython heap exists.
+
+`examples/ble_telemetry.py` needs no connection at all. It puts the battery
+voltage, the buttons and the uptime in the advertising packet, and it refreshes
+that packet every two seconds. Any scanner reads the values. Advertising is the
+most dependable part of Bluetooth here. Nothing holds the single connection
+slot, so many badges report at the same time, and any number of phones read
+them. This is the right shape for a field full of badges.
+
 ### Find and connect to other badges
 
-The badge also scans, which is the observer role, and it connects out, which is
-the central role. Two badges therefore find each other.
+The badge also scans, which is the observer role. It connects out, which is the
+central role. It reads what the other device offers, which is the GATT client.
+Two badges therefore find each other and inspect each other.
 
-`examples/ble_scan.py` lists what the badge hears. It scans and advertises at
-the same time, so two badges watch each other with no connection between them.
+`examples/ble_scan.py` lists what the badge hears, and it decodes the beacon of
+a badge that runs `ble_telemetry.py`. It scans and advertises at the same time,
+so two badges watch each other with no connection between them.
 `examples/ble_central.py` connects to a second badge that runs
 `examples/ble_uart.py`. The link comes up in about 0.2 seconds, and both badges
-report the same state.
+report the same state. `examples/ble_explore.py` connects and then lists every
+service and characteristic of the other device. It works against any device, not
+only against a badge.
 
 Scanning uses the multirole controller library, because the peripheral library
 has no scanning. That library costs about 31 KB more flash.
 
-Three limits are important:
+Four limits are important:
 
-* **There is no GATT client.** The badge connects to another device, but it
-  cannot read or write the characteristics of that device.
-  `Connection.discover_remote_services()` returns nothing. A connection is
-  therefore useful to prove that two badges reach each other, and to hold a
-  link, but not yet to exchange data.
+* **The badge does not read a remote value.** It finds the services and the
+  characteristics of a device it connects to. `Characteristic.value` on a remote
+  characteristic is not implemented. The badge therefore knows what a device
+  offers, and not yet what it holds.
+* **The badge does not find a remote descriptor**, so it cannot subscribe to a
+  notification from another device.
 * **Legacy advertising only.** The advertisement must fit in 31 bytes.
 * **Bluetooth does not work together with the display.** A full tri-color
   refresh keeps the panel busy for tens of seconds. The background work of
@@ -279,6 +304,11 @@ the program stops, or keep the program running.
 **The screen did not change.** The firmware limits the refresh rate. It ignores
 a request that comes too soon after the last refresh. Wait for the interval, or
 use `cyberaegg_epd.refresh(display)`. That function does the wait for you.
+
+**A Bluetooth connection times out, but scanning still works.** Check the other
+computer or phone first. A connected Bluetooth headset takes almost all of the
+radio time there, and connection attempts then fail while scans still succeed.
+Disconnect the headset and try again.
 
 ## Source
 
