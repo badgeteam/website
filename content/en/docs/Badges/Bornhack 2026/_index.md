@@ -9,9 +9,9 @@ weight: -2026
 
 # Introduction
 
-The BornHack 2026 badge is the **Cyber Ægg**: an egg-shaped, low-power hacker badge inspired by the 90's Tamagotchi. It is designed to run for the entire duration of the BornHack camp on a single battery charge, while keeping you connected to everyone else on the field over a long-range LoRa mesh.
+The BornHack 2026 badge is the **Cyber Ægg**. It is an egg-shaped, low-power hacker badge, inspired by the Tamagotchi of the 1990s. One battery charge runs the badge for the full BornHack camp. A long-range LoRa mesh keeps you connected to everyone else on the field.
 
-Under the playful shell it is a serious little radio computer. A Nordic nRF52840 drives a 1.54 inch black/red/white e-paper display, talks Bluetooth Low Energy to your phone, emulates an NFC tag on its back, and reaches the wider [MeshCore](https://meshcore.io/) network through a dedicated SX1262 LoRa radio. To keep you entertained between messages there is **BornPets**, a virtual pet with a handful of mini-games.
+Under the playful shell is a serious radio computer. A Nordic nRF52840 drives a 1.54 inch black, red and white e-paper display. The badge talks Bluetooth Low Energy to your phone, and it emulates an NFC tag on its back. A dedicated SX1262 LoRa radio connects the badge to the wider [MeshCore](https://meshcore.io/) network. Between messages, **BornPets** entertains you. BornPets is a virtual pet with a set of mini-games.
 
 <p align="center">
   <img src="badge-front.png" style="width: 45%; margin: 0 1%;"/>
@@ -20,38 +20,38 @@ Under the playful shell it is a serious little radio computer. A Nordic nRF52840
 <p align="center"><em>Front (display and buttons) and back (nRF52840, USB-C connectors, NFC coil).</em></p>
 
 {{% alert title="Expansion connector pinout" color="danger" %}}
-There is a QWIIC like I2C expansion connector on the board. Be aware that we made a small design mistake: the 3.3v and GND signals have been swapped around. Make sure to use a modified cable before connecting any QWIIC peripherals.
+The board has an I²C expansion connector of the QWIIC type. We made a design mistake: the 3.3 V and the GND signals are swapped. Before you connect a QWIIC peripheral, make a corrected cable and use that.
 {{% /alert %}}
 
 ## Features
 
-* Egg-shaped badge inspired by the classic Tamagotchi
-* Nordic **nRF52840** microcontroller (BLE + USB + NFC)
-* 1.54" **152 × 152** black/red/white e-paper display
+* Egg-shaped badge, inspired by the classic Tamagotchi
+* Nordic **nRF52840** microcontroller (BLE, USB and NFC)
+* 1.54 inch **152 × 152** black, red and white e-paper display
 * **SX1262** LoRa radio, part of the [MeshCore](https://meshcore.io/) mesh network
 * Bluetooth Low Energy companion connection to the MeshCore app
-* NFC tag on the back for location-based games and station taps
-* 5-way joystick, `Select` / `Execute` / `Cancel` buttons, RGB LED and a piezo buzzer
-* USB-C for charging and drag-and-drop file transfer
+* NFC tag on the back, for location games and station taps
+* 5-way joystick, `Select`, `Execute` and `Cancel` buttons, RGB LED and a piezo buzzer
+* USB-C for charging and for file transfer with drag and drop
 
-New to the badge? Start with the [Getting started](./getting-started/) guide. Curious about the virtual pet? See [Games](./games/). Want to know what is inside? See the [Hardware](./hardware/) page.
+Start with the [Getting started](./getting-started/) guide. The [Games](./games/) page describes the virtual pet. The [Hardware](./hardware/) page tells you what is inside the badge.
 
 {{% alert title="Update your badge from the browser" color="info" %}}
-The [**Flash** page](./flash/) installs firmware and the badge's asset files straight from a Chromium-family browser over USB — no toolchain and no command line. It offers both the standard firmware and the Community Edition, a fork with extra BornPets mechanics.
+The [**Flash** page](./flash/) installs the firmware and the badge's asset files from a Chromium-family browser over USB. You need no toolchain and no command line. The page offers the standard firmware and the Community Edition, a fork with more BornPets mechanics.
 {{% /alert %}}
 
 ## Source code
 
-The Cyber Ægg is open source. Both the hardware design and the firmware live on Codeberg:
+The Cyber Ægg is open source. The hardware design and the firmware are on Codeberg:
 
 * Hardware (KiCad) — [Ranzbak/bornhack2026-hardware](https://codeberg.org/Ranzbak/bornhack2026-hardware)
 * Firmware (Rust / Embassy) — [Ranzbak/bornhack-firmware-2026](https://codeberg.org/Ranzbak/bornhack-firmware-2026)
 
-The [Flash page](./flash/) also offers four alternative images, each with its own home:
+The [Flash page](./flash/) also offers four alternative images. Each image has its own home:
 
-* Community Edition — [ShadowSquad-org/BornHack-Cyberegg](https://github.com/ShadowSquad-org/BornHack-Cyberegg), a fork with extra BornPets mechanics
+* Community Edition — [ShadowSquad-org/BornHack-Cyberegg](https://github.com/ShadowSquad-org/BornHack-Cyberegg), a fork with more BornPets mechanics
 * [DOOM](./doom/) — [rarenerd/cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom), a bare-metal port of the DOOM engine
-* [CircuitPython](./circuitpython/) — [rarenerd/cyberaegg-circuitpython](https://codeberg.org/rarenerd/cyberaegg-circuitpython), for programming the badge in Python
+* [CircuitPython](./circuitpython/) — [rarenerd/cyberaegg-circuitpython](https://codeberg.org/rarenerd/cyberaegg-circuitpython), to program the badge in Python
 * Bad Apple!! — [annejan/aegg-apple](https://github.com/annejan/aegg-apple), the animation on the e-paper panel with the tune on the buzzer
 
 # Hardware sponsors
@@ -66,7 +66,7 @@ The [Flash page](./flash/) also offers four alternative images, each with its ow
 
 * **Nordic Semiconductor** sponsored their low power yet very capable and fast [NRF52840][NRF52840] microcontroller with Bluetooth Low Energy and NFC, making it possible for us to build a device that runs on one battery charge, the whole camp long!
 * **ALLNET China** is our production partner, they take care of sourcing most components and oversee the production process [in China][ALLNET China], saving us a lot of work and potential headaches and allowing us to focus on the product!
-* **Procolix** sponsored the SX1262 LoRa radio chips, converting the badge into a capable LoRa communications device. Check out their [managed hosting solutions][hosting] for a truely sovereign cloud built on European open source solutions!
+* **Procolix** sponsored the SX1262 LoRa radio chips, converting the badge into a capable LoRa communications device. Check out their [managed hosting solutions][hosting] for a truly sovereign cloud built on European open source solutions!
 * **deFEEST** sponsored part of the badge hardware, helping us get the components we needed to build it. Find out more at [defeest.nl][deFEEST]!
 * **Mollerup Automation** sponsored the 3D printed housing for the badge. They are automation, robotics and PLC specialists from Odense, Denmark — see [mollerup.info][Mollerup]!
 

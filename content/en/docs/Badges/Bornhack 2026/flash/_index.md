@@ -5,19 +5,19 @@ nodateline: true
 weight: 9
 ---
 
-Flash firmware onto your badge straight from this page — no toolchain, no
-drivers, no command line. The browser talks to the badge over USB and writes
-the image itself, and it can install the badge's asset files in the same
-sitting.
+This page writes firmware to your badge. You need no toolchain, no drivers and
+no command line. The browser talks to the badge over USB and writes the image.
+It can install the badge's asset files in the same session.
 
 {{% alert title="Chromium-family browsers only" color="warning" %}}
-This uses [WebUSB](https://developer.mozilla.org/en-US/docs/Web/API/USB), which
-only Chrome, Edge, Brave, Opera and Arc implement. Firefox and Safari do not
-ship it and never show the device chooser. On those, flash from a terminal with
-[`dfu-util`](https://dfu-util.sourceforge.net/) instead.
+This page uses [WebUSB](https://developer.mozilla.org/en-US/docs/Web/API/USB).
+Only Chrome, Edge, Brave, Opera and Arc have it. Firefox and Safari do not, and
+they never show the device chooser. On those browsers, write the firmware from a
+terminal with [`dfu-util`](https://dfu-util.sourceforge.net/).
 
-Linux users: you need a udev rule granting your user access to the bootloader,
-otherwise the device appears in the chooser but fails to open.
+On Linux you also need a udev rule that gives your user access to the
+bootloader. Without that rule the device appears in the chooser, but it does not
+open.
 {{% /alert %}}
 
 {{< flasher >}}
@@ -25,50 +25,51 @@ otherwise the device appears in the chooser but fails to open.
 ## If something goes wrong
 
 **The device chooser is empty.** The badge is not in DFU mode. Put it in the
-bootloader first (for the Cyber Ægg: slide the **ON/OFF** switch — top-left on
-the front of the badge — off, then back on while holding **Execute**, and the
-LED blinks red), then click *Connect* again. The battery keeps the badge
-running, so unplugging USB does not restart it.
+bootloader first. On the Cyber Ægg, slide the **ON/OFF** switch at the top left
+of the front off, then back on, while you hold **Execute**. The LED then blinks
+red. Click *Connect* again. The battery keeps the badge running, so a
+disconnection of USB does not restart it.
 
-**It connects but says "application firmware (CDC)".** Same cause: you reached
-the running firmware rather than the bootloader. Power-cycle into DFU mode.
+**The page connects, but it reports "application firmware (CDC)".** The cause is
+the same. You reached the running firmware, not the bootloader. Power cycle the
+badge into DFU mode.
 
-**"Failed to open the device" on Linux.** A udev rule is missing. The badge's
-own repository ships one — install it, replug, and retry.
+**"Failed to open the device" on Linux.** A udev rule is missing. The badge's own
+repository has one. Install the rule, connect the badge again, and retry.
 
-**The flash stopped part-way.** Nothing is bricked. The bootloader writes
-directly to the application partition, so an interrupted write just leaves the
-badge sitting in DFU mode. Reconnect and flash again.
+**The write stopped in the middle.** Nothing is damaged. The bootloader writes
+directly to the application partition, so an interrupted write leaves the badge
+in DFU mode. Connect again and write again.
 
-**Checksum mismatch.** The download did not match the hash published alongside
-it and was refused before anything was written. Reload the page and retry; if it
-persists, report it.
+**Checksum mismatch.** The download did not match the published hash, and the
+page refused it before it wrote anything. Load the page again and retry. If the
+error continues, report it.
 
-**The badge says "No sprites on flash".** The firmware is installed but the
-asset files are not. Do step 5 above, then power-cycle.
+**The badge reports "No sprites on flash".** The firmware is installed, but the
+asset files are not. Do step 5 above, then power cycle the badge.
 
-**I flashed DOOM and nothing happens / it asks for game data.** Flashing DOOM is
-only half of it. DOOM ignores the USB drive entirely: its game data goes into the
-badge's QSPI flash over a serial connection, so you need to
-[upload a WAD](../doom/) before there is anything to play.
+**I flashed DOOM, and nothing happens or it asks for game data.** The firmware is
+only half of DOOM. DOOM does not use the USB drive. Its game data goes into the
+badge's QSPI flash over a serial connection. [Upload a WAD](../doom/) before you
+play.
 
-**Sprites are missing or wrong after switching edition.** Each firmware image
-ships its own asset set, and the Community Edition draws a good deal more than
-the standard one. Install the assets that belong to the image you flashed —
-step 5 follows your choice in step 3 automatically.
+**Sprites are missing or wrong after a change of edition.** Each firmware image
+has its own asset set, and the Community Edition draws many more sprites than
+the standard image. Install the assets of the image you wrote. Step 5 follows
+your choice in step 3 automatically.
 
-**No drive appears to copy assets onto.** The badge only exposes its USB drive
-in DFU mode, the same mode you flash from. If you already power-cycled to boot
-the new firmware, go back into DFU mode.
+**No drive appears for the assets.** The badge shows its USB drive only in DFU
+mode, the mode you write from. If you already power cycled into the new
+firmware, enter DFU mode again.
 
-**The copy finished but the badge still looks empty.** Eject the drive in your
-file manager before unplugging. Until you do, the writes may still be sitting in
-your operating system's cache rather than on the badge.
+**The copy finished, but the badge looks empty.** Eject the drive in your file
+manager before you disconnect it. Until you do that, your operating system can
+still hold the data in its cache.
 
 ## Flashing without a browser
 
-Every image offered here is a plain `.bin` for the application partition, so
-`dfu-util` takes it directly:
+Every image on this page is a plain `.bin` file for the application partition,
+so `dfu-util` takes it directly:
 
 ```
 dfu-util -d 1915:521f -D cyber-aegg.bin
@@ -76,24 +77,24 @@ dfu-util -d 1915:521f -D cyber-aegg.bin
 
 ## Adding a badge or a firmware image
 
-The flasher is driven entirely by `data/firmwares.toml` in the
-[website repository](https://github.com/badgeteam/website). Add the image under
-`static/firmware/<badge-id>/`, record it in that file together with its
-`sha256sum`, and it appears here — there is no backend to deploy.
+`data/firmwares.toml` in the
+[website repository](https://github.com/badgeteam/website) drives the flasher.
+Put the image in `static/firmware/<badge-id>/`, record it in that file with its
+`sha256sum`, and it appears here. There is no backend to deploy.
 
-Asset payloads work the same way. Build the archive with flat, deflate-compressed
-entries, drop it in `static/assets/<badge-id>/`, and point the badge's `assets`
-entry at it:
+Asset payloads work in the same way. Build the archive with flat,
+deflate-compressed entries. Put it in `static/assets/<badge-id>/`, and point the
+badge's `assets` entry at it:
 
 ```
 cd assets/to-badge && zip -rX -9 cyber-aegg-assets.zip .
 ```
 
-Two constraints worth knowing:
+Two constraints are important:
 
-* **Images must be hosted on this site.** A cross-origin download needs CORS
-  headers, and release assets on Codeberg and GitHub do not send them.
-* **Only application images.** A combined image that includes the bootloader
-  (for the Cyber Ægg, `cyber-aegg-full.bin`) starts at address `0x00000000` and
-  is meant for SWD / J-Link recovery. DFU writes the application partition, so
-  publishing a combined image here would brick badges.
+* **This site must serve the images.** A cross-origin download needs CORS
+  headers, and the release assets of Codeberg and GitHub do not send them.
+* **Application images only.** A combined image that holds the bootloader
+  (`cyber-aegg-full.bin` on the Cyber Ægg) starts at address `0x00000000`, and
+  it is for SWD or J-Link recovery. DFU writes the application partition, so a
+  combined image here would damage badges.

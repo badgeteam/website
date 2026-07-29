@@ -5,101 +5,101 @@ nodateline: true
 weight: 6
 ---
 
-The **Game** screen runs **BornPets** — a virtual pet inspired by the 90's Tamagotchi — plus a set of mini-games you launch from the pet's *Play* menu.
+The **Game** screen runs **BornPets**, a virtual pet in the style of the Tamagotchi of the 1990s. It also holds a set of mini-games. You start the mini-games from the pet's *Play* menu.
 
 ## BornPets
 
-Hatch a snail or a cat, then keep it fed, healthy, rested and entertained.
+Hatch a snail or a cat. Then keep the pet fed, healthy, rested and entertained.
 
 ### Hatching
 
-The first time you open the Game screen you see the hatchery. Push **Execute / Fire** to start, pick a pet from the roster (the built-ins are **Bartholomeus**, **Cat** and **Slug**), then wait about a minute for the egg to hatch. After hatching you name your pet — up to 12 characters via the on-screen keyboard. The save persists across reboots. You can rename the roster or add your own pets — see [Custom pet roster](#custom-pet-roster-petscfg) below.
+The first time you open the Game screen, the badge shows the hatchery. Press **Execute / Fire** to start. Select a pet from the roster. The built-in pets are **Bartholomeus**, **Cat** and **Slug**. The egg then hatches in about one minute. After the hatching, give your pet a name of up to 12 characters, with the keyboard on the screen. The badge keeps the pet through a restart. You can rename the roster, and you can add your own pets. See [Custom pet roster](#custom-pet-roster-petscfg) below.
 
 ### Stats
 
-Your pet has decaying stats — the higher they get, the worse off the pet is. Watch out for:
+Your pet has stats that increase with time. A high value is bad for the pet. Watch these stats:
 
 | Stat | Fix with | Notes |
 | ---- | -------- | ----- |
-| **Hunger** | Feed | The pet gets hungry and other stats worsen |
-| **Tired** | Rest / sleep | Or **Hibernate** for long sleeps |
-| **Drained** | Play or a mini-game | Lack of inspiration — also resets "miserable" |
-| **Sick** | Heal | Use when the sick icon appears |
-| **Miserable** | Play | Makes the other stats decay faster, so treat it early |
+| **Hunger** | Feed | The pet gets hungry, and the other stats get worse |
+| **Tired** | Rest or sleep | Use **Hibernate** for a long sleep |
+| **Drained** | Play, or a mini-game | The pet has no inspiration. Play also clears "miserable" |
+| **Sick** | Heal | Use this when the sick icon appears |
+| **Miserable** | Play | The other stats then get worse faster, so correct this early |
 
-Stats interact: when several stats are bad the pet becomes miserable faster, and miserable makes everything else worse. Stay ahead of the spiral.
+The stats interact. When several stats are bad, the pet becomes miserable faster, and a miserable pet makes every other stat worse. Stay ahead of this spiral.
 
 ### Controls
 
 | Key | Action |
 | --- | ------ |
-| Up / Down | Switch between the top (actions) and bottom icon rows |
-| Left / Right | Move along the current row |
-| Execute / Fire | Activate the highlighted icon |
-| Cancel | Back out |
+| Up / Down | Changes between the top row (the actions) and the bottom icon row |
+| Left / Right | Moves along the current row |
+| Execute / Fire | Activates the selected icon |
+| Cancel | Goes back |
 
 ### Hibernate
 
-Putting the badge away for more than a few hours? Open the action menu and choose **Hibernate** — stats freeze until you wake the pet. Forget to hibernate before storing the badge and the pet keeps decaying, so it may have starved by the time you find it again.
+Before you store the badge for more than a few hours, open the action menu and select **Hibernate**. The stats then freeze until you wake the pet. If you store the badge without hibernation, the stats continue to decay, and the pet can starve before you find the badge again.
 
 ### Game modes
 
-Two difficulty presets, picked via **Main → Bornagotchi → Mode**:
+There are two difficulty settings, under **Main → Bornagotchi → Mode**:
 
-* **Classic** — the original balance the badge ships with.
-* **Casual** — roughly half the decay speed and more relief per action, for people who don't want to baby-sit.
+* **Classic.** The original balance of the badge.
+* **Casual.** About half the decay speed, and more relief for each action. Use this if you do not want to care for the pet often.
 
-The setting persists in flash. A `*` next to the mode name means the change is queued — **reboot the badge** for it to take effect.
+The badge keeps the setting in flash. A `*` next to the mode name means that the change waits. **Restart the badge** to apply it.
 
 ### Turning the pet off
 
-Not a pet person? **Main → Bornagotchi → Disable Game** hides the whole Game screen from the carousel. The toggle persists across reboots (the label flips to *Enable Game* once off) and, while disabled, an NFC station tap can no longer jump you into the pet. Flip it back to *Enable Game* to bring the pet screen back.
+You can remove the pet. **Main → Bornagotchi → Disable Game** hides the whole Game screen from the carousel. The badge keeps this setting through a restart, and the label changes to *Enable Game*. While the game is off, an NFC station tap can no longer open the pet. Select *Enable Game* to get the pet screen back.
 
 ## Mini-games
 
-Open the bottom-row **Play** menu in BornPets and pick a game. Each win reduces the *drained* stat without raising hunger, so they are free entertainment. **Cancel** always exits a mini-game.
+Open the **Play** menu in the bottom row of BornPets and select a game. Each win lowers the *drained* stat, and it does not raise hunger. The games are therefore free entertainment. **Cancel** always leaves a mini-game.
 
 | Game | Goal |
 | ---- | ---- |
-| **Tic-Tac-Toe** | Draw or beat the computer (Normal or Impossible difficulty) |
-| **Lights Out** | Toggle a 5×5 grid until every light is off |
+| **Tic-Tac-Toe** | Draw against the computer, or win (Normal or Impossible difficulty) |
+| **Lights Out** | Switch a 5×5 grid until every light is off |
 | **Nim** | Force the computer to take the last stick |
 | **Maze** | Reach any border exit of an 18×18 maze |
-| **Black Hole** | Beat the AI's adjacent-sum on a 21-cell pyramid |
-| **Triple Born** | A *Triple Town* style merge game on a 6×6 board |
-| **BornJeweled** | Accessible match-3 with a 30-move limit |
+| **Black Hole** | Beat the sum of the AI on a pyramid of 21 cells |
+| **Triple Born** | A merge game in the style of *Triple Town*, on a 6×6 board |
+| **BornJeweled** | An accessible match-3 game with a limit of 30 moves |
 
-Inside a game: the **joystick** moves the cursor, **Execute / Fire** places or selects, and **Cancel** quits back to the Play menu.
+In a game, the **joystick** moves the cursor. **Execute / Fire** places or selects. **Cancel** returns to the Play menu.
 
 ## Make your own pet
 
-Want a companion that isn't a snail or a cat? The **CyberÆgg Pet Maker** is a browser-based sprite and animation editor for BornPets:
+You can build a companion that is not a snail or a cat. The **CyberÆgg Pet Maker** is a sprite and animation editor for BornPets, and it runs in the browser:
 
 **[scene.rs/pets/](https://scene.rs/pets/)**
 
-With it you can:
+With the Pet Maker you can:
 
-* Start from a preset (**Bartholomeus**, **Cat**, **Slug**) or a **Blank** canvas.
-* Draw each animation frame with the badge's palette — **black**, **red**, **white** and transparent (white is the e-paper background; transparent means "not drawn").
-* Preview animation states (e.g. *Idle*) with speed and onion-skin controls.
-* Optionally tune the game balance (`BORNPETS.CFG`) — how fast stats decay and recover.
-* **Download ZIP** to get everything packaged for the badge.
+* Start from a preset (**Bartholomeus**, **Cat** or **Slug**), or from a **Blank** canvas.
+* Draw each animation frame with the badge's palette: **black**, **red**, **white** and transparent. White is the e-paper background, and transparent means that the badge draws nothing.
+* Preview the animation states, for example *Idle*, with controls for the speed and the onion skin.
+* Change the game balance (`BORNPETS.CFG`), which sets how fast the stats decay and recover.
+* Select **Download ZIP** to get all the files for the badge.
 
 ### Installing a custom pet
 
-The badge exposes a USB drive when plugged in over USB-C (see [Getting started](../getting-started/#usb-drag-and-drop)). Unzip the export from the Pet Maker and copy the sprite files — plus `PETS.CFG`, and `BORNPETS.CFG` if you made one — into the root of the `CYBR<4 hex>` drive, then reboot the badge.
+The badge shows a USB drive when you connect USB-C. See [Getting started](../getting-started/#usb-drag-and-drop). Unpack the export of the Pet Maker. Copy the sprite files to the root of the `CYBR<4 hex>` drive, together with `PETS.CFG` and, if you made one, `BORNPETS.CFG`. Then restart the badge.
 
 ### Hand-editing sprites (GIMP etc.)
 
-The badge only accepts a very specific PCX flavour (2 bits-per-pixel, single plane, RLE). Editors like GIMP happily export 16- or 256-colour PCX instead, which the badge silently skips. The firmware's [`scripts/`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts) folder has helpers for exactly this:
+The badge accepts one specific PCX format: 2 bits per pixel, one plane, RLE. Editors such as GIMP export a PCX with 16 or 256 colors instead, and the badge skips those files without a message. The firmware's [`scripts/`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts) folder has helpers for this problem:
 
-* [`fix_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/fix_badge_pcx.py) — re-packs a wrong-depth PCX (e.g. a 4bpp/8bpp GIMP export) back to the badge's 2bpp format, preserving dimensions.
-* [`png_to_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/png_to_badge_pcx.py) — converts a PNG straight to a 152×152 badge PCX.
-* [`check_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/check_badge_pcx.py) — validates a file before you copy it over, so you catch a bad export on your computer instead of on the badge.
+* [`fix_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/fix_badge_pcx.py) writes a PCX with the wrong depth, for example a 4 bpp or 8 bpp GIMP export, back to the badge's 2 bpp format. It keeps the dimensions.
+* [`png_to_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/png_to_badge_pcx.py) converts a PNG directly to a 152×152 badge PCX.
+* [`check_badge_pcx.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/check_badge_pcx.py) checks a file before you copy it. You then find a bad export on your computer, not on the badge.
 
 ## Custom pet roster: `PETS.CFG`
 
-`PETS.CFG` is the pet roster shown in "Choose your Pet". It is a plain-text file with one `PREFIX=NAME` per line, editable without reflashing the firmware:
+`PETS.CFG` is the pet roster in the "Choose your Pet" screen. It is a plain-text file with one `PREFIX=NAME` on each line. You can edit it without a new firmware:
 
 ```
 # --- current pets (rename if you like) ---
@@ -112,17 +112,17 @@ The badge only accepts a very specific PCX flavour (2 bits-per-pixel, single pla
 6=Ghost
 ```
 
-* **PREFIX** is the pet's sprite-prefix byte (decimal):
-  * `0`, `1`, `2` — the built-in pets (listing them just renames them)
-  * `3`, `4` — reserved (sponsors, menu icons) and ignored
-  * `5`–`7` — your own custom pets
+* **PREFIX** is the sprite-prefix byte of the pet, in decimal:
+  * `0`, `1`, `2` are the built-in pets. A line for one of these renames it.
+  * `3`, `4` are reserved for sponsors and menu icons, and the badge ignores them.
+  * `5` to `7` are your own pets.
 * **NAME** is up to 16 ASCII characters.
 
-A pet's sprites are the matching `PPAAFF.PCX` files on the badge — `PP` is the prefix, `AA` the animation part, `FF` the frame. The firmware just counts the PCX files present (for example `050100`…`050104` = five idle frames), so there is no fixed frame count or header to maintain. Export sprites at the pet's prefix from the [Pet Maker](https://scene.rs/pets/) and drop them next to `PETS.CFG` on the drive. Lines beginning with `#`, and reserved or malformed rows, are ignored.
+The sprites of a pet are the `PPAAFF.PCX` files on the badge. `PP` is the prefix, `AA` is the animation part, and `FF` is the frame. The firmware counts the PCX files that are present, for example `050100` to `050104` for five idle frames. There is therefore no fixed frame count and no header to maintain. Export the sprites at the prefix of the pet from the [Pet Maker](https://scene.rs/pets/), and copy them to the drive next to `PETS.CFG`. The firmware ignores lines that start with `#`, and reserved or damaged lines.
 
 ## Custom balance: `BORNPETS.CFG`
 
-If you only want to change the difficulty (not the sprites), drop a plain-text `BORNPETS.CFG` in the root of the badge's USB drive with one `KEY=VALUE` per line:
+To change only the difficulty, and not the sprites, copy a plain-text `BORNPETS.CFG` file to the root of the badge's USB drive. Write one `KEY=VALUE` on each line:
 
 ```
 # speed up hunger decay, slow down the drained stat
@@ -130,10 +130,10 @@ HUNGER_RATE=4
 DRAINED_INTERVAL=180
 ```
 
-Eject the drive and reboot. When a config is active a small `*` appears after the pet's name. Delete the file and reboot to return to a preset. The Pet Maker can generate this file for you, and the firmware's [`USER_GAMES.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/USER_GAMES.md) documents every supported key and its range.
+Eject the drive and restart the badge. While a configuration is active, a small `*` appears after the name of the pet. To return to a preset, delete the file and restart the badge. The Pet Maker can write this file for you. The firmware's [`USER_GAMES.md`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/USER_GAMES.md) documents every key and its range.
 
-A few gotchas:
+Three points are important:
 
-* **Edits apply at boot only.** Eject the drive properly (so the write is flushed), then power-cycle. No `*` after the pet name = no override was applied.
-* **The parser is silent.** Unknown keys are skipped, and a value that isn't a plain whole number (no units, decimals or minus sign) drops the whole line without any on-screen error.
-* **The documented "reasonable range" is advice, not a limit.** Values are only clamped to the raw integer type — `HUNGER_RATE=1000` really does make hunger fill ~300× faster, and your pet will be starving before you've unplugged the cable. If a wild value wrecked your pet, delete the file and reboot to fall back to the preset.
+* **Changes take effect at the start only.** Eject the drive correctly, so that the computer writes the data. Then power cycle the badge. If no `*` follows the name of the pet, the badge applied no override.
+* **The parser is silent.** It skips an unknown key. It also drops the whole line for a value that is not a plain whole number, so no units, no decimals and no minus sign. It shows no error on the screen.
+* **The documented "reasonable range" is advice, not a limit.** The firmware limits a value only to the range of the integer type. `HUNGER_RATE=1000` really fills hunger about 300 times faster, and your pet starves before you disconnect the cable. If a large value damaged your pet, delete the file and restart the badge to return to the preset.
