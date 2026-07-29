@@ -5,54 +5,55 @@ nodateline: true
 weight: 11
 ---
 
-There is a CircuitPython build for the Cyber Ægg, which turns the badge into
-something you program in Python with no toolchain at all. Flash it once and the
-badge mounts as a `CIRCUITPY` drive: drop a `code.py` on it, and it runs the
-moment you save.
+The Cyber Ægg has a CircuitPython build. It turns the badge into a device you
+program in Python, with no toolchain. Flash it once. The badge then mounts as a
+`CIRCUITPY` drive. Put a `code.py` file on the drive, and the badge runs it when
+you save.
 
-The display, buttons, joystick, LEDs, buzzer, battery, LoRa radio, NFC,
-Bluetooth Low Energy and deep sleep are all reachable from ordinary
-CircuitPython modules.
+Ordinary CircuitPython modules reach the display, the buttons, the joystick, the
+LEDs, the buzzer and the battery. The same is true for the LoRa radio, NFC,
+Bluetooth Low Energy and deep sleep.
 
-{{% alert title="It replaces the firmware and wipes your saved data" color="warning" %}}
-CircuitPython is a separate image, not an app inside the normal firmware. While
-it is installed there is no BornPets, mesh or clock — flash the standard
-firmware again from the [Flash page](../flash/) to get the badge back.
+{{% alert title="It replaces the firmware and erases your saved data" color="warning" %}}
+CircuitPython is a separate image. It is not an app inside the normal firmware.
+While CircuitPython is installed, the badge has no BornPets, no mesh and no
+clock. Flash the standard firmware again from the [Flash page](../flash/) to get
+the badge back.
 
-The CIRCUITPY drive lives on the same QSPI flash that holds your pet, settings
-(the KV store) and the badge's asset files, so switching to CircuitPython
-overwrites them. Your pet and settings are lost, and when you flash a normal
-firmware back you will need to re-install its assets before the sprites return.
+The CIRCUITPY drive uses the same QSPI flash that holds your pet, your settings
+(the KV store) and the badge's asset files. CircuitPython writes over all of
+them. You lose the pet and the settings. After you flash a normal firmware
+again, install its assets before the sprites come back.
 {{% /alert %}}
 
 ## Install it
 
-1. **Flash the CircuitPython image** from the [Flash page](../flash/), then
-   reset the badge with no button held.
-2. The badge appears as a **`CIRCUITPY`** drive, plus a serial console for the
-   REPL (`/dev/ttyACM0` on Linux, a `usbmodem` device on macOS, a `COM` port on
-   Windows).
-3. Copy the libraries and examples onto the drive, as below.
+1. Flash the CircuitPython image from the [Flash page](../flash/).
+2. Reset the badge with no button held.
+3. The badge appears as a **`CIRCUITPY`** drive. It also gives a serial console
+   for the REPL: `/dev/ttyACM0` on Linux, a `usbmodem` device on macOS, a `COM`
+   port on Windows.
+4. Copy the libraries and the examples to the drive, as below.
 
-{{% alert title="Power-cycle rather than reboot from the flasher" color="info" %}}
-After flashing, restart the badge with the **ON/OFF** switch — top-left on the
-front — (slide it off, then back on), not by asking the tool to reboot it. The battery keeps the badge
-powered when USB is unplugged, so a clean power-cycle is the reliable way to
-hand off to the new firmware.
+{{% alert title="Power cycle the badge, do not reboot it from the flasher" color="info" %}}
+After you flash the badge, restart it with the **ON/OFF** switch at the top left
+of the front. Slide the switch off, then back on. Do not ask the tool to reboot
+the badge. The battery keeps the badge powered when you disconnect USB. A power
+cycle is the reliable way to start the new firmware.
 {{% /alert %}}
 
 ## Install the libraries and examples
 
-None of the examples run without the support libraries — importing
-`cyberaegg_epd` or the LoRa driver fails until they are in `CIRCUITPY/lib`. Put
-them there first. The examples come along in the same archive, landing in
-`CIRCUITPY/examples`, so you can open one and save it as `code.py`:
+The examples do not run without the support libraries. An import of
+`cyberaegg_epd` or the LoRa driver fails until the libraries are in
+`CIRCUITPY/lib`. Install them first. The same archive holds the examples. They
+go to `CIRCUITPY/examples`, so you can open one and save it as `code.py`.
 
 {{< pylib >}}
 
 ## Your first program
 
-With the libraries installed, save this as `CIRCUITPY/code.py`:
+After you install the libraries, save this file as `CIRCUITPY/code.py`:
 
 ```python
 import cyberaegg_epd
@@ -61,47 +62,48 @@ display = cyberaegg_epd.get_display()
 ```
 
 `get_display()` returns a standard `displayio.EPaperDisplay`. Build a
-`displayio` group as usual, assign it to `display.root_group` and refresh.
+`displayio` group as usual. Assign the group to `display.root_group`, then
+refresh the display.
 
-The example `epd_hello.py` draws a bordered white field with a black and a red
-square; `hwtest.py` walks through the LED, buzzer, charger, battery, I²C and all
-the buttons.
+The example `epd_hello.py` draws a bordered white field with one black square
+and one red square. The example `hwtest.py` tests the LED, the buzzer, the
+charger, the battery, I²C and all the buttons.
 
-They are all in `CIRCUITPY/examples` after the install above — copy one to
-`code.py` and it runs on save. You can also
-[browse them online](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/examples),
-along with [the libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/lib),
-or paste one into the console below.
+The install above puts every example in `CIRCUITPY/examples`. Copy one to
+`code.py`, and the badge runs it when you save. You can also
+[read the examples online](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/examples)
+and [the libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/lib),
+or paste an example into the console below.
 
-For text, the firmware includes `terminalio` and `fontio`, so
-`adafruit_display_text` can draw labels — it is bundled in the repository's
-`lib/`.
+The firmware includes `terminalio` and `fontio`, so `adafruit_display_text` can
+draw text labels. That library is in the repository's `lib/` folder.
 
 ## The serial console
 
-CircuitPython prints `print()` output and tracebacks to a USB serial console,
-and offers a REPL there. That console is where you find out *why* a program did
-not run — errors never appear on the display.
+CircuitPython prints `print()` output and tracebacks to a USB serial console. It
+also gives a REPL there. The console tells you why a program did not run. Errors
+never appear on the display.
 
-You can open it right here, without installing a terminal program:
+You can open the console here, without a terminal program:
 
 {{< repl >}}
 
-**Ctrl-C** interrupts whatever is running and gives you the `>>>` prompt, where
-you can poke at the hardware a line at a time. **Ctrl-D** restarts `code.py`
-from the top, which is the quickest way to re-run after an edit.
+**Ctrl-C** stops the running program and gives you the `>>>` prompt. At that
+prompt you can test the hardware one line at a time. **Ctrl-D** starts `code.py`
+again from the top. This is the quickest way to run a program again after an
+edit.
 
-The console is only available while CircuitPython is installed — it is the
-firmware that provides it, not the bootloader.
+The console is only available while CircuitPython is installed. The firmware
+gives the console, not the bootloader.
 
-## Working with the e-paper display
+## Work with the e-paper display
 
-E-paper is the one part that does not behave like a normal screen, and most
-first-time surprises come from it.
+E-paper does not behave like a normal screen. Most first-time surprises come
+from this.
 
-**The badge shows whatever was drawn last.** E-ink holds its image with no
-power, and creating an `EPaperDisplay` does not touch the glass. To start from a
-clean panel:
+**The badge shows the last image it drew.** E-ink holds its image with no power.
+An `EPaperDisplay` object does not change the glass when you create it. To start
+from a clean panel, use this code:
 
 ```python
 import cyberaegg_epd
@@ -109,34 +111,35 @@ import cyberaegg_epd
 cyberaegg_epd.clear()          # white panel, one full refresh
 ```
 
-If your program clears the screen and then exits rather than staying running,
-call `displayio.release_displays()` afterwards — otherwise CircuitPython draws
-its own boot logo over your freshly cleared panel.
+If your program clears the screen and then stops, call
+`displayio.release_displays()` before it stops. If you do not, CircuitPython
+draws its own start logo over the clean panel.
 
-**Refreshes are slow and finite.** A tri-colour full refresh takes around twenty
-seconds, and every refresh wears the panel a little. So:
+**Refreshes are slow, and each one wears the panel.** A full tri-color refresh
+takes about twenty seconds. Obey these rules:
 
-* Prefer **one refresh per boot**, showing your final image with the white
-  background baked into the same frame, over clearing and then drawing as two
-  separate refreshes.
-* Do not refresh more often than roughly **every 180 seconds**.
-* Use **full refreshes only** — this panel does not do partial updates.
-* If the badge will sit unused for a long time, leave it cleared to white to
-  avoid image retention.
+* Use one refresh for each start. Draw the final image with the white
+  background in the same frame, instead of one refresh to clear and a second
+  refresh to draw.
+* Do not refresh more often than every 180 seconds.
+* Use full refreshes only. This panel does not do partial updates.
+* If the badge stays unused for a long time, leave the panel white. This
+  prevents image retention.
 
-**Refreshing does not block.** `display.refresh()` returns straight away while
-the panel keeps updating for about six seconds. Read `display.busy` if you need
-to wait, or call `cyberaegg_epd.refresh(display)`, which waits out the panel's
-minimum interval first and blocks until the refresh finishes.
+**A refresh does not block the program.** `display.refresh()` returns
+immediately, and the panel continues to update for about six seconds. Read
+`display.busy` if you must wait. You can also call
+`cyberaegg_epd.refresh(display)`. That function waits for the minimum interval
+of the panel, then blocks until the refresh ends.
 
 ## LoRa
 
-The SX1262 radio has a driver in the repository's `lib/`, configured for
-MeshCore-compatible EU settings: 869.618 MHz, SF8, 62.5 kHz bandwidth, coding
-rate 4/5, sync word `0x1424`, no TCXO.
+The repository's `lib/` folder has a driver for the SX1262 radio. The driver
+uses MeshCore-compatible EU settings: 869.618 MHz, SF8, 62.5 kHz bandwidth,
+coding rate 4/5, sync word `0x1424`, no TCXO.
 
-The driver and the SX126x files it needs are part of the library set installed
-[above](#install-the-libraries), so there is nothing more to copy:
+The driver and the SX126x files it needs are part of the library set that you
+[installed above](#install-the-libraries-and-examples). You copy no more files:
 
 ```python
 import cyberaegg_lora
@@ -146,22 +149,24 @@ radio.send("hello")
 data, err = radio.receive(timeout_ms=5000)
 ```
 
-`examples/lora_tx.py` sends a counter and `lora_rx.py` receives, printing each
-packet's size and signal strength. The receiver works both against a second
-badge running `lora_tx.py` and left listening to live MeshCore traffic.
-`lora_dashboard.py` shows live packet statistics on the e-paper display.
+`examples/lora_tx.py` sends a counter. `examples/lora_rx.py` receives, and
+prints the size and the signal strength of each packet. The receiver works
+against a second badge that runs `lora_tx.py`. It also works against live
+MeshCore traffic. `lora_dashboard.py` shows live packet statistics on the
+e-paper display.
 
 ## NFC
 
-NFC is built into the firmware, so there is nothing to copy into `lib/`. The
-badge serves a read-only tag, so tapping a phone against it opens a URL. See
+The firmware includes NFC, so you copy nothing into `lib/`. The badge serves a
+read-only tag. A phone that touches the badge opens a URL. See
 `examples/nfc_tag.py` and the repository's `docs/NFC.md`.
 
 ## Bluetooth
 
 The badge advertises and accepts Bluetooth Low Energy connections from
 CircuitPython, through the standard `_bleio` API. It uses the factory address
-from `FICR.DEVICEADDR` — the same one the normal Rust firmware advertises with.
+from `FICR.DEVICEADDR`. The normal Rust firmware advertises with the same
+address.
 
 ```python
 import _bleio
@@ -176,54 +181,58 @@ adapter.start_advertising(advertisement, scan_response=None, connectable=True,
                           tx_power=0, directed_to=None)
 ```
 
-Any phone scanner will then show the badge, or on Linux:
+A phone scanner then shows the badge. On Linux, use this command:
 
 ```
 bluetoothctl --timeout 20 scan le
 ```
 
-`examples/ble_advertise.py` is that with a loop that re-advertises after a
-central disconnects. Connections and GATT work too: `examples/ble_uart.py`
-serves a Nordic UART Service, so any BLE terminal app — nRF Connect, Adafruit
-Bluefruit Connect — can connect to `CyberAegg` and send text that arrives on the
+`examples/ble_advertise.py` does the same, and advertises again after a central
+disconnects. Connections and GATT also work. `examples/ble_uart.py` serves a
+Nordic UART Service. Any BLE terminal app, such as nRF Connect or Adafruit
+Bluefruit Connect, connects to `CyberAegg`. The text you send arrives on the
 badge's serial console.
 
-Three limits are worth knowing:
+Three limits are important:
 
-* **Peripheral only.** The badge can be found and connected to, but it cannot
-  scan or connect to anything itself — so badge-to-badge does not work.
-* **Legacy advertising only**, so the payload has to fit in 31 bytes.
-* **Not together with the display.** A tri-colour refresh keeps the panel busy
-  for tens of seconds and `displayio`'s background work contends with the
-  Bluetooth poll, so a connection does not survive a redraw. Keep the two in
-  separate programs for now.
+* **The badge is a peripheral only.** Other devices find the badge and connect
+  to it. The badge cannot scan, and it cannot connect to another device. Two
+  badges cannot talk to each other.
+* **Legacy advertising only.** The advertisement must fit in 31 bytes.
+* **Bluetooth does not work together with the display.** A full tri-color
+  refresh keeps the panel busy for tens of seconds. The background work of
+  `displayio` competes with the Bluetooth poll, and a connection does not
+  survive a redraw. Keep Bluetooth and the display in separate programs.
 
-Bluetooth also switches on the moment `_bleio` is first imported and stays on,
-which costs battery.
+Bluetooth starts when a program first imports `_bleio`, and then stays on. This
+uses battery power.
 
 {{% alert title="How it works without the SoftDevice" color="info" %}}
-CircuitPython's *native* nRF Bluetooth needs Nordic's S140 SoftDevice at flash
-address `0x1000`, which is inside the region the badge's bootloader owns — DFU
-writes only from `0x10000` up, so the S140 cannot be placed without an SWD
-reflash of the bootloader.
+The native nRF Bluetooth of CircuitPython needs Nordic's S140 SoftDevice at
+flash address `0x1000`. The badge's bootloader owns that region, and DFU writes
+only from `0x10000` up. Thus you cannot install the S140 without an SWD reflash
+of the bootloader.
 
-That restriction belongs to the S140 binary, not to Bluetooth. This firmware
-links Nordic's SoftDevice Controller instead — the link layer on its own, as an
-ordinary library with no fixed address — and wires it to the HCI Bluetooth host
-CircuitPython already ships for boards with an off-chip radio. Host and
-controller end up on the same chip, the bootloader is untouched, and flashing
-stays plain USB DFU. The write-up is in the repository's
-[docs/BLUETOOTH.md](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/docs/BLUETOOTH.md).
+This limit belongs to the S140 binary, not to Bluetooth. This firmware links
+Nordic's SoftDevice Controller instead. That controller is the link layer alone,
+an ordinary library with no fixed address. The firmware connects the controller
+to the HCI Bluetooth host that CircuitPython already has for boards with an
+off-chip radio. The host and the controller then run on the same chip. The
+bootloader stays untouched, and you flash the badge with plain USB DFU.
+
+The repository's
+[docs/BLUETOOTH.md](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/docs/BLUETOOTH.md)
+explains the design.
 {{% /alert %}}
 
-The MeshCore companion app still cannot talk to the badge while CircuitPython is
-installed: MeshCore lives in the normal badge firmware, which this image
-replaces.
+The MeshCore companion app cannot talk to the badge while CircuitPython is
+installed. MeshCore is part of the normal badge firmware, and this image
+replaces that firmware.
 
 ## Deep sleep
 
-The `alarm` module works, with both pin and time wake-up, so a battery-powered
-program can idle between refreshes instead of spinning:
+The `alarm` module works, with pin wake-up and time wake-up. A battery-powered
+program can sleep between refreshes instead of a busy loop:
 
 ```python
 import alarm
@@ -234,39 +243,39 @@ alarm.exit_and_deep_sleep_until_alarms(
 )
 ```
 
-E-paper keeps its image with no power, so the display stays readable through the
+E-paper keeps its image with no power. The display stays readable during the
 sleep.
 
 ## If something goes wrong
 
-**No `CIRCUITPY` drive appears.** The badge is probably still in the bootloader
-or was rebooted by the flashing tool rather than reset. Reset it with no button
+**No `CIRCUITPY` drive appears.** The badge is still in the bootloader, or the
+flashing tool rebooted it instead of a reset. Reset the badge with no button
 held.
 
 **My code did not run.** CircuitPython runs `code.py` from the root of the
-drive. Check the filename, and open the serial console — syntax errors and
-tracebacks are printed there, not on the display.
+drive. Check the file name. Open the serial console. The console prints syntax
+errors and tracebacks. The display does not show them.
 
 **The display shows the CircuitPython logo over my drawing.** Your program
-cleared the panel and then exited. Call `displayio.release_displays()` before
-finishing, or keep the program running.
+cleared the panel and then stopped. Call `displayio.release_displays()` before
+the program stops, or keep the program running.
 
-**The screen did not change.** Refreshes are rate-limited: too soon after the
-last one and the request is ignored. Wait out the interval, or use
-`cyberaegg_epd.refresh(display)`, which handles the waiting for you.
+**The screen did not change.** The firmware limits the refresh rate. It ignores
+a request that comes too soon after the last refresh. Wait for the interval, or
+use `cyberaegg_epd.refresh(display)`. That function does the wait for you.
 
 ## Source
 
-The firmware, library and examples live at
-[rarenerd/cyberaegg-circuitpython](https://codeberg.org/rarenerd/cyberaegg-circuitpython)
-— go straight to the
+The firmware, the libraries and the examples are at
+[rarenerd/cyberaegg-circuitpython](https://codeberg.org/rarenerd/cyberaegg-circuitpython).
+Go directly to the
 [examples](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/examples)
 or the [libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/lib).
-The image offered on the Flash page is that repository's prebuilt binary, byte
-for byte — its checksum matches the `SHA256SUMS` published alongside it. Build
-instructions are in the repository's `docs/BUILDING.md`.
+The image on the Flash page is that repository's prebuilt binary, byte for byte.
+Its checksum matches the published `SHA256SUMS` file. The repository's
+`docs/BUILDING.md` has the build instructions.
 
-CircuitPython itself is MIT and the badge port is Apache-2.0, but the Bluetooth
-build also links Nordic's SoftDevice Controller and MPSL under
-`LicenseRef-Nordic-5-Clause`: redistributable, but only for use on Nordic
-silicon — which the badge's nRF52840 is.
+CircuitPython is MIT, and the badge port is Apache-2.0. The Bluetooth build also
+links Nordic's SoftDevice Controller and MPSL under
+`LicenseRef-Nordic-5-Clause`. That license allows redistribution, but only for
+use on Nordic silicon. The badge's nRF52840 is Nordic silicon.
