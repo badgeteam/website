@@ -5,40 +5,40 @@ nodateline: true
 weight: 10
 ---
 
-Yes, it runs DOOM. E1M1 — *Knee-Deep in the Dead* — renders on the badge's
-e-paper panel at a couple of frames per second, in four levels of grey, with the
-level's music picked out on the piezo buzzer.
+The badge runs DOOM. E1M1, *Knee-Deep in the Dead*, appears on the badge's
+e-paper panel at a few frames per second, in four levels of gray. The piezo
+buzzer plays the music of the level.
 
-It is a slideshow, and it is genuinely playable.
+The result is a slideshow, and you can play it.
 
-{{% alert title="DOOM replaces the firmware and wipes your saved data" color="warning" %}}
-This is a separate firmware image, not an app inside the normal one. While DOOM
-is installed there is no BornPets, no mesh, no clock — flash the standard
-firmware again from the [Flash page](../flash/) to get the badge back.
+{{% alert title="DOOM replaces the firmware and erases your saved data" color="warning" %}}
+DOOM is a separate firmware image. It is not an app inside the normal firmware.
+While DOOM is installed, the badge has no BornPets, no mesh and no clock. Write
+the standard firmware again from the [Flash page](../flash/) to get the badge
+back.
 
-Switching to DOOM is **destructive**. The WAD fills nearly all of the badge's
-2 MB QSPI flash, and that same chip holds your pet and settings (the KV store)
-and the badge's asset files — uploading the WAD overwrites them. So your pet and
-settings are lost, and when you flash a normal firmware back you will need to
-re-install its assets from the [Flash page](../flash/) before the sprites show
-up again.
+A change to DOOM is **destructive**. The WAD fills almost all of the badge's
+2 MB QSPI flash. That same chip holds your pet and your settings (the KV store)
+and the badge's asset files, and the WAD writes over them. You lose the pet and
+the settings. After you write a normal firmware again, install its assets from
+the [Flash page](../flash/) before the sprites come back.
 {{% /alert %}}
 
 ## How to install it
 
-Getting DOOM running takes two steps, because the game data is far too big to
-sit on the badge's little USB drive. The firmware goes into the badge's program
-memory over USB; the game data goes into the separate 2 MB QSPI flash chip over
-a serial connection.
+DOOM needs two steps, because the game data is much too large for the badge's
+USB drive. The firmware goes into the badge's program memory over USB. The game
+data goes into the separate 2 MB QSPI flash chip over a serial connection.
 
-1. **Flash the DOOM firmware** on the [Flash page](../flash/), the same way as
-   any other image, then power-cycle the badge.
-2. **Upload a WAD** with the loader below.
+1. Write the DOOM firmware on the [Flash page](../flash/), as you write any
+   other image.
+2. Power cycle the badge.
+3. Upload a WAD with the loader below.
 
-{{% alert title="Flashing wipes the game data" color="info" %}}
-Writing any firmware over USB reformats the QSPI region where the WAD lives, so
-you need to upload the WAD again after every reflash. Once it is there a normal
-boot never touches it, so it survives ordinary power-cycles indefinitely.
+{{% alert title="A firmware write erases the game data" color="info" %}}
+A write of any firmware over USB formats the QSPI region that holds the WAD.
+Upload the WAD again after every firmware write. A normal start never touches
+the WAD, so it stays through power cycles.
 {{% /alert %}}
 
 ## Upload a WAD
@@ -51,28 +51,29 @@ boot never touches it, so it survives ordinary power-cycles indefinitely.
 | ----- | ------ |
 | **Joystick** | Move, strafe and turn |
 | **Joystick press** (*Fire*) | Shoot |
-| **Execute** | Use / open doors |
-| **Cancel** | Cycle weapon — and, held at boot, enter WAD upload mode |
-| **Execute + Cancel** | Toggle the music |
+| **Execute** | Use, and open doors |
+| **Cancel** | Change weapon. Held during the start, it enters WAD upload mode |
+| **Execute + Cancel** | Turns the music on or off |
 
 ## If something goes wrong
 
-**The browser never shows a serial port.** The badge only presents its serial
-console in WAD upload mode. Reset it while holding **Cancel** and try again.
+**The browser shows no serial port.** The badge shows its serial console only in
+WAD upload mode. Reset the badge while you hold **Cancel**, then try again.
 
-**"Timed out waiting for the badge to ask for data".** The badge is connected
-but not in upload mode, so nothing is asking for a transfer. Reset holding
-**Cancel**.
+**"Timed out waiting for the badge to ask for data".** The badge is connected,
+but it is not in upload mode, so it asks for no transfer. Reset the badge while
+you hold **Cancel**.
 
-**The upload fails part-way.** Nothing is damaged — the badge simply has no
-usable WAD and drops back into upload mode. Reconnect and send it again.
+**The upload stops in the middle.** Nothing is damaged. The badge has no usable
+WAD, and it returns to upload mode. Connect again and send the file again.
 
-**DOOM boots but complains about missing game data.** The firmware is installed
-and the WAD is not, which is exactly what you get after a fresh flash. Upload it
+**DOOM starts, but it reports missing game data.** The firmware is installed and
+the WAD is not. You get this state after every firmware write. Upload the WAD
 above.
 
-**Firefox or Safari show no Connect button.** Neither ships Web Serial. Use a
-Chromium-family browser, or send the blob from a terminal with a YMODEM tool:
+**Firefox and Safari show no Connect button.** Neither browser has Web Serial.
+Use a Chromium-family browser, or send the blob from a terminal with a YMODEM
+tool:
 
 ```
 sb --ymodem-1k e1m1.blob < /dev/ttyACM0 > /dev/ttyACM0
@@ -80,23 +81,24 @@ sb --ymodem-1k e1m1.blob < /dev/ttyACM0 > /dev/ttyACM0
 
 ## About the game data
 
-Only one level fits: the blob offered above is about 1.8 MiB, roughly 92% of the
-badge's QSPI flash. It is built from the freely distributable **shareware**
-`doom1.wad`, trimmed and compressed by the asset pipeline in the
-[cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom) repository. DOOM and
-its game data remain the property of id Software.
+Only one level fits. The blob above is about 1.8 MiB, which is about 92% of the
+badge's QSPI flash. The asset pipeline in the
+[cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom) repository builds
+it from the freely distributable **shareware** `doom1.wad`, and it cuts and
+compresses the data. DOOM and its game data stay the property of id Software.
 
-To build your own from a copy of `doom1.wad` you already have:
+To build your own blob from a copy of `doom1.wad` that you have:
 
 ```
 bash tools/build_assets.sh    # doom1.wad -> build/e1m1.blob
 ```
 
-Then pick that file in the loader instead of the prepared one.
+Then select that file in the loader instead of the prepared one.
 
 ## Source
 
-The port lives at [rarenerd/cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom).
-It is a fork of [next-hack/nRF52840Doom](https://github.com/next-hack/nRF52840Doom)
-(of prBoom and GBADoom lineage), re-fitted to the badge's e-paper display,
-buttons and power budget. The DOOM engine is licensed under the GPL.
+The port is at [rarenerd/cyberaegg-doom](https://codeberg.org/rarenerd/cyberaegg-doom).
+It is a fork of [next-hack/nRF52840Doom](https://github.com/next-hack/nRF52840Doom),
+which comes from prBoom and GBADoom. The fork fits the engine to the badge's
+e-paper display, its buttons and its power budget. The DOOM engine is under the
+GPL.

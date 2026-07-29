@@ -5,100 +5,100 @@ nodateline: true
 weight: 5
 ---
 
-Three apps share the "watch" carousel slots: **Clock**, **Alarm** (opened from the Clock) and **Calendar**.
+Three apps use the watch slots of the carousel: **Clock**, **Alarm** and **Calendar**. You open the Alarm from the Clock.
 
 ## Clock
 
-Two switchable watch faces — digital and analog. A small bell icon in the header lights up when an alarm is armed.
+The Clock has two watch faces, digital and analog. A small bell icon in the header appears when an alarm is on.
 
-**Open:** push Left / Right until you land on the **Clock** screen.
+**To open it:** press Left or Right until the badge shows the **Clock** screen.
 
 | Key | Action |
 | --- | ------ |
-| Up / Down | Toggle digital ↔ analog face |
-| Execute / Fire | Enter the alarm editor (slot 0) |
-| Left / Right | Next / previous carousel screen |
+| Up / Down | Changes between the digital face and the analog face |
+| Execute / Fire | Opens the alarm editor (slot 0) |
+| Left / Right | Goes to the next or the previous carousel screen |
 
 ### Setting the time
 
-The badge has no backup battery for its real-time clock, so the wall clock resets to **None** on every boot and reads "Clock not set" until you set it. Two ways:
+The badge has no backup battery for its real-time clock. The clock therefore returns to **None** at every start, and it shows "Clock not set" until you set it. You can set it in two ways:
 
-* **MeshCore app over Bluetooth** — the phone pushes its time. The easy path.
-* **Mesh time advert** — stand near a synced LoRa repeater and the badge picks the time up over the air. On-air time is only accepted from a *trusted* source: a signature-verified repeater / companion advert or a channel you hold the key for. A crowd of other badges won't set your clock.
+* **With the MeshCore app over Bluetooth.** The phone sends its time. This is the easy method.
+* **With a mesh time advert.** Stay near a synchronized LoRa repeater, and the badge takes the time over the air. The badge accepts a time over the air only from a *trusted* source. That is a repeater or companion advert with a verified signature, or a channel that you hold the key for. Other badges near you cannot set your clock.
 
-Set the timezone once under **Main → Settings → Timezone** — it persists across reboots (default `+2`, CEST for BornHack).
+Set the timezone once, under **Main → Settings → Timezone**. The badge keeps that setting through a restart. The default is `+2`, which is CEST for BornHack.
 
 {{% alert title="No seconds hand" color="info" %}}
-A BLE-set time overrides on-air refinement until the next reboot. There is no seconds hand — e-paper refresh is too slow for one.
+A time from BLE overrides the refinement over the air until the next restart. The watch face has no seconds hand, because the e-paper refresh is too slow for one.
 {{% /alert %}}
 
 ## Alarm
 
-Push **Execute / Fire** on the Clock screen to open the alarm editor.
+Press **Execute / Fire** on the Clock screen to open the alarm editor.
 
 | Key | Action |
 | --- | ------ |
-| Up / Down | Move between fields (Hour → Minute → Days → Tone → Enabled) |
-| Execute / Fire | Drill into / out of a field's edit mode |
-| Cancel | Exit back to the watch face |
+| Up / Down | Moves between the fields: Hour, Minute, Days, Tone, Enabled |
+| Execute / Fire | Enters or leaves the edit mode of a field |
+| Cancel | Returns to the watch face |
 
-The **Days** field cycles: Daily · Weekdays · Weekends · None · Custom. The **Tone** field offers ten built-in tunes: Beep, Imperial March, Rickroll, Pink Panther, Sandstorm, Startup, Trololo, Daisy Bell, Nokia, Samsung.
+The **Days** field steps through Daily, Weekdays, Weekends, None and Custom. The **Tone** field has ten built-in tunes: Beep, Imperial March, Rickroll, Pink Panther, Sandstorm, Startup, Trololo, Daisy Bell, Nokia and Samsung.
 
-When an alarm fires the buzzer plays the chosen tone up to five times, 8 seconds apart. Any button press silences it; if you ignore it, it stops itself after about 32 seconds.
+At the alarm time, the buzzer plays the selected tone up to five times, with 8 seconds between them. Any button press stops the alarm. If you do nothing, the alarm stops after about 32 seconds.
 
 {{% alert title="Set the clock first" color="warning" %}}
-Alarms only fire when the clock is set. After a reboot, if you haven't paired or heard a time advert, the alarm won't go off — pair first.
+An alarm sounds only when the clock is set. After a restart, pair the badge or wait for a time advert. Until then, the alarm does not sound.
 {{% /alert %}}
 
 ## Calendar
 
-A month grid with a per-day timeline of imported iCalendar events.
+The Calendar is a month grid with a timeline for each day. It shows the iCalendar events you imported.
 
-**Open:** Left / Right to the **Calendar** screen (right of Clock). The grid is shown without a cursor; push **Execute / Fire** to enter active mode.
+**To open it:** press Left or Right to the **Calendar** screen, to the right of the Clock. The grid appears without a cursor. Press **Execute / Fire** to enter the active mode.
 
 **Active mode:**
 
 | Key | Action |
 | --- | ------ |
-| Up / Down | Move the cursor ±7 days (jump a week) |
-| Left / Right | Move the cursor ±1 day |
-| Execute / Fire | Open the day-detail timeline |
-| Cancel | Back to the passive view |
+| Up / Down | Moves the cursor 7 days, one week |
+| Left / Right | Moves the cursor 1 day |
+| Execute / Fire | Opens the timeline of the day |
+| Cancel | Returns to the passive view |
 
 **Day detail (timeline):**
 
 | Key | Action |
 | --- | ------ |
-| Up / Down | Scroll ±1 hour |
-| Left / Right | Scroll long event titles horizontally |
-| Execute / Fire | Full day-list (all events as a list) |
-| Cancel | Back to the month view |
+| Up / Down | Moves 1 hour |
+| Left / Right | Moves a long event title horizontally |
+| Execute / Fire | Shows the full day list, with all events |
+| Cancel | Returns to the month view |
 
 ### Loading events
 
-The badge imports events at boot from a file named **`ALARMS.ICS`** in the root of the USB drive:
+The badge imports events at the start, from a file with the name **`ALARMS.ICS`** in the root of the USB drive:
 
-1. Plug the USB-C cable into your computer.
-2. Open the drive labelled `CYBR<4 hex>`.
-3. Drop your `.ics` file in the root, renamed to `ALARMS.ICS`.
+1. Connect the USB-C cable to your computer.
+2. Open the drive with the name `CYBR<4 hex>`.
+3. Copy your `.ics` file to the root, with the name `ALARMS.ICS`.
 4. Eject the drive.
-5. Reboot the badge — slide the **ON/OFF** switch (top-left on the front) off, then back on.
+5. Restart the badge. Slide the **ON/OFF** switch at the top left of the front off, then back on.
 
-You can use the official BornHack programme `.ics` straight from <https://bornhack.dk/>.
+You can use the official BornHack program `.ics` from <https://bornhack.dk/>.
 
 {{% alert title="Limits" color="info" %}}
-Up to 31 events are stored. Multi-day events are clamped to end at 23:59 on their start day (e-paper doesn't draw events spanning days). All events are RAM-only and re-imported on every boot from `ALARMS.ICS`.
+The badge stores up to 31 events. It cuts an event that covers more than one day. The event then ends at 23:59 on the first day, because the e-paper view draws no event over more than one day. All events are in RAM only, and the badge imports them again from `ALARMS.ICS` at every start.
 {{% /alert %}}
 
 ### Import limits & quirks
 
-The parser is deliberately minimal. If events are missing or look odd, one of these is usually why:
+The parser is minimal on purpose. If events are absent or wrong, one of these limits is usually the cause:
 
-* **File size: 16 KiB max.** Anything past that is silently cut off mid-event. A full conference programme easily exceeds this — trim it first with the firmware's [`scripts/strip_ics.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/strip_ics.py) (drops `DESCRIPTION`/`UID`/etc. and supports `--from` / `--to` / `--max` to select a range).
-* **31 events max.** Import stops quietly at the cap; later events in the file never appear.
-* **No recurrence.** `RRULE` is ignored — a repeating event imports as its first occurrence only. Export "expanded" per-occurrence ICS instead (the BornHack programme already is).
-* **No all-day events.** A DATE-only `DTSTART` is dropped without warning. Give the event a real start time.
-* **ASCII only.** Non-ASCII characters in titles are stripped, not transliterated (`Æ`, accents and emoji simply vanish).
-* **Timezones.** Only `Z`-suffixed (UTC) timestamps are shifted to local time — always by the built-in default of **UTC+2** (right for BornHack), because the import runs before your persisted timezone setting is applied. Floating and `TZID=`-zoned times are taken as-is. When in doubt, export in UTC.
-* **Fired events disappear from the Calendar until reboot.** Imported events are one-shot alarms: once one has fired it no longer shows on the grid or day view. Rebooting re-imports everything.
-* **Edits apply at boot only.** Replace `ALARMS.ICS`, eject the drive properly, then power-cycle the badge.
+* **File size: 16 KiB maximum.** The parser cuts the rest of the file, in the middle of an event, without a message. A full conference program is larger than this. Cut it first with the firmware's [`scripts/strip_ics.py`](https://codeberg.org/Ranzbak/bornhack-firmware-2026/src/branch/main/scripts/strip_ics.py). That script removes `DESCRIPTION`, `UID` and similar fields, and it accepts `--from`, `--to` and `--max` to select a range.
+* **31 events maximum.** The import stops at the limit without a message. Later events in the file never appear.
+* **No recurrence.** The parser ignores `RRULE`. A repeated event imports as its first occurrence only. Export an expanded ICS file with one entry for each occurrence. The BornHack program is already expanded.
+* **No all-day events.** The parser drops a `DTSTART` with a date and no time, without a message. Give the event a real start time.
+* **ASCII only.** The parser removes non-ASCII characters from titles. It does not transliterate them, so `Æ`, accented letters and emoji disappear.
+* **Timezones.** The parser shifts only timestamps with the `Z` suffix, which are UTC, to local time. It always uses the built-in default of **UTC+2**, which is correct for BornHack, because the import runs before the badge applies your saved timezone. The parser takes floating times and `TZID=` times without a change. Export in UTC if you are not sure.
+* **An event that fired disappears from the Calendar until the next start.** Imported events are single-shot alarms. After one fires, the grid and the day view no longer show it. A restart imports everything again.
+* **Changes take effect at the start only.** Replace `ALARMS.ICS`, eject the drive correctly, then power cycle the badge.

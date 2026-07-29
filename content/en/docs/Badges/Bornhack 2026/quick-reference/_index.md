@@ -5,7 +5,7 @@ nodateline: true
 weight: 2
 ---
 
-A one-page cheat sheet for the Cyber Ægg. Print it and tuck it under the strap.
+This is a one-page cheat sheet for the Cyber Ægg. Print it and put it under the strap.
 
 ```
         ┌─────────────────────────────┐
@@ -23,57 +23,57 @@ A one-page cheat sheet for the Cyber Ægg. Print it and tuck it under the strap.
 
 ## Buttons
 
-| Button | Anywhere in the menu |
+| Button | Function in the menu |
 | ------ | -------------------- |
 | **Execute** / Fire | Select · open · confirm |
 | **Cancel** | Back · cancel · close |
-| **Up / Down** | Move the cursor within a screen |
-| **Left / Right** | Switch top-level screen |
+| **Up / Down** | Move the cursor in a screen |
+| **Left / Right** | Go to the next top-level screen |
 
 ## Top-level screens
 
-Left / Right cycles through them:
+Left and Right move through the screens:
 
 `Game → Main → PMs → Channel → Adverts → Tokens → Clock → Calendar → Name → My QR`
 
 ## LED meanings
 
-| Colour | Meaning |
-| ------ | ------- |
-| Pulsing orange | Boot — hardware init |
-| Pulsing blue | Display + LoRa coming up (~13 s) |
-| Single green flash | Boot done |
-| Red flicker | Screen refreshing |
-| Blue flicker | USB drive write |
-| Blinking green | Contacts wipe in progress |
-| One-shot red / green / blue | Someone pinged you over the mesh (`blinkme`) |
+| Color | Meaning |
+| ----- | ------- |
+| Pulsing orange | Start — the hardware initializes |
+| Pulsing blue | The display and LoRa start (about 13 s) |
+| One green flash | The start is complete |
+| Red flicker | The screen refreshes |
+| Blue flicker | The badge writes to the USB drive |
+| Blinking green | The badge erases the contacts |
+| One red, green or blue flash | A person pinged you over the mesh (`blinkme`) |
 
 ## Power-on combos
 
-Hold these while powering on — slide the **ON/OFF** switch (top-left on the front) off, then back on (the battery keeps the badge running, so unplugging USB will not restart it):
+Hold the button while you start the badge. Slide the **ON/OFF** switch at the top left of the front off, then back on. The battery keeps the badge running, so a disconnection of USB does not restart it.
 
 | Hold | Result |
 | ---- | ------ |
 | **Execute** | USB firmware update (DFU mode) |
-| **Fire** (joystick press) | Force safe e-paper waveform (ignore a bad `LUT.CFG` for that boot) |
-| **Execute + Cancel + Fire** | Factory reset (~40 s — wipes data and settings) |
+| **Fire** (joystick press) | Forces the safe e-paper waveform, and ignores a bad `LUT.CFG` for that start |
+| **Execute + Cancel + Fire** | Factory reset (about 40 s — erases the data and the settings) |
 
-If the app slot is blank the badge enters DFU on its own.
+If the application slot is empty, the badge enters DFU mode without a button.
 
 ## USB drag-and-drop
 
-Plug in USB-C — the badge mounts as the **`CYBR<4 hex>`** drive.
+Connect USB-C. The badge mounts as the **`CYBR<4 hex>`** drive.
 
-| File you drop | What it does |
-| ------------- | ------------ |
-| `ALARMS.ICS` | Imports alarms + calendar events |
+| File you put on the drive | What it does |
+| ------------------------- | ------------ |
+| `ALARMS.ICS` | Imports alarms and calendar events |
 | `030000.PCX` … `030009.PCX` | Sponsor slides |
 | `<6 hex>.PCX` | Game sprite asset |
-| `PETS.CFG` | Add / rename pets (with sprite PCX files) |
+| `PETS.CFG` | Adds or renames pets, with sprite PCX files |
 | `BORNPETS.CFG` | Custom pet balance (`KEY=VALUE`) |
 | `LUT.CFG` | Custom e-paper waveform (advanced) |
 
-Reboot the badge after dropping files.
+Restart the badge after you copy the files.
 
 ## Firmware update (DFU)
 
@@ -81,8 +81,8 @@ Reboot the badge after dropping files.
 dfu-util -d 1915:521f -D cyber-aegg.bin
 ```
 
-Bootloader LEDs in DFU: red blink (idle) → solid blue (flashing) → solid green (done — power-cycle).
+The bootloader LEDs in DFU mode are: a red blink for idle, solid blue during the write, solid green when the write is complete. Then power cycle the badge.
 
 ## Charging
 
-USB-C in any port charges the badge. There is no separate charge LED — the battery icon on the watch / status bar shows the level.
+USB-C in any port charges the badge. There is no separate charge LED. The battery icon on the watch face and in the status bar shows the level.
