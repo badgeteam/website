@@ -120,11 +120,11 @@ precedence = "override"
 SPDX-FileCopyrightText = "CyberÆgg badge firmware contributors and the BornHack badge sponsors"
 SPDX-License-Identifier = "Apache-2.0"
 
-# CircuitPython support libraries for the CIRCUITPY drive: the badge's own
-# drivers (Apache-2.0) alongside Adafruit's display_text and the micropySX126X
-# radio driver, both MIT.
+# CircuitPython support libraries and examples for the CIRCUITPY drive: the
+# badge's own drivers and examples (Apache-2.0) alongside Adafruit's
+# display_text and the micropySX126X radio driver, both MIT.
 [[annotations]]
-path = "static/assets/cyber-aegg/cyberaegg-circuitpython-lib.zip"
+path = "static/assets/cyber-aegg/cyberaegg-circuitpython-files.zip"
 precedence = "override"
 SPDX-FileCopyrightText = "The CyberÆgg CircuitPython contributors, Adafruit Industries, E H Ong and Jan Gromeš"
 SPDX-License-Identifier = "MIT AND Apache-2.0"

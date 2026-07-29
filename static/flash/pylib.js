@@ -1,17 +1,18 @@
 // SPDX-FileCopyrightText: Stichting Badge.Team
 // SPDX-License-Identifier: MIT
 //
-// Installs the CircuitPython support libraries onto the badge's CIRCUITPY
-// drive.
+// Installs the CircuitPython support libraries and examples onto the
+// badge's CIRCUITPY drive.
 //
-// Nothing in the examples works without these: importing cyberaegg_epd or the
-// LoRa driver fails until they are in CIRCUITPY/lib. Copying them by hand
-// means fetching a repository and getting a nested directory right, so this
-// does it from the page instead.
+// Nothing in the examples works without the libraries: importing
+// cyberaegg_epd or the LoRa driver fails until they are in CIRCUITPY/lib.
+// Copying them by hand means fetching a repository and getting a nested
+// directory right, so this does it from the page instead. The examples ride
+// along in the same archive.
 //
 // Unlike the badge's FAT12 asset drive, this payload has structure — the
-// archive carries lib/ and lib/adafruit_display_text/ — so directories are
-// created as needed rather than the names being flattened.
+// archive carries lib/, lib/adafruit_display_text/ and examples/ — so
+// directories are created as needed rather than the names being flattened.
 
 import { readCentralDirectory, inflateEntry, safePath, sha256Hex } from "./zip.js";
 
@@ -104,7 +105,7 @@ async function install() {
       setProgress(written, entries.length, `${written}/${entries.length} ${entry.name}`);
     }
 
-    setProgress(written, entries.length, "done — the libraries are installed");
+    setProgress(written, entries.length, "done — the files are installed");
     logOk(`copied ${written} files into lib/`);
   } catch (e) {
     logErr(`install failed: ${e.message || e}`);

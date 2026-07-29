@@ -1,5 +1,6 @@
 {{- /*
-  Installs the CircuitPython support libraries onto the CIRCUITPY drive.
+  Installs the CircuitPython support libraries and examples onto the
+  CIRCUITPY drive.
 
   Reads the `pylib` table from whichever firmware entry in data/firmwares.toml
   declares one, so the archive and its checksum live with the rest of the
@@ -23,15 +24,16 @@
 
 <div id="pylib" class="flasher">
   <section class="flasher-step">
-    <h3>Install the libraries</h3>
+    <h3>Install the libraries and examples</h3>
     <p>
-      {{ $payload.label }} They go in a <code>lib</code> folder in the root of
-      the <code>CIRCUITPY</code> drive, which this creates for you.
+      {{ $payload.label }} They go in <code>lib</code> and
+      <code>examples</code> folders in the root of the <code>CIRCUITPY</code>
+      drive, which this creates for you.
     </p>
 
     <div class="flasher-row">
       <button id="btn-pylib-copy" class="btn btn-primary">
-        Copy the libraries to CIRCUITPY
+        Copy the files to CIRCUITPY
       </button>
       <progress id="pylib-progress" max="1" value="0"></progress>
       <span id="pylib-progress-label" class="flasher-status">idle</span>
@@ -40,12 +42,13 @@
     <div id="pylib-fs-warning" class="alert alert-warning d-none">
       This browser has no File System Access API, so it cannot write to the
       drive directly. Download the zip instead and unpack it into the root of
-      the drive — it already contains the <code>lib</code> folder.
+      the drive — it already contains the <code>lib</code> and
+      <code>examples</code> folders.
     </div>
 
     <div class="flasher-row">
       <a id="pylib-zip" class="btn btn-secondary" href="#" download>
-        Download the library zip
+        Download the zip
       </a>
     </div>
     <p class="flasher-hint">
@@ -64,7 +67,7 @@
 <script src="/flash/pylib.js" type="module"></script>
 {{- else }}
 <div class="alert alert-warning">
-  No library archive is registered. Add a <code>pylib</code> table to
+  No archive is registered. Add a <code>pylib</code> table to
   <code>data/firmwares.toml</code>.
 </div>
 {{- end }}
