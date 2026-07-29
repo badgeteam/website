@@ -95,11 +95,12 @@ appPid = "0x0001"
   [[badge.firmware]]
   label = "CircuitPython"
   # Prebuilt image from https://codeberg.org/rarenerd/cyberaegg-circuitpython
-  # (firmware/cyberaegg-circuitpython.bin @ 92b18a7, the Bluetooth build from
-  # pull request 1); the hash matches that repository's own firmware/SHA256SUMS.
+  # (firmware/cyberaegg-circuitpython.bin @ 2b19c94, the build that adds the
+  # observer and central roles); the hash matches that repository's own
+  # firmware/SHA256SUMS.
   file = "/firmware/cyber-aegg/cyberaegg-circuitpython.bin"
-  sha256 = "602fcd69767d6501a6ded03227712f8c02d25b84344ade60e432dcdbbdb11df0"
-  notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa, NFC, deep sleep and Bluetooth Low Energy are all exposed as ordinary CircuitPython modules — the badge advertises, accepts connections and serves GATT, though it cannot scan. It replaces the badge firmware, so no BornPets, mesh or clock until you flash one of those back."
+  sha256 = "d51b2106a968dd6ecca5a131123e273a8d2054677292a925e8c2934f3934982c"
+  notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa, NFC, deep sleep and Bluetooth Low Energy are all exposed as ordinary CircuitPython modules — the badge advertises, accepts connections, serves GATT, scans and connects out, so two badges find each other. It replaces the badge firmware, so no BornPets, mesh or clock until you flash one of those back."
   moreUrl = "../circuitpython/"
   moreLabel = "Getting started with CircuitPython →"
   # Support libraries and examples for the CIRCUITPY drive. Declared as this
@@ -111,8 +112,8 @@ appPid = "0x0001"
   # once the badge has been reset into the new firmware.
   [badge.firmware.assets]
   file = "/assets/cyber-aegg/cyberaegg-circuitpython-files.zip"
-  sha256 = "dec6e0b00e10c680fc096bc207a933e752a9925f7189d6e6a1b5699ad747005b"
-  label = "16 files — the e-paper and LoRa drivers and adafruit_display_text in lib, plus the eight examples."
+  sha256 = "29aefeb580a80b3af48e3cda09a3a676f4ab38e3027adf23f05982d6b956c569"
+  label = "18 files — the e-paper and LoRa drivers and adafruit_display_text in lib, plus the ten examples."
   drive = "CIRCUITPY"
   intro = "CircuitPython needs its support libraries before any of the examples will run. They go in a lib folder on the CIRCUITPY drive, which appears once you have flashed the firmware and reset the badge — it is not the CYBR drive you flashed from. The examples come along in an examples folder."
 
@@ -126,8 +127,8 @@ appPid = "0x0001"
   #   git ls-files lib examples | zip -X -9 -@ <out>.zip
   [badge.firmware.pylib]
   file = "/assets/cyber-aegg/cyberaegg-circuitpython-files.zip"
-  sha256 = "dec6e0b00e10c680fc096bc207a933e752a9925f7189d6e6a1b5699ad747005b"
-  label = "The e-paper and LoRa drivers and adafruit_display_text for lib, plus the eight examples."
+  sha256 = "29aefeb580a80b3af48e3cda09a3a676f4ab38e3027adf23f05982d6b956c569"
+  label = "The e-paper and LoRa drivers and adafruit_display_text for lib, plus the ten examples."
 
   [[badge.firmware]]
   label = "Bad Apple!!"
