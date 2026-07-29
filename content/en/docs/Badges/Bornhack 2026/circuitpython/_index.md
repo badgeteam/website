@@ -32,7 +32,7 @@ firmware back you will need to re-install its assets before the sprites return.
 2. The badge appears as a **`CIRCUITPY`** drive, plus a serial console for the
    REPL (`/dev/ttyACM0` on Linux, a `usbmodem` device on macOS, a `COM` port on
    Windows).
-3. Copy the library and an example onto the drive, as below.
+3. Copy the libraries and examples onto the drive, as below.
 
 {{% alert title="Power-cycle rather than reboot from the flasher" color="info" %}}
 After flashing, restart the badge with the **ON/OFF** switch — top-left on the
@@ -41,11 +41,12 @@ powered when USB is unplugged, so a clean power-cycle is the reliable way to
 hand off to the new firmware.
 {{% /alert %}}
 
-## Install the libraries
+## Install the libraries and examples
 
 None of the examples run without the support libraries — importing
 `cyberaegg_epd` or the LoRa driver fails until they are in `CIRCUITPY/lib`. Put
-them there first:
+them there first. The examples come along in the same archive, landing in
+`CIRCUITPY/examples`, so you can open one and save it as `code.py`:
 
 {{< pylib >}}
 
@@ -66,11 +67,11 @@ The example `epd_hello.py` draws a bordered white field with a black and a red
 square; `hwtest.py` walks through the LED, buzzer, charger, battery, I²C and all
 the buttons.
 
-**→ [Browse all the examples](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/examples)**
-· [the libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/lib)
-
-Copy any of them into the console below with **Paste**, or save one as
-`code.py` on the drive.
+They are all in `CIRCUITPY/examples` after the install above — copy one to
+`code.py` and it runs on save. You can also
+[browse them online](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/examples),
+along with [the libraries](https://codeberg.org/rarenerd/cyberaegg-circuitpython/src/branch/main/lib),
+or paste one into the console below.
 
 For text, the firmware includes `terminalio` and `fontio`, so
 `adafruit_display_text` can draw labels — it is bundled in the repository's
@@ -181,15 +182,21 @@ Any phone scanner will then show the badge, or on Linux:
 bluetoothctl --timeout 20 scan le
 ```
 
-`examples/ble_advertise.py` is the same thing with a loop that re-advertises
-after a central disconnects. GATT services and characteristics work too, through
-the usual `_bleio` classes.
+`examples/ble_advertise.py` is that with a loop that re-advertises after a
+central disconnects. Connections and GATT work too: `examples/ble_uart.py`
+serves a Nordic UART Service, so any BLE terminal app — nRF Connect, Adafruit
+Bluefruit Connect — can connect to `CyberAegg` and send text that arrives on the
+badge's serial console.
 
-Two limits are worth knowing:
+Three limits are worth knowing:
 
 * **Peripheral only.** The badge can be found and connected to, but it cannot
   scan or connect to anything itself — so badge-to-badge does not work.
 * **Legacy advertising only**, so the payload has to fit in 31 bytes.
+* **Not together with the display.** A tri-colour refresh keeps the panel busy
+  for tens of seconds and `displayio`'s background work contends with the
+  Bluetooth poll, so a connection does not survive a redraw. Keep the two in
+  separate programs for now.
 
 Bluetooth also switches on the moment `_bleio` is first imported and stays on,
 which costs battery.

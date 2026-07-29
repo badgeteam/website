@@ -95,38 +95,39 @@ appPid = "0x0001"
   [[badge.firmware]]
   label = "CircuitPython"
   # Prebuilt image from https://codeberg.org/rarenerd/cyberaegg-circuitpython
-  # (firmware/cyberaegg-circuitpython.bin @ d0fdd51, the Bluetooth build from
+  # (firmware/cyberaegg-circuitpython.bin @ 92b18a7, the Bluetooth build from
   # pull request 1); the hash matches that repository's own firmware/SHA256SUMS.
   file = "/firmware/cyber-aegg/cyberaegg-circuitpython.bin"
-  sha256 = "1c6b8ab105f42e8b7b612f12651bb83542fd1a70a2ec51a8f758c0084137d748"
-  notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa, NFC, deep sleep and Bluetooth Low Energy are all exposed as ordinary CircuitPython modules — the badge advertises and accepts connections, though it cannot scan. It replaces the badge firmware, so no BornPets, mesh or clock until you flash one of those back."
+  sha256 = "602fcd69767d6501a6ded03227712f8c02d25b84344ade60e432dcdbbdb11df0"
+  notes = "Write badge programs in Python, with no toolchain at all: the badge mounts as a CIRCUITPY drive and runs code.py every time you save it. The display, buttons, LEDs, buzzer, battery, LoRa, NFC, deep sleep and Bluetooth Low Energy are all exposed as ordinary CircuitPython modules — the badge advertises, accepts connections and serves GATT, though it cannot scan. It replaces the badge firmware, so no BornPets, mesh or clock until you flash one of those back."
   moreUrl = "../circuitpython/"
   moreLabel = "Getting started with CircuitPython →"
-  # Support libraries for the CIRCUITPY drive. Declared as this image's asset
-  # payload so the flasher offers them at step 5 like any other, and repeated
-  # as `pylib` below for the installer on the CircuitPython page.
+  # Support libraries and examples for the CIRCUITPY drive. Declared as this
+  # image's asset payload so the flasher offers them at step 5 like any other,
+  # and repeated as `pylib` below for the installer on the CircuitPython page.
   #
   # `drive` names the volume to pick. CircuitPython's is not the badge's own
   # CYBR volume: that one only exists in DFU mode, while CIRCUITPY appears
   # once the badge has been reset into the new firmware.
   [badge.firmware.assets]
-  file = "/assets/cyber-aegg/cyberaegg-circuitpython-lib.zip"
-  sha256 = "8905601ff13fa069770ded3a6007a96f2e88475e7f31714a46fc41d5bd734bf5"
-  label = "8 files — the e-paper and LoRa drivers, plus adafruit_display_text for drawing labels."
+  file = "/assets/cyber-aegg/cyberaegg-circuitpython-files.zip"
+  sha256 = "dec6e0b00e10c680fc096bc207a933e752a9925f7189d6e6a1b5699ad747005b"
+  label = "16 files — the e-paper and LoRa drivers and adafruit_display_text in lib, plus the eight examples."
   drive = "CIRCUITPY"
-  intro = "CircuitPython needs its support libraries before any of the examples will run. They go in a lib folder on the CIRCUITPY drive, which appears once you have flashed the firmware and reset the badge — it is not the CYBR drive you flashed from."
+  intro = "CircuitPython needs its support libraries before any of the examples will run. They go in a lib folder on the CIRCUITPY drive, which appears once you have flashed the firmware and reset the badge — it is not the CYBR drive you flashed from. The examples come along in an examples folder."
 
-  # Support libraries for the CIRCUITPY drive, offered by the installer on
-  # ../circuitpython/. Unlike the badge's own asset archives this one has
-  # structure — it carries lib/ and lib/adafruit_display_text/ — so the paths
-  # are preserved on extraction rather than flattened.
+  # The same archive, offered by the installer on ../circuitpython/. Unlike the
+  # badge's own asset archives this one has structure — lib/,
+  # lib/adafruit_display_text/ and examples/ — so the paths are preserved on
+  # extraction rather than flattened.
   #
-  # Built from the repository root so the paths come out right:
-  #   zip -rX -9 <out>.zip lib
+  # Built from the repository root, tracked files only, so nothing
+  # work-in-progress ships and the archive matches what the repository shows:
+  #   git ls-files lib examples | zip -X -9 -@ <out>.zip
   [badge.firmware.pylib]
-  file = "/assets/cyber-aegg/cyberaegg-circuitpython-lib.zip"
-  sha256 = "8905601ff13fa069770ded3a6007a96f2e88475e7f31714a46fc41d5bd734bf5"
-  label = "The e-paper and LoRa drivers, plus adafruit_display_text for drawing labels."
+  file = "/assets/cyber-aegg/cyberaegg-circuitpython-files.zip"
+  sha256 = "dec6e0b00e10c680fc096bc207a933e752a9925f7189d6e6a1b5699ad747005b"
+  label = "The e-paper and LoRa drivers and adafruit_display_text for lib, plus the eight examples."
 
   [[badge.firmware]]
   label = "Bad Apple!!"
