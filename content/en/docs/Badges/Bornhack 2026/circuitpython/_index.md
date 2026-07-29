@@ -193,11 +193,27 @@ Nordic UART Service. Any BLE terminal app, such as nRF Connect or Adafruit
 Bluefruit Connect, connects to `CyberAegg`. The text you send arrives on the
 badge's serial console.
 
+### Find and connect to other badges
+
+The badge also scans, which is the observer role, and it connects out, which is
+the central role. Two badges therefore find each other.
+
+`examples/ble_scan.py` lists what the badge hears. It scans and advertises at
+the same time, so two badges watch each other with no connection between them.
+`examples/ble_central.py` connects to a second badge that runs
+`examples/ble_uart.py`. The link comes up in about 0.2 seconds, and both badges
+report the same state.
+
+Scanning uses the multirole controller library, because the peripheral library
+has no scanning. That library costs about 31 KB more flash.
+
 Three limits are important:
 
-* **The badge is a peripheral only.** Other devices find the badge and connect
-  to it. The badge cannot scan, and it cannot connect to another device. Two
-  badges cannot talk to each other.
+* **There is no GATT client.** The badge connects to another device, but it
+  cannot read or write the characteristics of that device.
+  `Connection.discover_remote_services()` returns nothing. A connection is
+  therefore useful to prove that two badges reach each other, and to hold a
+  link, but not yet to exchange data.
 * **Legacy advertising only.** The advertisement must fit in 31 bytes.
 * **Bluetooth does not work together with the display.** A full tri-color
   refresh keeps the panel busy for tens of seconds. The background work of
