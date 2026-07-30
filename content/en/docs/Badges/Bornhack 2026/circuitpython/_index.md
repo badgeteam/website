@@ -216,8 +216,8 @@ them. This is the right shape for a field full of badges.
 ### Find and connect to other badges
 
 The badge also scans, which is the observer role. It connects out, which is the
-central role. It reads what the other device offers, which is the GATT client.
-Two badges therefore find each other and inspect each other.
+central role. It reads, writes and subscribes on the other device, which is the
+GATT client. Two badges therefore talk to each other in both directions.
 
 `examples/ble_scan.py` lists what the badge hears, and it decodes the beacon of
 a badge that runs `ble_telemetry.py`. It scans and advertises at the same time,
@@ -225,20 +225,35 @@ so two badges watch each other with no connection between them.
 `examples/ble_central.py` connects to a second badge that runs
 `examples/ble_uart.py`. The link comes up in about 0.2 seconds, and both badges
 report the same state. `examples/ble_explore.py` connects and then lists every
-service and characteristic of the other device. It works against any device, not
-only against a badge.
+service, characteristic and descriptor of the other device. It works against any
+device, not only against a badge.
+
+`examples/ble_client.py` is the mirror of `examples/ble_uart.py`. Put
+`ble_uart.py` on one badge and `ble_client.py` on a second one. The client badge
+finds the other badge, connects, subscribes, writes a line and prints the reply.
+Every protocol driver has this shape. Only the UUIDs and the bytes change.
+
+To read a remote value, read `characteristic.value`. To write it, assign to the
+same attribute. To subscribe, call `characteristic.set_cccd(notify=True)`, and
+put a `_bleio.CharacteristicBuffer` on the same characteristic. Without the
+buffer, the badge receives the notifications and drops them, because nothing
+observes that characteristic.
+
+The two sides negotiate the ATT MTU at each connection. The badge offers 247
+bytes, so one notification carries 244 bytes instead of the minimum 20. A reply
+of 180 bytes then arrives in one piece. The other side has the last word,
+because the connection uses the lower of the two offers. Read
+`connection.max_packet_length` instead of assuming a size. A device that does
+not negotiate stays at 20 bytes. The link layer packet size sets the ceiling at
+251 bytes.
 
 Scanning uses the multirole controller library, because the peripheral library
 has no scanning. That library costs about 31 KB more flash.
 
-Four limits are important:
+Three limits are important:
 
-* **The badge does not read a remote value.** It finds the services and the
-  characteristics of a device it connects to. `Characteristic.value` on a remote
-  characteristic is not implemented. The badge therefore knows what a device
-  offers, and not yet what it holds.
-* **The badge does not find a remote descriptor**, so it cannot subscribe to a
-  notification from another device.
+* **The badge cannot pair.** A device that asks for pairing before it answers
+  does not give its attribute table to the badge.
 * **Legacy advertising only.** The advertisement must fit in 31 bytes.
 * **Bluetooth does not work together with the display.** A full tri-color
   refresh keeps the panel busy for tens of seconds. The background work of
