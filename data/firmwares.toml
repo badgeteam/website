@@ -133,10 +133,10 @@ appPid = "0x0001"
   [[badge.firmware]]
   label = "Bad Apple!!"
   # Prebuilt release from https://github.com/annejan/aegg-apple
-  # (v1.0.0, aegg-apple.bin). Links at 0x10000 like the others.
+  # (v1.1.0 @ 6e6a2fe, aegg-apple.bin). Links at 0x10000 like the others.
   file = "/firmware/cyber-aegg/aegg-apple.bin"
-  sha256 = "ceff417a2ef1a9a1832ec1d184186b276feed379a36160a882d8e47c6291800d"
-  notes = "The Bad Apple!! animation on the e-paper panel, with the tune on the buzzer. A self-contained demo — the video and music are baked into the image, so there is nothing to copy to the drive. It leaves the USB volume and your saved data alone, so flashing one of the other images back restores the badge exactly as it was."
+  sha256 = "cfe4f94f02b592353ef20ba71f730ddb0ef753877ace4075e7075d1e13948e58"
+  notes = "The Bad Apple!! animation on the e-paper panel, with the tune on the buzzer. A self-contained demo — the video and music are baked into the image, so there is nothing to copy to the drive. Version 1.1.0 codes the frames with the CCITT G4 fax codec and repaints only the rows that changed, which pays for four times as many frames and brings playback down to about half a second to a second per frame. Fire cycles the waveform strength, Up and Down change the gate-scan timing, and Execute together with Cancel mutes the music. It leaves the USB volume and your saved data alone, so flashing one of the other images back restores the badge exactly as it was."
   moreUrl = "https://github.com/annejan/aegg-apple"
   moreLabel = "About this demo →"
   # No `assets` table and no `wad`: nothing to install at step 5, which hides
