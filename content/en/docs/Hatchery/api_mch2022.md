@@ -14,4 +14,4 @@ The badges communicate with the Hatchery server via an API, this page describes 
 }
 </style>
 
-{{< swaggerui src="https://mch2022.badge.team/docs/api-docs.json" >}}
+{{< swaggerui src="https://mch2022.badge.team/docs" >}}
