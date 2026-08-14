@@ -4,6 +4,25 @@ Add styles or override variables from the theme here.
 
 */
 
+/* A long URL used as link text, or a code-like heading, is one unbreakable
+   word. Without this the whole page scrolls sideways on a phone. */
+.td-content {
+    overflow-wrap: break-word;
+}
+
+/* The logo declares its size in millimetres, about 302px, which is wider than
+   the smallest phones once the navbar padding counts. The calc only bites
+   below ~340px, so the logo keeps its size everywhere else. */
+.navbar-brand svg {
+    max-width: calc(100vw - 2.5rem);
+}
+
+/* Swagger UI lays itself out wider than the content column on small screens.
+   Give the widget its own scroll area rather than scrolling the page. */
+#docsy_swagger_ui {
+    overflow-x: auto;
+}
+
 .navbar-brand .font-weight-bold {
     display: none;
 }
