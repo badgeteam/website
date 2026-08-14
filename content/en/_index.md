@@ -52,7 +52,7 @@ All the documentation — hardware, firmware, and an in-browser [flasher](/docs/
 
 {{% blocks/section color="black" %}}
 
-{{% blocks/project img="hackerhotel.png" phase="1" title="**HackerHotel** 2027" %}}
+{{% blocks/project img="hackerhotel.png" phase="2" title="**HackerHotel** 2027" %}}
 
 With **LoRa**, a **keyboard**, a **big screen** and the powerhouse **ESP32-P4** microcontroller you can guess how big our ambitions are! Our next challenge is fitting it all into the **budget**.
 
