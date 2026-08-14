@@ -115,9 +115,40 @@ rename it. In case you're asking yourself: the *.bin file will be named the
 same way your firmware project is named in the top level "CMakeLists.txt" file:
 `project(main)`
 
+#### Why it has to be called `main.bin`
+
+The name is not a convention, and it is not AppFS being fussy. It is the badge
+firmware. When you install an ESP32 app from the Hatchery, the badge walks the
+list of files the app has and writes exactly one of them into AppFS: the one
+called `main.bin`. Every other file is downloaded to the app's folder as a data
+file. The check is a plain string comparison against a constant named
+`esp32_bin_fn` in
+[`main/app_management.c`](https://github.com/badgeteam/mch2022-firmware-esp32/blob/master/main/app_management.c)
+and
+[`main/menus/hatchery.c`](https://github.com/badgeteam/mch2022-firmware-esp32/blob/master/main/menus/hatchery.c).
+
+So an app whose binary is called `myapp.bin` installs without an error and then
+has nothing to run.
+
+AppFS itself does not care what your file was called. It stores apps under the
+**slug**, with the file name kept only as a title. That is why the name does
+not matter when you push over USB:
+
+```
+python3 app_push.py build/whatever.bin my_app "My App" 1 --run
+```
+
+Here `my_app` is the AppFS name and the thing an update has to match. Push the
+same name again and you replace the app, whatever the file on your computer was
+called. Only the Hatchery route, which goes through the badge's installer, needs
+`main.bin`.
+
 ### FPGA
 
-If you are uploading an FPGA project, please name it `bitstream.bin`.
+If you are uploading an FPGA project, please name it `bitstream.bin`. The same
+reasoning applies: the launcher opens `bitstream.bin` in the app's folder, and
+looks nowhere else. See
+[`main/menus/launcher.c`](https://github.com/badgeteam/mch2022-firmware-esp32/blob/master/main/menus/launcher.c).
 
 Once all the relevant stuff is there, click "Save" and if you are feeling
 brave, check the "Publish" box, this allows others to see your app in the
