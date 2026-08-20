@@ -23,7 +23,7 @@ Our board consists of the following people:
  - Chairman: Paul Honig (ranzbak)
  - Treasurer: Jelle Haandrikman
  - Secretary: Emiel Bart
- - General board members: Anne Jan and Renze Nicolai
+ - General board members: Anne Jan Brouwer and Renze Nicolai
 
 ## Email
 
