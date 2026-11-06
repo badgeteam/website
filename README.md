@@ -9,10 +9,10 @@ If you want to test your changes locally then you first have to install [Hugo](h
 
 After you've installed Hugo building the website is as easy as cloning the repository and running ```hugo``` in the repository root.
 
-Hugo can also host a development server, you can use this feature by running ```hugo server``` in the root of the repository. The development server will then be reachable at http://localhost:1313
+Hugo can also host a development server, you can use this feature by running ```hugo server``` in the root of the repository. The development server will then be reachable at http://localhost:1313 Tested with Hugo 0.166+extensions and upward.
 
 ```bash
 git clone https://github.com/badgeteam/website.git
 cd website
-./dev_server.sh
+hugo server
 ```
