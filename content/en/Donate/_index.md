@@ -6,8 +6,15 @@ weight: 200
 
 <br />
 
-## Dontate to Stichting Badge.Team
+## Donations to Stichting Badge.Team
 
-Thank you very much for helping us facilitate building cool event badges!
+Thank you very much for helping us creating cool event badges!
 
-You can donate to us by sending money to our bank account. Our IBAN is NL14ABNA0145708470 in name of "Stichting Badge.Team".
+You can donate to us by sending money to our bank account. 
+
+  * IBAN: NL14ABNA0145708470 
+  * Name: Stichting Badge.Team
+  * Subject: Donation + \<reasons>
+
+Receipts are available upon request via an E-mail to penningmeester@badge.team 
+
