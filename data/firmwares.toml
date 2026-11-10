@@ -61,20 +61,22 @@ appPid = "0x0001"
   # The Community Edition lives at
   # https://github.com/ShadowSquad-org/BornHack-Cyberegg
   #
-  # Built from v0.2.0 @ 4604c1b (2026-07-21). The edition is developed on
-  # the annejan fork and synced upstream in batches, so this is ahead of
-  # ShadowSquad-org/main (6e046b8) by seven commits — the screen lock and
-  # the battle fighter names. Take new builds from the fork's main.
+  # Built with `make fw-bin-release` (SSD1675 panel) in
+  # https://codeberg.org/Ranzbak/bornhack-firmware-2026-ce, branch
+  # ranzbak/region-key @ cf0861a (2026-11-09). Development moved there
+  # after camp; it is ahead of both GitHub repositories.
   file = "/firmware/cyber-aegg/cyber-aegg-community.bin"
-  sha256 = "9d80eeff4cb95a716812936763ed6cfa12812faaaa83e1358ce21c5d300b226e"
-  notes = "A community fork of the badge firmware. Everything the standard image does, plus extra BornPets mechanics: weight and exercise, food and drink choices, the HAX in-game economy, mesh Battles and a fourth pet — and a screen lock, held on Cancel for three seconds."
+  sha256 = "0556b89eb53b8d3e179156389e88305636c4ed6aa9b833b90588fe013f7be57c"
+  notes = "A community fork of the badge firmware. Everything the standard image does, plus extra BornPets mechanics: weight and exercise, food and drink choices, the HAX in-game economy, mesh Battles and seven pets to choose from — and a screen lock, held on Cancel for three seconds. The pet list comes from PETS.CFG on the badge's drive, so install the asset set that goes with this image."
 
   # The Community Edition draws far more sprites (menu icons, the extra
-  # actions, the Panda pet), so it needs its own, larger asset set.
+  # actions, the Panda, Badger, Sea star and Jellyfish pets), so it needs
+  # its own, larger asset set. Its PETS.CFG is the pet roster: the firmware
+  # has no built-in pets any more.
   [badge.firmware.assets]
   file = "/assets/cyber-aegg/cyber-aegg-community-assets.zip"
-  sha256 = "992fee1ed791be4e65fe1e0b56553be1880546f3a5fd1bce5cb984ee43e36fb9"
-  label = "265 files — everything the standard set has, plus the Community Edition's menu icons, extra action sprites and the Panda pet."
+  sha256 = "3c9d03d11069f102cdf87f431a77cd88a623966563def3f46a6afb854fd3c259"
+  label = "418 files — everything the standard set has, plus the Community Edition's menu icons, extra action sprites, the pet roster and the Panda, Badger, Sea star and Jellyfish pets."
 
   [[badge.firmware]]
   label = "DOOM"
