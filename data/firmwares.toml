@@ -38,10 +38,10 @@ appPid = "0x0001"
   [[badge.firmware]]
   label = "Cyber Ægg application (release)"
   # Built with `make fw-bin-release` in Ranzbak/bornhack-firmware-2026,
-  # branch ranzbak/meshcore-1.18-main @ 7d9d9db (2026-11-12): main @
-  # 392ed6d plus the MeshCore 1.18 backport from the Community Edition,
-  # up for review as
-  # https://codeberg.org/Ranzbak/bornhack-firmware-2026/pulls/141.
+  # main @ c59f3a1 (2026-11-12): the merge of PR #141, the MeshCore 1.18
+  # backport from the Community Edition. The next commit on main, 8352c53
+  # (PR #143), only changes the dev profile and the host simulator; a
+  # release build of it differs from this image only in panic line numbers.
   file = "/firmware/cyber-aegg/cyber-aegg.bin"
   # Optional integrity check — verified in the browser before writing.
   # Generate with: sha256sum <file>
@@ -66,10 +66,10 @@ appPid = "0x0001"
   #
   # Built with `make fw-bin-release` (SSD1675 panel) in
   # https://codeberg.org/Ranzbak/bornhack-firmware-2026-ce, branch
-  # ranzbak/region-key @ fd28145 (2026-11-12). Development moved there
+  # ranzbak/region-key @ 978eabf (2026-11-12). Development moved there
   # after camp; it is ahead of both GitHub repositories.
   file = "/firmware/cyber-aegg/cyber-aegg-community.bin"
-  sha256 = "215bb84cba413d860d079b4c9389cdd679676a9fa10b32c4cbcaa95ddd62a146"
+  sha256 = "e5b3ad9097d0794d4979e56e715be11ddff62ed10593bbf4ebbacfdb77c55300"
   notes = "A community fork of the badge firmware. Everything the standard image does, plus extra BornPets mechanics: weight and exercise, food and drink choices, the HAX in-game economy, mesh Battles and seven pets to choose from — and a screen lock, held on Cancel for three seconds. The pet list comes from PETS.CFG on the badge's drive, so install the asset set that goes with this image."
 
   # The Community Edition draws far more sprites (menu icons, the extra
