@@ -38,11 +38,14 @@ appPid = "0x0001"
   [[badge.firmware]]
   label = "Cyber Ægg application (release)"
   # Built with `make fw-bin-release` in Ranzbak/bornhack-firmware-2026,
-  # from main @ 392ed6d (2026-07-21).
+  # branch ranzbak/meshcore-1.18-main @ 7d9d9db (2026-11-12): main @
+  # 392ed6d plus the MeshCore 1.18 backport from the Community Edition,
+  # up for review as
+  # https://codeberg.org/Ranzbak/bornhack-firmware-2026/pulls/141.
   file = "/firmware/cyber-aegg/cyber-aegg.bin"
   # Optional integrity check — verified in the browser before writing.
   # Generate with: sha256sum <file>
-  sha256 = "9d23b50eab3797b49e632e97c159a8416168e6853bcd43fc9f685aab1ffe0004"
+  sha256 = "e396e9f688ce142b385fc45cc98b9e7b8940e12ea3688d32eb27ec4f9b4430cd"
   notes = "The normal badge firmware: BornPets, mesh, clock and calendar."
 
   # Asset payload for the badge's USB drive, tied to this image — editions
