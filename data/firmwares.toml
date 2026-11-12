@@ -63,10 +63,10 @@ appPid = "0x0001"
   #
   # Built with `make fw-bin-release` (SSD1675 panel) in
   # https://codeberg.org/Ranzbak/bornhack-firmware-2026-ce, branch
-  # ranzbak/region-key @ cf0861a (2026-11-09). Development moved there
+  # ranzbak/region-key @ fd28145 (2026-11-12). Development moved there
   # after camp; it is ahead of both GitHub repositories.
   file = "/firmware/cyber-aegg/cyber-aegg-community.bin"
-  sha256 = "0556b89eb53b8d3e179156389e88305636c4ed6aa9b833b90588fe013f7be57c"
+  sha256 = "215bb84cba413d860d079b4c9389cdd679676a9fa10b32c4cbcaa95ddd62a146"
   notes = "A community fork of the badge firmware. Everything the standard image does, plus extra BornPets mechanics: weight and exercise, food and drink choices, the HAX in-game economy, mesh Battles and seven pets to choose from — and a screen lock, held on Cancel for three seconds. The pet list comes from PETS.CFG on the badge's drive, so install the asset set that goes with this image."
 
   # The Community Edition draws far more sprites (menu icons, the extra
@@ -75,8 +75,8 @@ appPid = "0x0001"
   # has no built-in pets any more.
   [badge.firmware.assets]
   file = "/assets/cyber-aegg/cyber-aegg-community-assets.zip"
-  sha256 = "3c9d03d11069f102cdf87f431a77cd88a623966563def3f46a6afb854fd3c259"
-  label = "418 files — everything the standard set has, plus the Community Edition's menu icons, extra action sprites, the pet roster and the Panda, Badger, Sea star and Jellyfish pets."
+  sha256 = "c4b15f0b857036ab02f3241f9e28ecb0993012abb29f5e8b68af3833285366ad"
+  label = "421 files — everything the standard set has, plus the Community Edition's menu icons, extra action sprites, the pet roster and the Panda, Badger, Sea star and Jellyfish pets."
 
   [[badge.firmware]]
   label = "DOOM"
