@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hackerhotel 2027 starfish control center</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="theme.js"></script>
+</head>
+
+<body>
+
+	<header>
+		<h1>Hackerhotel 2027 starfish control center</h1>
+		<div class="conn-controls">
+			<label class="theme-control">
+				Theme
+				<select id="theme-select">
+					<option value="system">System</option>
+					<option value="light">Light</option>
+					<option value="dark">Dark</option>
+				</select>
+			</label>
+			<span id="conn-status">Not connected</span>
+			<span id="device-mode"></span>
+			<button id="connect-btn">Connect over WebUSB</button>
+			<button id="disconnect-btn" hidden>Disconnect</button>
+		</div>
+	</header>
+
+	<main>
+		<section class="board-pane">
+			<div class="board-toolbar">
+				<div class="toolbar-group" role="group" aria-label="Brush">
+					<span class="toolbar-title">Brush</span>
+					<label class="inline">
+						Paint
+						<select id="brush-target">
+							<option value="white">White LEDs</option>
+							<option value="rgb">RGB LEDs</option>
+						</select>
+					</label>
+					<label class="inline" id="brush-brightness-control">
+						Brightness
+						<input type="range" id="brush-value" min="0" max="255" value="255">
+						<output id="brush-value-readout">255</output>
+					</label>
+					<label class="inline" id="brush-color-control" hidden>
+						Color
+						<input type="color" id="brush-color" value="#ff0000">
+					</label>
+					<label class="inline">
+						Size
+						<select id="brush-radius">
+							<option value="0">Single LED</option>
+							<option value="2.5">Small</option>
+							<option value="5">Large</option>
+						</select>
+					</label>
+					<label>
+						<input type="checkbox" id="erase-mode">
+						Erase
+					</label>
+					<label>
+						<input type="checkbox" id="live-send" checked>
+						Live send
+					</label>
+				</div>
+				<div class="toolbar-group" role="group" aria-label="Device">
+					<span class="toolbar-title">Device</span>
+					<button id="clear-btn">Clear matrix</button>
+					<button id="send-frame-btn">Send frame</button>
+				</div>
+			</div>
+			<div id="board-container" aria-label="LED matrix preview, click or drag to paint"></div>
+			<p class="hint">
+				Click or drag to paint. Round dots are the white LEDs, diamonds
+				are the RGB accent LEDs: set Paint to "RGB LEDs" to paint those
+				with a color instead. While painting white LEDs, clicking a
+				diamond opens its own color editor.
+			</p>
+		</section>
+
+		<aside class="side-panel">
+			<div class="side-column">
+
+				<fieldset id="rgb-editor" hidden>
+					<legend>RGB LED <span id="rgb-editor-label"></span></legend>
+					<label>
+						Color
+						<input type="color" id="rgb-color-input" value="#000000">
+					</label>
+					<p class="hint">
+						A 4-pin RGB accent LED -- driven as three ordinary channels
+						in the same frame, not a separate protocol feature (see
+						<code>docs/LEDPWM_MATRIX.md</code>).
+					</p>
+					<div class="button-row">
+						<button id="rgb-editor-off-btn">Turn off</button>
+						<button id="rgb-editor-close-btn">Close</button>
+					</div>
+				</fieldset>
+
+				<fieldset class="tabbed">
+					<legend>Create animation</legend>
+					<div class="tab-bar" role="tablist">
+						<button role="tab" id="tab-test" aria-controls="panel-test" aria-selected="true">Test
+							animations</button>
+						<button role="tab" id="tab-video" aria-controls="panel-video" aria-selected="false">From
+							video</button>
+						<button role="tab" id="tab-text" aria-controls="panel-text" aria-selected="false">From
+							text</button>
+					</div>
+					<div class="tab-panel" role="tabpanel" id="panel-test" aria-labelledby="tab-test">
+						<p class="hint">
+							Generates a built-in multi-frame pattern -- neon flicker-on,
+							strobe, a chase around the arms, a breathe crossfade, a
+							sparkling second chase, and a strobe finale -- and loads it
+							into the Pattern editor below (Play it there, or send it to
+							the device).
+						</p>
+						<div class="button-row">
+							<button id="pharmacy-sign-btn">Techno pharmacy sign (green/white)</button>
+						</div>
+					</div>
+					<div class="tab-panel" role="tabpanel" id="panel-video" aria-labelledby="tab-video" hidden>
+						<label>
+							Video file
+							<input type="file" id="video-file-input" accept="video/*">
+						</label>
+						<label>
+							Frame rate (fps)
+							<input type="number" id="video-fps" min="1" max="20" value="8">
+						</label>
+						<label>
+							Start at (seconds)
+							<input type="number" id="video-start" min="0" step="0.1" value="0">
+						</label>
+						<label>
+							Duration (seconds)
+							<input type="number" id="video-duration" min="0.1" step="0.1" value="5">
+						</label>
+						<label>
+							Brightness boost
+							<input type="range" id="video-brightness" min="0.5" max="3" step="0.1" value="1.3">
+							<output id="video-brightness-readout">1.3x</output>
+						</label>
+						<label>
+							<input type="checkbox" id="video-ambilight">
+							Ambilight mode
+						</label>
+						<p class="hint" id="video-normal-hint">
+							Off: each LED samples the video at its real position on the
+							board (cropped to the board's aspect ratio), so results follow
+							the starfish shape rather than a plain rectangle.
+						</p>
+						<p class="hint" id="video-ambilight-hint" hidden>
+							On: the video is scaled to fit the dense circular cluster in
+							the matrix's center (its corners, and depending on the video's
+							aspect ratio some of its left/right content, fall outside that
+							circle and won't show on any LED). Every other LED -- out along
+							the arms -- instead takes on the color of whichever edge of
+							that circle it points away from, like a Philips Ambilight TV.
+						</p>
+						<p class="hint">
+							A small, dim 384-LED display reads best with a brightness
+							boost and high-contrast source footage.
+						</p>
+						<div class="button-row">
+							<button id="video-convert-btn">Convert to pattern</button>
+							<button id="video-cancel-btn" hidden>Cancel</button>
+						</div>
+						<progress id="video-progress" value="0" max="1" hidden></progress>
+						<span id="video-status" class="hint"></span>
+					</div>
+					<div class="tab-panel" role="tabpanel" id="panel-text" aria-labelledby="tab-text" hidden>
+						<label>
+							Text
+							<input type="text" id="text-input" value="HACKER HOTEL">
+						</label>
+						<label>
+							Font size (px)
+							<input type="range" id="text-font-size" min="8" max="64" value="30">
+							<output id="text-font-size-readout">30</output>
+						</label>
+						<label>
+							<input type="checkbox" id="text-bold" checked>
+							Bold
+						</label>
+						<label>
+							Color
+							<input type="color" id="text-color-input" value="#ffffff">
+						</label>
+						<label>
+							Frame rate (fps)
+							<input type="number" id="text-fps" min="1" max="20" value="10">
+						</label>
+						<label>
+							Scroll speed (px/frame)
+							<input type="number" id="text-scroll-speed" min="0.5" max="20" step="0.5" value="3">
+						</label>
+						<label>
+							Brightness boost
+							<input type="range" id="text-brightness" min="0.5" max="3" step="0.1" value="1.3">
+							<output id="text-brightness-readout">1.3x</output>
+						</label>
+						<label>
+							<input type="checkbox" id="text-scroll" checked>
+							Scroll continuously (unchecked: center as one still frame if it fits)
+						</label>
+						<p class="hint">
+							Renders the text at high resolution and slides it across only
+							the dense circular cluster of LEDs at the board's center, so
+							it reads as a proper dot-matrix marquee rather than a
+							squashed rectangle. The sparser LEDs running out along the
+							arms -- plain white ones and the diamond-shaped RGB accents --
+							are too sparse to carry a legible glyph, so they're left free
+							for their own effect instead of showing (badly stretched)
+							text.
+						</p>
+						<label>
+							White edge LEDs
+							<select id="text-white-edge-effect">
+								<option value="none">Off</option>
+								<option value="chase" selected>Chase</option>
+								<option value="blink">Blink</option>
+								<option value="twinkle">Twinkle</option>
+							</select>
+						</label>
+						<label>
+							White edge speed
+							<input type="range" id="text-white-edge-speed" min="0.01" max="0.3" step="0.01"
+								value="0.05">
+							<output id="text-white-edge-speed-readout">0.05</output>
+						</label>
+						<label>
+							RGB edge LEDs
+							<select id="text-rgb-edge-effect">
+								<option value="none">Off</option>
+								<option value="chase" selected>Chase</option>
+								<option value="blink">Blink</option>
+								<option value="twinkle">Twinkle</option>
+								<option value="rainbow">Rainbow spin</option>
+							</select>
+						</label>
+						<label>
+							RGB edge speed
+							<input type="range" id="text-rgb-edge-speed" min="0.01" max="0.3" step="0.01" value="0.08">
+							<output id="text-rgb-edge-speed-readout">0.08</output>
+						</label>
+						<label>
+							RGB edge color
+							<input type="color" id="text-rgb-edge-color" value="#39d2c0">
+						</label>
+						<p class="hint">
+							Speed is a fraction of one full chase/blink cycle per frame --
+							higher wraps around (or blinks) faster. Twinkle ignores speed
+							and just sparkles randomly. Ignored if a group's effect is
+							Off.
+						</p>
+						<div class="button-row">
+							<button id="text-convert-btn">Convert to pattern</button>
+						</div>
+						<span id="text-status" class="hint"></span>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Flash storage</legend>
+					<label>
+						Brightness levels per LED
+						<select id="compression-quant">
+							<option value="8">256 (lossless)</option>
+							<option value="4" selected>16</option>
+							<option value="2">4</option>
+							<option value="1">2 (on/off)</option>
+						</select>
+					</label>
+					<p id="compression-stats" class="hint"></p>
+					<div class="button-row">
+						<button id="upload-pattern-btn">Store on device &amp; play on boot</button>
+					</div>
+					<p class="hint" id="upload-pattern-status"></p>
+					<div class="button-row">
+						<button id="export-compressed-btn">Download .ledanim</button>
+						<label class="file-button">
+							Load .ledanim
+							<input type="file" id="import-compressed-input" accept=".ledanim">
+						</label>
+					</div>
+					</p>
+				</fieldset>
+
+			</div>
+			<div class="side-column">
+
+				<fieldset>
+					<legend>Pattern</legend>
+					<label>
+						Name
+						<input type="text" id="pattern-name" value="Untitled">
+					</label>
+					<label>
+						Playback speed (fps)
+						<input type="number" id="pattern-fps" min="1" max="20" value="4">
+					</label>
+
+					<div class="frame-editor">
+						<div id="frame-strip" class="frame-strip"></div>
+						<span id="frame-count-label"></span>
+						<div class="button-row">
+							<button id="add-frame-btn" title="Insert a new frame (copy of current) after this one">+
+								Frame</button>
+							<button id="delete-frame-btn" title="Delete current frame">Delete frame</button>
+							<button id="play-btn">▶ Play</button>
+						</div>
+					</div>
+
+					<div class="button-row">
+						<button id="new-pattern-btn">New</button>
+						<button id="save-pattern-btn">Save</button>
+						<button id="duplicate-pattern-btn">Duplicate</button>
+						<button id="delete-pattern-btn">Delete</button>
+					</div>
+					<div class="button-row">
+						<button id="export-pattern-btn">Export JSON</button>
+						<label class="file-button">
+							Import JSON
+							<input type="file" id="import-pattern-input" accept="application/json">
+						</label>
+					</div>
+
+					<ul id="pattern-list" class="pattern-list"></ul>
+				</fieldset>
+
+			</div>
+		</aside>
+	</main>
+
+	<footer>
+		<p>
+			Copyright Nicolai Electronics & Stichting Badge.Team 2027
+		</p>
+	</footer>
+
+	<script src="board_data.js"></script>
+	<script src="webusb.js"></script>
+	<script src="board.js"></script>
+	<script src="patterns.js"></script>
+	<script src="compression.js"></script>
+	<script src="video_import.js"></script>
+	<script src="text_import.js"></script>
+	<script src="app.js"></script>
+</body>
+
+</html>
