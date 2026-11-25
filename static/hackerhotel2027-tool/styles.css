@@ -1,141 +1,1361 @@
-/* Themes: theme.js sets data-theme="light"/"dark" on <html> (following the
-   system preference unless the user picked one). Dark is also the fallback.
-   The board render itself (PCB green, white LEDs) looks the same in both. */
-:root {
+/* Starfish badge web UI, Hackerhotel 2027.
+
+   Themes: theme.js sets data-theme="light" or "dark" on <html>. It follows
+   the system preference unless the user picked a theme. Without JS, the
+   prefers-color-scheme block below picks the theme; dark is the default.
+
+   Brand yellow #f5e722 is only a fill behind black text. On a light
+   background it is never text, line or icon colour (1.29:1 on white). Light
+   mode uses dark olive #5c5300 for links, the focus ring, selected and
+   active bars and hover borders. Every colour pair is checked against
+   WCAG 2.2 AA: 4.5:1 for text, 3:1 for borders and states.
+
+   No inline styles, no external fonts, no CDNs: the CSP allows none. */
+
+/* ------------------------------------------------------------------ */
+/* Tokens                                                              */
+/* ------------------------------------------------------------------ */
+
+:root,
+:root[data-theme="dark"] {
 	color-scheme: dark;
-	--bg: #0d1117;
-	--panel: #161b22;
-	--panel-border: #30363d;
-	--text: #e6edf3;
-	--text-dim: #8b949e;
-	--accent: #39d2c0;
-	--accent-dim: #1f6f65;
-	--danger: #f85149;
-	--control-bg: #0d1117;
-	--button-bg: #21262d;
-	--board-bg: #0b0d10;
-	font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+	--bg: #000000;
+	--surface: #121212;
+	--surface-2: #1e1e1e;
+	--border: #3d3d3d;
+	--field-border: #8c8c8c;
+	--field-bg: #000000;
+	--text: #f2f2f2;
+	--text-muted: #b8b8b8;
+	--heading: #f5e722;
+	--heading-weight: 600;
+	--accent: #f5e722;
+	--accent-hover: #fff176;
+	--accent-fill: #f5e722;
+	--accent-fill-hover: #fff176;
+	--on-accent-fill: #000000;
+	--on-accent-fill-hover: #000000;
+	--accent-fill-border: #f5e722;
+	--accent-fill-hover-border: #fff176;
+	--focus: #f5e722;
+	--link: #f5e722;
+	--success: #6ee787;
+	--warning: #ffb305;
+	--warning-bg: #2b2200;
+	--danger: #ff7b72;
+	--danger-bg: #2d0f0f;
+	--danger-fill: #ff7b72;
+	--on-danger-fill: #000000;
+	--btn-bg: #1e1e1e;
+	--btn-hover-bg: #2a2a2a;
+	--board-stage: #000000;
 }
 
-* { box-sizing: border-box; }
+:root[data-theme="light"] {
+	color-scheme: light;
+	--bg: #ffffff;
+	--surface: #f7f7f2;
+	--surface-2: #ecece4;
+	--border: #d6d6cc;
+	--field-border: #6b6b6b;
+	--field-bg: #ffffff;
+	--text: #111111;
+	--text-muted: #4f4f4f;
+	--heading: #111111;
+	--heading-weight: 700;
+	--accent: #5c5300;
+	--accent-hover: #4a4300;
+	--accent-fill: #f5e722;
+	--accent-fill-hover: #000000;
+	--on-accent-fill: #000000;
+	--on-accent-fill-hover: #f5e722;
+	--accent-fill-border: #000000;
+	--accent-fill-hover-border: #000000;
+	--focus: #5c5300;
+	--link: #5c5300;
+	--success: #1a7f37;
+	--warning: #8a4b00;
+	--warning-bg: #fff4cc;
+	--danger: #b3261e;
+	--danger-bg: #fdecea;
+	--danger-fill: #b3261e;
+	--on-danger-fill: #ffffff;
+	--btn-bg: #ffffff;
+	--btn-hover-bg: #ecece4;
+	--board-stage: #1c1c1c;
+}
+
+/* No-JS fallback: theme.js has not set data-theme, so follow the system.
+   Keep this block identical to :root[data-theme="light"] above. */
+@media (prefers-color-scheme: light) {
+	:root:not([data-theme]) {
+		color-scheme: light;
+		--bg: #ffffff;
+		--surface: #f7f7f2;
+		--surface-2: #ecece4;
+		--border: #d6d6cc;
+		--field-border: #6b6b6b;
+		--field-bg: #ffffff;
+		--text: #111111;
+		--text-muted: #4f4f4f;
+		--heading: #111111;
+		--heading-weight: 700;
+		--accent: #5c5300;
+		--accent-hover: #4a4300;
+		--accent-fill: #f5e722;
+		--accent-fill-hover: #000000;
+		--on-accent-fill: #000000;
+		--on-accent-fill-hover: #f5e722;
+		--accent-fill-border: #000000;
+		--accent-fill-hover-border: #000000;
+		--focus: #5c5300;
+		--link: #5c5300;
+		--success: #1a7f37;
+		--warning: #8a4b00;
+		--warning-bg: #fff4cc;
+		--danger: #b3261e;
+		--danger-bg: #fdecea;
+		--danger-fill: #b3261e;
+		--on-danger-fill: #ffffff;
+		--btn-bg: #ffffff;
+		--btn-hover-bg: #ecece4;
+		--board-stage: #1c1c1c;
+	}
+}
+
+/* Theme-independent tokens: fonts, the brand yellow, and the board. The
+   board looks the same in both themes because the PCB is the same. */
+:root {
+	--font-body: Verdana, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif;
+	--font-head: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+	--font-mono: ui-monospace, "DejaVu Sans Mono", Consolas, Menlo, monospace;
+	--brand-yellow: #f5e722;
+	--radius: 4px;
+	--radius-card: 8px;
+	--target: 2.75rem;
+
+	--pcb: #ece9e1;
+	--pcb-edge: #2b2925;
+	--led-off: #4a463f;
+	--led-on: #ffffff;
+	--led-stroke: #2b2925;
+	--board-cursor: #000000;
+	--board-cursor-halo: #f5e722;
+	/* The stage is dark in both themes, so the board ring is always yellow
+	   (16.34:1 on #000, about 14:1 on #1c1c1c). */
+	--board-focus: #f5e722;
+
+	/* Icons: 24x24 SVGs used as CSS masks over currentColor. data: is
+	   allowed for images under the CSP. */
+	--i-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.2 6.1L12 16.9l-5.5 3 1.2-6.1-4.5-4.2 6.1-.8z' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+	--i-star-filled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.2l3.1 6.3 6.9.9-5 4.8 1.3 6.9L12 17.7l-6.3 3.4L7 14.2 2 9.4l6.9-.9z'/%3E%3C/svg%3E");
+	--i-trash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M9 2h6l1 2h5v2H3V4h5zM5 8h14l-1.2 14H6.2zm4 3v8h2v-8zm4 0v8h2v-8z'/%3E%3C/svg%3E");
+	--i-play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 4.5v15l12.5-7.5z'/%3E%3C/svg%3E");
+	--i-stop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6h12v12H6z'/%3E%3C/svg%3E");
+	--i-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.5 12.5l5 5 10-11' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	--i-warning: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 2 1 21h22zm-1 7h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E");
+	--i-usb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 2h2v5H9zm4 0h2v5h-2zM6 8h12v5a6 6 0 0 1-5 5.9V22h-2v-3.1A6 6 0 0 1 6 13z'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+[hidden] {
+	display: none !important;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
 
 body {
 	margin: 0;
 	background: var(--bg);
 	color: var(--text);
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0.75rem 1.25rem;
-	border-bottom: 1px solid var(--panel-border);
-	flex-wrap: wrap;
-	gap: 0.5rem;
-}
-
-header h1 {
-	font-size: 1.1rem;
+h1,
+h2,
+h3 {
+	font-family: var(--font-head);
+	color: var(--heading);
+	font-weight: var(--heading-weight);
+	line-height: 1.25;
 	margin: 0;
-	letter-spacing: 0.02em;
 }
 
-:root[data-theme="light"] {
-	color-scheme: light;
-	--bg: #f6f8fa;
-	--panel: #ffffff;
-	--panel-border: #d0d7de;
-	--text: #1f2328;
-	--text-dim: #59636e;
-	--accent: #0b7a6e;
-	--accent-dim: #b4e5de;
-	--danger: #cf222e;
-	--control-bg: #ffffff;
-	--button-bg: #f0f2f4;
-	--board-bg: #c3c7cc;
+h1 {
+	font-size: 1.25rem;
 }
 
-.conn-controls {
+/* Section headings carry a decorative 6px brand-yellow bar. It is
+   decoration only, so it needs no 3:1 contrast. */
+h2 {
+	font-size: 1.375rem;
+	border-inline-start: 6px solid var(--brand-yellow);
+	padding-inline-start: 10px;
+}
+
+h3 {
+	font-size: 1.125rem;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: var(--link);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+a:hover {
+	color: var(--accent-hover);
+	text-decoration-thickness: 2px;
+}
+
+code,
+kbd,
+samp,
+output {
+	font-family: var(--font-mono);
+	font-size: 0.9375em;
+}
+
+output {
+	font-variant-numeric: tabular-nums;
+}
+
+code {
+	overflow-wrap: anywhere;
+}
+
+/* Soft-wrap code blocks so they never scroll sideways at 320px; a copy
+   still gets the original single lines. */
+pre {
+	margin: 0;
+	padding: 8px 12px;
+	background: var(--surface-2);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+}
+
+pre code {
+	font-size: inherit;
+}
+
+strong,
+b {
+	font-weight: 700;
+}
+
+ol,
+ul {
+	padding-inline-start: 1.5rem;
+	margin: 0;
+}
+
+li + li {
+	margin-top: 4px;
+}
+
+section[id],
+[id="main"] {
+	scroll-margin-top: 16px;
+}
+
+/* Focus: one 3px ring everywhere. --focus is at least 6:1 on every
+   surface and on the yellow fills. */
+:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+.visually-hidden {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0 0 0 0) !important;
+	clip-path: inset(50%) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+}
+
+.skip-link {
+	position: absolute;
+	top: 8px;
+	inset-inline-start: 8px;
+	z-index: 10;
+	padding: 8px 16px;
+	border: 2px solid var(--accent-fill-border);
+	border-radius: var(--radius);
+	background: var(--accent-fill);
+	color: var(--on-accent-fill);
+	font-weight: 700;
+	text-decoration: none;
+	transform: translateY(-200%);
+}
+
+.skip-link:focus {
+	transform: none;
+	color: var(--on-accent-fill);
+}
+
+/* Small text never goes below 0.875rem. */
+.meta,
+.hint,
+.empty {
+	font-size: 0.875rem;
+	color: var(--text-muted);
+}
+
+.meta code,
+.hint code {
+	color: var(--text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Page layout                                                         */
+/* ------------------------------------------------------------------ */
+
+.site-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 24px;
+	max-width: 100rem;
+	margin-inline: auto;
+	padding: 16px;
+	border-bottom: 1px solid var(--border);
+}
+
+.brand {
 	display: flex;
 	align-items: center;
-	gap: 0.75rem;
-	font-size: 0.9rem;
-	color: var(--text-dim);
+	gap: 12px;
+	min-width: 0;
 }
 
-label.theme-control {
-	flex-direction: row;
+.brand h1 {
+	overflow-wrap: anywhere;
+}
+
+.brand-sub {
+	display: block;
+	font-family: var(--font-body);
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: var(--text-muted);
+}
+
+.wordmark {
+	display: block;
+	flex: none;
+	height: 2.5rem;
+	width: auto;
+	max-width: 100%;
+	color: var(--heading);
+	fill: currentColor;
+}
+
+.section-nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.section-nav li + li {
+	margin-top: 0;
+}
+
+.section-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.section-nav a {
+	display: inline-flex;
 	align-items: center;
-	gap: 0.4rem;
-	font-size: 0.9rem;
+	min-height: var(--target);
+	padding: 0 12px;
+	border: 1px solid transparent;
+	border-radius: var(--radius);
+	color: var(--text);
+	text-decoration: none;
 }
 
-#conn-status.connected {
-	color: var(--accent);
+.section-nav a:hover {
+	background: var(--accent-fill);
+	border-color: var(--accent-fill-border);
+	color: var(--on-accent-fill);
+}
+
+.theme-control {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-inline-start: auto;
+	font-weight: 400;
+}
+
+.theme-control label {
+	font-weight: 400;
+}
+
+.layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 16px;
+	max-width: 48rem;
+	margin-inline: auto;
+	padding: 16px;
+}
+
+.manage {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 16px;
+	align-content: start;
+	min-width: 0;
+}
+
+.card {
+	min-width: 0;
+	padding: 16px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+}
+
+.panel {
+	min-width: 0;
+	margin: 0;
+	padding: 12px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+}
+
+/* Vertical rhythm: 12px between blocks, 4px between a label (or its hint)
+   and the control it names. */
+:is(.card, .panel, .tab-panel, .disclosure, .notice, dialog, .frame-editor) > * + * {
+	margin-top: 12px;
+}
+
+:is(.card, .panel, .tab-panel, .disclosure, dialog) > label + *,
+:is(.card, .panel, .tab-panel, .disclosure, dialog) > label + .meta + *,
+:is(.card, .panel, .tab-panel, .disclosure, dialog) > label + .hint + * {
+	margin-top: 4px;
+}
+
+.card > h2 + * {
+	margin-top: 16px;
+}
+
+footer {
+	max-width: 100rem;
+	margin-inline: auto;
+	padding: 16px;
+	border-top: 1px solid var(--border);
+	color: var(--text-muted);
+	font-size: 0.875rem;
+}
+
+footer p + p {
+	margin-top: 4px;
+}
+
+footer code,
+#webui-version {
+	font-family: var(--font-mono);
+	color: var(--text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Form controls                                                       */
+/* ------------------------------------------------------------------ */
+
+label {
+	display: block;
 	font-weight: 600;
 }
 
-main {
-	flex: 1;
+/* A label that wraps its control stacks them. */
+label:has(> :is(select, textarea, input:not([type="checkbox"], [type="radio"], [type="file"]))) {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+}
+
+label:has(> :is(select, textarea, input:not([type="checkbox"], [type="radio"], [type="file"]))) > :is(select, textarea, input) {
+	font-weight: 400;
+}
+
+label:has(> input[type="checkbox"], > input[type="radio"]),
+.check {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+	min-height: var(--target);
+	font-weight: 400;
+	cursor: pointer;
+}
+
+input,
+select,
+textarea,
+button {
+	font: inherit;
+	color: inherit;
+}
+
+input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]),
+select,
+textarea {
+	min-height: var(--target);
+	max-width: 100%;
+	padding: 8px 10px;
+	background: var(--field-bg);
+	color: var(--text);
+	border: 1px solid var(--field-border);
+	border-radius: var(--radius);
+}
+
+input:is([type="text"], [type="search"], [type="url"], [type="email"]),
+input:not([type]),
+textarea {
+	width: 100%;
+}
+
+input[type="number"] {
+	width: 8rem;
+}
+
+textarea {
+	display: block;
+	min-height: 5.5rem;
+	resize: vertical;
+}
+
+select {
+	cursor: pointer;
+}
+
+::placeholder {
+	color: var(--text-muted);
+	opacity: 1;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	flex: none;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin: 0;
+	accent-color: var(--accent);
+	cursor: pointer;
+}
+
+input[type="range"] {
+	width: 12rem;
+	max-width: 100%;
+	height: var(--target);
+	margin: 0;
+	accent-color: var(--accent);
+	cursor: pointer;
+}
+
+input[type="color"] {
+	width: 4rem;
+	max-width: 100%;
+	min-height: var(--target);
+	padding: 4px;
+	background: var(--field-bg);
+	border: 1px solid var(--field-border);
+	border-radius: var(--radius);
+	cursor: pointer;
+}
+
+progress {
+	display: block;
+	width: 100%;
+	height: 1rem;
+	accent-color: var(--accent);
+}
+
+fieldset {
+	min-width: 0;
+	margin: 0;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+}
+
+legend {
+	padding: 0 4px;
+	font-family: var(--font-head);
+	font-size: 1.125rem;
+	font-weight: var(--heading-weight);
+	color: var(--heading);
+}
+
+/* .field: a label on its own line, then the control and its readout. */
+.field {
+	display: grid;
+	grid-template-columns: minmax(0, auto) auto;
+	justify-content: start;
+	align-items: center;
+	gap: 4px 8px;
+	min-width: 0;
+}
+
+.field > label {
+	grid-column: 1 / -1;
+}
+
+.field > output {
+	min-width: 3ch;
+}
+
+input[type="file"] {
+	max-width: 100%;
+	font-size: 0.875rem;
+}
+
+input[type="file"]::file-selector-button {
+	min-height: var(--target);
+	margin-inline-end: 12px;
+	padding: 8px 16px;
+	background: var(--btn-bg);
+	color: var(--text);
+	border: 1px solid var(--field-border);
+	border-radius: var(--radius);
+	font: inherit;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+	background: var(--btn-hover-bg);
+	border-color: var(--accent);
+}
+
+.input-row {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1rem;
-	padding: 1rem;
-	align-items: flex-start;
-	min-height: 0;
+	align-items: center;
+	gap: 8px;
 }
 
-.board-pane {
-	flex: 1 1 480px;
-	min-width: 320px;
+.input-row > :is(input, select, textarea) {
+	flex: 1 1 12rem;
+	width: auto;
+	min-width: 0;
 }
 
-#board-container {
-	background: var(--board-bg);
-	border: 1px solid var(--panel-border);
-	border-radius: 12px;
-	overflow: hidden;
-	display: flex;
+/* ------------------------------------------------------------------ */
+/* Buttons                                                             */
+/* ------------------------------------------------------------------ */
+
+/* Every <button> gets the secondary look, so buttons built in JS look
+   right without a class. .btn gives links and file labels the same look. */
+button,
+.btn {
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 8px;
+	min-height: var(--target);
+	padding: 8px 16px;
+	background: var(--btn-bg);
+	color: var(--text);
+	border: 1px solid var(--field-border);
+	border-radius: var(--radius);
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.25;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+:is(button, .btn):not(:disabled, [aria-disabled="true"]):hover {
+	background: var(--btn-hover-bg);
+	border-color: var(--accent);
+	color: var(--text);
+}
+
+.btn-primary {
+	background: var(--accent-fill);
+	color: var(--on-accent-fill);
+	border: 2px solid var(--accent-fill-border);
+	font-weight: 700;
+}
+
+.btn-primary:not(:disabled, [aria-disabled="true"]):hover {
+	background: var(--accent-fill-hover);
+	border-color: var(--accent-fill-hover-border);
+	color: var(--on-accent-fill-hover);
+}
+
+.btn-danger {
+	background: transparent;
+	color: var(--danger);
+	border-color: var(--danger);
+}
+
+.btn-danger:not(:disabled, [aria-disabled="true"]):hover {
+	background: var(--danger-fill);
+	border-color: var(--danger-fill);
+	color: var(--on-danger-fill);
+}
+
+:is(button, .btn):disabled,
+:is(button, .btn)[aria-disabled="true"] {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.btn-icon {
+	width: var(--target);
+	min-width: var(--target);
+	height: var(--target);
+	padding: 0;
+	flex: none;
+}
+
+.btn-icon[aria-pressed="true"] {
+	background: var(--accent-fill);
+	color: var(--on-accent-fill);
+	border: 2px solid var(--accent-fill-border);
+}
+
+.btn-icon[aria-pressed="true"]:not(:disabled, [aria-disabled="true"]):hover {
+	background: var(--accent-fill-hover);
+	border-color: var(--accent-fill-hover-border);
+	color: var(--on-accent-fill-hover);
+}
+
+.button-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+/* A file picker styled as a button. The real input covers the label at
+   opacity 0, so the ring goes on the label. */
+.file-button {
+	position: relative;
+	overflow: hidden;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	min-height: var(--target);
+	padding: 8px 16px;
+	background: var(--btn-bg);
+	color: var(--text);
+	border: 1px solid var(--field-border);
+	border-radius: var(--radius);
+	font-weight: 400;
+	cursor: pointer;
+}
+
+.file-button:hover {
+	background: var(--btn-hover-bg);
+	border-color: var(--accent);
+}
+
+.file-button input {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.file-button:has(input:focus-visible) {
+	outline: 3px solid var(--focus);
+	outline-offset: 2px;
+}
+
+.file-button:has(input:disabled) {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------------ */
+/* Icons                                                               */
+/* ------------------------------------------------------------------ */
+
+.icon {
+	display: inline-block;
+	flex: none;
+	width: 1.25em;
+	height: 1.25em;
+	vertical-align: -0.25em;
+	background-color: currentColor;
+	-webkit-mask: var(--icon) center / contain no-repeat;
+	mask: var(--icon) center / contain no-repeat;
+}
+
+.i-star { --icon: var(--i-star); }
+.i-star-filled { --icon: var(--i-star-filled); }
+.i-trash { --icon: var(--i-trash); }
+.i-play { --icon: var(--i-play); }
+.i-stop { --icon: var(--i-stop); }
+.i-check { --icon: var(--i-check); }
+.i-warning { --icon: var(--i-warning); }
+.i-usb { --icon: var(--i-usb); }
+
+/* ------------------------------------------------------------------ */
+/* Chips, pills, notices                                               */
+/* ------------------------------------------------------------------ */
+
+/* #conn-status: JS overwrites its text, so the check icon is a
+   pseudo-element. */
+.chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 2rem;
+	padding: 2px 12px;
+	border: 1px solid var(--field-border);
+	border-radius: 999px;
+	color: var(--text-muted);
+	font-size: 0.875rem;
+}
+
+.chip.connected {
+	background: var(--accent-fill);
+	border-color: var(--accent-fill-border);
+	color: var(--on-accent-fill);
+	font-weight: 700;
+}
+
+.chip.connected::before {
+	content: "";
+	width: 1em;
+	height: 1em;
+	flex: none;
+	background-color: currentColor;
+	-webkit-mask: var(--i-check) center / contain no-repeat;
+	mask: var(--i-check) center / contain no-repeat;
+}
+
+.pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 1px 10px;
+	border: 1px solid var(--field-border);
+	border-radius: 999px;
+	color: var(--text);
+	font-size: 0.875rem;
+	font-weight: 700;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+.pill .icon {
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.125em;
+}
+
+.pill-playing {
+	background: var(--accent-fill);
+	border-color: var(--accent-fill-border);
+	color: var(--on-accent-fill);
+}
+
+.pill-boot {
+	background: transparent;
+}
+
+.notice {
+	position: relative;
+	padding: 12px 16px;
+	background: var(--surface-2);
+	border: 1px solid var(--border);
+	border-inline-start: 4px solid var(--accent);
+	border-radius: var(--radius);
+	color: var(--text);
+}
+
+.notice-info {
+	border-inline-start-color: var(--accent);
+}
+
+.notice-warning,
+.notice-danger {
+	padding-inline-start: 44px;
+}
+
+.notice-warning {
+	background: var(--warning-bg);
+	border-color: var(--warning);
+}
+
+.notice-danger {
+	background: var(--danger-bg);
+	border-color: var(--danger);
+}
+
+.notice-warning::before,
+.notice-danger::before {
+	content: "";
+	position: absolute;
+	top: 14px;
+	inset-inline-start: 14px;
+	width: 1.25rem;
+	height: 1.25rem;
+	background-color: var(--warning);
+	-webkit-mask: var(--i-warning) center / contain no-repeat;
+	mask: var(--i-warning) center / contain no-repeat;
+}
+
+.notice-danger::before {
+	background-color: var(--danger);
+}
+
+/* #fw-confirm: the first span holds the message, then a button row. */
+.notice > span:first-child {
+	display: block;
+}
+
+.notice > .button-row {
+	margin-top: 12px;
+}
+
+/* Over budget: the stats line turns red. */
+.stats-over-budget {
+	color: var(--danger);
+	font-weight: 700;
+}
+
+/* Older firmware: #fw-old-notice shows, and #fw-cta under it. */
+#fw-cta {
+	display: none;
+}
+
+.card:has(#fw-old-notice:not([hidden])) #fw-cta {
+	display: inline-flex;
+}
+
+/* uiError() gives a status line role=alert for one message. */
+[role="alert"]:not(:empty):not(dialog) {
+	color: var(--danger);
+	font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ */
+/* Badge card                                                          */
+/* ------------------------------------------------------------------ */
+
+.conn-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+}
+
+#first-run li::marker {
+	font-weight: 700;
+}
+
+#badge:has(#disconnect-btn:not([hidden])) #first-run {
+	display: none;
+}
+
+#badge-name {
+	font-family: var(--font-mono);
+}
+
+/* ------------------------------------------------------------------ */
+/* Disclosures                                                         */
+/* ------------------------------------------------------------------ */
+
+summary {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-height: var(--target);
+	padding: 8px 0;
+	font-weight: 700;
+	cursor: pointer;
+	list-style: none;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+summary::before {
+	content: "";
+	flex: none;
+	width: 0.55em;
+	height: 0.55em;
+	margin-inline: 0.2em;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(-45deg);
+}
+
+details[open] > summary::before {
+	transform: rotate(45deg);
+}
+
+summary:hover {
+	color: var(--accent);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+
+.disclosure {
+	padding: 0 12px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+}
+
+.disclosure[open] {
+	padding-bottom: 12px;
+}
+
+.disclosure > summary {
+	margin-inline: -12px;
+	padding-inline: 12px;
+}
+
+.disclosure > summary + * {
+	margin-top: 4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Lists: stored items, app library, saved animations                  */
+/* ------------------------------------------------------------------ */
+
+.item-list,
+.store-list,
+.pattern-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.item-list > li + li,
+.store-list > li + li,
+.pattern-list > li + li {
+	margin-top: 0;
+}
+
+.store-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 8px 8px 12px;
+	border-bottom: 1px solid var(--border);
+}
+
+.store-item:first-child {
+	border-top: 1px solid var(--border);
+}
+
+/* The running item keeps its "Playing" pill as the real cue; the bar
+   is extra. */
+.store-item.running {
+	box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.store-label {
+	flex: 1 1 8rem;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+/* Names are at most 32 characters: they wrap, never cut off. */
+.store-name {
+	overflow-wrap: anywhere;
+	font-weight: 700;
+}
+
+.store-meta {
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	color: var(--text-muted);
+	font-variant-numeric: tabular-nums;
+	overflow-wrap: anywhere;
+}
+
+.store-desc {
+	font-family: var(--font-body);
+	font-variant-numeric: normal;
+}
+
+.store-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.store-item > :is(button, .btn) {
+	flex: none;
+}
+
+/* Start, star and trash wrap as one group, so a narrow row never leaves
+   one button alone on a line. */
+.store-actions {
+	display: flex;
+	flex: none;
+	gap: 8px;
+	margin-inline-start: auto;
+}
+
+.item-list > .hint,
+.item-list > .empty,
+.store-list > .hint,
+.pattern-list > .empty {
+	padding: 8px 0;
+}
+
+.pattern-item button {
+	width: 100%;
+	justify-content: flex-start;
+	text-align: start;
+	border-inline-start: 4px solid transparent;
+	overflow-wrap: anywhere;
+}
+
+.pattern-item + .pattern-item {
+	margin-top: 4px;
+}
+
+.pattern-item.active button {
+	border-inline-start-color: var(--accent);
+	font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tabs                                                                */
+/* ------------------------------------------------------------------ */
+
+.tab-bar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	border-bottom: 1px solid var(--field-border);
+}
+
+.tab-bar [role="tab"] {
+	min-height: var(--target);
+	margin-bottom: -1px;
+	padding: 8px 12px;
+	background: transparent;
+	color: var(--text);
+	border: 0;
+	border-bottom: 4px solid transparent;
+	border-radius: 0;
+	font-weight: 400;
+}
+
+.tab-bar [role="tab"]:not(:disabled):hover {
+	background: transparent;
+	color: var(--text);
+	border-bottom-color: var(--field-border);
+}
+
+.tab-bar [role="tab"][aria-selected="true"],
+.tab-bar [role="tab"][aria-selected="true"]:not(:disabled):hover {
+	border-bottom-color: var(--accent);
+	color: var(--text);
+	font-weight: 700;
+}
+
+.tab-panel {
+	padding-top: 12px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Animation editor                                                    */
+/* ------------------------------------------------------------------ */
+
+.editor,
+.editor-stage,
+.editor-tools {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 16px;
+	min-width: 0;
+}
+
+.editor-stage {
+	gap: 12px;
+}
+
+.board-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 8px 16px;
+	padding: 8px 12px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+}
+
+.board-toolbar > * {
+	min-width: 0;
+}
+
+.board-toolbar output {
+	min-width: 3ch;
+}
+
+/* Kept for markup that still groups the toolbar. */
+.toolbar-group {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 8px 16px;
+}
+
+.toolbar-title {
+	font-weight: 700;
+}
+
+.frame-editor {
+	display: block;
+}
+
+.frame-strip {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.frame-thumb {
+	width: var(--target);
+	min-width: var(--target);
+	height: var(--target);
+	padding: 0;
+	background: var(--btn-bg);
+	border: 1px solid var(--field-border);
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+}
+
+.frame-thumb.active,
+.frame-thumb.active:not(:disabled):hover {
+	background: var(--accent-fill);
+	color: var(--on-accent-fill);
+	border: 2px solid var(--accent-fill-border);
+	font-weight: 700;
+}
+
+#frame-count-label {
+	display: block;
+}
+
+#compression-stats {
+	font-family: var(--font-mono);
+	font-variant-numeric: tabular-nums;
+}
+
+#compression-stats.stats-over-budget {
+	color: var(--danger);
+}
+
+/* With live send on, every stroke goes to the badge already. */
+#create:has(#live-send:checked) #send-frame-btn {
+	display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Board                                                               */
+/* ------------------------------------------------------------------ */
+
+/* A dark stage in both themes, with a faint LED dot-matrix. */
+#board-container {
+	padding: 8px;
+	background-color: var(--board-stage);
+	background-image: radial-gradient(circle, rgb(255 255 255 / 0.07) 1px, transparent 1.5px);
+	background-size: 8px 8px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
 }
 
 .board-svg {
+	display: block;
 	width: 100%;
 	height: auto;
-	display: block;
 	touch-action: none;
 }
 
-/* The board render is the same in both themes: white solder mask, LED
-   packages in light grey when off. Lit LEDs brighten to white and glow
-   (white LEDs a cool white, RGB LEDs their own color); the glow carries
-   most of the brightness contrast against the white board. */
+.board-svg:focus-visible {
+	outline: 3px solid var(--board-focus);
+	outline-offset: 4px;
+}
+
 .board-outline {
-	fill: #ece9e1;
-	stroke: #c9c4b6;
+	fill: var(--pcb);
+	stroke: var(--pcb-edge);
 	stroke-width: 0.3;
 }
 
+/* The silkscreen is faint, so the unlit LEDs are the darkest marks. */
 .board-silkscreen {
+	opacity: 0.4;
 	pointer-events: none;
 }
 
+/* Off #4a463f vs PCB 7.73:1; on #fff vs off 9.38:1. The stroke ring
+   separates a lit LED from the PCB. */
 .led {
-	fill: color-mix(in srgb, #ffffff calc(var(--level, 0) * 100%), #bdbab2);
-	stroke: rgba(0, 0, 0, calc(0.3 - var(--level, 0) * 0.2));
-	stroke-width: 0.12;
-	filter: drop-shadow(0 0 calc(var(--level, 0) * 0.9px) rgba(70, 160, 255, var(--level, 0)));
+	fill: color-mix(in srgb, var(--led-on) calc(var(--level, 0) * 100%), var(--led-off));
+	stroke: var(--led-stroke);
+	stroke-width: 0.15;
+	filter: drop-shadow(0 0 calc(var(--level, 0) * 1.2px) rgba(70, 160, 255, var(--level, 0)));
 	cursor: crosshair;
 }
 
 .led-rgb {
-	fill: #bdbab2;
-	stroke: rgba(0, 0, 0, 0.35);
+	fill: var(--led-off);
+	stroke: var(--led-stroke);
 	stroke-width: 0.18;
 	filter: drop-shadow(0 0 0.9px var(--glow, transparent));
 	cursor: pointer;
@@ -146,391 +1366,192 @@ main {
 }
 
 .led-rgb:hover {
-	stroke: var(--accent);
+	stroke: #000000;
 	stroke-width: 0.3;
 }
 
-
-.hint {
-	color: var(--text-dim);
-	font-size: 0.85rem;
-	margin: 0.6rem 0 0;
+/* Keyboard cursor. board.js shows and hides it (visibility attribute). */
+/* Two tones, so the ring keeps 3:1 over unlit dots, lit dots and the PCB
+   alike: a yellow halo (7.3:1 on unlit #4a463f) under a black core (17:1
+   on the light PCB). Widths are in board millimetres (see board.js). */
+.board-cursor {
+	pointer-events: none;
 }
 
-.hint code {
+.board-cursor circle {
+	fill: none;
+}
+
+.board-cursor-halo {
+	stroke: var(--board-cursor-halo);
+	stroke-width: 0.9;
+}
+
+.board-cursor-core {
+	stroke: var(--board-cursor);
+	stroke-width: 0.45;
+}
+
+/* ------------------------------------------------------------------ */
+/* Dialog (uiConfirm)                                                  */
+/* ------------------------------------------------------------------ */
+
+dialog {
+	width: min(32rem, calc(100vw - 32px));
+	max-width: 100%;
+	padding: 16px;
+	background: var(--surface);
 	color: var(--text);
+	border: 1px solid var(--field-border);
+	border-radius: var(--radius-card);
 }
 
-#compression-stats.stats-over-budget {
-	color: var(--danger);
+dialog::backdrop {
+	background: rgb(0 0 0 / 0.6);
 }
 
-progress {
-	width: 100%;
-	accent-color: var(--accent);
+dialog .button-row {
+	justify-content: flex-end;
 }
 
-.board-toolbar {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-	margin-bottom: 0.5rem;
-	flex: 0 0 auto;
-}
+/* ------------------------------------------------------------------ */
+/* Breakpoints                                                         */
+/* ------------------------------------------------------------------ */
 
-.toolbar-group {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 0.4rem 0.9rem;
-	background: var(--panel);
-	border: 1px solid var(--panel-border);
-	border-radius: 10px;
-	padding: 0.4rem 0.75rem;
-}
+/* Two columns: manage on the left, the editor on the right. The board
+   always fits the viewport height. */
+@media (min-width: 64rem) {
+	.layout {
+		grid-template-columns: minmax(20rem, 25rem) minmax(0, 1fr);
+		gap: 24px;
+		max-width: 100rem;
+		align-items: start;
+	}
 
-.toolbar-group button {
-	font-size: 0.8rem;
-}
-
-.toolbar-title {
-	color: var(--accent);
-	font-size: 0.75rem;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-}
-
-label.inline {
-	flex-direction: row;
-	align-items: center;
-	gap: 0.4rem;
-}
-
-label.inline input[type="range"] {
-	width: 7rem;
-}
-
-.tab-bar {
-	display: flex;
-	gap: 0.25rem;
-	border-bottom: 1px solid var(--panel-border);
-}
-
-.tab-bar [role="tab"] {
-	flex: 1 1 auto;
-	font-size: 0.8rem;
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom: none;
-	background: transparent;
-	color: var(--text-dim);
-}
-
-.tab-bar [role="tab"][aria-selected="true"] {
-	background: var(--button-bg);
-	color: var(--accent);
-	border-color: var(--accent-dim);
-}
-
-.tab-panel {
-	display: flex;
-	flex-direction: column;
-	gap: 0.6rem;
-}
-
-.side-panel {
-	flex: 0 0 340px;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-
-[hidden] {
-	display: none !important;
-}
-
-fieldset {
-	border: 1px solid var(--panel-border);
-	border-radius: 10px;
-	background: var(--panel);
-	padding: 0.75rem 1rem 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.6rem;
-}
-
-legend {
-	padding: 0 0.4rem;
-	color: var(--accent);
-	font-size: 0.85rem;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-}
-
-label {
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-	font-size: 0.85rem;
-	color: var(--text-dim);
-}
-
-label:has(input[type="checkbox"]) {
-	flex-direction: row;
-	align-items: center;
-	gap: 0.5rem;
-}
-
-input, select, button, textarea {
-	font: inherit;
-	color: var(--text);
-	background: var(--control-bg);
-	border: 1px solid var(--panel-border);
-	border-radius: 6px;
-	padding: 0.35rem 0.5rem;
-}
-
-input[type="range"] {
-	padding: 0;
-}
-
-button {
-	cursor: pointer;
-	background: var(--button-bg);
-}
-
-button:hover {
-	border-color: var(--accent-dim);
-}
-
-button:active {
-	background: var(--accent-dim);
-}
-
-.button-row {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.4rem;
-}
-
-.button-row button {
-	flex: 1 1 auto;
-	font-size: 0.8rem;
-}
-
-.file-button {
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	flex: 1 1 auto;
-	cursor: pointer;
-	background: var(--button-bg);
-	border: 1px solid var(--panel-border);
-	border-radius: 6px;
-	padding: 0.35rem 0.5rem;
-	font-size: 0.8rem;
-}
-
-.file-button input {
-	position: absolute;
-	inset: 0;
-	opacity: 0;
-	cursor: pointer;
-}
-
-.frame-editor {
-	display: flex;
-	flex-direction: column;
-	gap: 0.4rem;
-}
-
-.frame-strip {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.3rem;
-}
-
-.frame-thumb {
-	width: 2rem;
-	height: 2rem;
-	padding: 0;
-	font-size: 0.75rem;
-}
-
-.frame-thumb.active {
-	background: var(--accent-dim);
-	border-color: var(--accent);
-}
-
-#frame-count-label {
-	font-size: 0.75rem;
-	color: var(--text-dim);
-}
-
-.pattern-list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 0.3rem;
-	max-height: 14rem;
-	overflow-y: auto;
-}
-
-.pattern-item button {
-	width: 100%;
-	text-align: left;
-	font-size: 0.8rem;
-}
-
-.pattern-item.active button {
-	border-color: var(--accent);
-	color: var(--accent);
-}
-
-.pattern-list .empty {
-	color: var(--text-dim);
-	font-size: 0.8rem;
-	padding: 0.3rem 0;
-}
-
-footer {
-	padding: 0.75rem 1.25rem;
-	border-top: 1px solid var(--panel-border);
-	color: var(--text-dim);
-	font-size: 0.78rem;
-}
-
-footer code {
-	color: var(--text);
-}
-
-/* Layout. Small screens (default): normal page scrolling, the board at
-   full width (but never narrower than .board-pane's min-width) with the
-   side panel sections stacked below it. Wider screens: the page fills the
-   viewport exactly, the board scales to the available height, and the
-   side panel scrolls on its own -- as one column, or as two columns next
-   to each other once there's room, so nothing needs scrolling at all. */
-
-.side-column {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	min-width: 0;
-}
-
-@media (max-width: 860px) {
-	.side-panel {
-		flex-basis: 100%;
+	.board-svg {
+		max-height: max(20rem, calc(100dvh - 8rem));
 	}
 }
 
-@media (min-width: 861px) {
-	body {
-		height: 100vh;
-		min-height: 0;
-		overflow: hidden;
+/* Wide and tall enough: tools beside the board, and the board stays in
+   view while the tools scroll. Without the min-height nothing is sticky,
+   so a short viewport (1280x320) scrolls normally. */
+@media (min-width: 85rem) and (min-height: 40rem) {
+	.editor {
+		grid-template-columns: minmax(0, 1fr) 24rem;
+		align-items: start;
 	}
 
-	main {
-		flex: 1 1 0;
-		flex-wrap: nowrap;
-		align-items: stretch;
-		overflow: hidden;
-	}
-
-	.board-pane {
-		flex: 1 1 0;
-		min-width: 0;
-		display: flex;
-		flex-direction: column;
-	}
-
-	#board-container {
-		flex: 1 1 0;
-		min-height: 0;
+	.editor-stage {
+		position: sticky;
+		top: 16px;
+		align-self: start;
 	}
 
 	.board-svg {
 		width: auto;
-		height: 100%;
 		max-width: 100%;
-	}
-
-	.side-panel {
-		min-height: 0;
-		overflow-y: auto;
+		max-height: calc(100dvh - 16rem);
+		margin-inline: auto;
 	}
 }
 
-@media (min-width: 1280px) {
-	.side-panel {
-		flex: 0 0 auto;
-		flex-direction: row;
-		overflow: visible;
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
 	}
 
-	.side-column {
-		width: 340px;
-		overflow-y: auto;
+	button,
+	.btn,
+	.file-button,
+	.section-nav a {
+		transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+	}
+
+	summary::before {
+		transition: transform 0.12s ease;
 	}
 }
 
-/* A fieldset is at least as wide as its content's min-content width by
-   default; in the fixed-width side column, long content must shrink
-   (store item names end in an ellipsis) instead of adding a scroll bar */
-.side-column fieldset {
-	min-width: 0;
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition: none !important;
+		animation: none !important;
+		scroll-behavior: auto !important;
+	}
 }
 
-.store-list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 0.3rem;
-	max-height: 14rem;
-	overflow-y: auto;
-}
+/* ------------------------------------------------------------------ */
+/* Forced colours (Windows High Contrast)                              */
+/* ------------------------------------------------------------------ */
 
-.store-item {
-	display: flex;
-	align-items: center;
-	gap: 0.4rem;
-	font-size: 0.8rem;
-}
+@media (forced-colors: active) {
+	:focus-visible,
+	.file-button:has(input:focus-visible),
+	.board-svg:focus-visible {
+		outline-color: Highlight;
+	}
 
-.store-label {
-	flex: 1;
-	min-width: 0;
-	display: flex;
-	flex-direction: column;
-}
+	.tab-bar [role="tab"][aria-selected="true"],
+	.tab-bar [role="tab"][aria-selected="true"]:not(:disabled):hover {
+		border: 3px solid Highlight;
+	}
 
-.store-name,
-.store-meta {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
+	.frame-thumb.active,
+	.frame-thumb.active:not(:disabled):hover {
+		border: 3px solid Highlight;
+	}
 
-.store-item.running .store-name {
-	color: var(--accent);
-}
+	.pattern-item.active button,
+	.store-item.running {
+		border-inline-start: 4px solid Highlight;
+	}
 
-.store-meta {
-	color: var(--text-dim);
-	font-size: 0.7rem;
-	font-variant-numeric: tabular-nums;
-}
+	.pill,
+	.chip {
+		border: 1px solid CanvasText;
+	}
 
-/* "Add a text" in the On the badge panel */
-.text-item textarea {
-	width: 100%;
-	box-sizing: border-box;
-	resize: vertical;
-	margin: 0.4em 0;
+	/* Forced colours paint transparent borders too; hide the unused ones. */
+	.tab-bar [role="tab"]:not([aria-selected="true"]) {
+		border-bottom-color: Canvas;
+	}
+
+	.pattern-item:not(.active) button {
+		border-inline-start-color: ButtonFace;
+	}
+
+	.section-nav a:not(:hover) {
+		border-color: Canvas;
+	}
+
+	.btn-icon[aria-pressed="true"] {
+		border: 3px solid Highlight;
+	}
+
+	/* Masked icons draw with background-color, which forced colours would
+	   replace. Keep it equal to the (forced) text colour. */
+	.icon,
+	.chip.connected::before,
+	.notice-warning::before,
+	.notice-danger::before {
+		forced-color-adjust: none;
+		background-color: currentColor;
+	}
+
+	/* The board keeps its own palette: lit and unlit LEDs are the data. */
+	#board-container,
+	.board-svg {
+		forced-color-adjust: none;
+	}
+
+	.board-svg:focus-visible {
+		outline-color: Highlight;
+	}
 }

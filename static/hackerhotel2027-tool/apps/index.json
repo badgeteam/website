@@ -27,9 +27,9 @@
   {
    "name": "EYE",
    "file": "eye.hhapp",
-   "bytes": 6800,
+   "bytes": 7032,
    "api": 6,
-   "description": "One big eye: the centre grid is the eyeball, the RGB LEDs on the arms its lashes. It looks around, blinks, and now and then opens its pupil wide to search and tightens it to focus. Every 30 to 60 s it has a mood: a wink, an eye roll, dizzy, sleepy, suspicious, angry, surprised, hypnotised, crying, crazy or laughing. B: a mood now; D / C: brighter / dimmer (the outline shows the level). A Samsung TV remote: Vol+ / Vol- the same, and a mood: 3 wink, 4 eye roll, 5 dizzy, 6 sleepy, 7 suspicious, 8 angry, 9 surprised, 0 hypnotised, red crazy, blue crying, yellow laughing, green one at random; and 1 or 2: it falls in love, which it never does by itself.",
+   "description": "One big eye: the centre grid is the eyeball, the RGB LEDs on the arms its lashes. It looks around, blinks, and now and then opens its pupil wide to search and tightens it to focus. Every 30 to 60 s it has a mood: a wink, an eye roll, dizzy, sleepy, suspicious, angry, surprised, hypnotised, crying, crazy or laughing. B: a mood now; D / C: brighter / dimmer (the outline shows the level). A Samsung TV remote: Vol+ / Vol- the same, and a mood: 3 wink, 4 eye roll, 5 dizzy, 6 sleepy, 7 suspicious, 8 angry, 9 surprised, 0 hypnotised, red crazy, blue crying, yellow laughing, green one at random; and 1 or 2: it falls in love, which it never does by itself. A banana: a shot surprises it, a second one soon after makes it angry, and the lashes flash the shooter's team colour; a heal: love; a team: a wink.",
    "recommended": true
   },
   {

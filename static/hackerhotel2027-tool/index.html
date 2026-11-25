@@ -4,437 +4,457 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Hackerhotel 2027 starfish control center</title>
+	<meta name="color-scheme" content="dark light">
+	<title>Starfish badge · Hackerhotel 2027</title>
 	<link rel="stylesheet" href="styles.css">
 	<script src="theme.js"></script>
 </head>
 
 <body>
 
-	<header>
-		<h1>Hackerhotel 2027 starfish control center</h1>
-		<div class="conn-controls">
-			<label class="theme-control">
-				Theme
-				<select id="theme-select">
-					<option value="system">System</option>
-					<option value="light">Light</option>
-					<option value="dark">Dark</option>
-				</select>
-			</label>
-			<span id="conn-status">Not connected</span>
-			<span id="device-mode"></span>
-			<button id="connect-btn">Connect over WebUSB</button>
-			<button id="emu-btn" hidden>Connect emulator</button>
-			<button id="disconnect-btn" hidden>Disconnect</button>
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<header class="site-header">
+		<div class="brand">
+			<h1>Starfish badge</h1>
+			<span class="brand-sub">Hackerhotel 2027</span>
+		</div>
+		<nav class="section-nav" aria-label="Page sections">
+			<ul>
+				<li><a href="#badge">Badge</a></li>
+				<li><a href="#apps">Apps</a></li>
+				<li><a href="#firmware">Firmware</a></li>
+				<li><a href="#create">Create</a></li>
+			</ul>
+		</nav>
+		<div class="theme-control">
+			<label for="theme-select">Theme</label>
+			<select id="theme-select">
+				<option value="system">System</option>
+				<option value="light">Light</option>
+				<option value="dark">Dark</option>
+			</select>
 		</div>
 	</header>
 
-	<main>
-		<section class="board-pane">
-			<div class="board-toolbar">
-				<div class="toolbar-group" role="group" aria-label="Brush">
-					<span class="toolbar-title">Brush</span>
-					<label class="inline">
-						Paint
-						<select id="brush-target">
-							<option value="white">White LEDs</option>
-							<option value="rgb">RGB LEDs</option>
-						</select>
-					</label>
-					<label class="inline" id="brush-brightness-control">
-						Brightness
-						<input type="range" id="brush-value" min="0" max="255" value="255">
-						<output id="brush-value-readout">255</output>
-					</label>
-					<label class="inline" id="brush-color-control" hidden>
-						Color
-						<input type="color" id="brush-color" value="#ff0000">
-					</label>
-					<label class="inline">
-						Size
-						<select id="brush-radius">
-							<option value="0">Single LED</option>
-							<option value="2.5">Small</option>
-							<option value="5">Large</option>
-						</select>
-					</label>
-					<label>
-						<input type="checkbox" id="erase-mode">
-						Erase
-					</label>
-					<label>
-						<input type="checkbox" id="live-send" checked title="The badge shows what you draw, and the frames of ▶ Play. Run or Stop on the badge ends it until you draw or play again.">
-						Live send
-					</label>
+	<main id="main" class="layout">
+		<div class="manage">
+
+			<section id="badge" class="card" aria-labelledby="badge-h">
+				<h2 id="badge-h">Your badge</h2>
+				<div class="conn-row">
+					<span id="conn-status" class="chip" role="status">Not connected</span>
+					<button type="button" id="connect-btn" class="btn btn-primary"><span class="icon i-usb" aria-hidden="true"></span> Connect badge</button>
+					<button type="button" id="emu-btn" class="btn" hidden>Connect emulator</button>
+					<button type="button" id="disconnect-btn" class="btn" hidden>Disconnect</button>
 				</div>
-				<div class="toolbar-group" role="group" aria-label="Device">
-					<span class="toolbar-title">Device</span>
-					<button id="clear-btn">Clear matrix</button>
-					<button id="send-frame-btn">Send frame</button>
+				<p id="device-mode" class="meta"></p>
+				<p id="fw-old-notice" class="notice notice-warning" hidden></p>
+				<a id="fw-cta" class="btn btn-primary" href="#firmware">Update firmware</a>
+				<ol id="first-run">
+					<li>Plug the badge into this computer with a USB&#8209;C cable.</li>
+					<li>Use Chrome, Edge or Opera (on a computer or Android).</li>
+					<li>Click Connect badge and pick <strong>Hackerhotel 2027 starfish</strong>.</li>
+				</ol>
+				<details class="disclosure">
+					<summary>Badge not in the list?</summary>
+					<p>Some USB&#8209;C cables only charge. Try another cable.</p>
+					<p>Firefox and Safari can't connect to USB devices. Use Chrome, Edge or Opera.</p>
+					<p><strong>Linux:</strong> give your user access to the badge (1209:d643) and to its
+						boot ROM (1a86:55e0) with a udev rule, for example in
+						<code>/etc/udev/rules.d/99-hh27-starfish.rules</code>:</p>
+					<pre><code>SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55e0", MODE="0666"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="d643", MODE="0666"</code></pre>
+					<p>Then run <code>sudo udevadm control --reload</code> and plug the badge in again.</p>
+					<p><strong>Windows:</strong> if the badge does not show up, install the WinUSB driver
+						for it once with <a href="https://zadig.akeo.ie/">Zadig</a>: Options &gt; List All
+						Devices, pick the badge (USB ID 1209 D643), driver WinUSB, Install Driver.</p>
+				</details>
+
+				<label for="badge-name">Your name</label>
+				<p id="badge-name-hint" class="meta">Apps on the badge show it. Up to 32 plain letters and digits.</p>
+				<div class="input-row">
+					<input type="text" id="badge-name" maxlength="32" autocomplete="nickname" spellcheck="false"
+						aria-describedby="badge-name-hint">
+					<button type="button" id="badge-name-btn" class="btn">Save name</button>
 				</div>
-			</div>
-			<div id="board-container" aria-label="LED matrix preview, click or drag to paint"></div>
-			<p class="hint">
-				Click or drag to paint. Round dots are the white LEDs, diamonds
-				are the RGB accent LEDs: set Paint to "RGB LEDs" to paint those
-				with a color instead. While painting white LEDs, clicking a
-				diamond opens its own color editor.
-			</p>
-		</section>
+				<p id="badge-name-status" class="meta" role="status"></p>
+				<p class="meta">Change the brightness on the badge with the B and D buttons.</p>
+			</section>
 
-		<aside class="side-panel">
-			<div class="side-column">
-
-				<fieldset id="rgb-editor" hidden>
-					<legend>RGB LED <span id="rgb-editor-label"></span></legend>
-					<label>
-						Color
-						<input type="color" id="rgb-color-input" value="#000000">
+			<section id="stored" class="card" aria-labelledby="stored-h">
+				<h2 id="stored-h">On your badge</h2>
+				<p id="store-status" class="meta" role="status">Connect your badge to see what is on it.</p>
+				<ul id="store-list" class="item-list" aria-labelledby="stored-h"></ul>
+				<p class="meta">&#9733; marks the item that starts at power-on. Hold any button while the
+					badge powers on to skip it. Hold A on the badge for its menu.</p>
+				<div class="button-row">
+					<label class="btn file-button">
+						Add from file…
+						<input type="file" id="store-add-input" accept=".hhapp,.ledanim,.txt"
+							aria-describedby="store-add-hint">
 					</label>
-					<p class="hint">
-						A 4-pin RGB accent LED -- driven as three ordinary channels
-						in the same frame, not a separate protocol feature (see
-						<code>docs/LEDPWM_MATRIX.md</code>).
-					</p>
-					<div class="button-row">
-						<button id="rgb-editor-off-btn">Turn off</button>
-						<button id="rgb-editor-close-btn">Close</button>
-					</div>
-				</fieldset>
+					<button type="button" id="store-stop-btn" class="btn"><span class="icon i-stop" aria-hidden="true"></span> Stop playing</button>
+				</div>
+				<p id="store-add-hint" class="meta">.hhapp, .ledanim or .txt</p>
 
-				<fieldset class="tabbed">
-					<legend>Create animation</legend>
-					<div class="tab-bar" role="tablist">
-						<button role="tab" id="tab-test" aria-controls="panel-test" aria-selected="true">Test
-							animations</button>
-						<button role="tab" id="tab-video" aria-controls="panel-video" aria-selected="false">From
-							video or GIF</button>
-						<button role="tab" id="tab-text" aria-controls="panel-text" aria-selected="false">From
-							text</button>
-					</div>
-					<div class="tab-panel" role="tabpanel" id="panel-test" aria-labelledby="tab-test">
-						<p class="hint">
-							Generates a built-in multi-frame pattern -- neon flicker-on,
-							strobe, a chase around the arms, a breathe crossfade, a
-							sparkling second chase, and a strobe finale -- and loads it
-							into the Pattern editor below (Play it there, or send it to
-							the device).
-						</p>
-						<div class="button-row">
-							<button id="pharmacy-sign-btn">Techno pharmacy sign (green/white)</button>
-						</div>
-					</div>
-					<div class="tab-panel" role="tabpanel" id="panel-video" aria-labelledby="tab-video" hidden>
-						<label>
-							Video or animated image (GIF, WebP, PNG)
-							<input type="file" id="video-file-input" accept="video/*,image/gif,image/webp,image/apng,image/png">
-						</label>
-						<label>
-							Frame rate (fps)
-							<input type="number" id="video-fps" min="1" max="20" value="8">
-						</label>
-						<label>
-							Start at (seconds)
-							<input type="number" id="video-start" min="0" step="0.1" value="0">
-						</label>
-						<label>
-							Duration (seconds)
-							<input type="number" id="video-duration" min="0.1" step="0.1" value="5">
-						</label>
-						<label>
-							Brightness boost
-							<input type="range" id="video-brightness" min="0.5" max="3" step="0.1" value="1.3">
-							<output id="video-brightness-readout">1.3x</output>
-						</label>
-						<label>
-							<input type="checkbox" id="video-ambilight">
-							Ambilight mode
-						</label>
-						<p class="hint" id="video-normal-hint">
-							Off: each LED samples the video at its real position on the
-							board (cropped to the board's aspect ratio), so results follow
-							the starfish shape rather than a plain rectangle.
-						</p>
-						<p class="hint" id="video-ambilight-hint" hidden>
-							On: the video is scaled to fit the dense circular cluster in
-							the matrix's center (its corners, and depending on the video's
-							aspect ratio some of its left/right content, fall outside that
-							circle and won't show on any LED). Every other LED -- out along
-							the arms -- instead takes on the color of whichever edge of
-							that circle it points away from, like a Philips Ambilight TV.
-						</p>
-						<p class="hint">
-							A small, dim 384-LED display reads best with a brightness
-							boost and high-contrast source footage.
-						</p>
-						<div class="button-row">
-							<button id="video-convert-btn">Convert to pattern</button>
-							<button id="video-cancel-btn" hidden>Cancel</button>
-						</div>
-						<progress id="video-progress" value="0" max="1" hidden></progress>
-						<span id="video-status" class="hint"></span>
-					</div>
-					<div class="tab-panel" role="tabpanel" id="panel-text" aria-labelledby="tab-text" hidden>
-						<label>
-							Text
-							<input type="text" id="text-input" value="HACKER HOTEL">
-						</label>
-						<label>
-							Font size (px)
-							<input type="range" id="text-font-size" min="8" max="64" value="30">
-							<output id="text-font-size-readout">30</output>
-						</label>
-						<label>
-							<input type="checkbox" id="text-bold" checked>
-							Bold
-						</label>
-						<label>
-							Color
-							<input type="color" id="text-color-input" value="#ffffff">
-						</label>
-						<label>
-							Frame rate (fps)
-							<input type="number" id="text-fps" min="1" max="20" value="10">
-						</label>
-						<label>
-							Scroll speed (px/frame)
-							<input type="number" id="text-scroll-speed" min="0.5" max="20" step="0.5" value="3">
-						</label>
-						<label>
-							Brightness boost
-							<input type="range" id="text-brightness" min="0.5" max="3" step="0.1" value="1.3">
-							<output id="text-brightness-readout">1.3x</output>
-						</label>
-						<label>
-							<input type="checkbox" id="text-scroll" checked>
-							Scroll continuously (unchecked: center as one still frame if it fits)
-						</label>
-						<p class="hint">
-							Renders the text at high resolution and slides it across only
-							the dense circular cluster of LEDs at the board's center, so
-							it reads as a proper dot-matrix marquee rather than a
-							squashed rectangle. The sparser LEDs running out along the
-							arms -- plain white ones and the diamond-shaped RGB accents --
-							are too sparse to carry a legible glyph, so they're left free
-							for their own effect instead of showing (badly stretched)
-							text.
-						</p>
-						<label>
-							White edge LEDs
-							<select id="text-white-edge-effect">
-								<option value="none">Off</option>
-								<option value="chase" selected>Chase</option>
-								<option value="blink">Blink</option>
-								<option value="twinkle">Twinkle</option>
+				<h3>Show a text</h3>
+				<label for="text-item-input">Text to show</label>
+				<p id="text-item-hint" class="meta">Shown in the badge's own font: still if it fits, else
+					scrolling. Accents are dropped; other symbols show as ?.</p>
+				<textarea id="text-item-input" rows="3" aria-describedby="text-item-hint text-item-count text-item-status"></textarea>
+				<p id="text-item-count" class="meta"></p>
+				<label for="text-item-speed">Scroll speed (columns per second)</label>
+				<input type="number" id="text-item-speed" min="1" max="60" value="10">
+				<label class="check">
+					<input type="checkbox" id="text-item-plain">
+					Text only, arm LEDs stay off
+				</label>
+				<div class="button-row">
+					<button type="button" id="text-item-btn" class="btn btn-primary">Add text to badge</button>
+				</div>
+				<p id="text-item-status" class="meta" role="status"></p>
+
+				<details class="disclosure" id="stored-danger">
+					<summary>Erase the badge</summary>
+					<p class="notice notice-danger">Removes every app, animation and text from the badge.</p>
+					<button type="button" id="store-erase-btn" class="btn btn-danger">Erase all items</button>
+				</details>
+			</section>
+
+			<section id="apps" class="card" aria-labelledby="apps-h">
+				<h2 id="apps-h">App library</h2>
+				<p class="meta">Apps that come with this firmware. Add stores an app on the badge and starts
+					it. Update replaces an older copy; saved data such as high scores stays.</p>
+				<p id="app-library-reason" class="notice" hidden></p>
+				<ul id="app-library" class="item-list" aria-labelledby="apps-h"></ul>
+				<details class="disclosure">
+					<summary>Start over with the recommended apps</summary>
+					<p class="notice notice-danger">This erases everything on the badge first, then adds the
+						recommended apps.</p>
+					<p id="app-recommended-reason" class="meta" hidden></p>
+					<button type="button" id="app-recommended-btn" class="btn btn-danger">Erase badge and install recommended apps</button>
+					<span id="app-recommended-hint" class="meta" role="status"></span>
+				</details>
+			</section>
+
+			<section id="firmware" class="card" aria-labelledby="firmware-h">
+				<h2 id="firmware-h">Firmware</h2>
+				<p id="fw-badge" class="meta" role="status">Badge: connect it to see its firmware.</p>
+				<p id="fw-site" class="meta"></p>
+				<div class="button-row">
+					<button type="button" id="fw-update-btn" class="btn btn-primary">Update firmware</button>
+				</div>
+				<div id="fw-confirm" class="notice notice-warning" hidden>
+					<span tabindex="-1"></span>
+					<span class="button-row">
+						<button type="button" id="fw-go-btn" class="btn btn-primary">Flash now</button>
+						<button type="button" id="fw-cancel-btn" class="btn">Cancel</button>
+					</span>
+				</div>
+				<progress id="fw-progress" max="100" value="0" aria-label="Firmware update progress" hidden></progress>
+				<p id="fw-status" class="meta" role="status" tabindex="-1"></p>
+				<details class="disclosure">
+					<summary>Help: drivers, browsers and recovery</summary>
+					<p>The page restarts the badge into its USB boot ROM and asks you to pick it: "Unknown
+						device from QinHeng Electronics". No badge connected? On the badge, hold A for the
+						menu, press C to reach UPDATE, and press A. Your items, name and settings stay.</p>
+					<p><strong>Linux:</strong> the udev rule under "Badge not in the list?" covers the boot
+						ROM (1a86:55e0) too.</p>
+					<p><strong>Windows:</strong> once, install the WinUSB driver for the boot ROM with
+						<a href="https://zadig.akeo.ie/">Zadig</a>: Device &gt; Create New Device, USB ID
+						1A86 55E0, driver WinUSB, Install Driver. Without it the boot ROM never shows up in
+						the list.</p>
+					<p><strong>Firefox and Safari</strong> can't connect to USB devices. Use Chrome, Edge or
+						Opera, or flash with <code>minichlink -w ledmatrix.bin flash -b</code>.</p>
+					<p>If an update stops half way, the badge starts in its boot ROM: update again. If it no
+						longer starts at all, unplug it (and its battery) and plug it in again, or bring it to
+						the badge recovery area at the event.</p>
+				</details>
+				<details class="disclosure">
+					<summary>Advanced: flash a .bin file</summary>
+					<label class="btn file-button">
+						Choose .bin file…
+						<input type="file" id="fw-file-input" accept=".bin">
+					</label>
+				</details>
+			</section>
+
+		</div>
+
+		<section id="create" class="card create" aria-labelledby="create-h">
+			<h2 id="create-h">Create an animation</h2>
+			<p class="meta">Draw on the starfish frame by frame, or start from a demo, a video or a text.
+				Then save it to the badge.</p>
+
+			<div class="editor">
+				<div class="editor-stage">
+					<div class="board-toolbar" role="group" aria-label="Brush">
+						<div class="field">
+							<label for="brush-target">Paint</label>
+							<select id="brush-target">
+								<option value="white">White LEDs</option>
+								<option value="rgb">Colour LEDs</option>
 							</select>
-						</label>
-						<label>
-							White edge speed
-							<input type="range" id="text-white-edge-speed" min="0.01" max="0.3" step="0.01"
-								value="0.05">
-							<output id="text-white-edge-speed-readout">0.05</output>
-						</label>
-						<label>
-							RGB edge LEDs
-							<select id="text-rgb-edge-effect">
-								<option value="none">Off</option>
-								<option value="chase" selected>Chase</option>
-								<option value="blink">Blink</option>
-								<option value="twinkle">Twinkle</option>
-								<option value="rainbow">Rainbow spin</option>
+						</div>
+						<div class="field" id="brush-brightness-control">
+							<label for="brush-value">Brush level</label>
+							<input type="range" id="brush-value" min="0" max="255" value="255">
+							<output id="brush-value-readout" for="brush-value">255</output>
+						</div>
+						<div class="field" id="brush-color-control" hidden>
+							<label for="brush-color">Colour</label>
+							<input type="color" id="brush-color" value="#ff0000">
+						</div>
+						<div class="field">
+							<label for="brush-radius">Size</label>
+							<select id="brush-radius">
+								<option value="0">Single LED</option>
+								<option value="2.5">Small</option>
+								<option value="5">Large</option>
 							</select>
-						</label>
-						<label>
-							RGB edge speed
-							<input type="range" id="text-rgb-edge-speed" min="0.01" max="0.3" step="0.01" value="0.08">
-							<output id="text-rgb-edge-speed-readout">0.08</output>
-						</label>
-						<label>
-							RGB edge color
-							<input type="color" id="text-rgb-edge-color" value="#39d2c0">
-						</label>
-						<p class="hint">
-							Speed is a fraction of one full chase/blink cycle per frame --
-							higher wraps around (or blinks) faster. Twinkle ignores speed
-							and just sparkles randomly. Ignored if a group's effect is
-							Off.
-						</p>
-						<div class="button-row">
-							<button id="text-convert-btn">Convert to pattern</button>
 						</div>
-						<span id="text-status" class="hint"></span>
-					</div>
-				</fieldset>
-
-				<fieldset>
-					<legend>Flash storage</legend>
-					<label>
-						Brightness levels per LED
-						<select id="compression-quant">
-							<option value="8">256 (lossless)</option>
-							<option value="4" selected>16</option>
-							<option value="2">4</option>
-							<option value="1">2 (on/off)</option>
-						</select>
-					</label>
-					<p id="compression-stats" class="hint"></p>
-					<div class="button-row">
-						<button id="upload-pattern-btn">Add to the badge &amp; play on boot</button>
-					</div>
-					<p class="hint" id="upload-pattern-status"></p>
-					<div class="button-row">
-						<button id="export-compressed-btn">Download .ledanim</button>
-						<label class="file-button">
-							Load .ledanim
-							<input type="file" id="import-compressed-input" accept=".ledanim">
+						<label class="check">
+							<input type="checkbox" id="erase-mode">
+							Eraser
+						</label>
+						<label class="check">
+							<input type="checkbox" id="live-send" checked aria-describedby="live-send-hint">
+							Show on badge while drawing
 						</label>
 					</div>
-					</p>
-				</fieldset>
+					<p id="live-send-hint" class="meta">The badge shows what you draw and play here.
+						Starting an item or pressing Stop playing (under On your badge) ends this until
+						you draw or press Play again.</p>
 
-			</div>
-			<div class="side-column">
-
-				<fieldset>
-					<legend>Firmware</legend>
-					<p class="hint" id="fw-badge">Badge: connect it to see its firmware.</p>
-					<p class="hint" id="fw-site"></p>
-					<div class="button-row">
-						<button id="fw-update-btn">Update firmware</button>
-						<label class="file-button">
-							Pick a .bin
-							<input type="file" id="fw-file-input" accept=".bin">
-						</label>
-					</div>
-					<p class="hint" id="fw-confirm" hidden>
-						<span></span>
-						<span class="button-row">
-							<button id="fw-go-btn">Flash now</button>
-							<button id="fw-cancel-btn">Cancel</button>
-						</span>
-					</p>
-					<progress id="fw-progress" max="100" value="0" hidden></progress>
-					<p class="hint" id="fw-status"></p>
-					<details class="hint">
-						<summary>Help</summary>
-						<p>The page sends the badge into its USB boot ROM and asks you to pick it
-							("Unknown device from QinHeng Electronics"). Without a connected badge:
-							on the badge, hold A for the menu, press C to reach UPDATE, and tap A. Your items, name
-							and settings stay.</p>
-						<p><strong>Linux:</strong> the udev rule from the README, for 1a86:55e0 too.
-							<strong>Windows:</strong> once, install the WinUSB driver for the boot ROM
-							with <a href="https://zadig.akeo.ie/">Zadig</a>: Device &gt; Create New
-							Device, USB ID 1A86 55E0, driver WinUSB, Install Driver. Without it the
-							boot ROM never shows up in the list. <strong>Firefox and Safari</strong>
-							have no WebUSB: use Chrome, Edge or Opera, or flash with
-							<code>minichlink -w ledmatrix.bin flash -b</code>.</p>
-						<p>If an update stops half way, the badge starts in its boot ROM: update
-							again. If it no longer starts at all, unplug it (and its battery) and
-							plug it in again, or bring it to the badge recovery area at the event.</p>
-					</details>
-				</fieldset>
-				<fieldset>
-					<legend>On the badge</legend>
-					<label>
-						Your name
-						<span class="button-row">
-							<input type="text" id="badge-name" maxlength="32" placeholder="for apps to show">
-							<button id="badge-name-btn">Save</button>
-						</span>
-					</label>
-					<p class="hint">Apps, animations and texts stored on the badge. The one marked
-						&#9733; starts at power-on; hold any button while the badge powers on to
-						skip it. On the badge, hold A for the menu (also from an app).</p>
-					<ul id="store-list" class="store-list"></ul>
-					<p class="hint" id="store-status">Connect to see what is stored.</p>
-					<div class="button-row">
-						<label class="file-button">
-							Add app, animation or text
-							<input type="file" id="store-add-input" accept=".hhapp,.ledanim,.txt">
-						</label>
-						<button id="store-stop-btn">Stop</button>
-						<button id="store-erase-btn">Erase all</button>
-					</div>
-					<details class="text-item">
-						<summary>Add a text</summary>
-						<p class="hint">The badge shows the text in its own font, as the name tag:
-							still if it fits, else scrolling. It stores one byte per letter, so a
-							long text fits (an animation of it would not). Letters outside plain
-							ASCII lose their accents or show as <code>?</code>.</p>
-						<textarea id="text-item-input" rows="3" placeholder="Your text"></textarea>
-						<div class="button-row">
-							<label>
-								Speed
-								<input type="number" id="text-item-speed" min="1" max="60" value="10">
-								columns/s
-							</label>
-							<label>
-								<input type="checkbox" id="text-item-plain">
-								Text only (no colours on the arms)
-							</label>
-							<button id="text-item-btn">Add to the badge</button>
-						</div>
-						<p class="hint" id="text-item-status"></p>
-					</details>
-					<p class="hint"><strong>App library:</strong> the apps that come with the
-						firmware. <strong>Add</strong> stores one on the badge and starts it;
-						<strong>Update</strong> replaces an older copy (its saved data, such as
-						high scores, stays).</p>
-					<p>
-						<button id="app-recommended-btn">Install the recommended set</button>
-						<span class="hint" id="app-recommended-hint"></span>
-					</p>
-					<ul id="app-library" class="store-list"></ul>
-				</fieldset>
-
-				<fieldset>
-					<legend>Pattern</legend>
-					<label>
-						Name
-						<input type="text" id="pattern-name" value="Untitled">
-					</label>
-					<label>
-						Playback speed (fps)
-						<input type="number" id="pattern-fps" min="1" max="20" value="4">
-					</label>
+					<div id="board-container"></div>
+					<p id="board-live" class="visually-hidden" role="status" aria-live="polite"></p>
+					<p id="board-help" class="meta">Click or drag to paint. Round dots are white LEDs;
+						diamonds are colour LEDs. With the keyboard: Tab to the board, arrows move, Space
+						paints, Enter on a diamond sets its colour.</p>
 
 					<div class="frame-editor">
-						<div id="frame-strip" class="frame-strip"></div>
-						<span id="frame-count-label"></span>
+						<div id="frame-strip" class="frame-strip" role="group" aria-label="Frames"></div>
+						<span id="frame-count-label" class="meta"></span>
 						<div class="button-row">
-							<button id="add-frame-btn" title="Insert a new frame (copy of current) after this one">+
-								Frame</button>
-							<button id="delete-frame-btn" title="Delete current frame">Delete frame</button>
-							<button id="play-btn">▶ Play</button>
+							<button type="button" id="add-frame-btn" class="btn">Add frame</button>
+							<button type="button" id="delete-frame-btn" class="btn">Delete frame</button>
+							<button type="button" id="clear-btn" class="btn">Clear frame</button>
+							<button type="button" id="play-btn" class="btn"><span aria-hidden="true">▶</span> Play</button>
 						</div>
 					</div>
+				</div>
 
-					<div class="button-row">
-						<button id="new-pattern-btn">New</button>
-						<button id="save-pattern-btn">Save</button>
-						<button id="duplicate-pattern-btn">Duplicate</button>
-						<button id="delete-pattern-btn">Delete</button>
-					</div>
-					<div class="button-row">
-						<button id="export-pattern-btn">Export JSON</button>
-						<label class="file-button">
-							Import JSON
-							<input type="file" id="import-pattern-input" accept="application/json">
-						</label>
-					</div>
+				<div class="editor-tools">
+					<fieldset id="rgb-editor" class="panel" hidden>
+						<legend>Colour LED <span id="rgb-editor-label"></span></legend>
+						<label for="rgb-color-input">Colour</label>
+						<input type="color" id="rgb-color-input" value="#000000" aria-describedby="rgb-editor-hint">
+						<p id="rgb-editor-hint" class="meta">Sets this LED's colour in the current frame.</p>
+						<div class="button-row">
+							<button type="button" id="rgb-editor-off-btn" class="btn">Turn off</button>
+							<button type="button" id="rgb-editor-close-btn" class="btn">Close</button>
+						</div>
+					</fieldset>
 
-					<ul id="pattern-list" class="pattern-list"></ul>
-				</fieldset>
+					<section class="panel" aria-labelledby="anim-h">
+						<h3 id="anim-h">Animation</h3>
+						<label for="pattern-name">Name</label>
+						<input type="text" id="pattern-name" value="Untitled" autocomplete="off" spellcheck="false">
+						<label for="pattern-fps">Speed (frames per second)</label>
+						<input type="number" id="pattern-fps" min="1" max="20" value="4">
+					</section>
 
+					<section class="panel" aria-labelledby="save-h">
+						<h3 id="save-h">Save to badge</h3>
+						<label for="compression-quant">Detail</label>
+						<select id="compression-quant" aria-describedby="compression-stats">
+							<option value="8">256 levels (exact, largest)</option>
+							<option value="4" selected>16 levels</option>
+							<option value="2">4 levels</option>
+							<option value="1">On or off (smallest)</option>
+						</select>
+						<p id="compression-stats" class="meta"></p>
+						<div class="button-row">
+							<button type="button" id="upload-pattern-btn" class="btn btn-primary">Save to badge and play</button>
+						</div>
+						<p class="meta">It also becomes the item that starts at power-on.</p>
+						<p id="upload-pattern-status" class="meta" role="status"></p>
+					</section>
+
+					<section class="panel" aria-labelledby="start-h">
+						<h3 id="start-h">Start from</h3>
+						<div class="tab-bar" role="tablist" aria-label="Start from">
+							<button type="button" role="tab" id="tab-test" aria-controls="panel-test"
+								aria-selected="true">Demo</button>
+							<button type="button" role="tab" id="tab-video" aria-controls="panel-video"
+								aria-selected="false" tabindex="-1">Video or GIF</button>
+							<button type="button" role="tab" id="tab-text" aria-controls="panel-text"
+								aria-selected="false" tabindex="-1">Animated text</button>
+						</div>
+
+						<div class="tab-panel" role="tabpanel" id="panel-test" aria-labelledby="tab-test">
+							<p id="demo-hint" class="meta">Loads a built-in animation into the editor: neon
+								flicker, strobe, chases around the arms and a breathing fade.</p>
+							<div class="button-row">
+								<button type="button" id="pharmacy-sign-btn" class="btn"
+									aria-describedby="demo-hint">Load the demo</button>
+							</div>
+						</div>
+
+						<div class="tab-panel" role="tabpanel" id="panel-video" aria-labelledby="tab-video" hidden>
+							<label for="video-file-input">Video or animated image (GIF, WebP, PNG)</label>
+							<input type="file" id="video-file-input"
+								accept="video/*,image/gif,image/webp,image/apng,image/png">
+							<label for="video-fps">Frames per second</label>
+							<input type="number" id="video-fps" min="1" max="20" value="8">
+							<label for="video-start">Start at (seconds)</label>
+							<input type="number" id="video-start" min="0" step="0.1" value="0">
+							<label for="video-duration">Duration (seconds)</label>
+							<input type="number" id="video-duration" min="0.1" step="0.1" value="5">
+							<div class="field">
+								<label for="video-brightness">Boost</label>
+								<input type="range" id="video-brightness" min="0.5" max="3" step="0.1" value="1.3"
+									aria-describedby="video-boost-hint">
+								<output id="video-brightness-readout" for="video-brightness">1.3x</output>
+							</div>
+							<p id="video-boost-hint" class="meta">Bright, high-contrast videos look best on the
+								badge.</p>
+							<label class="check">
+								<input type="checkbox" id="video-ambilight"
+									aria-describedby="video-normal-hint video-ambilight-hint">
+								Fill the arms from the video's edges
+							</label>
+							<p id="video-normal-hint" class="meta">Off: each LED takes the colour of the video
+								at its own place on the starfish.</p>
+							<p id="video-ambilight-hint" class="meta" hidden>On: the video fills the centre
+								circle, and each arm LED takes the colour of the nearest edge.</p>
+							<div class="button-row">
+								<button type="button" id="video-convert-btn" class="btn btn-primary">Make animation</button>
+								<button type="button" id="video-cancel-btn" class="btn" hidden>Cancel</button>
+							</div>
+							<progress id="video-progress" value="0" max="1" aria-label="Video conversion progress"
+								hidden></progress>
+							<p id="video-status" class="meta" role="status"></p>
+						</div>
+
+						<div class="tab-panel" role="tabpanel" id="panel-text" aria-labelledby="tab-text" hidden>
+							<label for="text-input">Text</label>
+							<input type="text" id="text-input" value="HACKER HOTEL" autocomplete="off"
+								aria-describedby="text-hint">
+							<p id="text-hint" class="meta">The text scrolls through the round centre of the
+								board. The arms stay free for their own effect.</p>
+							<div class="field">
+								<label for="text-font-size">Font size (pixels)</label>
+								<input type="range" id="text-font-size" min="8" max="64" value="30">
+								<output id="text-font-size-readout" for="text-font-size">30</output>
+							</div>
+							<label class="check">
+								<input type="checkbox" id="text-bold" checked>
+								Bold
+							</label>
+							<label for="text-color-input">Colour</label>
+							<input type="color" id="text-color-input" value="#ffffff">
+							<label for="text-fps">Frames per second</label>
+							<input type="number" id="text-fps" min="1" max="20" value="10">
+							<label for="text-scroll-speed">Scroll speed (pixels per frame)</label>
+							<input type="number" id="text-scroll-speed" min="0.5" max="20" step="0.5" value="3">
+							<div class="field">
+								<label for="text-brightness">Boost</label>
+								<input type="range" id="text-brightness" min="0.5" max="3" step="0.1" value="1.3">
+								<output id="text-brightness-readout" for="text-brightness">1.3x</output>
+							</div>
+							<label class="check">
+								<input type="checkbox" id="text-scroll" checked aria-describedby="text-scroll-hint">
+								Scroll continuously
+							</label>
+							<p id="text-scroll-hint" class="meta">Off: one still frame, centred, if the text
+								fits.</p>
+
+							<details class="disclosure">
+								<summary>Arm effects</summary>
+								<p id="text-edge-hint" class="meta">Speed is the part of one chase or blink
+									cycle per frame: higher is faster. Twinkle ignores speed.</p>
+								<label for="text-white-edge-effect">White arm LEDs</label>
+								<select id="text-white-edge-effect">
+									<option value="none">Off</option>
+									<option value="chase" selected>Chase</option>
+									<option value="blink">Blink</option>
+									<option value="twinkle">Twinkle</option>
+								</select>
+								<div class="field">
+									<label for="text-white-edge-speed">White arm speed</label>
+									<input type="range" id="text-white-edge-speed" min="0.01" max="0.3" step="0.01"
+										value="0.05" aria-describedby="text-edge-hint">
+									<output id="text-white-edge-speed-readout" for="text-white-edge-speed">0.05</output>
+								</div>
+								<label for="text-rgb-edge-effect">Colour arm LEDs</label>
+								<select id="text-rgb-edge-effect">
+									<option value="none">Off</option>
+									<option value="chase" selected>Chase</option>
+									<option value="blink">Blink</option>
+									<option value="twinkle">Twinkle</option>
+									<option value="rainbow">Rainbow spin</option>
+								</select>
+								<div class="field">
+									<label for="text-rgb-edge-speed">Colour arm speed</label>
+									<input type="range" id="text-rgb-edge-speed" min="0.01" max="0.3" step="0.01"
+										value="0.08" aria-describedby="text-edge-hint">
+									<output id="text-rgb-edge-speed-readout" for="text-rgb-edge-speed">0.08</output>
+								</div>
+								<label for="text-rgb-edge-color">Colour arm colour</label>
+								<input type="color" id="text-rgb-edge-color" value="#39d2c0">
+							</details>
+
+							<div class="button-row">
+								<button type="button" id="text-convert-btn" class="btn btn-primary">Make animation</button>
+							</div>
+							<p id="text-status" class="meta" role="status"></p>
+						</div>
+					</section>
+
+					<section class="panel" aria-labelledby="saved-h">
+						<h3 id="saved-h">Saved in this browser</h3>
+						<ul id="pattern-list" class="item-list pattern-list" aria-labelledby="saved-h"></ul>
+						<div class="button-row">
+							<button type="button" id="new-pattern-btn" class="btn">New animation</button>
+							<button type="button" id="save-pattern-btn" class="btn">Save in this browser</button>
+							<button type="button" id="duplicate-pattern-btn" class="btn">Duplicate</button>
+							<button type="button" id="delete-pattern-btn" class="btn btn-danger" aria-describedby="saved-reason">Delete</button>
+						</div>
+						<p id="saved-reason" class="meta" hidden>This animation is not saved in this browser, so there is nothing to delete.</p>
+					</section>
+
+					<details class="disclosure">
+						<summary>Advanced</summary>
+						<div class="button-row">
+							<button type="button" id="send-frame-btn" class="btn">Send frame to badge</button>
+						</div>
+						<div class="button-row">
+							<button type="button" id="export-compressed-btn" class="btn">Download .ledanim file</button>
+							<label class="btn file-button">
+								Open .ledanim file…
+								<input type="file" id="import-compressed-input" accept=".ledanim">
+							</label>
+						</div>
+						<div class="button-row">
+							<button type="button" id="export-pattern-btn" class="btn">Export JSON</button>
+							<label class="btn file-button">
+								Import JSON…
+								<input type="file" id="import-pattern-input" accept="application/json">
+							</label>
+						</div>
+					</details>
+				</div>
 			</div>
-		</aside>
+		</section>
 	</main>
 
 	<footer>
 		<p>
-			Copyright Nicolai Electronics & Stichting Badge.Team 2027
+			Copyright Nicolai Electronics &amp; Stichting Badge.Team 2027
 			<span id="webui-version"></span>
+			· <a href="https://hackerhotel.nl/">hackerhotel.nl</a>
 		</p>
 	</footer>
 
@@ -447,6 +467,7 @@
 	<script src="video_import.js"></script>
 	<script src="text_import.js"></script>
 	<script src="text_item.js"></script>
+	<script src="ui.js"></script>
 	<script src="app.js"></script>
 	<script src="wchisp.js"></script>
 	<script src="firmware_update.js"></script>

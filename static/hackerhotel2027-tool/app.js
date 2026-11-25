@@ -13,12 +13,12 @@ const eraseToggle = document.getElementById('erase-mode');
 const brushTargetInput = document.getElementById('brush-target');
 const brushColorInput = document.getElementById('brush-color');
 
-function currentBrushLevel() {
-	return eraseToggle.checked ? 0 : Number(brushValueInput.value);
+function currentBrushLevel(erase = eraseToggle.checked) {
+	return erase ? 0 : Number(brushValueInput.value);
 }
 
-function currentBrushColor() {
-	return eraseToggle.checked ? [0, 0, 0] : hexToRgbChannels(brushColorInput.value);
+function currentBrushColor(erase = eraseToggle.checked) {
+	return erase ? [0, 0, 0] : hexToRgbChannels(brushColorInput.value);
 }
 
 function hexToRgbChannels(hex) {
@@ -30,7 +30,7 @@ brushValueInput.addEventListener('input', () => {
 });
 
 // "White LEDs" paints a brightness onto the mono LEDs, "RGB LEDs" paints a
-// color onto the RGB accent LEDs -- each mode only touches its own LEDs.
+// color onto the RGB accent LEDs: each mode only touches its own LEDs.
 brushTargetInput.addEventListener('change', () => {
 	const rgb = brushTargetInput.value === 'rgb';
 	board.rgbBrush = rgb;
@@ -39,30 +39,40 @@ brushTargetInput.addEventListener('change', () => {
 	document.getElementById('brush-color-control').hidden = !rgb;
 });
 
-board.onPaintAt = (xmm, ymm) => {
+// Paints with the brush at a board position (millimeters). `erase` paints
+// black whatever the Eraser box says (the board's Delete key). Returns
+// false when no LED of the brush's kind was in reach.
+function paintAt(xmm, ymm, erase = eraseToggle.checked) {
 	const radius = Number(brushRadiusInput.value);
 	const pickRadius = Math.max(radius, 1.6); // always usable even at radius 0
 	let touched = false;
+	let hit = false;
 	if (board.rgbBrush) {
-		const [r, g, b] = currentBrushColor();
+		const [r, g, b] = currentBrushColor(erase);
 		for (const led of BOARD_DATA.rgb_leds) {
 			if (Math.hypot(led.x - xmm, led.y - ymm) > pickRadius) continue;
+			hit = true;
 			const [cr, cg, cb] = board.getRgb(led);
 			if (cr === r && cg === g && cb === b) continue; // don't resend while dragging over it
 			setRgbChannels(led, r, g, b);
 			touched = true;
 		}
 	} else {
-		const level = currentBrushLevel();
+		const level = currentBrushLevel(erase);
 		for (const led of BOARD_DATA.leds) {
 			if (Math.hypot(led.x - xmm, led.y - ymm) <= pickRadius) {
 				paintPixel(led.row, led.col, level);
 				touched = true;
+				hit = true;
 			}
 		}
 	}
 	if (touched) markFrameDirty();
-};
+	return hit;
+}
+
+board.onPaintAt = (xmm, ymm) => paintAt(xmm, ymm);
+board.onEraseAt = (xmm, ymm) => paintAt(xmm, ymm, true);
 
 function paintPixel(row, col, level) {
 	board.setPixel(row, col, level);
@@ -168,12 +178,29 @@ async function liveFlush() {
 device.addEventListener('connect', liveCancel);
 liveSendInput.addEventListener('change', liveCancel);
 
-board.onSelectRgb = (led) => {
+// Where focus goes back to when the editor closes
+let rgbEditorOpener = null;
+
+// From the keyboard, the editor takes focus and scrolls into view. From a
+// pointer it takes focus without scrolling, so the LED you clicked stays
+// on the screen.
+board.onSelectRgb = (led, { keyboard = false } = {}) => {
 	selectedRgbLed = led;
 	rgbEditorLabel.textContent = led.ref;
 	rgbColorInput.value = rgbToHex(...board.getRgb(led));
+	if (rgbEditor.hidden) rgbEditorOpener = document.activeElement;
 	rgbEditor.hidden = false;
+	rgbColorInput.focus(keyboard ? undefined : { preventScroll: true });
 };
+
+function closeRgbEditor() {
+	rgbEditor.hidden = true;
+	selectedRgbLed = null;
+	const opener = rgbEditorOpener;
+	rgbEditorOpener = null;
+	if (opener && opener !== document.body && opener.isConnected && typeof opener.focus === 'function') opener.focus();
+	else if (board.svg && typeof board.svg.focus === 'function') board.svg.focus();
+}
 
 rgbColorInput.addEventListener('input', () => {
 	if (!selectedRgbLed) return;
@@ -186,9 +213,12 @@ document.getElementById('rgb-editor-off-btn').addEventListener('click', () => {
 	rgbColorInput.value = '#000000';
 });
 
-document.getElementById('rgb-editor-close-btn').addEventListener('click', () => {
-	rgbEditor.hidden = true;
-	selectedRgbLed = null;
+document.getElementById('rgb-editor-close-btn').addEventListener('click', closeRgbEditor);
+rgbEditor.addEventListener('keydown', (ev) => {
+	if (ev.key === 'Escape' && !rgbEditor.hidden) {
+		ev.preventDefault();
+		closeRgbEditor();
+	}
 });
 
 // --- Device connection ---------------------------------------------------
@@ -199,52 +229,110 @@ let emulatorHere = false; // tools/emu/emu.py --web serves this page
 const disconnectBtn = document.getElementById('disconnect-btn');
 const connStatusEl = document.getElementById('conn-status');
 const deviceModeEl = document.getElementById('device-mode');
+const firstRunEl = document.getElementById('first-run');
+const fwCtaEl = document.getElementById('fw-cta');
+const fwOldNoticeEl = document.getElementById('fw-old-notice');
+const NO_WEBUSB_TEXT = "This browser can't connect to USB devices. Use Chrome, Edge or Opera.";
 
 function webUsbAvailable() {
 	return typeof navigator !== 'undefined' && !!navigator.usb;
 }
 
 function refreshConnButtons() {
+	// A button that hides while it has focus would drop focus to the page:
+	// hand it to the button that takes its place
+	const focused = document.activeElement;
+	const hadFocus = focused === connectBtn || focused === emuBtn || focused === disconnectBtn;
 	connectBtn.hidden = device.connected;
 	emuBtn.hidden = device.connected || !emulatorHere;
 	disconnectBtn.hidden = !device.connected;
-	connStatusEl.textContent = device.connected ? (device.emulator ? 'Connected to the emulator' : 'Connected') : 'Not connected';
+	if (hadFocus && focused.hidden) {
+		if (device.connected) disconnectBtn.focus();
+		else if (connectBtn.disabled && !emuBtn.hidden) emuBtn.focus();
+		else connectBtn.focus();
+	}
+
+	const text = device.connected ? (device.emulator ? 'Connected to the emulator' : 'Connected') : 'Not connected';
+	if (connStatusEl.textContent !== text) connStatusEl.textContent = text; // the CSS draws the check
 	connStatusEl.classList.toggle('connected', device.connected);
+	if (firstRunEl) firstRunEl.hidden = device.connected;
+	if (!device.connected) {
+		if (fwOldNoticeEl) fwOldNoticeEl.hidden = true;
+		if (fwCtaEl) fwCtaEl.hidden = true;
+		if (!webUsbAvailable()) uiAnnounce(deviceModeEl, NO_WEBUSB_TEXT);
+		else if (!uiHasError(deviceModeEl)) uiAnnounce(deviceModeEl, '');
+	}
 }
 
 connectBtn.addEventListener('click', async () => {
 	try {
 		await device.requestAndOpen();
 	} catch (e) {
-		if (e.name !== 'NotFoundError') alert(`Couldn't connect: ${e.message}`);
+		if (e.name !== 'NotFoundError') uiError(deviceModeEl, `Couldn't connect to the badge: ${e.message}`);
 	}
 });
 disconnectBtn.addEventListener('click', () => device.disconnect());
-emuBtn.addEventListener('click', () => device.connectEmulator().catch((e) => alert(e.message)));
+emuBtn.addEventListener('click', () =>
+	device.connectEmulator().catch((e) => uiError(deviceModeEl, `Couldn't connect to the emulator: ${e.message}`))
+);
 LedMatrixDevice.emulatorPresent().then((here) => {
 	emulatorHere = here;
 	refreshConnButtons();
 });
 device.addEventListener('connect', refreshConnButtons);
 device.addEventListener('disconnect', refreshConnButtons);
+if (fwCtaEl) {
+	// The link scrolls to the Firmware card; the update button there takes focus
+	fwCtaEl.addEventListener('click', () => {
+		const btn = document.getElementById('fw-update-btn');
+		if (btn && !btn.disabled && !btn.hidden) setTimeout(() => btn.focus(), 0);
+	});
+}
 // Must match APP_MODE_* in the firmware's webusb_protocol.h
-const DEVICE_MODE_NAMES = { 1: 'Custom frame', 2: 'Stored animation or text', 3: 'App', 4: 'Name tag' };
+const DEVICE_MODE_NAMES = {
+	1: 'Showing your drawing',
+	2: 'Playing a stored animation or text',
+	3: 'Running an app',
+	4: 'Showing your name',
+};
 const MODE_CUSTOM = 1;
+const MODE_ITEM = 2;
+const MODE_APP = 3;
+let oldFirmwareAnnounced = false; // said once per connection, not every second
+
+device.addEventListener('connect', () => {
+	oldFirmwareAnnounced = false;
+});
 
 device.addEventListener('status', (ev) => {
 	const { mode, brightness } = ev.detail;
 	badgeMode = mode;
-	const name = DEVICE_MODE_NAMES[mode] ?? `Mode ${mode}`;
-	deviceModeEl.textContent = `${name}, brightness ${brightness}`;
+	// "Playing: NAME" when the store list knows the running item
+	const running =
+		(mode === MODE_ITEM || mode === MODE_APP) && storeItems.find((item) => item.index === ev.detail.running);
+	const what = running ? `Playing: ${running.name || 'an item with no name'}` : DEVICE_MODE_NAMES[mode] ?? `Mode ${mode}`;
+	const text = `${what} · Brightness ${brightness} of 255`;
+	// Older firmware: a warning of its own, above the Update firmware button
 	const old = ev.detail.api !== undefined && ev.detail.api < FIRMWARE_API;
-	deviceModeEl.classList.toggle('stats-over-budget', old);
-	if (old) deviceModeEl.textContent += ` -- the badge's firmware is older than this page (API ${ev.detail.api}, needs ${FIRMWARE_API}): update it`;
+	if (old) {
+		const sentence =
+			`This badge has older firmware (API ${ev.detail.api}; this page needs ${FIRMWARE_API}). ` +
+			'Update it to use everything here.';
+		if (fwOldNoticeEl && fwOldNoticeEl.textContent !== sentence) fwOldNoticeEl.textContent = sentence;
+		if (!oldFirmwareAnnounced) {
+			oldFirmwareAnnounced = true;
+			uiAnnounce(null, sentence);
+		}
+	}
+	if (fwOldNoticeEl) fwOldNoticeEl.hidden = !old;
+	if (fwCtaEl) fwCtaEl.hidden = !old;
+	// not a live region: it changes every second
+	if (deviceModeEl.textContent !== text || uiHasError(deviceModeEl)) uiAnnounce(deviceModeEl, text);
 	storeStatusChanged(ev.detail);
 });
 
 if (!webUsbAvailable()) {
 	connectBtn.disabled = true;
-	connStatusEl.textContent = 'WebUSB not available in this browser';
 } else {
 	device.tryAutoReconnect().catch(() => {});
 }
@@ -265,9 +353,10 @@ document.getElementById('clear-btn').addEventListener('click', () => {
 	liveStale = false;
 });
 
-document.getElementById('send-frame-btn').addEventListener('click', () => {
+const sendFrameBtn = document.getElementById('send-frame-btn');
+sendFrameBtn.addEventListener('click', () => {
 	if (!device.connected) {
-		alert('Connect to a device first.');
+		uiErrorFor(sendFrameBtn, 'Connect your badge first.');
 		return;
 	}
 	stopPlayback();
@@ -277,19 +366,38 @@ document.getElementById('send-frame-btn').addEventListener('click', () => {
 
 // --- Create animation tabs ---------------------------------------------------
 
-const animationTabs = document.querySelectorAll('.tab-bar [role="tab"]');
+const animationTabs = [...document.querySelectorAll('.tab-bar [role="tab"]')];
 
-function selectAnimationTab(selected) {
+// The ARIA tabs pattern: only the selected tab is a tab stop (roving
+// tabindex); the arrow keys, Home and End move between the tabs and select.
+function selectAnimationTab(selected, focus = false) {
 	for (const tab of animationTabs) {
 		const isSelected = tab === selected;
 		tab.setAttribute('aria-selected', String(isSelected));
-		document.getElementById(tab.getAttribute('aria-controls')).hidden = !isSelected;
+		tab.tabIndex = isSelected ? 0 : -1;
+		const panel = document.getElementById(tab.getAttribute('aria-controls'));
+		if (panel) panel.hidden = !isSelected;
 	}
+	if (focus) selected.focus();
 }
 
 for (const tab of animationTabs) {
 	tab.addEventListener('click', () => selectAnimationTab(tab));
+	tab.addEventListener('keydown', (ev) => {
+		const i = animationTabs.indexOf(tab);
+		const n = animationTabs.length;
+		const next = {
+			ArrowRight: (i + 1) % n,
+			ArrowLeft: (i - 1 + n) % n,
+			Home: 0,
+			End: n - 1,
+		}[ev.key];
+		if (next === undefined || ev.altKey || ev.ctrlKey || ev.metaKey) return;
+		ev.preventDefault();
+		selectAnimationTab(animationTabs[next], true);
+	});
 }
+selectAnimationTab(animationTabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || animationTabs[0]);
 
 // --- Built-in test animation: techno pharmacy sign ---------------------------------------------------
 // A pharmacy sign as reimagined for a rave: a neon-tube flicker-on, a hard
@@ -347,11 +455,17 @@ function buildPharmacySignPattern() {
 	for (let i = 0; i < 4; i++) frames.push(withGreen(blank(), 255));
 
 	// 2. Hard strobe: green cross <-> white body, full snap each beat.
-	for (let i = 0; i < 4; i++) {
-		frames.push(withGreen(blank(), 255));
-		frames.push(blank());
-		frames.push(withWhite(blank(), 255));
-		frames.push(blank());
+	// Each state holds STROBE_HOLD frames: at 12 fps the whole board
+	// changes at most 3 times a second, under the WCAG 2.3.1 flash limit.
+	const STROBE_HOLD = 4;
+	const hold = (frame) => {
+		for (let k = 0; k < STROBE_HOLD; k++) frames.push(k ? frame.slice() : frame);
+	};
+	for (let i = 0; i < 2; i++) {
+		hold(withGreen(blank(), 255));
+		hold(blank());
+		hold(withWhite(blank(), 255));
+		hold(blank());
 	}
 	for (let i = 0; i < 4; i++) frames.push(withWhite(blank(), 255));
 
@@ -390,20 +504,22 @@ function buildPharmacySignPattern() {
 
 	// 6. Strobe finale: both colors slammed on together against total
 	// blackout, before looping back to the flicker-on.
-	for (let i = 0; i < 6; i++) {
+	// (held like the strobe above, for the same reason)
+	for (let i = 0; i < 3; i++) {
 		const frame = withWhite(blank(), 255);
 		withGreen(frame, 255);
-		frames.push(frame);
-		frames.push(blank());
+		hold(frame);
+		hold(blank());
 	}
 
-	const pattern = newPattern('Techno pharmacy sign (test)');
+	const pattern = newPattern('Techno pharmacy sign (demo)');
 	pattern.fps = 12;
 	pattern.frames = frames;
 	return pattern;
 }
 
-document.getElementById('pharmacy-sign-btn').addEventListener('click', () => {
+document.getElementById('pharmacy-sign-btn').addEventListener('click', async () => {
+	if (!(await confirmDiscard())) return;
 	const pattern = buildPharmacySignPattern();
 	savePattern(pattern);
 	renderPatternList();
@@ -440,55 +556,89 @@ videoAmbilightInput.addEventListener('change', () => {
 
 let videoConversionAborted = false;
 
+// Reads a number input and keeps it within min..max. When the value had
+// to change, the input shows the new value and `notes` gets a sentence
+// that says why ("Frames per second set to 20, the maximum.").
+function clampedInput(input, min, max, fallback, label, notes) {
+	const raw = input.value.trim();
+	const n = Number(raw);
+	if (raw === '' || !Number.isFinite(n)) {
+		input.value = fallback;
+		notes.push(`${label} was empty or not a number; using ${fallback}.`);
+		return fallback;
+	}
+	if (n < min || n > max) {
+		const v = n < min ? min : max;
+		input.value = v;
+		notes.push(`${label} set to ${v}, the ${n < min ? 'minimum' : 'maximum'}.`);
+		return v;
+	}
+	return n;
+}
+
 videoConvertBtn.addEventListener('click', async () => {
 	const file = videoFileInput.files[0];
 	if (!file) {
-		alert('Choose a video file first.');
+		uiError(videoStatus, 'Choose a video or animated image first.');
+		videoFileInput.focus();
 		return;
 	}
+	if (!(await confirmDiscard())) return;
+
+	const notes = [];
+	const fps = clampedInput(videoFpsInput, 1, 20, 8, 'Frames per second', notes);
+	const startTime = clampedInput(videoStartInput, 0, Infinity, 0, 'Start at', notes);
+	const duration = clampedInput(videoDurationInput, 0.1, Infinity, 5, 'Duration', notes);
 
 	videoConversionAborted = false;
-	videoConvertBtn.hidden = true;
+	const hadFocus = document.activeElement === videoConvertBtn;
 	videoCancelBtn.hidden = false;
+	if (hadFocus) videoCancelBtn.focus(); // before Convert hides, so focus stays in the panel
+	videoConvertBtn.hidden = true;
 	videoProgress.hidden = false;
 	videoProgress.value = 0;
-	videoStatus.textContent = 'Loading video...';
+	uiAnnounce(videoStatus, [...notes, 'Loading the video…'].join(' '));
 
 	try {
 		const { frames } = await extractFramesFromVideo(
 			file,
 			{
-				fps: Math.max(1, Math.min(20, Number(videoFpsInput.value) || 8)),
-				startTime: Math.max(0, Number(videoStartInput.value) || 0),
-				duration: Math.max(0.1, Number(videoDurationInput.value) || 5),
+				fps,
+				startTime,
+				duration,
 				bounds: board.bounds,
 				brightnessBoost: Number(videoBrightnessInput.value) || 1,
 				ambilight: videoAmbilightInput.checked,
 			},
 			(done, total) => {
 				videoProgress.value = done / total;
-				videoStatus.textContent = `Extracting frame ${done} / ${total}...`;
+				uiAnnounce(videoStatus, `Reading frame ${done} of ${total}…`, {
+					throttleMs: 2000,
+					percent: (100 * done) / total,
+				});
 			},
 			() => videoConversionAborted
 		);
 
 		if (videoConversionAborted) {
-			videoStatus.textContent = 'Cancelled.';
+			uiAnnounce(videoStatus, 'Cancelled.');
 			return;
 		}
 
 		const pattern = newPattern(file.name.replace(/\.[^.]+$/, ''));
-		pattern.fps = Math.max(1, Math.min(20, Number(videoFpsInput.value) || 8));
+		pattern.fps = fps;
 		pattern.frames = frames;
 		savePattern(pattern);
 		renderPatternList();
 		setActivePattern(pattern);
 
-		videoStatus.textContent = `Done -- ${frames.length} frames.`;
+		uiAnnounce(videoStatus, [...notes, `Done: ${frames.length} frame${frames.length === 1 ? '' : 's'}.`].join(' '));
 	} catch (e) {
-		videoStatus.textContent = `Failed: ${e.message}`;
+		uiError(videoStatus, `Couldn't make an animation of this file: ${e.message}`);
 	} finally {
+		const cancelHadFocus = document.activeElement === videoCancelBtn;
 		videoConvertBtn.hidden = false;
+		if (cancelHadFocus) videoConvertBtn.focus();
 		videoCancelBtn.hidden = true;
 		videoProgress.hidden = true;
 	}
@@ -496,6 +646,7 @@ videoConvertBtn.addEventListener('click', async () => {
 
 videoCancelBtn.addEventListener('click', () => {
 	videoConversionAborted = true;
+	uiAnnounce(videoStatus, 'Cancelling…');
 });
 
 // --- Text to animation ---------------------------------------------------
@@ -540,19 +691,24 @@ textRgbEdgeSpeedInput.addEventListener('input', () => {
 	textRgbEdgeSpeedReadout.textContent = textRgbEdgeSpeedInput.value;
 });
 
-textConvertBtn.addEventListener('click', () => {
+textConvertBtn.addEventListener('click', async () => {
 	const text = textInput.value;
 	if (!text.trim()) {
-		alert('Type some text first.');
+		uiError(textStatus, 'Type some text first.');
+		textInput.focus();
 		return;
 	}
+	if (!(await confirmDiscard())) return;
 
+	const notes = [];
+	const fps = clampedInput(textFpsInput, 1, 20, 10, 'Frames per second', notes);
+	const scrollSpeed = clampedInput(textScrollSpeedInput, 0.5, 20, 3, 'Scroll speed', notes);
 	const { frames } = extractFramesFromText({
 		text,
 		fontSize: Math.max(8, Math.min(64, Number(textFontSizeInput.value) || 30)),
 		bold: textBoldInput.checked,
 		color: textColorInput.value,
-		scrollSpeed: Math.max(0.5, Math.min(20, Number(textScrollSpeedInput.value) || 3)),
+		scrollSpeed,
 		bounds: board.bounds,
 		brightnessBoost: Number(textBrightnessInput.value) || 1,
 		scroll: textScrollInput.checked,
@@ -564,13 +720,13 @@ textConvertBtn.addEventListener('click', () => {
 	});
 
 	const pattern = newPattern(text.trim().slice(0, 40));
-	pattern.fps = Math.max(1, Math.min(20, Number(textFpsInput.value) || 10));
+	pattern.fps = fps;
 	pattern.frames = frames;
 	savePattern(pattern);
 	renderPatternList();
 	setActivePattern(pattern);
 
-	textStatus.textContent = `Done -- ${frames.length} frame${frames.length === 1 ? '' : 's'}.`;
+	uiAnnounce(textStatus, [...notes, `Done: ${frames.length} frame${frames.length === 1 ? '' : 's'}.`].join(' '));
 });
 
 // --- Pattern / frame editor ---------------------------------------------------
@@ -594,12 +750,14 @@ function loadFrameIntoBoard() {
 
 function setActivePattern(pattern) {
 	stopPlayback();
+	hideFlashWarning();
 	activePattern = pattern;
 	activeFrameIndex = 0;
 	document.getElementById('pattern-name').value = pattern.name;
 	document.getElementById('pattern-fps').value = pattern.fps;
 	loadFrameIntoBoard();
 	renderFrameStrip();
+	renderDeletePattern();
 }
 
 document.getElementById('pattern-name').addEventListener('input', (ev) => {
@@ -609,13 +767,40 @@ document.getElementById('pattern-fps').addEventListener('input', (ev) => {
 	activePattern.fps = Math.max(1, Math.min(20, Number(ev.target.value) || 4));
 });
 
-document.getElementById('new-pattern-btn').addEventListener('click', () => {
+// The editor's animation has changes this browser has not saved: a new
+// drawing with anything on it, or a saved one changed since
+function activePatternUnsaved() {
+	const saved = getPattern(activePattern.id);
+	if (!saved) return activePattern.frames.length > 1 || activePattern.frames.some((f) => f.some((v) => v));
+	return (
+		saved.name !== activePattern.name ||
+		saved.fps !== activePattern.fps ||
+		JSON.stringify(saved.frames) !== JSON.stringify(activePattern.frames)
+	);
+}
+
+// Before something replaces the editor's animation: true to go on
+async function confirmDiscard() {
+	if (!activePatternUnsaved()) return true;
+	const name = activePattern.name || 'this animation';
+	return uiConfirm(`Your changes to ${name} are not saved in this browser. Discard them?`, {
+		title: 'Discard your changes?',
+		confirmLabel: 'Discard changes',
+		cancelLabel: 'Keep editing',
+		danger: true,
+	});
+}
+
+document.getElementById('new-pattern-btn').addEventListener('click', async () => {
+	if (!(await confirmDiscard())) return;
 	setActivePattern(newPattern('Untitled'));
+	renderPatternList();
 });
 
 document.getElementById('save-pattern-btn').addEventListener('click', () => {
 	savePattern(activePattern);
 	renderPatternList();
+	uiAnnounce(null, `Saved ${activePattern.name || 'the animation'} in this browser.`);
 });
 
 document.getElementById('duplicate-pattern-btn').addEventListener('click', () => {
@@ -625,13 +810,20 @@ document.getElementById('duplicate-pattern-btn').addEventListener('click', () =>
 	savePattern(copy);
 	setActivePattern(copy);
 	renderPatternList();
+	uiAnnounce(null, `Made a copy: ${copy.name}.`);
 });
 
-document.getElementById('delete-pattern-btn').addEventListener('click', () => {
-	if (!confirm(`Delete "${activePattern.name}"? This can't be undone.`)) return;
-	deletePattern(activePattern.id);
+document.getElementById('delete-pattern-btn').addEventListener('click', async () => {
+	const pattern = activePattern;
+	const sure = await uiConfirm(`Delete ${pattern.name || 'this animation'} from this browser? This can't be undone.`, {
+		confirmLabel: 'Delete animation',
+		danger: true,
+	});
+	if (!sure) return;
+	deletePattern(pattern.id);
+	if (activePattern === pattern) setActivePattern(newPattern('Untitled'));
 	renderPatternList();
-	setActivePattern(newPattern('Untitled'));
+	uiAnnounce(null, `Deleted ${pattern.name || 'the animation'}.`);
 });
 
 document.getElementById('export-pattern-btn').addEventListener('click', () => {
@@ -643,63 +835,141 @@ document.getElementById('export-pattern-btn').addEventListener('click', () => {
 	URL.revokeObjectURL(a.href);
 });
 
-document.getElementById('import-pattern-input').addEventListener('change', async (ev) => {
+const importPatternInput = document.getElementById('import-pattern-input');
+importPatternInput.addEventListener('change', async (ev) => {
 	const file = ev.target.files[0];
 	ev.target.value = '';
 	if (!file) return;
 	try {
 		const pattern = importPattern(await file.text());
+		if (!(await confirmDiscard())) return;
 		savePattern(pattern);
 		renderPatternList();
 		setActivePattern(pattern);
 	} catch (e) {
-		alert(`Couldn't import that file: ${e.message}`);
+		uiErrorFor(importPatternInput, `Couldn't open ${file.name}: ${e.message}`);
 	}
 });
 
+// Delete works on a saved animation only; the line under it says why not
+function renderDeletePattern() {
+	const saved = !!getPattern(activePattern.id);
+	const deleteBtn = document.getElementById('delete-pattern-btn');
+	if (!saved && document.activeElement === deleteBtn) document.getElementById('save-pattern-btn').focus();
+	deleteBtn.disabled = !saved;
+	document.getElementById('saved-reason').hidden = saved;
+}
+
+// Rebuilt on every change; the button that had focus gets it back
 function renderPatternList() {
+	renderDeletePattern();
 	const list = document.getElementById('pattern-list');
-	list.innerHTML = '';
+	const focusedId = list.contains(document.activeElement) ? document.activeElement.dataset.id : undefined;
+	list.replaceChildren();
 	const patterns = listPatterns().sort((a, b) => b.updatedAt - a.updatedAt);
 	if (patterns.length === 0) {
-		list.innerHTML = '<li class="empty">No saved patterns yet.</li>';
+		const li = document.createElement('li');
+		li.className = 'empty';
+		li.textContent = 'Nothing saved in this browser yet.';
+		list.appendChild(li);
 		return;
 	}
 	for (const p of patterns) {
 		const li = document.createElement('li');
 		li.className = 'pattern-item';
-		if (activePattern.id === p.id) li.classList.add('active');
 		const btn = document.createElement('button');
+		btn.type = 'button';
+		btn.dataset.id = p.id;
 		btn.textContent = `${p.name} (${p.frames.length} frame${p.frames.length === 1 ? '' : 's'})`;
-		btn.addEventListener('click', () => {
+		if (activePattern.id === p.id) {
+			li.classList.add('active');
+			btn.setAttribute('aria-current', 'true');
+		}
+		btn.addEventListener('click', async () => {
+			if (activePattern.id === p.id) return;
+			if (!(await confirmDiscard())) return;
 			setActivePattern(JSON.parse(JSON.stringify(p)));
 			renderPatternList();
 		});
 		li.appendChild(btn);
 		list.appendChild(li);
 	}
+	if (focusedId !== undefined) {
+		const again = [...list.querySelectorAll('button')].find((btn) => btn.dataset.id === focusedId);
+		if (again) again.focus();
+	}
 }
 
 // --- Frame strip (per-pattern flipbook editing) ---------------------------------------------------
+// Updated in place, so a focused frame keeps focus while you paint or play.
 
-function renderFrameStrip() {
-	refreshCompressionStats();
-	const strip = document.getElementById('frame-strip');
-	strip.innerHTML = '';
-	activePattern.frames.forEach((_, i) => {
+const frameStrip = document.getElementById('frame-strip');
+const frameCountLabel = document.getElementById('frame-count-label');
+
+const deleteFrameBtn = document.getElementById('delete-frame-btn');
+
+function selectFrame(index) {
+	activeFrameIndex = index;
+	loadFrameIntoBoard();
+	renderFrameStrip(false);
+}
+
+frameStrip.addEventListener('click', (ev) => {
+	const btn = ev.target.closest('.frame-thumb');
+	if (!btn) return;
+	selectFrame(Number(btn.dataset.index));
+});
+
+// One Tab stop for the whole strip (roving tabindex, like the tabs): the
+// active frame. The arrow keys, Home and End select a frame and move focus.
+frameStrip.addEventListener('keydown', (ev) => {
+	const btn = ev.target.closest('.frame-thumb');
+	if (!btn || ev.altKey || ev.ctrlKey || ev.metaKey) return;
+	const i = Number(btn.dataset.index);
+	const n = activePattern.frames.length;
+	const next = {
+		ArrowRight: Math.min(i + 1, n - 1),
+		ArrowLeft: Math.max(i - 1, 0),
+		Home: 0,
+		End: n - 1,
+	}[ev.key];
+	if (next === undefined) return;
+	ev.preventDefault();
+	selectFrame(next);
+	frameStrip.children[next].focus();
+});
+
+// `stats`: the frames may have changed, so redo the size line
+function renderFrameStrip(stats = true) {
+	if (stats) refreshCompressionStats();
+	const n = activePattern.frames.length;
+	const focused = frameStrip.contains(document.activeElement) ? Number(document.activeElement.dataset.index) : -1;
+	while (frameStrip.children.length > n) frameStrip.lastElementChild.remove();
+	while (frameStrip.children.length < n) {
 		const btn = document.createElement('button');
+		btn.type = 'button';
 		btn.className = 'frame-thumb';
-		btn.textContent = i + 1;
-		if (i === activeFrameIndex) btn.classList.add('active');
-		btn.addEventListener('click', () => {
-			activeFrameIndex = i;
-			loadFrameIntoBoard();
-			renderFrameStrip();
-		});
-		strip.appendChild(btn);
-	});
-	document.getElementById('frame-count-label').textContent =
-		`${activePattern.frames.length} frame${activePattern.frames.length === 1 ? '' : 's'}`;
+		btn.dataset.index = frameStrip.children.length;
+		btn.textContent = frameStrip.children.length + 1;
+		frameStrip.appendChild(btn);
+	}
+	for (let i = 0; i < n; i++) {
+		const btn = frameStrip.children[i];
+		const active = i === activeFrameIndex;
+		btn.classList.toggle('active', active);
+		btn.tabIndex = active ? 0 : -1;
+		const label = `Frame ${i + 1} of ${n}`;
+		if (btn.getAttribute('aria-label') !== label) btn.setAttribute('aria-label', label);
+		if (active) btn.setAttribute('aria-current', 'step');
+		else btn.removeAttribute('aria-current');
+	}
+	if (focused >= 0 && !frameStrip.contains(document.activeElement) && n) frameStrip.children[Math.min(focused, n - 1)].focus();
+
+	if (n < 2 && playTimer) stopPlayback();
+	playBtn.disabled = n < 2;
+	deleteFrameBtn.disabled = n < 2;
+	const count = `${n} frame${n === 1 ? '' : 's'}`;
+	frameCountLabel.textContent = n < 2 ? `${count}. Add a second frame to play.` : count;
 }
 
 document.getElementById('add-frame-btn').addEventListener('click', () => {
@@ -709,37 +979,144 @@ document.getElementById('add-frame-btn').addEventListener('click', () => {
 	renderFrameStrip();
 });
 
-document.getElementById('delete-frame-btn').addEventListener('click', () => {
+deleteFrameBtn.addEventListener('click', () => {
 	if (activePattern.frames.length <= 1) return;
 	activePattern.frames.splice(activeFrameIndex, 1);
 	activeFrameIndex = Math.max(0, activeFrameIndex - 1);
 	loadFrameIntoBoard();
 	renderFrameStrip();
+	// the last frame but one is gone: the button turns off, Add frame takes focus
+	if (deleteFrameBtn.disabled) document.getElementById('add-frame-btn').focus();
 });
 
 // --- Playback ---------------------------------------------------
 
 const playBtn = document.getElementById('play-btn');
+const reducedMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+const REDUCED_MOTION_FPS = 3; // the preview's cap when the system asks for less motion
+
+function playbackFps() {
+	return reducedMotion && reducedMotion.matches ? Math.min(REDUCED_MOTION_FPS, activePattern.fps) : activePattern.fps;
+}
+
+// The glyph is hidden from screen readers, so the name is "Play" or "Stop"
+function setPlayButton(playing) {
+	const glyph = document.createElement('span');
+	glyph.setAttribute('aria-hidden', 'true');
+	glyph.textContent = playing ? '■' : '▶';
+	playBtn.replaceChildren(glyph, playing ? ' Stop' : ' Play');
+}
+
+// WCAG 2.3.1: more than three flashes in one second can cause seizures.
+// A flash is a pair of opposite changes in brightness. This counts the
+// frame-to-frame changes of the whole board's mean level of at least
+// FLASH_STEP that go the other way from the change before.
+const FLASH_STEP = 0.1; // of full brightness
+const FLASH_MAX_CHANGES = 6; // three flashes
+
+function patternFlashesFast(pattern, fps) {
+	const frames = pattern.frames;
+	const n = frames.length;
+	if (n < 2) return false;
+	const means = frames.map((f) => {
+		let sum = 0;
+		for (const v of f) sum += v;
+		return sum / (f.length * 255);
+	});
+	const second = Math.max(1, Math.round(fps)); // in frames
+	// at least two loops and one second past the first loop, so flashes
+	// across the loop point and in short loops count too
+	const span = Math.max(2 * n, n + second);
+	const changes = [];
+	let lastSign = 0;
+	for (let i = 1; i <= span; i++) {
+		const d = means[i % n] - means[(i - 1) % n];
+		if (Math.abs(d) < FLASH_STEP) continue;
+		const sign = Math.sign(d);
+		if (sign !== lastSign) changes.push(i);
+		lastSign = sign;
+	}
+	for (let j = 0, k = 0; j < changes.length; j++) {
+		while (changes[k] <= changes[j] - second) k++;
+		if (j - k + 1 > FLASH_MAX_CHANGES) return true;
+	}
+	return false;
+}
+
+let flashWarningEl = null;
+let flashWarningText = null;
+let flashAcceptedFor = null; // the pattern you chose to play anyway
+
+function hideFlashWarning() {
+	if (flashWarningEl) flashWarningEl.hidden = true;
+}
+
+function showFlashWarning() {
+	if (!flashWarningEl) {
+		flashWarningEl = document.createElement('div');
+		flashWarningEl.id = 'play-flash-warning';
+		flashWarningEl.className = 'notice notice-warning';
+		flashWarningText = document.createElement('p');
+		flashWarningText.id = 'play-flash-warning-text';
+		flashWarningText.textContent =
+			'This animation flashes fast, which can cause seizures. To make it safe, lower the speed or make ' +
+			'neighbouring frames less different. Play anyway?';
+		const row = document.createElement('div');
+		row.className = 'button-row';
+		const anyway = document.createElement('button');
+		anyway.type = 'button';
+		anyway.className = 'btn';
+		anyway.id = 'play-anyway-btn';
+		anyway.textContent = 'Play anyway';
+		anyway.setAttribute('aria-describedby', flashWarningText.id);
+		anyway.addEventListener('click', () => {
+			flashAcceptedFor = activePattern;
+			hideFlashWarning();
+			playBtn.focus();
+			startPlayback();
+		});
+		const dont = document.createElement('button');
+		dont.type = 'button';
+		dont.className = 'btn';
+		dont.id = 'play-dont-btn';
+		dont.textContent = "Don't play";
+		dont.addEventListener('click', () => {
+			hideFlashWarning();
+			playBtn.focus();
+		});
+		row.append(dont, anyway);
+		flashWarningEl.append(flashWarningText, row);
+		(playBtn.closest('.button-row') || playBtn).insertAdjacentElement('afterend', flashWarningEl);
+	}
+	flashWarningEl.hidden = false;
+	uiAnnounce(null, flashWarningText.textContent);
+}
 
 function stopPlayback() {
 	if (playTimer) {
 		clearInterval(playTimer);
 		playTimer = null;
 	}
-	playBtn.textContent = '▶ Play';
+	setPlayButton(false);
 }
 
 function startPlayback() {
 	if (activePattern.frames.length < 2) return;
-	playBtn.textContent = '■ Stop';
+	const fps = playbackFps();
+	if (flashAcceptedFor !== activePattern && patternFlashesFast(activePattern, fps)) {
+		showFlashWarning();
+		return;
+	}
+	hideFlashWarning();
+	setPlayButton(true);
 	// With Live send on, the badge follows. If the badge is slower than the
 	// fps, it skips frames: liveFlush() sends only the newest one.
 	playTimer = setInterval(() => {
 		activeFrameIndex = (activeFrameIndex + 1) % activePattern.frames.length;
 		loadFrameIntoBoard();
-		renderFrameStrip();
+		renderFrameStrip(false);
 		liveSendFrame();
-	}, 1000 / activePattern.fps);
+	}, 1000 / fps);
 }
 
 playBtn.addEventListener('click', () => {
@@ -822,6 +1199,7 @@ function compressAsync(pattern, quantBits) {
 // The size line: one compression at a time; edits made meanwhile are
 // compressed when it is done (only the last one)
 let statsBusy = false, statsAgain = false;
+let statsOverAnnounced = false; // "too big" was said; again only after it fits
 async function refreshCompressionStats() {
 	if (!activePattern) return;
 	if (statsBusy) {
@@ -834,7 +1212,8 @@ async function refreshCompressionStats() {
 	const quantBits = Number(compressionQuantSelect.value);
 	const rawBytes = frameCount * MATRIX_ROWS * MATRIX_COLS;
 	const pending = compressAsync(pattern, quantBits);
-	const slow = setTimeout(() => (compressionStatsEl.textContent = `${frameCount} frames: compressing...`), 150);
+	const frameWord = `${frameCount} frame${frameCount === 1 ? '' : 's'}`;
+	const slow = setTimeout(() => (compressionStatsEl.textContent = `${frameWord}: working out the size…`), 150);
 	let compressedBytes = null, error = null;
 	try {
 		compressedBytes = (await pending).byteLength;
@@ -849,32 +1228,36 @@ async function refreshCompressionStats() {
 		return;
 	}
 	if (error) {
-		compressionStatsEl.textContent = `Can't estimate: ${error.message}`;
+		compressionStatsEl.textContent = `Can't work out the size: ${error.message}`;
 		return;
 	}
 	const budgetBytes = patternBudgetBytes();
-	const pct = rawBytes ? Math.round((100 * compressedBytes) / rawBytes) : 0;
 	const fits = compressedBytes <= budgetBytes;
-	const overBy = compressedBytes - budgetBytes;
 	compressionStatsEl.textContent = fits
-		? `${frameCount} frames: ${formatBytes(compressedBytes)} compressed ` +
-		  `(${pct}% of ${formatBytes(rawBytes)} raw) -- fits the ${formatBytes(budgetBytes)} budget.`
-		: `${frameCount} frames: ${formatBytes(compressedBytes)} compressed ` +
-		  `(${pct}% of ${formatBytes(rawBytes)} raw) -- ${formatBytes(overBy)} over the ` +
-		  `${formatBytes(budgetBytes)} budget. Lower the brightness levels, trim frames, or drop the fps.`;
+		? `${frameWord} · ${formatBytes(compressedBytes)} · fits (${formatBytes(budgetBytes)} free)`
+		: tooBigText(compressedBytes, budgetBytes);
+	compressionStatsEl.title = `${formatBytes(rawBytes)} before compression`;
 	compressionStatsEl.classList.toggle('stats-over-budget', !fits);
+	// not a live region (it changes as you paint): say "too big" once
+	if (!fits && !statsOverAnnounced) uiAnnounce(null, compressionStatsEl.textContent);
+	statsOverAnnounced = !fits;
+}
+
+function tooBigText(bytes, budgetBytes) {
+	return `Too big: ${formatBytes(bytes)}, ${formatBytes(budgetBytes)} free. Lower Detail, frames or fps.`;
 }
 
 compressionQuantSelect.addEventListener('change', refreshCompressionStats);
 
-document.getElementById('export-compressed-btn').addEventListener('click', async () => {
+const exportCompressedBtn = document.getElementById('export-compressed-btn');
+exportCompressedBtn.addEventListener('click', async () => {
 	const quantBits = Number(compressionQuantSelect.value);
 	const name = activePattern.name;
 	let bytes;
 	try {
 		bytes = await compressAsync(activePattern, quantBits);
 	} catch (e) {
-		alert(`Couldn't compress this pattern: ${e.message}`);
+		uiErrorFor(exportCompressedBtn, `Couldn't compress this animation: ${e.message}`);
 		return;
 	}
 	const blob = new Blob([bytes], { type: 'application/octet-stream' });
@@ -886,52 +1269,62 @@ document.getElementById('export-compressed-btn').addEventListener('click', async
 });
 
 const uploadPatternStatusEl = document.getElementById('upload-pattern-status');
+const uploadPatternBtn = document.getElementById('upload-pattern-btn');
 
-document.getElementById('upload-pattern-btn').addEventListener('click', async () => {
+uploadPatternBtn.addEventListener('click', async () => {
+	if (uiIsBusy(uploadPatternBtn)) return;
 	if (!device.connected) {
-		alert('Connect to a device first.');
+		uiError(uploadPatternStatusEl, 'Connect your badge first.');
+		return;
+	}
+	if (storeUploading) {
+		uiError(uploadPatternStatusEl, 'Wait until the badge is done with the last upload.');
 		return;
 	}
 	const quantBits = Number(compressionQuantSelect.value);
-	const name = activePattern.name.toUpperCase() || 'PATTERN';
-	uploadPatternStatusEl.textContent = 'Compressing...';
-	let bytes;
+	// the badge shows names in capitals
+	const name = activePattern.name.trim().toUpperCase() || 'PATTERN';
+	uiBusy(uploadPatternBtn, 'Saving…');
+	uiAnnounce(uploadPatternStatusEl, 'Compressing…');
 	try {
-		bytes = await compressAsync(activePattern, quantBits);
-	} catch (e) {
-		uploadPatternStatusEl.textContent = '';
-		alert(`Couldn't compress this pattern: ${e.message}`);
-		return;
-	}
-	const budgetBytes = patternBudgetBytes();
-	if (bytes.length > budgetBytes) {
-		uploadPatternStatusEl.textContent = '';
-		alert(
-			`Compressed pattern is ${formatBytes(bytes.length)}, over the ` +
-			`${formatBytes(budgetBytes)} budget -- lower the brightness levels, ` +
-			`trim frames, or drop the fps first.`
-		);
-		return;
-	}
-	handOverBadge();
-	uploadPatternStatusEl.textContent = `Uploading ${formatBytes(bytes.length)}...`;
-	try {
-		await device.uploadPattern(bytes, name);
-		uploadPatternStatusEl.textContent =
-			`Stored (${formatBytes(bytes.length)}) and playing -- will autoplay on every boot from now on.`;
+		let bytes;
+		try {
+			bytes = await compressAsync(activePattern, quantBits);
+		} catch (e) {
+			uiError(uploadPatternStatusEl, `Couldn't compress this animation: ${e.message}`);
+			return;
+		}
+		const budgetBytes = patternBudgetBytes();
+		if (bytes.length > budgetBytes) {
+			uiError(uploadPatternStatusEl, tooBigText(bytes.length, budgetBytes));
+			return;
+		}
+		handOverBadge();
+		uiAnnounce(uploadPatternStatusEl, `Saving ${formatBytes(bytes.length)}…`);
+		storeUploading = true;
+		try {
+			await device.uploadPattern(bytes, name);
+			uiAnnounce(uploadPatternStatusEl, `Saved as ${name} (${formatBytes(bytes.length)}) and playing.`);
+		} catch (e) {
+			uiError(uploadPatternStatusEl, `Couldn't save to the badge: ${e.message}`);
+		} finally {
+			storeUploading = false;
+		}
 		refreshStore();
-	} catch (e) {
-		uploadPatternStatusEl.textContent = `Upload failed: ${e.message}`;
+	} finally {
+		uiBusy(uploadPatternBtn, null);
 	}
 });
 
-document.getElementById('import-compressed-input').addEventListener('change', async (ev) => {
+const importCompressedInput = document.getElementById('import-compressed-input');
+importCompressedInput.addEventListener('change', async (ev) => {
 	const file = ev.target.files[0];
 	ev.target.value = '';
 	if (!file) return;
 	try {
 		const bytes = new Uint8Array(await file.arrayBuffer());
 		const { fps, frames } = decompressPattern(bytes);
+		if (!(await confirmDiscard())) return;
 		const pattern = newPattern(file.name.replace(/\.[^.]+$/, ''));
 		pattern.fps = fps;
 		pattern.frames = frames;
@@ -939,16 +1332,22 @@ document.getElementById('import-compressed-input').addEventListener('change', as
 		renderPatternList();
 		setActivePattern(pattern);
 	} catch (e) {
-		alert(`Couldn't load that .ledanim file: ${e.message}`);
+		uiErrorFor(importCompressedInput, `Couldn't open ${file.name}: ${e.message}`);
 	}
 });
 
-// --- On the badge: the item store (store.h) ---------------------------------------------------
+// --- On your badge: the item store (store.h) ---------------------------------------------------
 
 const storeListEl = document.getElementById('store-list');
 const storeStatusEl = document.getElementById('store-status');
+storeStatusEl.tabIndex = -1; // takes focus when the row that had it is gone
 let storeItems = []; // [{index, type, length, name}]
 let storeBusy = false; // an upload or a listing is going on
+// An upload is going on. Only this refuses a second upload: a listing
+// can run alongside, webusb.js puts the packets in order.
+let storeUploading = false;
+let storeNotice = ''; // how the last action went, said before the item count
+let storeListKey = null; // the items the rows show now
 
 // The flash an item takes: the header and the payload, in whole pages
 // (store.h), which is what the free space counts
@@ -957,54 +1356,165 @@ function storeItemBytes(item) {
 	return Math.ceil((STORE_ITEM_HEADER_BYTES + item.length) / STORE_PAGE_BYTES) * STORE_PAGE_BYTES;
 }
 
+// Row keys that stay the same when the indexes move after a delete
+function rowKeys(items, keyOf) {
+	const seen = new Map();
+	return items.map((item) => {
+		const base = keyOf(item);
+		const n = seen.get(base) || 0;
+		seen.set(base, n + 1);
+		return `${base}#${n}`;
+	});
+}
+
+// Before a list is rebuilt: which row and which of its buttons had focus
+function rememberListFocus(listEl) {
+	const el = document.activeElement;
+	if (!el || !listEl.contains(el) || !el.dataset.action) return null;
+	const li = el.closest('li');
+	return { key: li.dataset.key, action: el.dataset.action, position: [...listEl.children].indexOf(li) };
+}
+
+// After the rebuild: the same button of the same row, else of the row now
+// at that place, else `fallback`
+function restoreListFocus(listEl, saved, fallback) {
+	if (!saved) return;
+	const rows = [...listEl.children];
+	const row = rows.find((li) => li.dataset.key === saved.key) || rows[Math.min(saved.position, rows.length - 1)];
+	const btn = row && row.querySelector(`[data-action="${saved.action}"]`);
+	if (btn && !btn.disabled) btn.focus();
+	else if (fallback) fallback.focus();
+}
+
+function makeIcon(name) {
+	const icon = document.createElement('span');
+	icon.className = `icon ${name}`;
+	icon.setAttribute('aria-hidden', 'true');
+	return icon;
+}
+
+// A row button; `label` is its accessible name when the visible text
+// alone does not say which item it is for. An icon button gets it as
+// title only: title is the name then, and the tooltip, without a second
+// copy read as the description.
+function makeRowButton(action, text, label, icon) {
+	const btn = document.createElement('button');
+	btn.type = 'button';
+	btn.className = icon ? 'btn btn-icon' : 'btn';
+	btn.dataset.action = action;
+	if (icon) {
+		btn.appendChild(makeIcon(icon));
+		btn.title = label;
+	} else {
+		btn.textContent = text;
+		btn.setAttribute('aria-label', label);
+	}
+	return btn;
+}
+
+function buildStoreRow(item, key) {
+	const name = item.name || '(no name)';
+	const li = document.createElement('li');
+	li.className = 'store-item';
+	li.dataset.key = key;
+	// name, under it the type and the flash it takes, then the state pills
+	const label = document.createElement('span');
+	label.className = 'store-label';
+	const nameEl = document.createElement('span');
+	nameEl.className = 'store-name';
+	nameEl.textContent = name;
+	const meta = document.createElement('span');
+	meta.className = 'store-meta';
+	meta.textContent = `${ITEM_TYPE_NAMES[item.type] ?? 'Type ' + item.type} · ${formatBytes(storeItemBytes(item))}`;
+	meta.title = `${formatBytes(item.length)} file; on the badge it takes whole 256-byte pages, with a 32-byte header`;
+	const badges = document.createElement('span');
+	badges.className = 'store-badges';
+	label.append(nameEl, meta, badges);
+
+	const run = makeRowButton('run', 'Start', `Start ${name}`);
+	run.addEventListener('click', () => storeAction(() => device.runItem(item.index), { done: `Started ${name}.` }));
+	const bootBtn = makeRowButton('boot', '', `Start ${name} at power-on`, 'i-star');
+	bootBtn.addEventListener('click', () =>
+		storeAction(() => device.runItem(item.index, true), { done: `${name} starts at power-on now.` })
+	);
+	const del = makeRowButton('delete', '', `Delete ${name}`, 'i-trash');
+	del.addEventListener('click', async () => {
+		const sure = await uiConfirm(`Delete ${name} from the badge? This can't be undone.`, {
+			title: `Delete ${name}`,
+			confirmLabel: 'Delete',
+			danger: true,
+		});
+		if (sure) storeAction(() => device.deleteItem(item.index), { done: `Deleted ${name}.` });
+	});
+	const actions = document.createElement('span');
+	actions.className = 'store-actions';
+	actions.append(run, bootBtn, del);
+	li.append(label, actions);
+	return li;
+}
+
+// The running and power-on marks: a pill each (not colour alone),
+// aria-current on the running row, aria-pressed on the power-on star
+function updateStoreRow(li, item) {
+	const running = !!storeStatus && item.index === storeStatus.running;
+	const boot = !!storeStatus && item.index === storeStatus.boot;
+	const marks = `${running}/${boot}`;
+	if (li.dataset.marks === marks) return;
+	li.dataset.marks = marks;
+	li.classList.toggle('running', running);
+	if (running) li.setAttribute('aria-current', 'true');
+	else li.removeAttribute('aria-current');
+	const pills = [];
+	if (running) {
+		const pill = document.createElement('span');
+		pill.className = 'pill pill-playing';
+		pill.textContent = 'Playing';
+		pills.push(pill);
+	}
+	if (boot) {
+		const pill = document.createElement('span');
+		pill.className = 'pill pill-boot';
+		pill.append(makeIcon('i-star-filled'), ' Power-on');
+		pills.push(pill);
+	}
+	li.querySelector('.store-badges').replaceChildren(...pills);
+	const bootBtn = li.querySelector('[data-action="boot"]');
+	bootBtn.setAttribute('aria-pressed', String(boot));
+	bootBtn.firstElementChild.className = `icon ${boot ? 'i-star-filled' : 'i-star'}`;
+}
+
 function renderStore() {
 	renderAppLibrary(); // its Add / Update buttons follow what is stored
-	storeListEl.innerHTML = '';
 	if (!device.connected) {
-		storeStatusEl.textContent = 'Connect to see what is stored.';
+		storeListEl.replaceChildren();
+		storeListKey = null;
+		storeNotice = '';
+		uiAnnounce(storeStatusEl, 'Connect your badge to see what is on it.');
 		return;
 	}
-	for (const item of storeItems) {
-		const li = document.createElement('li');
-		li.className = 'store-item';
-		if (storeStatus && item.index === storeStatus.running) li.classList.add('running');
-		// name, and under it the type and the flash it takes
-		const label = document.createElement('span');
-		label.className = 'store-label';
-		const boot = storeStatus && item.index === storeStatus.boot ? '\u2605 ' : '';
-		const name = document.createElement('span');
-		name.className = 'store-name';
-		name.textContent = `${boot}${item.name || '(no name)'}`;
-		const meta = document.createElement('span');
-		meta.className = 'store-meta';
-		meta.textContent = `${ITEM_TYPE_NAMES[item.type] ?? 'Type ' + item.type} \u00b7 ${formatBytes(storeItemBytes(item))}`;
-		meta.title = `${formatBytes(item.length)} file; on the badge it takes whole 256-byte pages, with a 32-byte header`;
-		label.append(name, meta);
-		const run = document.createElement('button');
-		run.textContent = 'Run';
-		run.addEventListener('click', () => storeAction(() => device.runItem(item.index)));
-		const bootBtn = document.createElement('button');
-		bootBtn.textContent = '\u2605';
-		bootBtn.title = 'Run it, and at every power-on';
-		bootBtn.addEventListener('click', () => storeAction(() => device.runItem(item.index, true)));
-		const del = document.createElement('button');
-		del.textContent = '\u{1F5D1}';
-		del.title = 'Delete it from the badge';
-		del.addEventListener('click', () => {
-			if (!confirm(`Delete ${item.name || 'this item'} from the badge?`)) return;
-			storeAction(() => device.deleteItem(item.index));
-		});
-		li.append(label, run, bootBtn, del);
-		storeListEl.appendChild(li);
+	// Rebuild the rows only when the items changed; the once-a-second
+	// running and power-on marks are updated in place, so focus stays put
+	const keys = rowKeys(storeItems, (item) => `${item.type}:${item.name}`);
+	const listKey = JSON.stringify(storeItems.map((item, i) => [keys[i], item.index, item.length]));
+	if (listKey !== storeListKey) {
+		const saved = rememberListFocus(storeListEl);
+		storeListEl.replaceChildren(...storeItems.map((item, i) => buildStoreRow(item, keys[i])));
+		storeListKey = listKey;
+		restoreListFocus(storeListEl, saved, storeStatusEl);
 	}
+	storeItems.forEach((item, i) => updateStoreRow(storeListEl.children[i], item));
+
+	if (uiHasError(storeStatusEl)) return; // it stays until the next action
+	let summary = '';
 	if (storeStatus && storeStatus.freeBytes !== undefined) {
 		const used = storeItems.reduce((sum, item) => sum + storeItemBytes(item), 0);
-		storeStatusEl.textContent =
+		summary =
 			`${storeItems.length} item${storeItems.length === 1 ? '' : 's'}, ` +
 			`${formatBytes(used)} used, ${formatBytes(storeStatus.freeBytes)} free.`;
 	} else if (storeStatus) {
-		storeStatusEl.textContent = 'This firmware has no item store; update the badge.';
+		summary = "This firmware can't store items. Update the badge firmware.";
 	}
+	uiAnnounce(storeStatusEl, storeNotice ? `${storeNotice} ${summary}` : summary);
 }
 
 async function refreshStore() {
@@ -1015,7 +1525,7 @@ async function refreshStore() {
 		storeStatus = status;
 		storeItems = items;
 	} catch (e) {
-		storeStatusEl.textContent = e.message;
+		uiError(storeStatusEl, `Couldn't read what is on the badge: ${e.message}`);
 	} finally {
 		storeBusy = false;
 	}
@@ -1030,28 +1540,39 @@ function storeStatusChanged(status) {
 	const marks = !storeStatus || status.running !== storeStatus.running || status.boot !== storeStatus.boot;
 	if (storeBusy) return;
 	storeStatus = status;
+	// changed on the badge, or by live drawing: the notice is out of date
+	if (changed || marks) storeNotice = '';
 	if (changed && status.count !== undefined) refreshStore();
 	else if (marks) renderStore();
 }
 
-// The badge shows something else now: the editor stops sending to it
+// The badge shows something else now: the editor stops sending to it,
+// and the last action's notice in #store-status is out of date
 function handOverBadge() {
 	stopPlayback();
 	liveCancel();
+	storeNotice = '';
 }
 
-async function storeAction(action) {
+// Runs a store command. Errors show in `statusEl`; `done` says how it went.
+async function storeAction(action, { statusEl = storeStatusEl, done = '' } = {}) {
 	if (!device.connected) {
-		alert('Connect to a device first.');
-		return;
+		uiError(statusEl, 'Connect your badge first.');
+		return false;
 	}
 	handOverBadge();
+	if (uiHasError(statusEl)) uiAnnounce(statusEl, '');
+	let ok = true;
 	try {
 		await action();
+		if (statusEl === storeStatusEl) storeNotice = done;
+		else if (done) uiAnnounce(statusEl, done);
 	} catch (e) {
-		alert(e.message);
+		ok = false;
+		uiError(statusEl, e.message);
 	}
-	refreshStore();
+	await refreshStore();
+	return ok;
 }
 
 document.getElementById('store-add-input').addEventListener('change', async (ev) => {
@@ -1059,23 +1580,30 @@ document.getElementById('store-add-input').addEventListener('change', async (ev)
 	ev.target.value = '';
 	if (!file) return;
 	if (!device.connected) {
-		alert('Connect to a device first.');
+		uiError(storeStatusEl, 'Connect your badge first.');
+		return;
+	}
+	if (storeUploading) {
+		uiError(storeStatusEl, 'Wait until the badge is done with the last upload.');
 		return;
 	}
 	const bytes = new Uint8Array(await file.arrayBuffer());
 	const magic = new TextDecoder().decode(bytes.subarray(0, 4));
 	const name = file.name.replace(/\.[^.]+$/, '').toUpperCase();
 	if (/\.txt$/i.test(file.name)) {
+		let text;
 		try {
-			await addToBadge(ITEM_TYPE.TEXT, name, makeTextItem(new TextDecoder().decode(bytes)));
+			text = makeTextItem(new TextDecoder().decode(bytes));
 		} catch (e) {
-			alert(e.message);
+			uiError(storeStatusEl, `Couldn't add ${file.name}: ${e.message}`);
+			return;
 		}
+		await addToBadge(ITEM_TYPE.TEXT, name, text);
 		return;
 	}
 	const type = magic === 'HHAP' ? ITEM_TYPE.APP : magic === 'LA04' ? ITEM_TYPE.ANIMATION : 0;
 	if (!type) {
-		alert(`${file.name} is not an app (.hhapp), an animation (.ledanim) or a text (.txt).`);
+		uiError(storeStatusEl, `${file.name} is not an app (.hhapp), an animation (.ledanim) or a text (.txt).`);
 		return;
 	}
 	await addToBadge(type, name, bytes);
@@ -1084,18 +1612,32 @@ document.getElementById('store-add-input').addEventListener('change', async (ev)
 // A text item (text_item.js): the badge draws the text in its own font
 const textItemInput = document.getElementById('text-item-input');
 const textItemStatus = document.getElementById('text-item-status');
+const textItemCount = document.getElementById('text-item-count');
+const textItemBtn = document.getElementById('text-item-btn');
+let textItemOver = false; // "too long" was said; again only after it fits
+// The count is not a live region (it changes on every key); the textarea
+// points to it. Going over the limit is said once.
 function textItemCheck() {
 	const ascii = textItemAscii(textItemInput.value);
 	const room = patternBudgetBytes() - TEXT_ITEM.HEADER_BYTES;
-	textItemStatus.textContent = ascii
-		? `${ascii.length} characters${ascii.length > room ? `, ${room} fit on the badge now` : ''}.`
-		: '';
+	const n = ascii ? ascii.length : 0;
+	const over = n > room;
+	const text = n ? `${n} character${n === 1 ? '' : 's'}${over ? `, ${room} fit on the badge now` : ''}.` : '';
+	if (textItemCount.textContent !== text) textItemCount.textContent = text;
+	if (over && !textItemOver) uiAnnounce(null, text);
+	textItemOver = over;
+	if (uiHasError(textItemStatus)) uiAnnounce(textItemStatus, '');
 	return ascii;
 }
 textItemInput.addEventListener('input', textItemCheck);
-document.getElementById('text-item-btn').addEventListener('click', async () => {
+textItemBtn.addEventListener('click', async () => {
+	if (uiIsBusy(textItemBtn)) return;
 	if (!device.connected) {
-		alert('Connect to a device first.');
+		uiError(textItemStatus, 'Connect your badge first.');
+		return;
+	}
+	if (storeUploading) {
+		uiError(textItemStatus, 'Wait until the badge is done with the last upload.');
 		return;
 	}
 	let bytes;
@@ -1105,32 +1647,55 @@ document.getElementById('text-item-btn').addEventListener('click', async () => {
 			style: document.getElementById('text-item-plain').checked ? TEXT_ITEM.STYLE.PLAIN : TEXT_ITEM.STYLE.NAMETAG,
 		});
 	} catch (e) {
-		alert(e.message);
+		uiError(textItemStatus, e.message);
 		return;
 	}
-	await addToBadge(ITEM_TYPE.TEXT, textItemName(textItemInput.value), bytes);
+	uiBusy(textItemBtn, 'Adding…');
+	const ok = await addToBadge(ITEM_TYPE.TEXT, textItemName(textItemInput.value), bytes, null, {
+		statusEl: textItemStatus,
+		button: textItemBtn,
+	});
+	uiBusy(textItemBtn, null);
+	if (ok) uiAnnounce(textItemStatus, 'Added and playing.');
 });
 
 // Stores an item on the badge (it starts at once). If `replace` is the
 // index of an older copy, that one is deleted afterwards: the new item
 // went in after it, so its index is still right.
-async function addToBadge(type, name, bytes, replace = null) {
+// Progress shows in `statusEl` (throttled for screen readers) and on
+// `button`; an error goes to `onError`, by default `statusEl`.
+// Resolves true when the item is stored.
+async function addToBadge(type, name, bytes, replace = null, options = {}) {
+	const { statusEl = storeStatusEl, button = null } = options;
+	const onError = options.onError || ((message) => uiError(statusEl, message));
+	const verb = replace === null ? 'Adding' : 'Updating';
 	handOverBadge();
 	storeBusy = true;
+	storeUploading = true;
+	let ok = false;
 	try {
+		uiAnnounce(statusEl, `${verb} ${name}…`);
 		await device.storeItem(type, name, bytes, (sent, total) => {
-			storeStatusEl.textContent = `Uploading ${name}: ${Math.round((100 * sent) / total)}%`;
+			const pct = Math.round((100 * sent) / total);
+			if (button) uiBusy(button, `${verb}… ${pct}%`);
+			uiAnnounce(statusEl, `${verb} ${name}: ${pct}%`, { throttleMs: 2000, percent: pct });
 		});
 		if (replace !== null) await device.deleteItem(replace);
+		ok = true;
+		storeNotice = `${replace === null ? 'Added' : 'Updated'} ${name}. It is playing now.`;
+		if (statusEl !== storeStatusEl) uiAnnounce(statusEl, '');
 	} catch (e) {
 		// firmware from before text items refuses the type
 		if (type === ITEM_TYPE.TEXT && e.result === 1)
-			alert('The badge\'s firmware does not know text items yet. Update it in the Firmware panel first.');
-		else alert(e.message);
+			onError("The badge's firmware does not know text items yet. Update it under Firmware first.");
+		else onError(`Couldn't add ${name}: ${e.message}`);
 	} finally {
 		storeBusy = false;
+		storeUploading = false;
+		if (button) uiBusy(button, null);
 	}
 	await refreshStore();
+	return ok;
 }
 
 // --- App library: the apps that come with the firmware (webui/apps/, made
@@ -1139,53 +1704,103 @@ async function addToBadge(type, name, bytes, replace = null) {
 // var, not let: renderStore() may run before this part of the file has
 var appLibrary = []; // [{name, file, bytes, api, description, recommended}]
 var appRecommended = []; // the names of the recommended set, in install order (apps/recommended.txt)
+var appListKey = null; // what the rows show now
+
+// Why Add can't be used now, shown as text (a disabled button can't take
+// focus, so a tooltip on it never reaches keyboard users)
+function appLibraryReason() {
+	if (!device.connected) return 'Connect your badge to add apps.';
+	const api = storeStatus && storeStatus.api;
+	if (api === undefined || api === null) return '';
+	const tooOld = appLibrary.filter((app) => api < app.api).length;
+	if (tooOld && tooOld === appLibrary.length) return 'Update the badge firmware to add apps.';
+	if (tooOld) return 'Some apps need newer badge firmware. Update the firmware to add them.';
+	return '';
+}
+
+function buildAppRow({ app, old, disabled }) {
+	const appLibraryEl = document.getElementById('app-library');
+	const li = document.createElement('li');
+	li.className = 'store-item';
+	li.dataset.key = app.name;
+	const label = document.createElement('span');
+	label.className = 'store-label';
+	const name = document.createElement('span');
+	name.className = 'store-name';
+	name.textContent = app.name;
+	label.appendChild(name);
+	if (app.description) {
+		// one line: the first sentence; the whole text as a tooltip
+		const description = document.createElement('span');
+		description.className = 'store-meta store-desc';
+		const first = app.description.match(/^.*?[.!?](?=\s|$)/);
+		description.textContent = first ? first[0] : app.description;
+		if (description.textContent !== app.description) description.title = app.description;
+		label.appendChild(description);
+	}
+	const meta = document.createElement('span');
+	meta.className = 'store-meta';
+	meta.textContent = `App · ${formatBytes(storeItemBytes({ length: app.bytes }))}${app.recommended ? ' · recommended' : ''}`;
+	label.appendChild(meta);
+
+	const verb = old ? 'Update' : 'Add';
+	const btn = makeRowButton('add', verb, `${verb} ${app.name}`);
+	if (disabled) {
+		btn.disabled = true;
+		if (document.getElementById('app-library-reason')) btn.setAttribute('aria-describedby', 'app-library-reason');
+	}
+	btn.addEventListener('click', async () => {
+		if (uiIsBusy(btn)) return;
+		const showError = (message) => uiErrorFor(appLibraryEl, message);
+		if (storeUploading) {
+			showError('Wait until the badge is done with the last upload.');
+			return;
+		}
+		uiBusy(btn, `${old ? 'Updating' : 'Adding'}…`);
+		try {
+			const r = await fetch(`apps/${app.file}`, { cache: 'no-store' });
+			if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+			const bytes = new Uint8Array(await r.arrayBuffer());
+			if (new TextDecoder().decode(bytes.subarray(0, 4)) !== 'HHAP') throw new Error('not an app');
+			await addToBadge(ITEM_TYPE.APP, app.name, bytes, old ? old.index : null, { button: btn, onError: showError });
+		} catch (e) {
+			showError(`Couldn't add ${app.name}: ${e.message}`);
+		} finally {
+			uiBusy(btn, null);
+		}
+	});
+	li.append(label, btn);
+	return li;
+}
 
 function renderAppLibrary() {
 	const appLibraryEl = document.getElementById('app-library');
-	appLibraryEl.innerHTML = '';
-	for (const app of appLibrary) {
-		const li = document.createElement('li');
-		li.className = 'store-item';
-		const label = document.createElement('span');
-		label.className = 'store-label';
-		const name = document.createElement('span');
-		name.className = 'store-name';
-		name.textContent = app.name;
-		name.title = app.description;
-		const meta = document.createElement('span');
-		meta.className = 'store-meta';
-		meta.textContent = `App \u00b7 ${formatBytes(storeItemBytes({ length: app.bytes }))}${app.recommended ? ' \u00b7 recommended' : ''}`;
-		meta.title = app.description;
-		label.append(name, meta);
-
-		const old = storeItems.find((item) => item.type === ITEM_TYPE.APP && item.name === app.name);
-		const btn = document.createElement('button');
-		btn.textContent = old ? 'Update' : 'Add';
-		const api = storeStatus && storeStatus.api;
-		if (!device.connected) {
-			btn.disabled = true;
-			btn.title = 'Connect to the badge first';
-		} else if (api !== undefined && api < app.api) {
-			btn.disabled = true;
-			btn.title = `Needs firmware with app API ${app.api}; the badge has ${api}. Update the firmware first.`;
-		} else {
-			btn.title = old ? `Replace the ${app.name} on the badge` : `Store ${app.name} on the badge and start it`;
-		}
-		btn.addEventListener('click', async () => {
-			try {
-				const r = await fetch(`apps/${app.file}`, { cache: 'no-store' });
-				if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-				const bytes = new Uint8Array(await r.arrayBuffer());
-				if (new TextDecoder().decode(bytes.subarray(0, 4)) !== 'HHAP') throw new Error('not an app');
-				await addToBadge(ITEM_TYPE.APP, app.name, bytes, old ? old.index : null);
-			} catch (e) {
-				alert(`Couldn't add ${app.name}: ${e.message}`);
-			}
-		});
-		li.append(label, btn);
-		appLibraryEl.appendChild(li);
+	const reasonEl = document.getElementById('app-library-reason');
+	const reason = appLibraryReason();
+	if (reasonEl) {
+		if (reasonEl.textContent !== reason) reasonEl.textContent = reason;
+		reasonEl.hidden = !reason;
 	}
-	if (!appLibrary.length) appLibraryEl.innerHTML = '<li class="hint">No apps found (make -C apps webui).</li>';
+	const api = storeStatus && storeStatus.api;
+	const rows = appLibrary.map((app) => ({
+		app,
+		old: storeItems.find((item) => item.type === ITEM_TYPE.APP && item.name === app.name),
+		disabled: !device.connected || (api !== undefined && api !== null && api < app.api),
+	}));
+	// Rebuild only when a button changes; focus goes back to the same app
+	const key = JSON.stringify(rows.map((row) => [row.app.name, row.old ? row.old.index : null, row.disabled]));
+	if (key !== appListKey) {
+		const saved = rememberListFocus(appLibraryEl);
+		appLibraryEl.replaceChildren(...rows.map(buildAppRow));
+		if (!appLibrary.length) {
+			const li = document.createElement('li');
+			li.className = 'hint';
+			li.textContent = 'No apps found (make -C apps webui).';
+			appLibraryEl.appendChild(li);
+		}
+		appListKey = key;
+		restoreListFocus(appLibraryEl, saved, null);
+	}
 	renderRecommended();
 }
 
@@ -1197,26 +1812,51 @@ function renderRecommended() {
 	const bytes = apps.reduce((sum, a) => sum + storeItemBytes({ length: a.bytes }), 0);
 	const api = storeStatus && storeStatus.api;
 	const needs = Math.max(0, ...apps.map((a) => a.api));
-	btn.disabled = !apps.length || !device.connected || (api !== undefined && api < needs);
-	btn.title = !device.connected
-		? 'Connect to the badge first'
-		: api !== undefined && api < needs
-			? `Needs firmware with app API ${needs}; the badge has ${api}. Update the firmware first.`
-			: 'Erases the badge, then installs these apps';
-	hint.textContent = apps.length
-		? `${apps.length} apps, ${formatBytes(bytes)}: ${apps.map((a) => a.name).join(', ')}. Erases the badge first.`
-		: '';
+	const tooOld = api !== undefined && api !== null && api < needs;
+	if (!uiIsBusy(btn)) btn.disabled = !apps.length || !device.connected || tooOld;
+	btn.removeAttribute('title');
+	// why the button is off, next to it (the list's reason is far above)
+	const reasonEl = document.getElementById('app-recommended-reason');
+	let reason = '';
+	if (apps.length && !device.connected) reason = 'Connect your badge to install the recommended apps.';
+	else if (apps.length && tooOld) reason = 'Update the badge firmware to install the recommended apps.';
+	if (reasonEl) {
+		if (reasonEl.textContent !== reason) reasonEl.textContent = reason;
+		reasonEl.hidden = !reason;
+	}
+	const describedBy = [];
+	if (reason && reasonEl) describedBy.push('app-recommended-reason');
+	if (hint) describedBy.push('app-recommended-hint');
+	if (describedBy.length) btn.setAttribute('aria-describedby', describedBy.join(' '));
+	else btn.removeAttribute('aria-describedby');
+	if (hint) {
+		const text = apps.length ? `${apps.length} apps, ${formatBytes(bytes)}: ${apps.map((a) => a.name).join(', ')}.` : '';
+		if (hint.textContent !== text) hint.textContent = text;
+	}
 }
 
 async function installRecommended() {
+	const btn = document.getElementById('app-recommended-btn');
+	if (uiIsBusy(btn)) return;
 	if (!device.connected) {
-		alert('Connect to a device first.');
+		uiErrorFor(btn, 'Connect your badge first.');
+		return;
+	}
+	if (storeUploading) {
+		uiErrorFor(btn, 'Wait until the badge is done with the last upload.');
 		return;
 	}
 	const apps = appRecommended.map((n) => appLibrary.find((a) => a.name === n)).filter(Boolean);
-	if (!confirm(`Erase every app, animation and text on the badge, then install the recommended set (${apps.length} apps)?\n\nYour name and the apps' saved data (high scores) stay.`)) return;
+	const sure = await uiConfirm(
+		`Erase every app, animation and text on the badge, then install the ${apps.length} recommended apps? ` +
+			"Your name and the apps' saved data, such as high scores, stay.",
+		{ title: 'Install the recommended apps', confirmLabel: 'Erase and install', danger: true }
+	);
+	if (!sure) return;
 	handOverBadge();
 	storeBusy = true;
+	storeUploading = true;
+	uiBusy(btn, 'Downloading…');
 	try {
 		// every download first, so a failed one erases nothing
 		const files = [];
@@ -1225,18 +1865,27 @@ async function installRecommended() {
 			if (!r.ok) throw new Error(`${app.name}: ${r.status} ${r.statusText}`);
 			files.push([app, new Uint8Array(await r.arrayBuffer())]);
 		}
-		storeStatusEl.textContent = 'Erasing the badge';
+		uiBusy(btn, 'Erasing…');
+		uiAnnounce(storeStatusEl, 'Erasing the badge…');
 		await device.eraseStore();
 		for (let i = 0; i < files.length; i++) {
 			const [app, bytes] = files[i];
+			uiBusy(btn, `Installing ${i + 1} of ${files.length}…`);
 			await device.storeItem(ITEM_TYPE.APP, app.name, bytes, (sent, total) => {
-				storeStatusEl.textContent = `Installing ${i + 1} of ${files.length}, ${app.name}: ${Math.round((100 * sent) / total)}%`;
+				const pct = Math.round((100 * sent) / total);
+				uiAnnounce(storeStatusEl, `Installing ${i + 1} of ${files.length}, ${app.name}: ${pct}%`, {
+					throttleMs: 2000,
+					percent: (100 * (i + sent / total)) / files.length,
+				});
 			});
 		}
+		storeNotice = `Installed ${files.length} recommended apps.`;
 	} catch (e) {
-		alert(`The recommended set did not install completely: ${e.message}`);
+		uiErrorFor(btn, `The recommended apps did not install completely: ${e.message}`);
 	} finally {
 		storeBusy = false;
+		storeUploading = false;
+		uiBusy(btn, null);
 	}
 	await refreshStore();
 }
@@ -1252,19 +1901,29 @@ fetch('apps/index.json', { cache: 'no-store' })
 	})
 	.catch(() => renderAppLibrary());
 
-document.getElementById('store-stop-btn').addEventListener('click', () => storeAction(() => device.stop()));
+document.getElementById('store-stop-btn').addEventListener('click', () =>
+	storeAction(() => device.stop(), { done: 'Stopped.' })
+);
 
-document.getElementById('store-erase-btn').addEventListener('click', () => {
-	if (!confirm('Erase every app and animation on the badge? (Your name and the apps\' saved data stay.)')) return;
-	storeAction(() => device.eraseStore());
+document.getElementById('store-erase-btn').addEventListener('click', async () => {
+	const sure = await uiConfirm("Erase every app, animation and text on the badge? This can't be undone.", {
+		title: 'Erase the badge',
+		confirmLabel: 'Erase all items',
+		danger: true,
+	});
+	if (sure) storeAction(() => device.eraseStore(), { done: 'Erased all items.' });
 });
 
 const badgeNameInput = document.getElementById('badge-name');
+const badgeNameStatus = document.getElementById('badge-name-status') || storeStatusEl;
 
 document.getElementById('badge-name-btn').addEventListener('click', () =>
-	storeAction(async () => {
-		badgeNameInput.value = await device.setName(badgeNameInput.value.trim());
-	})
+	storeAction(
+		async () => {
+			badgeNameInput.value = await device.setName(badgeNameInput.value.trim());
+		},
+		{ statusEl: badgeNameStatus, done: 'Name saved.' }
+	)
 );
 
 device.addEventListener('connect', async () => {
@@ -1279,7 +1938,9 @@ device.addEventListener('disconnect', () => {
 	storeStatus = null;
 	storeItems = [];
 	badgeNameInput.value = '';
+	if (badgeNameStatus !== storeStatusEl) uiAnnounce(badgeNameStatus, '');
 	renderStore();
+	refreshCompressionStats(); // the free space is the whole store again
 });
 
 // --- Init ---------------------------------------------------
@@ -1288,7 +1949,7 @@ device.addEventListener('disconnect', () => {
 fetch('version.json', { cache: 'no-store' })
 	.then((r) => (r.ok ? r.json() : null))
 	.then((v) => {
-		if (v) document.getElementById('webui-version').textContent = `-- web interface ${v.commit} (${v.date})`;
+		if (v) document.getElementById('webui-version').textContent = `· web interface ${v.commit} (${v.date})`;
 	})
 	.catch(() => {});
 

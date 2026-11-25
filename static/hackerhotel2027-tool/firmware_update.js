@@ -28,12 +28,19 @@ const fwConfirmEl = document.getElementById('fw-confirm');
 const fwGoBtn = document.getElementById('fw-go-btn');
 const fwCancelBtn = document.getElementById('fw-cancel-btn');
 const fwFileInput = document.getElementById('fw-file-input');
+const fwConfirmText = fwConfirmEl.querySelector('span');
+
+// Focus moves to the confirmation and to the status line, so they take
+// focus from script but stay out of the tab order
+fwConfirmText.setAttribute('tabindex', '-1');
+fwStatusEl.setAttribute('tabindex', '-1');
 
 let fwBundled = null; // {image, commit, date} from firmware/ on this site
 let fwChosen = null; // {image, name} from a file the user picked
 let fwBadge = undefined; // the badge's FW_INFO text; null: too old to say; false: no answer
 let fwBusy = false;
 let fwWaitingForRom = false; // the chooser is open: keep the badge in the boot ROM
+let fwReason = ''; // why the update button is off, as shown in #fw-status
 
 // "HH27-STARFISH-FW S1 abc1234" -> {layout: 'S1', version: 'abc1234'}, or null
 function parseFirmwareId(text) {
@@ -57,33 +64,48 @@ function imageFirmwareId(image) {
 
 // Throws unless image is badge firmware that keeps the stored items
 function checkImage(image) {
-	if (image.length > FW_MAX_BYTES) throw new Error(`it is ${image.length} bytes; the firmware region holds ${FW_MAX_BYTES}`);
+	if (image.length > FW_MAX_BYTES) throw new Error(`it is ${image.length} bytes, and the firmware region holds ${FW_MAX_BYTES}`);
 	if (image.length < 1024) throw new Error('it is too small to be the firmware');
 	const id = imageFirmwareId(image);
-	if (!id) throw new Error('it is not starfish badge firmware (no HH27-STARFISH-FW marker); a .hex or .elf will not do, use the .bin');
+	if (!id) throw new Error('it is not starfish badge firmware (no HH27-STARFISH-FW marker). Use the .bin file, not the .hex or .elf');
 	if (id.layout !== FW_STORE_LAYOUT)
-		throw new Error(`it stores items differently (${id.layout}, this site knows ${FW_STORE_LAYOUT}); the stored items would be lost`);
+		throw new Error(`it stores items differently (${id.layout}; this site knows ${FW_STORE_LAYOUT}), so your stored items would be lost`);
 	return id;
+}
+
+// Sets the text only when it changes, so a live region does not repeat it
+function setText(el, text) {
+	if (el.textContent !== text) el.textContent = text;
 }
 
 function renderFirmware() {
 	const usb = 'usb' in navigator;
 	const site = fwBundled ? `${fwBundled.commit} (${fwBundled.date})` : null;
-	fwSiteEl.textContent = site ? `This site's firmware: ${site}` : 'This site has no firmware file; pick a .bin below.';
+	setText(fwSiteEl, site ? `This site's firmware: ${site}` : 'This site has no firmware file. To flash one, open "Advanced: flash a .bin file".');
 	const badgeId = parseFirmwareId(fwBadge);
-	if (!device.connected) fwBadgeEl.textContent = 'Badge: connect it to see its firmware.';
-	else if (device.emulator) fwBadgeEl.textContent = 'Badge: the emulator (no firmware update).';
-	else if (fwBadge === null) fwBadgeEl.textContent = 'Badge: older firmware (it does not report its version).';
-	else if (fwBadge === false) fwBadgeEl.textContent = 'Badge: it did not say which firmware it runs; reload the page to ask again.';
-	else if (badgeId) {
-		const same = fwBundled && badgeId.version === fwBundled.commit;
-		fwBadgeEl.textContent = `Badge: ${badgeId.version}${same ? ' -- up to date' : fwBundled ? ' -- an update is available' : ''}`;
-	} else fwBadgeEl.textContent = 'Badge: ...';
+	const upToDate = !!(device.connected && !device.emulator && badgeId && fwBundled && badgeId.version === fwBundled.commit);
+	let badge;
+	if (!device.connected) badge = 'Badge: connect it to see its firmware.';
+	else if (device.emulator) badge = 'Badge: the emulator.';
+	else if (fwBadge === null) badge = 'Badge: older firmware. It does not report its version.';
+	else if (fwBadge === false) badge = 'Badge: it did not say which firmware it runs. Reload the page to ask again.';
+	else if (badgeId) badge = `Badge: ${badgeId.version}${upToDate ? ' – up to date' : fwBundled ? ' – an update is available' : ''}`;
+	else badge = 'Badge: asking which firmware it runs…';
+	setText(fwBadgeEl, badge);
 	const image = fwChosen || fwBundled;
-	fwUpdateBtn.textContent = fwChosen ? `Flash ${fwChosen.name}` : 'Update firmware';
-	fwUpdateBtn.disabled = fwBusy || !usb || !image || device.emulator;
-	if (!usb) fwUpdateBtn.title = 'Needs WebUSB: Chrome, Edge or Opera';
-	else fwUpdateBtn.title = '';
+	setText(fwUpdateBtn, fwChosen ? `Flash ${fwChosen.name}` : fwBundled ? `Update firmware to ${fwBundled.commit}` : 'Update firmware');
+	// The reason the button is off, in words on the page (not in a tooltip)
+	let reason = '';
+	if (fwBusy) {
+		/* the status shows the update */
+	} else if (!usb) reason = "This browser can't connect to USB devices. Use Chrome, Edge or Opera.";
+	else if (device.emulator) reason = 'The emulator has no firmware to update.';
+	else if (!fwChosen && upToDate) reason = 'The badge already runs this site\'s firmware.';
+	fwUpdateBtn.disabled = fwBusy || !usb || !image || device.emulator || (!fwChosen && upToDate);
+	// Show the reason only over an empty status or an older reason, never over
+	// the result of an update
+	if (fwStatusEl.textContent === '' || fwStatusEl.textContent === fwReason) setText(fwStatusEl, reason);
+	fwReason = reason;
 }
 
 // Asks the badge which firmware it runs. Right after the badge restarts
@@ -110,6 +132,7 @@ async function refreshBadgeFirmware() {
 	renderFirmware();
 }
 
+// Always writes, so the same message after a second try is read out again
 function setStatus(text, progress = null) {
 	fwStatusEl.textContent = text;
 	fwProgressEl.hidden = progress === null;
@@ -138,16 +161,16 @@ async function flash(image, label) {
 		fwWaitingForRom = true;
 		if (viaBadge) device.rebootToBootRom().catch(() => {});
 		setStatus(viaBadge
-			? 'The badge goes into its boot ROM. In the box that opens, pick the "Unknown device from QinHeng Electronics" and click Connect.'
-			: 'On the badge, hold A for the menu, press C to reach UPDATE, and tap A. In the box that opens, pick the "Unknown device from QinHeng Electronics" and click Connect.');
+			? 'The badge restarts into its boot ROM. In the box that opens, pick "Unknown device from QinHeng Electronics" and click Connect.'
+			: 'On the badge, hold A for the menu, press C to reach UPDATE, and press A. In the box that opens, pick "Unknown device from QinHeng Electronics" and click Connect.');
 		// No await before this line: Chrome opens the chooser only within the click
 		rom = await navigator.usb.requestDevice({ filters: WchIsp.filters });
 	} catch (e) {
 		fwWaitingForRom = false;
 		fwBusy = false;
 		setStatus(e.name === 'NotFoundError'
-			? 'No boot ROM was picked, so nothing changed. The badge goes back to its firmware by itself. ' +
-			  'On Windows the boot ROM only shows up after a one-time driver install (see "Help").'
+			? 'You picked no boot ROM, so nothing changed. The badge goes back to its firmware by itself. ' +
+			  'On Windows, the boot ROM shows up only after a one-time driver install. See "Help: drivers, browsers and recovery".'
 			: `Could not open the chooser: ${e.message}`);
 		renderFirmware();
 		return;
@@ -156,20 +179,35 @@ async function flash(image, label) {
 	const isp = new WchIsp(rom);
 	const names = { identify: 'Connecting', erase: 'Erasing', write: 'Writing', verify: 'Checking',
 		'write-boot-page': 'Writing the first page', 'verify-boot-page': 'Checking the first page', reset: 'Restarting', done: 'Done' };
+	// #fw-status is a live region: its text changes only at a new phase or a
+	// new 25% step, so a screen reader does not read every packet. The bar
+	// follows every step.
+	let lastPhase = null;
+	let lastStep = -1;
 	try {
 		const info = await isp.flashFirmware(image, {
-			onProgress: ({ phase, percent }) => setStatus(`${label}: ${names[phase] || phase}... ${percent}%`, percent),
+			onProgress: ({ phase, percent }) => {
+				const step = Math.floor(percent / 25);
+				// 'done' needs no line of its own: the result follows at once
+				if (phase === 'done' || (phase === lastPhase && step === lastStep)) {
+					fwProgressEl.value = percent;
+					return;
+				}
+				lastPhase = phase;
+				lastStep = step;
+				setStatus(`${label}: ${names[phase] || phase}… ${percent}%`, percent);
+			},
 		});
-		setStatus(`Done: ${label} is on the badge (${info.bytes} bytes, checked). The badge restarts; your items, name and settings stayed.`, 100);
+		setStatus(`Done: ${label} is on the badge (${info.bytes} bytes, checked). The badge restarts. Your items, name and settings stayed.`, 100);
 		setTimeout(async () => {
 			try { await device.tryAutoReconnect(); } catch (e) { /* the user connects again */ }
 			refreshBadgeFirmware();
 		}, 2500);
 	} catch (e) {
 		const advice = e.bootPageWritten
-			? 'If the badge does not start, unplug it (and its battery) and plug it in again: it then starts in the boot ROM, and you can update again. ' +
-			  'If that does not help either, bring it to the badge recovery area at the event.'
-			: 'The badge\'s start page was not touched: it starts the boot ROM by itself, or its old firmware. Try again.';
+			? 'If the badge does not start, unplug it and its battery, then plug it in again. It then starts in the boot ROM, and you can update again. ' +
+			  'If that does not help, bring the badge to the badge recovery area at the event.'
+			: 'The badge\'s start page was not touched, so it starts the boot ROM or its old firmware. Try again.';
 		setStatus(`The update stopped (${e.phase || 'start'}): ${e.message} ${advice}`);
 		await isp.close();
 	} finally {
@@ -179,22 +217,29 @@ async function flash(image, label) {
 }
 
 // Two clicks: the first shows what will happen, the second (a fresh click,
-// so Chrome allows the chooser) starts it
+// so Chrome allows the chooser) starts it. Each hidden button hands focus
+// on: Update to the question, Flash now to the status, Cancel back to Update.
 fwUpdateBtn.addEventListener('click', () => {
 	const image = fwChosen ? fwChosen.image : fwBundled && fwBundled.image;
 	if (!image) return;
 	try {
 		const id = checkImage(image);
-		fwConfirmEl.querySelector('span').textContent =
+		fwConfirmText.textContent =
 			`Flash firmware ${id.version} onto the badge? Your items, name and settings stay. Keep the badge plugged in until it is done.`;
 		fwConfirmEl.hidden = false;
+		fwConfirmText.focus();
 	} catch (e) {
-		setStatus(`This file cannot be flashed: ${e.message}.`);
+		setStatus(`You can't flash this file: ${e.message}.`);
+		fwStatusEl.focus();
 	}
 });
-fwCancelBtn.addEventListener('click', () => { fwConfirmEl.hidden = true; });
+fwCancelBtn.addEventListener('click', () => {
+	fwConfirmEl.hidden = true;
+	fwUpdateBtn.focus();
+});
 fwGoBtn.addEventListener('click', () => {
 	fwConfirmEl.hidden = true;
+	fwStatusEl.focus();
 	const image = fwChosen ? fwChosen.image : fwBundled.image;
 	flash(image, fwChosen ? fwChosen.name : `firmware ${fwBundled.commit}`);
 });
@@ -207,10 +252,10 @@ fwFileInput.addEventListener('change', async (ev) => {
 	try {
 		checkImage(image);
 		fwChosen = { image, name: file.name };
-		setStatus(`${file.name} is ready: click "Flash ${file.name}".`);
+		setStatus(`${file.name} is ready. Click "Flash ${file.name}".`);
 	} catch (e) {
 		fwChosen = null;
-		setStatus(`${file.name} cannot be flashed: ${e.message}.`);
+		setStatus(`You can't flash ${file.name}: ${e.message}.`);
 	}
 	renderFirmware();
 });
