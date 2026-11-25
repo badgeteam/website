@@ -55,6 +55,14 @@ precedence = "override"
 SPDX-FileCopyrightText = "Stichting Badge.Team"
 SPDX-License-Identifier = "MIT"
 
+# ---- Hackerhotel 2027 badge tool: the web interface, apps and firmware of ----
+# badgeteam/hackerhotel2027-firmware, deployed by its tools/deploy_webui.sh
+[[annotations]]
+path = "static/hackerhotel2027-tool/**"
+precedence = "override"
+SPDX-FileCopyrightText = "the badge.team contributors"
+SPDX-License-Identifier = "MIT"
+
 # ---------------------------------------------------------------------------
 # Flashable firmware images served by /flash/. These are build artefacts of
 # the badge firmware projects, redistributed here so the browser flasher can

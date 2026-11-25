@@ -281,7 +281,7 @@ label:has(input[type="checkbox"]) {
 	gap: 0.5rem;
 }
 
-input, select, button {
+input, select, button, textarea {
 	font: inherit;
 	color: var(--text);
 	background: var(--control-bg);
@@ -476,4 +476,61 @@ footer code {
 		width: 340px;
 		overflow-y: auto;
 	}
+}
+
+/* A fieldset is at least as wide as its content's min-content width by
+   default; in the fixed-width side column, long content must shrink
+   (store item names end in an ellipsis) instead of adding a scroll bar */
+.side-column fieldset {
+	min-width: 0;
+}
+
+.store-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	max-height: 14rem;
+	overflow-y: auto;
+}
+
+.store-item {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-size: 0.8rem;
+}
+
+.store-label {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.store-name,
+.store-meta {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.store-item.running .store-name {
+	color: var(--accent);
+}
+
+.store-meta {
+	color: var(--text-dim);
+	font-size: 0.7rem;
+	font-variant-numeric: tabular-nums;
+}
+
+/* "Add a text" in the On the badge panel */
+.text-item textarea {
+	width: 100%;
+	box-sizing: border-box;
+	resize: vertical;
+	margin: 0.4em 0;
 }

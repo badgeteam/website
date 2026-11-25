@@ -25,6 +25,7 @@
 			<span id="conn-status">Not connected</span>
 			<span id="device-mode"></span>
 			<button id="connect-btn">Connect over WebUSB</button>
+			<button id="emu-btn" hidden>Connect emulator</button>
 			<button id="disconnect-btn" hidden>Disconnect</button>
 		</div>
 	</header>
@@ -63,7 +64,7 @@
 						Erase
 					</label>
 					<label>
-						<input type="checkbox" id="live-send" checked>
+						<input type="checkbox" id="live-send" checked title="The badge shows what you draw, and the frames of ▶ Play. Run or Stop on the badge ends it until you draw or play again.">
 						Live send
 					</label>
 				</div>
@@ -108,7 +109,7 @@
 						<button role="tab" id="tab-test" aria-controls="panel-test" aria-selected="true">Test
 							animations</button>
 						<button role="tab" id="tab-video" aria-controls="panel-video" aria-selected="false">From
-							video</button>
+							video or GIF</button>
 						<button role="tab" id="tab-text" aria-controls="panel-text" aria-selected="false">From
 							text</button>
 					</div>
@@ -126,8 +127,8 @@
 					</div>
 					<div class="tab-panel" role="tabpanel" id="panel-video" aria-labelledby="tab-video" hidden>
 						<label>
-							Video file
-							<input type="file" id="video-file-input" accept="video/*">
+							Video or animated image (GIF, WebP, PNG)
+							<input type="file" id="video-file-input" accept="video/*,image/gif,image/webp,image/apng,image/png">
 						</label>
 						<label>
 							Frame rate (fps)
@@ -279,7 +280,7 @@
 					</label>
 					<p id="compression-stats" class="hint"></p>
 					<div class="button-row">
-						<button id="upload-pattern-btn">Store on device &amp; play on boot</button>
+						<button id="upload-pattern-btn">Add to the badge &amp; play on boot</button>
 					</div>
 					<p class="hint" id="upload-pattern-status"></p>
 					<div class="button-row">
@@ -294,6 +295,98 @@
 
 			</div>
 			<div class="side-column">
+
+				<fieldset>
+					<legend>Firmware</legend>
+					<p class="hint" id="fw-badge">Badge: connect it to see its firmware.</p>
+					<p class="hint" id="fw-site"></p>
+					<div class="button-row">
+						<button id="fw-update-btn">Update firmware</button>
+						<label class="file-button">
+							Pick a .bin
+							<input type="file" id="fw-file-input" accept=".bin">
+						</label>
+					</div>
+					<p class="hint" id="fw-confirm" hidden>
+						<span></span>
+						<span class="button-row">
+							<button id="fw-go-btn">Flash now</button>
+							<button id="fw-cancel-btn">Cancel</button>
+						</span>
+					</p>
+					<progress id="fw-progress" max="100" value="0" hidden></progress>
+					<p class="hint" id="fw-status"></p>
+					<details class="hint">
+						<summary>Help</summary>
+						<p>The page sends the badge into its USB boot ROM and asks you to pick it
+							("Unknown device from QinHeng Electronics"). Without a connected badge:
+							on the badge, hold A for the menu, press C to reach UPDATE, and tap A. Your items, name
+							and settings stay.</p>
+						<p><strong>Linux:</strong> the udev rule from the README, for 1a86:55e0 too.
+							<strong>Windows:</strong> once, install the WinUSB driver for the boot ROM
+							with <a href="https://zadig.akeo.ie/">Zadig</a>: Device &gt; Create New
+							Device, USB ID 1A86 55E0, driver WinUSB, Install Driver. Without it the
+							boot ROM never shows up in the list. <strong>Firefox and Safari</strong>
+							have no WebUSB: use Chrome, Edge or Opera, or flash with
+							<code>minichlink -w ledmatrix.bin flash -b</code>.</p>
+						<p>If an update stops half way, the badge starts in its boot ROM: update
+							again. If it no longer starts at all, unplug it (and its battery) and
+							plug it in again, or bring it to the badge recovery area at the event.</p>
+					</details>
+				</fieldset>
+				<fieldset>
+					<legend>On the badge</legend>
+					<label>
+						Your name
+						<span class="button-row">
+							<input type="text" id="badge-name" maxlength="32" placeholder="for apps to show">
+							<button id="badge-name-btn">Save</button>
+						</span>
+					</label>
+					<p class="hint">Apps, animations and texts stored on the badge. The one marked
+						&#9733; starts at power-on; hold any button while the badge powers on to
+						skip it. On the badge, hold A for the menu (also from an app).</p>
+					<ul id="store-list" class="store-list"></ul>
+					<p class="hint" id="store-status">Connect to see what is stored.</p>
+					<div class="button-row">
+						<label class="file-button">
+							Add app, animation or text
+							<input type="file" id="store-add-input" accept=".hhapp,.ledanim,.txt">
+						</label>
+						<button id="store-stop-btn">Stop</button>
+						<button id="store-erase-btn">Erase all</button>
+					</div>
+					<details class="text-item">
+						<summary>Add a text</summary>
+						<p class="hint">The badge shows the text in its own font, as the name tag:
+							still if it fits, else scrolling. It stores one byte per letter, so a
+							long text fits (an animation of it would not). Letters outside plain
+							ASCII lose their accents or show as <code>?</code>.</p>
+						<textarea id="text-item-input" rows="3" placeholder="Your text"></textarea>
+						<div class="button-row">
+							<label>
+								Speed
+								<input type="number" id="text-item-speed" min="1" max="60" value="10">
+								columns/s
+							</label>
+							<label>
+								<input type="checkbox" id="text-item-plain">
+								Text only (no colours on the arms)
+							</label>
+							<button id="text-item-btn">Add to the badge</button>
+						</div>
+						<p class="hint" id="text-item-status"></p>
+					</details>
+					<p class="hint"><strong>App library:</strong> the apps that come with the
+						firmware. <strong>Add</strong> stores one on the badge and starts it;
+						<strong>Update</strong> replaces an older copy (its saved data, such as
+						high scores, stays).</p>
+					<p>
+						<button id="app-recommended-btn">Install the recommended set</button>
+						<span class="hint" id="app-recommended-hint"></span>
+					</p>
+					<ul id="app-library" class="store-list"></ul>
+				</fieldset>
 
 				<fieldset>
 					<legend>Pattern</legend>
@@ -341,17 +434,22 @@
 	<footer>
 		<p>
 			Copyright Nicolai Electronics & Stichting Badge.Team 2027
+			<span id="webui-version"></span>
 		</p>
 	</footer>
 
 	<script src="board_data.js"></script>
+	<script src="layout_data.js"></script>
 	<script src="webusb.js"></script>
 	<script src="board.js"></script>
 	<script src="patterns.js"></script>
 	<script src="compression.js"></script>
 	<script src="video_import.js"></script>
 	<script src="text_import.js"></script>
+	<script src="text_item.js"></script>
 	<script src="app.js"></script>
+	<script src="wchisp.js"></script>
+	<script src="firmware_update.js"></script>
 </body>
 
 </html>

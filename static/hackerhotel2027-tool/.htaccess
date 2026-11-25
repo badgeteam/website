@@ -1,0 +1,3 @@
+# The badge web interface (tools/deploy_webui.sh in hackerhotel2027-firmware).
+# Scripts and styles are files here; the video import needs blob: media.
+Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
