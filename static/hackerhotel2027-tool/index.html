@@ -22,9 +22,9 @@
 		<nav class="section-nav" aria-label="Page sections">
 			<ul>
 				<li><a href="#badge">Badge</a></li>
-				<li><a href="#apps">Apps</a></li>
 				<li><a href="#firmware">Firmware</a></li>
 				<li><a href="#create">Create</a></li>
+				<li><a href="#apps">Apps</a></li>
 			</ul>
 		</nav>
 		<div class="theme-control">
@@ -119,22 +119,6 @@ SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="d643", MODE="0666"
 					<summary>Erase the badge</summary>
 					<p class="notice notice-danger">Removes every app, animation and text from the badge.</p>
 					<button type="button" id="store-erase-btn" class="btn btn-danger">Erase all items</button>
-				</details>
-			</section>
-
-			<section id="apps" class="card" aria-labelledby="apps-h">
-				<h2 id="apps-h">App library</h2>
-				<p class="meta">Apps that come with this firmware. Add stores an app on the badge and starts
-					it. Update replaces an older copy; saved data such as high scores stays.</p>
-				<p id="app-library-reason" class="notice" hidden></p>
-				<ul id="app-library" class="item-list" aria-labelledby="apps-h"></ul>
-				<details class="disclosure">
-					<summary>Start over with the recommended apps</summary>
-					<p class="notice notice-danger">This erases everything on the badge first, then adds the
-						recommended apps.</p>
-					<p id="app-recommended-reason" class="meta" hidden></p>
-					<button type="button" id="app-recommended-btn" class="btn btn-danger">Erase badge and install recommended apps</button>
-					<span id="app-recommended-hint" class="meta" role="status"></span>
 				</details>
 			</section>
 
@@ -448,6 +432,22 @@ SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="d643", MODE="0666"
 				</div>
 			</div>
 		</section>
+		<section id="apps" class="card library" aria-labelledby="apps-h">
+			<h2 id="apps-h">App library</h2>
+			<p class="meta">Apps that come with this firmware. Add stores an app on the badge and starts
+				it. Update replaces an older copy; saved data such as high scores stays.</p>
+			<p id="app-library-reason" class="notice" hidden></p>
+			<ul id="app-library" class="item-list" aria-labelledby="apps-h"></ul>
+			<details class="disclosure">
+				<summary>Start over with the recommended apps</summary>
+				<p class="notice notice-danger">This erases everything on the badge first, then adds the
+					recommended apps.</p>
+				<p id="app-recommended-reason" class="meta" hidden></p>
+				<button type="button" id="app-recommended-btn" class="btn btn-danger">Erase badge and install recommended apps</button>
+				<span id="app-recommended-hint" class="meta" role="status"></span>
+			</details>
+		</section>
+
 	</main>
 
 	<footer>

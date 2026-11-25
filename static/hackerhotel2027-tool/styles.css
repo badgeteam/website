@@ -1428,6 +1428,29 @@ dialog .button-row {
 		align-items: start;
 	}
 
+	/* The left column runs beside both the editor and the app library
+	   under it, so the library fills the space below the editor. */
+	.manage {
+		grid-row: span 2;
+	}
+
+	/* The app library is wide here: its apps in columns. Each row of the
+	   grid gets its own top line, as the first item has in one column. */
+	.library .item-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+		column-gap: 24px;
+	}
+
+	.library .item-list > .store-item {
+		border-top: 1px solid var(--border);
+		border-bottom: 0;
+	}
+
+	.library .item-list > .store-item:last-child {
+		border-bottom: 1px solid var(--border);
+	}
+
 	.board-svg {
 		max-height: max(20rem, calc(100dvh - 8rem));
 	}
