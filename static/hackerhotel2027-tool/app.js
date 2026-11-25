@@ -67,9 +67,7 @@ board.onPaintAt = (xmm, ymm) => {
 function paintPixel(row, col, level) {
 	board.setPixel(row, col, level);
 	currentFrame()[row * MATRIX_COLS + col] = level;
-	if (liveSendInput.checked && device.connected) {
-		device.setPixel(row, col, level);
-	}
+	liveSendCell(row * MATRIX_COLS + col);
 }
 
 // --- RGB LED selection/editing ---------------------------------------------------
@@ -100,12 +98,75 @@ function setRgbChannels(led, r, g, b) {
 	frame[led.row * MATRIX_COLS + led.col] = r;
 	frame[led.green_row * MATRIX_COLS + led.col] = g;
 	frame[led.blue_row * MATRIX_COLS + led.col] = b;
-	if (liveSendInput.checked && device.connected) {
-		device.setPixel(led.row, led.col, r);
-		device.setPixel(led.green_row, led.col, g);
-		device.setPixel(led.blue_row, led.col, b);
+	liveSendCell(led.row * MATRIX_COLS + led.col);
+	liveSendCell(led.green_row * MATRIX_COLS + led.col);
+	liveSendCell(led.blue_row * MATRIX_COLS + led.col);
+}
+
+// --- Live send: the badge shows the editor ---------------------------------------------------
+// Painting and the player both go through liveFlush(). Only one send is
+// on its way at a time. Changes made while it is on its way go into the
+// next send, so a fast brush or a high fps never builds up a queue of old
+// packets in front of Run or Stop.
+
+const LIVE_PIXEL_LIMIT = 8; // more changed LEDs than this: send the whole frame
+const liveDirty = new Set(); // matrix cells changed since the last send
+let liveWholeFrame = false; // send the whole frame next
+let liveStale = true; // the badge does not show the editor's frame
+let liveSending = false;
+let badgeMode = null; // APP_MODE_* from the badge's last reply
+
+function liveSendOn() {
+	return liveSendInput.checked && device.connected;
+}
+
+function liveSendCell(index) {
+	if (!liveSendOn()) return;
+	liveDirty.add(index);
+	liveFlush();
+}
+
+function liveSendFrame() {
+	if (!liveSendOn()) return;
+	liveWholeFrame = true;
+	liveFlush();
+}
+
+// Forget what is waiting: the badge gets something else to show
+function liveCancel() {
+	liveDirty.clear();
+	liveWholeFrame = false;
+	liveStale = true;
+}
+
+async function liveFlush() {
+	if (liveSending) return;
+	liveSending = true;
+	try {
+		while (liveWholeFrame || liveDirty.size) {
+			const frame = currentFrame();
+			// If the badge shows another frame or runs an item, single
+			// LEDs would mix the editor into it: send the whole frame
+			const badgeElsewhere = badgeMode !== MODE_CUSTOM;
+			if (liveWholeFrame || liveStale || badgeElsewhere || liveDirty.size > LIVE_PIXEL_LIMIT) {
+				liveWholeFrame = false;
+				liveDirty.clear();
+				liveStale = false;
+				await device.uploadFrame(Uint8Array.from(frame));
+			} else {
+				const cells = [...liveDirty];
+				liveDirty.clear();
+				// queued together, like the packets of a frame
+				await Promise.all(cells.map((i) => device.setPixel(Math.floor(i / MATRIX_COLS), i % MATRIX_COLS, frame[i])));
+			}
+		}
+	} finally {
+		liveSending = false;
 	}
 }
+
+device.addEventListener('connect', liveCancel);
+liveSendInput.addEventListener('change', liveCancel);
 
 board.onSelectRgb = (led) => {
 	selectedRgbLed = led;
@@ -133,6 +194,8 @@ document.getElementById('rgb-editor-close-btn').addEventListener('click', () => 
 // --- Device connection ---------------------------------------------------
 
 const connectBtn = document.getElementById('connect-btn');
+const emuBtn = document.getElementById('emu-btn');
+let emulatorHere = false; // tools/emu/emu.py --web serves this page
 const disconnectBtn = document.getElementById('disconnect-btn');
 const connStatusEl = document.getElementById('conn-status');
 const deviceModeEl = document.getElementById('device-mode');
@@ -143,8 +206,9 @@ function webUsbAvailable() {
 
 function refreshConnButtons() {
 	connectBtn.hidden = device.connected;
+	emuBtn.hidden = device.connected || !emulatorHere;
 	disconnectBtn.hidden = !device.connected;
-	connStatusEl.textContent = device.connected ? 'Connected' : 'Not connected';
+	connStatusEl.textContent = device.connected ? (device.emulator ? 'Connected to the emulator' : 'Connected') : 'Not connected';
 	connStatusEl.classList.toggle('connected', device.connected);
 }
 
@@ -156,15 +220,26 @@ connectBtn.addEventListener('click', async () => {
 	}
 });
 disconnectBtn.addEventListener('click', () => device.disconnect());
+emuBtn.addEventListener('click', () => device.connectEmulator().catch((e) => alert(e.message)));
+LedMatrixDevice.emulatorPresent().then((here) => {
+	emulatorHere = here;
+	refreshConnButtons();
+});
 device.addEventListener('connect', refreshConnButtons);
 device.addEventListener('disconnect', refreshConnButtons);
 // Must match APP_MODE_* in the firmware's webusb_protocol.h
-const DEVICE_MODE_NAMES = { 1: 'Custom frame', 2: 'Stored pattern' };
+const DEVICE_MODE_NAMES = { 1: 'Custom frame', 2: 'Stored animation or text', 3: 'App', 4: 'Name tag' };
+const MODE_CUSTOM = 1;
 
 device.addEventListener('status', (ev) => {
 	const { mode, brightness } = ev.detail;
+	badgeMode = mode;
 	const name = DEVICE_MODE_NAMES[mode] ?? `Mode ${mode}`;
 	deviceModeEl.textContent = `${name}, brightness ${brightness}`;
+	const old = ev.detail.api !== undefined && ev.detail.api < FIRMWARE_API;
+	deviceModeEl.classList.toggle('stats-over-budget', old);
+	if (old) deviceModeEl.textContent += ` -- the badge's firmware is older than this page (API ${ev.detail.api}, needs ${FIRMWARE_API}): update it`;
+	storeStatusChanged(ev.detail);
 });
 
 if (!webUsbAvailable()) {
@@ -172,10 +247,11 @@ if (!webUsbAvailable()) {
 	connStatusEl.textContent = 'WebUSB not available in this browser';
 } else {
 	device.tryAutoReconnect().catch(() => {});
-	setInterval(() => {
-		if (device.connected) device.query();
-	}, 1000);
 }
+// the emulator works without WebUSB, so the status poll runs either way
+setInterval(() => {
+	if (device.connected) device.query();
+}, 1000);
 refreshConnButtons();
 
 // --- Clear / send ---------------------------------------------------
@@ -183,7 +259,10 @@ refreshConnButtons();
 document.getElementById('clear-btn').addEventListener('click', () => {
 	board.clear();
 	currentFrame().fill(0);
+	stopPlayback();
+	liveCancel();
 	if (device.connected) device.clear();
+	liveStale = false;
 });
 
 document.getElementById('send-frame-btn').addEventListener('click', () => {
@@ -191,7 +270,9 @@ document.getElementById('send-frame-btn').addEventListener('click', () => {
 		alert('Connect to a device first.');
 		return;
 	}
-	device.uploadFrame(Uint8Array.from(currentFrame()));
+	stopPlayback();
+	liveSendFrame();
+	if (!liveSendOn()) device.uploadFrame(Uint8Array.from(currentFrame()));
 });
 
 // --- Create animation tabs ---------------------------------------------------
@@ -508,6 +589,7 @@ function markFrameDirty() {
 
 function loadFrameIntoBoard() {
 	board.setFrame(currentFrame());
+	liveStale = true; // the next paint sends the whole frame
 }
 
 function setActivePattern(pattern) {
@@ -649,19 +731,14 @@ function stopPlayback() {
 
 function startPlayback() {
 	if (activePattern.frames.length < 2) return;
-	const sendToDevice = device.connected;
 	playBtn.textContent = '■ Stop';
-	playTimer = setInterval(async () => {
+	// With Live send on, the badge follows. If the badge is slower than the
+	// fps, it skips frames: liveFlush() sends only the newest one.
+	playTimer = setInterval(() => {
 		activeFrameIndex = (activeFrameIndex + 1) % activePattern.frames.length;
 		loadFrameIntoBoard();
 		renderFrameStrip();
-		if (sendToDevice) {
-			try {
-				await device.uploadFrame(Uint8Array.from(currentFrame()));
-			} catch (e) {
-				/* webusb.js already logs this */
-			}
-		}
+		liveSendFrame();
 	}, 1000 / activePattern.fps);
 }
 
@@ -671,41 +748,118 @@ playBtn.addEventListener('click', () => {
 });
 
 // --- Flash storage (compressed .ledanim export/import) ---------------------------------------------------
-// Compression format/rationale: docs/ANIMATION_FORMAT.md, codec in
-// compression.js. No firmware support for reading this back from flash
-// yet (see that doc) -- this is purely the browser-side half, so there's
-// a known format ready once that firmware feature exists.
+// The LA04 format: docs/ANIMATION_FORMAT.md, the codec in compression.js.
 
 const compressionQuantSelect = document.getElementById('compression-quant');
 const compressionStatsEl = document.getElementById('compression-stats');
 
-// Size of the flash region the firmware reserves for the pattern
-// (PATTERN_FLASH_SIZE in pattern_flash.h)
-const PATTERN_FLASH_BYTES = 32 * 1024;
+// Room for a new item in the badge's store: what the badge reports, or,
+// before it has, the whole store (STORE_FLASH_SIZE in flash_pages.h, less
+// the settings page and the item header)
+const STORE_ITEM_HEADER_BYTES = 32;
+let storeStatus = null; // the badge's last status reply
+function patternBudgetBytes() {
+	const free = storeStatus && storeStatus.freeBytes !== undefined ? storeStatus.freeBytes : 32 * 1024 - 256;
+	return Math.max(0, free - STORE_ITEM_HEADER_BYTES);
+}
 
 function formatBytes(n) {
 	return n < 1024 ? `${n} B` : `${(n / 1024).toFixed(1)} KB`;
 }
 
-function refreshCompressionStats() {
+// compressPattern() can take seconds, so it runs in a worker
+// (compression_worker.js); without workers (a page opened from a file) it
+// runs here. The last few results are kept: the same frames, fps and
+// brightness levels give the same file.
+let compressWorker = null;
+try {
+	compressWorker = new Worker('compression_worker.js');
+} catch (e) {
+	compressWorker = null;
+}
+const compressJobs = new Map(); // job id -> {resolve, reject}
+let compressJobId = 0;
+if (compressWorker) {
+	compressWorker.onmessage = (ev) => {
+		const job = compressJobs.get(ev.data.id);
+		compressJobs.delete(ev.data.id);
+		if (ev.data.error) job.reject(new Error(ev.data.error));
+		else job.resolve(ev.data.bytes);
+	};
+	compressWorker.onerror = (ev) => {
+		ev.preventDefault();
+		compressWorker = null; // no worker after all: compress here from now on
+		for (const job of compressJobs.values()) job.reject(new Error(ev.message || 'the compression worker failed'));
+		compressJobs.clear();
+	};
+}
+
+function patternKey(pattern, quantBits) {
+	let h = 0x811c9dc5; // FNV-1a over every value
+	for (const frame of pattern.frames) for (const v of frame) h = Math.imul(h ^ v, 0x01000193);
+	return `${quantBits}/${pattern.fps}/${pattern.frames.length}/${h >>> 0}`;
+}
+
+const compressCache = new Map(); // patternKey -> Promise of the bytes
+function compressAsync(pattern, quantBits) {
+	const key = patternKey(pattern, quantBits);
+	if (compressCache.has(key)) return compressCache.get(key);
+	const snapshot = { fps: pattern.fps, frames: pattern.frames }; // postMessage copies it
+	const frozen = compressWorker ? null : { fps: pattern.fps, frames: pattern.frames.map((f) => f.slice()) };
+	const job = compressWorker
+		? new Promise((resolve, reject) => {
+			const id = ++compressJobId;
+			compressJobs.set(id, { resolve, reject });
+			compressWorker.postMessage({ id, pattern: snapshot, quantBits });
+		})
+		: new Promise((resolve) => setTimeout(resolve, 0)).then(() => compressPattern(frozen, { quantBits }));
+	compressCache.set(key, job);
+	job.catch(() => compressCache.delete(key));
+	while (compressCache.size > 8) compressCache.delete(compressCache.keys().next().value);
+	return job;
+}
+
+// The size line: one compression at a time; edits made meanwhile are
+// compressed when it is done (only the last one)
+let statsBusy = false, statsAgain = false;
+async function refreshCompressionStats() {
 	if (!activePattern) return;
-	const quantBits = Number(compressionQuantSelect.value);
-	const budgetBytes = PATTERN_FLASH_BYTES;
-	const rawBytes = activePattern.frames.length * MATRIX_ROWS * MATRIX_COLS;
-	let compressedBytes;
-	try {
-		compressedBytes = compressPattern(activePattern, { quantBits }).byteLength;
-	} catch (e) {
-		compressionStatsEl.textContent = `Can't estimate: ${e.message}`;
+	if (statsBusy) {
+		statsAgain = true;
 		return;
 	}
+	statsBusy = true;
+	const pattern = activePattern;
+	const frameCount = pattern.frames.length;
+	const quantBits = Number(compressionQuantSelect.value);
+	const rawBytes = frameCount * MATRIX_ROWS * MATRIX_COLS;
+	const pending = compressAsync(pattern, quantBits);
+	const slow = setTimeout(() => (compressionStatsEl.textContent = `${frameCount} frames: compressing...`), 150);
+	let compressedBytes = null, error = null;
+	try {
+		compressedBytes = (await pending).byteLength;
+	} catch (e) {
+		error = e;
+	}
+	clearTimeout(slow);
+	statsBusy = false;
+	if (statsAgain) {
+		statsAgain = false;
+		refreshCompressionStats();
+		return;
+	}
+	if (error) {
+		compressionStatsEl.textContent = `Can't estimate: ${error.message}`;
+		return;
+	}
+	const budgetBytes = patternBudgetBytes();
 	const pct = rawBytes ? Math.round((100 * compressedBytes) / rawBytes) : 0;
 	const fits = compressedBytes <= budgetBytes;
 	const overBy = compressedBytes - budgetBytes;
 	compressionStatsEl.textContent = fits
-		? `${activePattern.frames.length} frames: ${formatBytes(compressedBytes)} compressed ` +
+		? `${frameCount} frames: ${formatBytes(compressedBytes)} compressed ` +
 		  `(${pct}% of ${formatBytes(rawBytes)} raw) -- fits the ${formatBytes(budgetBytes)} budget.`
-		: `${activePattern.frames.length} frames: ${formatBytes(compressedBytes)} compressed ` +
+		: `${frameCount} frames: ${formatBytes(compressedBytes)} compressed ` +
 		  `(${pct}% of ${formatBytes(rawBytes)} raw) -- ${formatBytes(overBy)} over the ` +
 		  `${formatBytes(budgetBytes)} budget. Lower the brightness levels, trim frames, or drop the fps.`;
 	compressionStatsEl.classList.toggle('stats-over-budget', !fits);
@@ -713,11 +867,12 @@ function refreshCompressionStats() {
 
 compressionQuantSelect.addEventListener('change', refreshCompressionStats);
 
-document.getElementById('export-compressed-btn').addEventListener('click', () => {
+document.getElementById('export-compressed-btn').addEventListener('click', async () => {
 	const quantBits = Number(compressionQuantSelect.value);
+	const name = activePattern.name;
 	let bytes;
 	try {
-		bytes = compressPattern(activePattern, { quantBits });
+		bytes = await compressAsync(activePattern, quantBits);
 	} catch (e) {
 		alert(`Couldn't compress this pattern: ${e.message}`);
 		return;
@@ -725,7 +880,7 @@ document.getElementById('export-compressed-btn').addEventListener('click', () =>
 	const blob = new Blob([bytes], { type: 'application/octet-stream' });
 	const a = document.createElement('a');
 	a.href = URL.createObjectURL(blob);
-	a.download = `${activePattern.name.replace(/[^\w-]+/g, '_') || 'pattern'}.ledanim`;
+	a.download = `${name.replace(/[^\w-]+/g, '_') || 'pattern'}.ledanim`;
 	a.click();
 	URL.revokeObjectURL(a.href);
 });
@@ -738,15 +893,19 @@ document.getElementById('upload-pattern-btn').addEventListener('click', async ()
 		return;
 	}
 	const quantBits = Number(compressionQuantSelect.value);
-	const budgetBytes = PATTERN_FLASH_BYTES;
+	const name = activePattern.name.toUpperCase() || 'PATTERN';
+	uploadPatternStatusEl.textContent = 'Compressing...';
 	let bytes;
 	try {
-		bytes = compressPattern(activePattern, { quantBits });
+		bytes = await compressAsync(activePattern, quantBits);
 	} catch (e) {
+		uploadPatternStatusEl.textContent = '';
 		alert(`Couldn't compress this pattern: ${e.message}`);
 		return;
 	}
+	const budgetBytes = patternBudgetBytes();
 	if (bytes.length > budgetBytes) {
+		uploadPatternStatusEl.textContent = '';
 		alert(
 			`Compressed pattern is ${formatBytes(bytes.length)}, over the ` +
 			`${formatBytes(budgetBytes)} budget -- lower the brightness levels, ` +
@@ -754,11 +913,13 @@ document.getElementById('upload-pattern-btn').addEventListener('click', async ()
 		);
 		return;
 	}
+	handOverBadge();
 	uploadPatternStatusEl.textContent = `Uploading ${formatBytes(bytes.length)}...`;
 	try {
-		await device.uploadPattern(bytes);
+		await device.uploadPattern(bytes, name);
 		uploadPatternStatusEl.textContent =
 			`Stored (${formatBytes(bytes.length)}) and playing -- will autoplay on every boot from now on.`;
+		refreshStore();
 	} catch (e) {
 		uploadPatternStatusEl.textContent = `Upload failed: ${e.message}`;
 	}
@@ -782,7 +943,354 @@ document.getElementById('import-compressed-input').addEventListener('change', as
 	}
 });
 
+// --- On the badge: the item store (store.h) ---------------------------------------------------
+
+const storeListEl = document.getElementById('store-list');
+const storeStatusEl = document.getElementById('store-status');
+let storeItems = []; // [{index, type, length, name}]
+let storeBusy = false; // an upload or a listing is going on
+
+// The flash an item takes: the header and the payload, in whole pages
+// (store.h), which is what the free space counts
+const STORE_PAGE_BYTES = 256;
+function storeItemBytes(item) {
+	return Math.ceil((STORE_ITEM_HEADER_BYTES + item.length) / STORE_PAGE_BYTES) * STORE_PAGE_BYTES;
+}
+
+function renderStore() {
+	renderAppLibrary(); // its Add / Update buttons follow what is stored
+	storeListEl.innerHTML = '';
+	if (!device.connected) {
+		storeStatusEl.textContent = 'Connect to see what is stored.';
+		return;
+	}
+	for (const item of storeItems) {
+		const li = document.createElement('li');
+		li.className = 'store-item';
+		if (storeStatus && item.index === storeStatus.running) li.classList.add('running');
+		// name, and under it the type and the flash it takes
+		const label = document.createElement('span');
+		label.className = 'store-label';
+		const boot = storeStatus && item.index === storeStatus.boot ? '\u2605 ' : '';
+		const name = document.createElement('span');
+		name.className = 'store-name';
+		name.textContent = `${boot}${item.name || '(no name)'}`;
+		const meta = document.createElement('span');
+		meta.className = 'store-meta';
+		meta.textContent = `${ITEM_TYPE_NAMES[item.type] ?? 'Type ' + item.type} \u00b7 ${formatBytes(storeItemBytes(item))}`;
+		meta.title = `${formatBytes(item.length)} file; on the badge it takes whole 256-byte pages, with a 32-byte header`;
+		label.append(name, meta);
+		const run = document.createElement('button');
+		run.textContent = 'Run';
+		run.addEventListener('click', () => storeAction(() => device.runItem(item.index)));
+		const bootBtn = document.createElement('button');
+		bootBtn.textContent = '\u2605';
+		bootBtn.title = 'Run it, and at every power-on';
+		bootBtn.addEventListener('click', () => storeAction(() => device.runItem(item.index, true)));
+		const del = document.createElement('button');
+		del.textContent = '\u{1F5D1}';
+		del.title = 'Delete it from the badge';
+		del.addEventListener('click', () => {
+			if (!confirm(`Delete ${item.name || 'this item'} from the badge?`)) return;
+			storeAction(() => device.deleteItem(item.index));
+		});
+		li.append(label, run, bootBtn, del);
+		storeListEl.appendChild(li);
+	}
+	if (storeStatus && storeStatus.freeBytes !== undefined) {
+		const used = storeItems.reduce((sum, item) => sum + storeItemBytes(item), 0);
+		storeStatusEl.textContent =
+			`${storeItems.length} item${storeItems.length === 1 ? '' : 's'}, ` +
+			`${formatBytes(used)} used, ${formatBytes(storeStatus.freeBytes)} free.`;
+	} else if (storeStatus) {
+		storeStatusEl.textContent = 'This firmware has no item store; update the badge.';
+	}
+}
+
+async function refreshStore() {
+	if (!device.connected || storeBusy) return;
+	storeBusy = true;
+	try {
+		const { status, items } = await device.listItems();
+		storeStatus = status;
+		storeItems = items;
+	} catch (e) {
+		storeStatusEl.textContent = e.message;
+	} finally {
+		storeBusy = false;
+	}
+	renderStore();
+	refreshCompressionStats();
+}
+
+// The once-a-second status: re-read the list when it changed size, else
+// just move the running and boot marks.
+function storeStatusChanged(status) {
+	const changed = !storeStatus || status.count !== storeStatus.count;
+	const marks = !storeStatus || status.running !== storeStatus.running || status.boot !== storeStatus.boot;
+	if (storeBusy) return;
+	storeStatus = status;
+	if (changed && status.count !== undefined) refreshStore();
+	else if (marks) renderStore();
+}
+
+// The badge shows something else now: the editor stops sending to it
+function handOverBadge() {
+	stopPlayback();
+	liveCancel();
+}
+
+async function storeAction(action) {
+	if (!device.connected) {
+		alert('Connect to a device first.');
+		return;
+	}
+	handOverBadge();
+	try {
+		await action();
+	} catch (e) {
+		alert(e.message);
+	}
+	refreshStore();
+}
+
+document.getElementById('store-add-input').addEventListener('change', async (ev) => {
+	const file = ev.target.files[0];
+	ev.target.value = '';
+	if (!file) return;
+	if (!device.connected) {
+		alert('Connect to a device first.');
+		return;
+	}
+	const bytes = new Uint8Array(await file.arrayBuffer());
+	const magic = new TextDecoder().decode(bytes.subarray(0, 4));
+	const name = file.name.replace(/\.[^.]+$/, '').toUpperCase();
+	if (/\.txt$/i.test(file.name)) {
+		try {
+			await addToBadge(ITEM_TYPE.TEXT, name, makeTextItem(new TextDecoder().decode(bytes)));
+		} catch (e) {
+			alert(e.message);
+		}
+		return;
+	}
+	const type = magic === 'HHAP' ? ITEM_TYPE.APP : magic === 'LA04' ? ITEM_TYPE.ANIMATION : 0;
+	if (!type) {
+		alert(`${file.name} is not an app (.hhapp), an animation (.ledanim) or a text (.txt).`);
+		return;
+	}
+	await addToBadge(type, name, bytes);
+});
+
+// A text item (text_item.js): the badge draws the text in its own font
+const textItemInput = document.getElementById('text-item-input');
+const textItemStatus = document.getElementById('text-item-status');
+function textItemCheck() {
+	const ascii = textItemAscii(textItemInput.value);
+	const room = patternBudgetBytes() - TEXT_ITEM.HEADER_BYTES;
+	textItemStatus.textContent = ascii
+		? `${ascii.length} characters${ascii.length > room ? `, ${room} fit on the badge now` : ''}.`
+		: '';
+	return ascii;
+}
+textItemInput.addEventListener('input', textItemCheck);
+document.getElementById('text-item-btn').addEventListener('click', async () => {
+	if (!device.connected) {
+		alert('Connect to a device first.');
+		return;
+	}
+	let bytes;
+	try {
+		bytes = makeTextItem(textItemInput.value, {
+			speed: document.getElementById('text-item-speed').value,
+			style: document.getElementById('text-item-plain').checked ? TEXT_ITEM.STYLE.PLAIN : TEXT_ITEM.STYLE.NAMETAG,
+		});
+	} catch (e) {
+		alert(e.message);
+		return;
+	}
+	await addToBadge(ITEM_TYPE.TEXT, textItemName(textItemInput.value), bytes);
+});
+
+// Stores an item on the badge (it starts at once). If `replace` is the
+// index of an older copy, that one is deleted afterwards: the new item
+// went in after it, so its index is still right.
+async function addToBadge(type, name, bytes, replace = null) {
+	handOverBadge();
+	storeBusy = true;
+	try {
+		await device.storeItem(type, name, bytes, (sent, total) => {
+			storeStatusEl.textContent = `Uploading ${name}: ${Math.round((100 * sent) / total)}%`;
+		});
+		if (replace !== null) await device.deleteItem(replace);
+	} catch (e) {
+		// firmware from before text items refuses the type
+		if (type === ITEM_TYPE.TEXT && e.result === 1)
+			alert('The badge\'s firmware does not know text items yet. Update it in the Firmware panel first.');
+		else alert(e.message);
+	} finally {
+		storeBusy = false;
+	}
+	await refreshStore();
+}
+
+// --- App library: the apps that come with the firmware (webui/apps/, made
+// by `make -C apps webui`) ---------------------------------------------------
+
+// var, not let: renderStore() may run before this part of the file has
+var appLibrary = []; // [{name, file, bytes, api, description, recommended}]
+var appRecommended = []; // the names of the recommended set, in install order (apps/recommended.txt)
+
+function renderAppLibrary() {
+	const appLibraryEl = document.getElementById('app-library');
+	appLibraryEl.innerHTML = '';
+	for (const app of appLibrary) {
+		const li = document.createElement('li');
+		li.className = 'store-item';
+		const label = document.createElement('span');
+		label.className = 'store-label';
+		const name = document.createElement('span');
+		name.className = 'store-name';
+		name.textContent = app.name;
+		name.title = app.description;
+		const meta = document.createElement('span');
+		meta.className = 'store-meta';
+		meta.textContent = `App \u00b7 ${formatBytes(storeItemBytes({ length: app.bytes }))}${app.recommended ? ' \u00b7 recommended' : ''}`;
+		meta.title = app.description;
+		label.append(name, meta);
+
+		const old = storeItems.find((item) => item.type === ITEM_TYPE.APP && item.name === app.name);
+		const btn = document.createElement('button');
+		btn.textContent = old ? 'Update' : 'Add';
+		const api = storeStatus && storeStatus.api;
+		if (!device.connected) {
+			btn.disabled = true;
+			btn.title = 'Connect to the badge first';
+		} else if (api !== undefined && api < app.api) {
+			btn.disabled = true;
+			btn.title = `Needs firmware with app API ${app.api}; the badge has ${api}. Update the firmware first.`;
+		} else {
+			btn.title = old ? `Replace the ${app.name} on the badge` : `Store ${app.name} on the badge and start it`;
+		}
+		btn.addEventListener('click', async () => {
+			try {
+				const r = await fetch(`apps/${app.file}`, { cache: 'no-store' });
+				if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+				const bytes = new Uint8Array(await r.arrayBuffer());
+				if (new TextDecoder().decode(bytes.subarray(0, 4)) !== 'HHAP') throw new Error('not an app');
+				await addToBadge(ITEM_TYPE.APP, app.name, bytes, old ? old.index : null);
+			} catch (e) {
+				alert(`Couldn't add ${app.name}: ${e.message}`);
+			}
+		});
+		li.append(label, btn);
+		appLibraryEl.appendChild(li);
+	}
+	if (!appLibrary.length) appLibraryEl.innerHTML = '<li class="hint">No apps found (make -C apps webui).</li>';
+	renderRecommended();
+}
+
+// The recommended set: erase the badge, then install the apps it ships with
+function renderRecommended() {
+	const btn = document.getElementById('app-recommended-btn');
+	const hint = document.getElementById('app-recommended-hint');
+	const apps = appRecommended.map((n) => appLibrary.find((a) => a.name === n)).filter(Boolean);
+	const bytes = apps.reduce((sum, a) => sum + storeItemBytes({ length: a.bytes }), 0);
+	const api = storeStatus && storeStatus.api;
+	const needs = Math.max(0, ...apps.map((a) => a.api));
+	btn.disabled = !apps.length || !device.connected || (api !== undefined && api < needs);
+	btn.title = !device.connected
+		? 'Connect to the badge first'
+		: api !== undefined && api < needs
+			? `Needs firmware with app API ${needs}; the badge has ${api}. Update the firmware first.`
+			: 'Erases the badge, then installs these apps';
+	hint.textContent = apps.length
+		? `${apps.length} apps, ${formatBytes(bytes)}: ${apps.map((a) => a.name).join(', ')}. Erases the badge first.`
+		: '';
+}
+
+async function installRecommended() {
+	if (!device.connected) {
+		alert('Connect to a device first.');
+		return;
+	}
+	const apps = appRecommended.map((n) => appLibrary.find((a) => a.name === n)).filter(Boolean);
+	if (!confirm(`Erase every app, animation and text on the badge, then install the recommended set (${apps.length} apps)?\n\nYour name and the apps' saved data (high scores) stay.`)) return;
+	handOverBadge();
+	storeBusy = true;
+	try {
+		// every download first, so a failed one erases nothing
+		const files = [];
+		for (const app of apps) {
+			const r = await fetch(`apps/${app.file}`, { cache: 'no-store' });
+			if (!r.ok) throw new Error(`${app.name}: ${r.status} ${r.statusText}`);
+			files.push([app, new Uint8Array(await r.arrayBuffer())]);
+		}
+		storeStatusEl.textContent = 'Erasing the badge';
+		await device.eraseStore();
+		for (let i = 0; i < files.length; i++) {
+			const [app, bytes] = files[i];
+			await device.storeItem(ITEM_TYPE.APP, app.name, bytes, (sent, total) => {
+				storeStatusEl.textContent = `Installing ${i + 1} of ${files.length}, ${app.name}: ${Math.round((100 * sent) / total)}%`;
+			});
+		}
+	} catch (e) {
+		alert(`The recommended set did not install completely: ${e.message}`);
+	} finally {
+		storeBusy = false;
+	}
+	await refreshStore();
+}
+
+document.getElementById('app-recommended-btn').addEventListener('click', installRecommended);
+
+fetch('apps/index.json', { cache: 'no-store' })
+	.then((r) => (r.ok ? r.json() : { apps: [] }))
+	.then((index) => {
+		appLibrary = index.apps || [];
+		appRecommended = index.recommended || [];
+		renderAppLibrary();
+	})
+	.catch(() => renderAppLibrary());
+
+document.getElementById('store-stop-btn').addEventListener('click', () => storeAction(() => device.stop()));
+
+document.getElementById('store-erase-btn').addEventListener('click', () => {
+	if (!confirm('Erase every app and animation on the badge? (Your name and the apps\' saved data stay.)')) return;
+	storeAction(() => device.eraseStore());
+});
+
+const badgeNameInput = document.getElementById('badge-name');
+
+document.getElementById('badge-name-btn').addEventListener('click', () =>
+	storeAction(async () => {
+		badgeNameInput.value = await device.setName(badgeNameInput.value.trim());
+	})
+);
+
+device.addEventListener('connect', async () => {
+	try {
+		badgeNameInput.value = await device.getName();
+	} catch (e) {
+		/* firmware without persistent settings */
+	}
+	refreshStore();
+});
+device.addEventListener('disconnect', () => {
+	storeStatus = null;
+	storeItems = [];
+	badgeNameInput.value = '';
+	renderStore();
+});
+
 // --- Init ---------------------------------------------------
+
+// version.json is written by tools/deploy_webui.sh: which commit this page is
+fetch('version.json', { cache: 'no-store' })
+	.then((r) => (r.ok ? r.json() : null))
+	.then((v) => {
+		if (v) document.getElementById('webui-version').textContent = `-- web interface ${v.commit} (${v.date})`;
+	})
+	.catch(() => {});
 
 renderPatternList();
 renderFrameStrip();

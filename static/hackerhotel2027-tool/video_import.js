@@ -57,8 +57,9 @@ function seekTo(video, time) {
 // so canvas-pixel-space maps 1:1 onto board-mm-space via `bounds`, and
 // sampling each LED's position needs no further per-LED math.
 function drawCoverFit(video, canvas, ctx, boardAspect) {
-	const vw = video.videoWidth;
-	const vh = video.videoHeight;
+	// a <video>, or a VideoFrame from an animated image (ImageDecoder)
+	const vw = video.videoWidth ?? video.displayWidth;
+	const vh = video.videoHeight ?? video.displayHeight;
 	const videoAspect = vw / vh;
 	let sx, sy, sw, sh;
 	if (videoAspect > boardAspect) {
@@ -246,6 +247,7 @@ function sampleFrame(canvas, ctx, bounds, brightnessBoost, monoLeds = BOARD_DATA
 // times as that implies (slow, but the Cancel button -- `shouldAbort` --
 // is the way out of that, not a silent truncation).
 async function extractFramesFromVideo(file, opts, onProgress, shouldAbort) {
+	if (isAnimatedImage(file)) return extractFramesFromAnimatedImage(file, opts, onProgress, shouldAbort);
 	const { fps, startTime, duration, bounds, brightnessBoost, ambilight } = opts;
 	const { video, url } = await loadVideoElement(file);
 	try {
@@ -276,5 +278,76 @@ async function extractFramesFromVideo(file, opts, onProgress, shouldAbort) {
 		return { frames };
 	} finally {
 		URL.revokeObjectURL(url);
+	}
+}
+
+// --- Animated images (GIF, animated WebP and PNG) ----------------------------
+// These do not play in a <video> element. WebCodecs' ImageDecoder (Chrome,
+// Edge) decodes them frame by frame, each frame with its own duration.
+
+function isAnimatedImage(file) {
+	return /^image\/(gif|webp|apng|png)$/.test(file.type) || /\.(gif|webp|apng)$/i.test(file.name);
+}
+
+// Browsers show a GIF frame with a delay under 20 ms for 100 ms; so does this.
+const MIN_FRAME_SECONDS = 0.02;
+const SHORT_FRAME_SECONDS = 0.1;
+
+// Same options and result as extractFramesFromVideo(). One pass through
+// the animation: duration is cut at its end (the badge loops it anyway).
+async function extractFramesFromAnimatedImage(file, opts, onProgress, shouldAbort) {
+	const { fps, startTime, duration, bounds, brightnessBoost, ambilight } = opts;
+	if (typeof ImageDecoder === 'undefined') {
+		throw new Error('this browser cannot decode animated images (no ImageDecoder): use Chrome or Edge');
+	}
+	const type = file.type || 'image/gif';
+	if (!(await ImageDecoder.isTypeSupported(type))) throw new Error(`this browser cannot decode ${type}`);
+	const decoder = new ImageDecoder({ data: await file.arrayBuffer(), type });
+	try {
+		await decoder.tracks.ready;
+		await decoder.completed;
+		const count = decoder.tracks.selectedTrack.frameCount;
+
+		// when each source frame starts, in seconds
+		const starts = [];
+		let total = 0;
+		for (let i = 0; i < count; i++) {
+			const { image } = await decoder.decode({ frameIndex: i });
+			const seconds = (image.duration ?? 0) / 1e6;
+			image.close();
+			starts.push(total);
+			total += seconds >= MIN_FRAME_SECONDS ? seconds : SHORT_FRAME_SECONDS;
+		}
+
+		const clipDuration = Math.max(0, Math.min(duration, total - startTime));
+		const frameCount = Math.max(1, Math.round(clipDuration * fps));
+		const coreGeom = ambilight ? findCoreCircle(BOARD_DATA.leds) : null;
+		const cropAspect = ambilight ? 1 : bounds.width / bounds.height;
+		const canvas = document.createElement('canvas');
+		canvas.width = SAMPLE_CANVAS_WIDTH;
+		canvas.height = Math.max(1, Math.round(SAMPLE_CANVAS_WIDTH / cropAspect));
+		const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+		const frames = [];
+		let source = 0;
+		for (let k = 0; k < frameCount; k++) {
+			if (shouldAbort && shouldAbort()) break;
+			const t = startTime + k / fps;
+			// (1 µs of slack: sums of frame delays do not round exactly, 0.1 + 0.2 > 0.3)
+			while (source + 1 < count && starts[source + 1] <= t + 1e-6) source++;
+			const { image } = await decoder.decode({ frameIndex: source });
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			drawCoverFit(image, canvas, ctx, cropAspect);
+			image.close();
+			frames.push(
+				ambilight
+					? sampleFrameAmbilight(canvas, ctx, coreGeom, brightnessBoost)
+					: sampleFrame(canvas, ctx, bounds, brightnessBoost)
+			);
+			if (onProgress) onProgress(k + 1, frameCount);
+		}
+		return { frames };
+	} finally {
+		decoder.close();
 	}
 }
