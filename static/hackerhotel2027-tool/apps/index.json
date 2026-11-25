@@ -9,6 +9,14 @@
    "recommended": true
   },
   {
+   "name": "BOTTLE",
+   "file": "bottle.hhapp",
+   "bytes": 1780,
+   "api": 6,
+   "description": "Spin the bottle: who fetches the beer? Press C once for each player: each press lights one more place on the star, spread round it, so up to 10 players: the five arms and the five dips of the outline between them. B takes the last player away again. Then press D: the bottle in the middle spins, slows down and stops pointing at a place. Is it a player's place, that lights up from the centre outward: that one fetches the beer. Is it an empty place, that place and the bottle blink: press D again. Every place has the same chance. The badge keeps the number of players from the last spin.",
+   "recommended": false
+  },
+  {
    "name": "BREAKOUT",
    "file": "breakout.hhapp",
    "bytes": 2168,
