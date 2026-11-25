@@ -3,7 +3,7 @@
   {
    "name": "BANANA",
    "file": "banana.hhapp",
-   "bytes": 2076,
+   "bytes": 2108,
    "api": 6,
    "description": "Banana: the badge joins the Hacker Hotel 2025 banana game (thanks, Anesidora team!), by the banana's rules. Shoot it with a banana or a Fri3d Camp 2022 Time Blaster: a hit sends a ring out in the shooter's colour, and 5 hits is GAME OVER (hold B to play again). You can't shoot your own team. It shoots back: B shoots (5 shots, the arms show them), C reloads, D picks the badge's team, hold D to give a banana that team. Text typed into a banana's serial port scrolls by.",
    "recommended": true
@@ -30,7 +30,7 @@
    "bytes": 7032,
    "api": 6,
    "description": "One big eye: the centre grid is the eyeball, the RGB LEDs on the arms its lashes. It looks around, blinks, and now and then opens its pupil wide to search and tightens it to focus. Every 30 to 60 s it has a mood: a wink, an eye roll, dizzy, sleepy, suspicious, angry, surprised, hypnotised, crying, crazy or laughing. B: a mood now; D / C: brighter / dimmer (the outline shows the level). A Samsung TV remote: Vol+ / Vol- the same, and a mood: 3 wink, 4 eye roll, 5 dizzy, 6 sleepy, 7 suspicious, 8 angry, 9 surprised, 0 hypnotised, red crazy, blue crying, yellow laughing, green one at random; and 1 or 2: it falls in love, which it never does by itself. A banana: a shot surprises it, a second one soon after makes it angry, and the lashes flash the shooter's team colour; a heal: love; a team: a wink.",
-   "recommended": true
+   "recommended": false
   },
   {
    "name": "FIRE",
@@ -105,6 +105,14 @@
    "recommended": false
   },
   {
+   "name": "NAMETAG",
+   "file": "nametag.hhapp",
+   "bytes": 7888,
+   "api": 6,
+   "description": "The name tag, with all the extras. Your name in 7 styles: rainbow, fire, matrix, wave, starfield, glitch, typewriter (B / D, remembered). The Hacker Hotel 2025 banana game built in: a hit rings out in the shooter's colour and counts, a banana's team colours the arms. Badge friends: badges near each other swap names by infrared by themselves, count the hackers you met (kept over power-off; an estimate from about 50 on, it tops out near 400), and the dots going round show who is nearby. C: who is here? (this app's SAY HI; the menu's does nothing while an app runs). Hold C and press B / D for brightness. Badges without an app nearby show \"HI <your name>\" when this one says hello, at most every 10 min.",
+   "recommended": true
+  },
+  {
    "name": "PONG",
    "file": "pong.hhapp",
    "bytes": 2084,
@@ -147,7 +155,7 @@
   {
    "name": "STARTRIS",
    "file": "startris.hhapp",
-   "bytes": 3228,
+   "bytes": 3232,
    "api": 6,
    "description": "Startris: a 9-wide, 14-deep well in the middle of the octagon. C / D move the piece (hold to repeat), tap A to rotate, B drops it. Full rows clear; the more lines, the faster the pieces fall. The arms show the next piece's colour and fill with the lines you cleared. When a new piece has no room, the game is over: the grid shows the lines, the outline the best (kept on the badge), and any button starts again. Until the first button the badge plays a demo, placing each piece where it scores best, and it goes back to that 15 s after a game. As in the previous firmware's Startris.",
    "recommended": true
@@ -181,6 +189,6 @@
   "HOTEL",
   "GALAXY",
   "RIPPLE",
-  "EYE"
+  "NAMETAG"
  ]
 }
