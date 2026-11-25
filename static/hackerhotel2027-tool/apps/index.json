@@ -27,9 +27,9 @@
   {
    "name": "CHASE",
    "file": "chase.hhapp",
-   "bytes": 1576,
+   "bytes": 1560,
    "api": 6,
-   "description": "Star Chase: a light runs round the outline. Press B, C or D when it is beside the arm that shows green. Every hit makes the light faster, up to a limit; three misses and the game is over. The grid shows the level, the dots below it the lives left. After the end, any button starts again; the best level is kept on the badge. Until the first button the badge plays a demo, and it goes back to that 15 s after a game. As in the previous firmware's Star Chase.",
+   "description": "Star Chase: a light runs round the outline. Press B, C or D when it is beside the arm that shows green. Every hit makes the light a little faster, by the same step each time, up to a limit at level 24; three misses and the game is over. The grid shows the level, the dots below it the lives left. After the end, any button starts again; the best level is kept on the badge. Until the first button the badge plays a demo, and it goes back to that 15 s after a game. As in the previous firmware's Star Chase, with a gentler speed-up.",
    "recommended": false
   },
   {
@@ -59,9 +59,9 @@
   {
    "name": "FOUR",
    "file": "four.hhapp",
-   "bytes": 3128,
+   "bytes": 3188,
    "api": 6,
-   "description": "4 in a row: drop discs into seven columns, six high; four of yours in a line (across, up or diagonal) wins. C / D aim, B drops. Against another badge over infrared: open 4 in a row on both and point them at each other, and they pair up. Drop a disc before that, and you play against this badge. After a game, B starts the next one.  Your discs are bright, the other side's dim. The arms are green on your turn and orange on theirs, and a blue wave runs out while the badge looks for another one.  Infrared: packet type 'F', data [game, move, column, flags]. `game` is a random number that keeps two pairs of players apart. A badge looking for a partner sends move 0 with FL_ANSWER about every second; a badge that is looking too answers and joins, and the one that asked moves first (when both ask, the higher number wins). The one that joined sets FL_SECOND in everything it sends. After that each move goes out as soon as it is made, and again every 0.8 s until the other badge answers. An answer is our own last move, so whichever packet arrives, both badges end up with the same board. While it is the other badge's turn, ours asks every 3 s whether it is still there; 20 s without an answer ends the game. As in the previous firmware's 4 in a row.",
+   "description": "4 in a row: drop discs into seven columns, six high; four of yours in a line (across, up or diagonal) wins. The columns sit side by side, each two LEDs wide. C / D aim, B drops. Against another badge over infrared: open 4 in a row on both and point them at each other, and they pair up. Drop a disc before that, and you play against this badge. After a game, B starts the next one.  Your discs are bright, the other side's dim. The arms are green on your turn and orange on theirs, and a blue wave runs out while the badge looks for another one.  Infrared: packet type 'F', data [game, move, column, flags]. `game` is a random number that keeps two pairs of players apart. A badge looking for a partner sends move 0 with FL_ANSWER about every second; a badge that is looking too answers and joins, and the one that asked moves first (when both ask, the higher number wins). The one that joined sets FL_SECOND in everything it sends. After that each move goes out as soon as it is made, and again every 0.8 s until the other badge answers. An answer is our own last move, so whichever packet arrives, both badges end up with the same board. While it is the other badge's turn, ours asks every 3 s whether it is still there; 20 s without an answer ends the game. As in the previous firmware's 4 in a row.",
    "recommended": true
   },
   {
@@ -107,9 +107,9 @@
   {
    "name": "MAZE",
    "file": "maze.hhapp",
-   "bytes": 2304,
+   "bytes": 2436,
    "api": 6,
-   "description": "Maze: you stay in the middle of the grid and the maze moves around you; only the walls close by are lit. The buttons are a diamond round the badge's corners: A up, B right, D down, C left (B, C, D repeat when held; A steps once a tap, since holding A opens the menu). The arm that points most towards the exit, in the far corner, lights blue, and the outline shows the time left. Five mazes, from 5 x 5 to 13 x 13 cells, with 15 s for the first and 8 s more for each next one; an arm's sides turn green for each maze solved. After the end, any button starts again; the most mazes solved are kept on the badge. Until the first button the badge walks the mazes itself, a hand on the right-hand wall, and it goes back to that 15 s after a game. As in the previous firmware's maze.",
+   "description": "Maze: you stay in the middle of the grid and the maze moves around you; only the walls close by are lit. The buttons are a diamond round the badge's corners: A up, B right, D down, C left (B, C, D repeat when held; A steps once a tap, since holding A opens the menu). The arm that points most towards the exit, in the far corner, lights blue. Five mazes, from 5 x 5 to 13 x 13 cells. The first two have no timer: take your time, the outline only glows. From the third on the outline shows the time left: 60 s for the third, 75 s for the fourth and 90 s for the last. An arm's sides turn green for each maze solved. After the end, any button starts again; the most mazes solved are kept on the badge. A minute without a button in a maze without a timer also ends the game. Until the first button the badge walks the mazes itself, a hand on the right-hand wall, and it goes back to that 15 s after a game. As in the previous firmware's maze, with more time.",
    "recommended": false
   },
   {
