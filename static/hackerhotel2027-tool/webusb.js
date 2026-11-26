@@ -158,6 +158,13 @@ class LedMatrixDevice extends EventTarget {
 		let d;
 		if (this.emulator) {
 			const r = await fetch('usb', { method: 'POST', body: new Uint8Array(bytes) });
+			if (r.status === 503) {
+				// USB unplugged in the emulator (V): a disconnect, as WebUSB
+				// reports when a badge is unplugged
+				this.device = null;
+				this.dispatchEvent(new CustomEvent('disconnect'));
+				return null;
+			}
 			if (!r.ok) throw new Error(`emulator: ${r.status} ${r.statusText}`);
 			d = new DataView(await r.arrayBuffer());
 		} else {
