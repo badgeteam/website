@@ -162,7 +162,7 @@ async function flash(image, label) {
 		if (viaBadge) device.rebootToBootRom().catch(() => {});
 		setStatus(viaBadge
 			? 'The badge restarts into its boot ROM. In the box that opens, pick "Unknown device from QinHeng Electronics" and click Connect.'
-			: 'On the badge, hold A for the menu, press C to reach UPDATE, and press A. In the box that opens, pick "Unknown device from QinHeng Electronics" and click Connect.');
+			: 'On the badge, hold A for the menu, press C to reach UPDATE, and press A (or, on newer firmware, hold C and D for 3 seconds). In the box that opens, pick "Unknown device from QinHeng Electronics" and click Connect.');
 		// No await before this line: Chrome opens the chooser only within the click
 		rom = await navigator.usb.requestDevice({ filters: WchIsp.filters });
 	} catch (e) {

@@ -311,7 +311,8 @@ device.addEventListener('status', (ev) => {
 	const running =
 		(mode === MODE_ITEM || mode === MODE_APP) && storeItems.find((item) => item.index === ev.detail.running);
 	const what = running ? `Playing: ${running.name || 'an item with no name'}` : DEVICE_MODE_NAMES[mode] ?? `Mode ${mode}`;
-	const text = `${what} · Brightness ${brightness} of 255`;
+	const serial = device.serialNumber;
+	const text = `${what} · Brightness ${brightness} of 255` + (serial ? ` · Serial ${serial}` : '');
 	// Older firmware: a warning of its own, above the Update firmware button
 	const old = ev.detail.api !== undefined && ev.detail.api < FIRMWARE_API;
 	if (old) {

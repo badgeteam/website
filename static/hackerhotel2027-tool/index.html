@@ -66,9 +66,10 @@
 					<pre><code>SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55e0", MODE="0666"
 SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="d643", MODE="0666"</code></pre>
 					<p>Then run <code>sudo udevadm control --reload</code> and plug the badge in again.</p>
-					<p><strong>Windows:</strong> if the badge does not show up, install the WinUSB driver
-						for it once with <a href="https://zadig.akeo.ie/">Zadig</a>: Options &gt; List All
-						Devices, pick the badge (USB ID 1209 D643), driver WinUSB, Install Driver.</p>
+					<p><strong>Windows:</strong> the badge needs no driver. A badge with older firmware
+						may not show up: install the WinUSB driver for it once with
+						<a href="https://zadig.akeo.ie/">Zadig</a>: Options &gt; List All Devices, pick the
+						badge (USB ID 1209 D643), driver WinUSB, Install Driver. Then update its firmware.</p>
 				</details>
 
 				<label for="badge-name">Your name</label>
@@ -142,7 +143,9 @@ SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="d643", MODE="0666"
 					<summary>Help: drivers, browsers and recovery</summary>
 					<p>The page restarts the badge into its USB boot ROM and asks you to pick it: "Unknown
 						device from QinHeng Electronics". No badge connected? On the badge, hold A for the
-						menu, press C to reach UPDATE, and press A. Your items, name and settings stay.</p>
+						menu, press C to reach UPDATE, and press A. On newer firmware, holding C and D
+						together for 3 seconds also works, even when the menu does not: an arrow runs down
+						the LEDs, then the boot ROM starts. Your items, name and settings stay.</p>
 					<p><strong>Linux:</strong> the udev rule under "Badge not in the list?" covers the boot
 						ROM (1a86:55e0) too.</p>
 					<p><strong>Windows:</strong> once, install the WinUSB driver for the boot ROM with
