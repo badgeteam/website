@@ -16,18 +16,34 @@ function storedThemeChoice() {
 	}
 }
 
+// Sets data-theme on <html>. Once the page has its #theme-select, it also
+// syncs the select with the stored choice and names the theme that "System"
+// stands for, as "System (dark)" or "System (light)".
 function applyTheme() {
 	const choice = storedThemeChoice();
-	const theme = choice === 'system' ? (systemDarkQuery.matches ? 'dark' : 'light') : choice;
+	const systemTheme = systemDarkQuery.matches ? 'dark' : 'light';
+	const theme = choice === 'system' ? systemTheme : choice;
 	document.documentElement.dataset.theme = theme;
+
+	const select = document.getElementById('theme-select');
+	if (!select) return;
+	select.value = choice;
+	const systemOption = select.querySelector('option[value="system"]');
+	if (systemOption) systemOption.textContent = `System (${systemTheme})`;
 }
 
 applyTheme();
 systemDarkQuery.addEventListener('change', applyTheme);
 
+// Another tab changed the theme: follow it. A null key means storage was cleared.
+window.addEventListener('storage', (event) => {
+	if (event.key === THEME_STORAGE_KEY || event.key === null) applyTheme();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
 	const select = document.getElementById('theme-select');
-	select.value = storedThemeChoice();
+	if (!select) return;
+	applyTheme();
 	select.addEventListener('change', () => {
 		try {
 			if (select.value === 'system') localStorage.removeItem(THEME_STORAGE_KEY);

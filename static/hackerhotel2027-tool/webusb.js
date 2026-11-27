@@ -25,6 +25,7 @@ const CMD = {
 	ITEM_DELETE: 0x27,
 	NAME_GET: 0x30,
 	NAME_SET: 0x31,
+	BRIGHTNESS: 0x32,
 	BOOT_ROM: 0x40,
 	FW_INFO: 0x41,
 	QUERY: 0xff,
@@ -38,7 +39,7 @@ const NO_ITEM = 0xff;
 // The firmware's app API version (HH_API_VERSION in apps/hhapp.h) that this
 // web interface was made with. A badge with an older one lacks commands or
 // modes the page uses: the page asks for a firmware update.
-const FIRMWARE_API = 6;
+const FIRMWARE_API = 9;
 
 // The status reply's result byte (STORE_ERR_* in store.h)
 const STORE_ERRORS = {
@@ -70,6 +71,12 @@ class LedMatrixDevice extends EventTarget {
 
 	get emulator() {
 		return !!this.device?.emulator;
+	}
+
+	// The badge's USB serial number: 16 hex digits from the chip's unique ID
+	// ("001" on older firmware). Empty for the emulator.
+	get serialNumber() {
+		return (this.device?.serialNumber || '').replace(/\0+$/, '');
 	}
 
 	// The emulator (tools/emu/emu.py --web) serves this page and takes the
@@ -158,6 +165,13 @@ class LedMatrixDevice extends EventTarget {
 		let d;
 		if (this.emulator) {
 			const r = await fetch('usb', { method: 'POST', body: new Uint8Array(bytes) });
+			if (r.status === 503) {
+				// USB unplugged in the emulator (V): a disconnect, as WebUSB
+				// reports when a badge is unplugged
+				this.device = null;
+				this.dispatchEvent(new CustomEvent('disconnect'));
+				return null;
+			}
 			if (!r.ok) throw new Error(`emulator: ${r.status} ${r.statusText}`);
 			d = new DataView(await r.arrayBuffer());
 		} else {
@@ -305,5 +319,12 @@ class LedMatrixDevice extends EventTarget {
 	async setName(name) {
 		const bytes = new TextEncoder().encode(name).subarray(0, 32);
 		return (await this._checked([CMD.NAME_SET, ...bytes], 'Saving the name')).name ?? '';
+	}
+
+	// The global brightness, 1 .. 255; the badge keeps it (persist.h).
+	// Returns the brightness the badge reports after the command: firmware
+	// without the command ignores it and reports the old one.
+	async setBrightness(value) {
+		return (await this._checked([CMD.BRIGHTNESS, value], 'Setting the brightness')).brightness;
 	}
 }
