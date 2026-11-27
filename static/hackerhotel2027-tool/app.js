@@ -1927,7 +1927,69 @@ document.getElementById('badge-name-btn').addEventListener('click', () =>
 	)
 );
 
+// The brightness: the menu's 6 levels (menu.c), as B and D step them. A
+// brightness between two levels (tools/badge.py can set any) shows as the
+// level below it, as on the badge. The slider sends only when it settles
+// (the change event: on release, or per key), never while it is dragged.
+const BRIGHTNESS_LEVELS = [8, 16, 32, 64, 128, 255];
+const brightnessControl = document.getElementById('badge-brightness-control');
+const brightnessInput = document.getElementById('badge-brightness');
+const brightnessReadout = document.getElementById('badge-brightness-readout');
+const brightnessStatus = document.getElementById('badge-brightness-status');
+let brightnessDragging = false; // a pointer holds the slider: the badge's value waits
+let brightnessSending = false;
+
+// <output> is a live region: write it only when the text changes, so the
+// status poll every second does not make a screen reader repeat it
+function showBrightness(value) {
+	const text = `${value} of 255`;
+	if (brightnessReadout.textContent === text) return;
+	brightnessReadout.textContent = text;
+	brightnessInput.setAttribute('aria-valuetext', text);
+}
+
+function brightnessLevel(value) {
+	let i = BRIGHTNESS_LEVELS.length - 1;
+	while (i > 0 && BRIGHTNESS_LEVELS[i] > value) i--;
+	return i;
+}
+
+brightnessInput.addEventListener('pointerdown', () => {
+	brightnessDragging = true;
+});
+// pointerup can land outside the slider: listen on the whole page
+document.addEventListener('pointerup', () => {
+	brightnessDragging = false;
+});
+document.addEventListener('pointercancel', () => {
+	brightnessDragging = false;
+});
+brightnessInput.addEventListener('input', () => showBrightness(BRIGHTNESS_LEVELS[brightnessInput.value]));
+brightnessInput.addEventListener('change', async () => {
+	if (!device.connected) return;
+	const want = BRIGHTNESS_LEVELS[brightnessInput.value];
+	brightnessSending = true;
+	try {
+		const got = await device.setBrightness(want);
+		if (got === want) uiAnnounce(brightnessStatus, '');
+		else uiError(brightnessStatus, "This badge's firmware can't set the brightness. Update it.");
+	} catch (e) {
+		uiError(brightnessStatus, e.message);
+	} finally {
+		brightnessSending = false;
+	}
+});
+
+device.addEventListener('status', (ev) => {
+	const { brightness } = ev.detail;
+	if (brightness === undefined || brightnessDragging || brightnessSending) return;
+	const level = String(brightnessLevel(brightness));
+	if (brightnessInput.value !== level) brightnessInput.value = level;
+	showBrightness(brightness);
+});
+
 device.addEventListener('connect', async () => {
+	brightnessControl.hidden = false;
 	try {
 		badgeNameInput.value = await device.getName();
 	} catch (e) {
@@ -1936,6 +1998,8 @@ device.addEventListener('connect', async () => {
 	refreshStore();
 });
 device.addEventListener('disconnect', () => {
+	brightnessControl.hidden = true;
+	uiAnnounce(brightnessStatus, '');
 	storeStatus = null;
 	storeItems = [];
 	badgeNameInput.value = '';

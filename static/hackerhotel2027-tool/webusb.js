@@ -25,6 +25,7 @@ const CMD = {
 	ITEM_DELETE: 0x27,
 	NAME_GET: 0x30,
 	NAME_SET: 0x31,
+	BRIGHTNESS: 0x32,
 	BOOT_ROM: 0x40,
 	FW_INFO: 0x41,
 	QUERY: 0xff,
@@ -318,5 +319,12 @@ class LedMatrixDevice extends EventTarget {
 	async setName(name) {
 		const bytes = new TextEncoder().encode(name).subarray(0, 32);
 		return (await this._checked([CMD.NAME_SET, ...bytes], 'Saving the name')).name ?? '';
+	}
+
+	// The global brightness, 1 .. 255; the badge keeps it (persist.h).
+	// Returns the brightness the badge reports after the command: firmware
+	// without the command ignores it and reports the old one.
+	async setBrightness(value) {
+		return (await this._checked([CMD.BRIGHTNESS, value], 'Setting the brightness')).brightness;
 	}
 }
