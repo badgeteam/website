@@ -39,7 +39,7 @@ const NO_ITEM = 0xff;
 // The firmware's app API version (HH_API_VERSION in apps/hhapp.h) that this
 // web interface was made with. A badge with an older one lacks commands or
 // modes the page uses: the page asks for a firmware update.
-const FIRMWARE_API = 8;
+const FIRMWARE_API = 9;
 
 // The status reply's result byte (STORE_ERR_* in store.h)
 const STORE_ERRORS = {

@@ -4,7 +4,7 @@
    "name": "BANANA",
    "file": "banana.hhapp",
    "bytes": 2108,
-   "api": 8,
+   "api": 9,
    "description": "Banana: the badge joins the Hacker Hotel 2025 banana game (thanks, Anesidora team!), by the banana's rules. Shoot it with a banana or a Fri3d Camp 2022 Time Blaster: a hit sends a ring out in the shooter's colour, and 5 hits is GAME OVER (hold B to play again). You can't shoot your own team. It shoots back: B shoots (5 shots, the arms show them), C reloads, D picks the badge's team, hold D to give a banana that team. Text typed into a banana's serial port scrolls by.",
    "recommended": true
   },
@@ -12,7 +12,7 @@
    "name": "BOTTLE",
    "file": "bottle.hhapp",
    "bytes": 1780,
-   "api": 8,
+   "api": 9,
    "description": "Spin the bottle: who fetches the beer? Press C once for each player: each press lights one more place on the star, spread round it, so up to 10 players: the five arms and the five dips of the outline between them. B takes the last player away again. Then press D: the bottle in the middle spins, slows down and stops pointing at a place. Is it a player's place, that lights up from the centre outward: that one fetches the beer. Is it an empty place, that place and the bottle blink: press D again. Every place has the same chance. The badge keeps the number of players from the last spin.",
    "recommended": false
   },
@@ -20,7 +20,7 @@
    "name": "BREAKOUT",
    "file": "breakout.hhapp",
    "bytes": 2168,
-   "api": 8,
+   "api": 9,
    "description": "Breakout: five rows of bricks on top, a 3-wide paddle near the bottom, and the octagon's angled walls to bounce off. C / D move the paddle (hold to keep moving); where the ball hits the paddle steers it. Clear all the bricks for a new wave, a little faster. 3 lives, shown blue on the top arms; the score fills the arms orange. After the last life, any button starts again. Until the first button the badge plays a demo, and it goes back to that 15 s after a game. As in the previous firmware's breakout.",
    "recommended": true
   },
@@ -28,7 +28,7 @@
    "name": "CHASE",
    "file": "chase.hhapp",
    "bytes": 1560,
-   "api": 8,
+   "api": 9,
    "description": "Star Chase: a light runs round the outline. Press B, C or D when it is beside the arm that shows green. Every hit makes the light a little faster, by the same step each time, up to a limit at level 24; three misses and the game is over. The grid shows the level, the dots below it the lives left. After the end, any button starts again; the best level is kept on the badge. Until the first button the badge plays a demo, and it goes back to that 15 s after a game. As in the previous firmware's Star Chase, with a gentler speed-up.",
    "recommended": false
   },
@@ -36,7 +36,7 @@
    "name": "EYE",
    "file": "eye.hhapp",
    "bytes": 7032,
-   "api": 8,
+   "api": 9,
    "description": "One big eye: the centre grid is the eyeball, the RGB LEDs on the arms its lashes. It looks around, blinks, and now and then opens its pupil wide to search and tightens it to focus. Every 30 to 60 s it has a mood: a wink, an eye roll, dizzy, sleepy, suspicious, angry, surprised, hypnotised, crying, crazy or laughing. B: a mood now; D / C: brighter / dimmer (the outline shows the level). A Samsung TV remote: Vol+ / Vol- the same, and a mood: 3 wink, 4 eye roll, 5 dizzy, 6 sleepy, 7 suspicious, 8 angry, 9 surprised, 0 hypnotised, red crazy, blue crying, yellow laughing, green one at random; and 1 or 2: it falls in love, which it never does by itself. A banana: a shot surprises it, a second one soon after makes it angry, and the lashes flash the shooter's team colour; a heal: love; a team: a wink.",
    "recommended": false
   },
@@ -44,7 +44,7 @@
    "name": "FIRE",
    "file": "fire.hhapp",
    "bytes": 772,
-   "api": 8,
+   "api": 9,
    "description": "Fire: heat rises from two rows below the grid and cools as it goes up; the lower half of the outline and the arms glow like embers. B / D: brighter / dimmer. As in the previous firmware's fire.",
    "recommended": true
   },
@@ -52,7 +52,7 @@
    "name": "FLAPPY",
    "file": "flappy.hhapp",
    "bytes": 1420,
-   "api": 8,
+   "api": 9,
    "description": "Flappy: one button. B, C or D flaps; fly through the gaps in the pipes. The bird waits until the first flap. Hitting a pipe or the edge of the grid ends the game; the arms fill gold with the pipes you passed, and after the end the grid shows the score, the outline the best. Until the first button the badge plays a demo, and it goes back to that 15 s after a game. As in the previous firmware's flappy.",
    "recommended": true
   },
@@ -60,7 +60,7 @@
    "name": "FOUR",
    "file": "four.hhapp",
    "bytes": 3188,
-   "api": 8,
+   "api": 9,
    "description": "4 in a row: drop discs into seven columns, six high; four of yours in a line (across, up or diagonal) wins. The columns sit side by side, each two LEDs wide. C / D aim, B drops. Against another badge over infrared: open 4 in a row on both and point them at each other, and they pair up. Drop a disc before that, and you play against this badge. After a game, B starts the next one.  Your discs are bright, the other side's dim. The arms are green on your turn and orange on theirs, and a blue wave runs out while the badge looks for another one.  Infrared: packet type 'F', data [game, move, column, flags]. `game` is a random number that keeps two pairs of players apart. A badge looking for a partner sends move 0 with FL_ANSWER about every second; a badge that is looking too answers and joins, and the one that asked moves first (when both ask, the higher number wins). The one that joined sets FL_SECOND in everything it sends. After that each move goes out as soon as it is made, and again every 0.8 s until the other badge answers. An answer is our own last move, so whichever packet arrives, both badges end up with the same board. While it is the other badge's turn, ours asks every 3 s whether it is still there; 20 s without an answer ends the game. As in the previous firmware's 4 in a row.",
    "recommended": true
   },
@@ -68,7 +68,7 @@
    "name": "GALAXY",
    "file": "galaxy.hhapp",
    "bytes": 584,
-   "api": 8,
+   "api": 9,
    "description": "Galaxy: a five-armed spiral turns once every 3 s, fading towards the outside; the arms turn through the colours with it. B / D: brighter / dimmer. As in the previous firmware.",
    "recommended": true
   },
@@ -76,7 +76,7 @@
    "name": "HEART",
    "file": "heart.hhapp",
    "bytes": 600,
-   "api": 8,
+   "api": 9,
    "description": "Heartbeat: a double beat every 2.2 s, travelling out from the centre at 120 mm/s; the arms glow red with it. B / D: brighter / dimmer. As in the previous firmware.",
    "recommended": false
   },
@@ -84,7 +84,7 @@
    "name": "HILO",
    "file": "hilo.hhapp",
    "bytes": 1040,
-   "api": 8,
+   "api": 9,
    "description": "Higher or lower: a number from 1 to 99. Will the next one be higher (D) or lower (C)? The arm next to D blinks green for higher, the arm next to C orange for lower. A right guess adds one to the streak, which fills the outline; a wrong one ends the game. After the end, any button starts again; the longest streak is kept on the badge. Until the first button the badge plays a demo, and it goes back to that 15 s after a game. As in the previous firmware's Higher Lower.",
    "recommended": false
   },
@@ -92,7 +92,7 @@
    "name": "HOTEL",
    "file": "hotel.hhapp",
    "bytes": 784,
-   "api": 8,
+   "api": 9,
    "description": "Hacker Hotel 2027: \"HH\" over \"2027\" for 4 s, then the whole name scrolls by. The outline runs marquee lights like a hotel sign; the arms glow warm gold. B / D: brighter / dimmer. As in the previous firmware.",
    "recommended": true
   },
@@ -100,7 +100,7 @@
    "name": "LIFE",
    "file": "life.hhapp",
    "bytes": 1200,
-   "api": 8,
+   "api": 9,
    "description": "Life: Conway's Game of Life on the grid, 5 generations a second. Cells that are born flash, those that die fade out; the arms shift colour with the population and flash with the births. A board that dies out or settles into a still life or a blinker starts again. B / D: brighter / dimmer. As in the previous firmware.",
    "recommended": false
   },
@@ -108,23 +108,23 @@
    "name": "MAZE",
    "file": "maze.hhapp",
    "bytes": 2436,
-   "api": 8,
+   "api": 9,
    "description": "Maze: you stay in the middle of the grid and the maze moves around you; only the walls close by are lit. The buttons are a diamond round the badge's corners: A up, B right, D down, C left (B, C, D repeat when held; A steps once a tap, since holding A opens the menu). The arm that points most towards the exit, in the far corner, lights blue. Five mazes, from 5 x 5 to 13 x 13 cells. The first two have no timer: take your time, the outline only glows. From the third on the outline shows the time left: 60 s for the third, 75 s for the fourth and 90 s for the last. An arm's sides turn green for each maze solved. After the end, any button starts again; the most mazes solved are kept on the badge. A minute without a button in a maze without a timer also ends the game. Until the first button the badge walks the mazes itself, a hand on the right-hand wall, and it goes back to that 15 s after a game. As in the previous firmware's maze, with more time.",
    "recommended": false
   },
   {
    "name": "NAMETAG",
    "file": "nametag.hhapp",
-   "bytes": 7888,
-   "api": 8,
-   "description": "The name tag, with all the extras. Your name in 7 styles: rainbow, fire, matrix, wave, starfield, glitch, typewriter (B / D, remembered). The Hacker Hotel 2025 banana game built in: a hit rings out in the shooter's colour and counts, a banana's team colours the arms. Badge friends: badges near each other swap names by infrared by themselves, count the hackers you met (kept over power-off; an estimate from about 50 on, it tops out near 400), and the dots going round show who is nearby. C: who is here? (and says hello at once). Hold C and press B / D for brightness. Badges with older firmware (it had SAY HI in the menu) and no app nearby show \"HI <your name>\" when this one says hello, at most every 10 min; badges with this firmware and no app do not answer.",
+   "bytes": 7892,
+   "api": 9,
+   "description": "The name tag, with all the extras. Your name in 7 styles: rainbow, fire, matrix, wave, starfield, glitch, typewriter (B / D, remembered). The Hacker Hotel 2025 banana game built in: a hit rings out in the shooter's colour and counts, a banana's team colours the arms. Badge friends: badges near each other swap names by infrared by themselves, count the hackers you met (kept over power-off; an estimate from about 50 on, it tops out near 400), and the dots going round show who is nearby. C: who is here? (and says hello at once). Hold C and press B / D for brightness. Badges with older firmware (it had SAY HI in the menu) and no app nearby show \"HI <your name>\" when this one says hello, at most every 10 min; badges with this firmware and no app do not answer. When the battery starts to charge, a battery fills up on the grid, over and over; tap any button to hide it until charging starts again.",
    "recommended": true
   },
   {
    "name": "PONG",
    "file": "pong.hhapp",
    "bytes": 2084,
-   "api": 8,
+   "api": 9,
    "description": "Pong against the badge: your paddle on the left edge, the badge's on the right. B moves yours up, D down (hold to keep moving); where the ball hits a paddle steers it. First to 5 wins. The left arms show your points in blue, the right arms the badge's in red. After a game the grid shows the score, the outline your wins so far (kept on the badge); any button starts the next game. Until the first button the badge plays both sides, and it goes back to that 15 s after a game. As in the previous firmware's pong.",
    "recommended": false
   },
@@ -132,7 +132,7 @@
    "name": "RIPPLE",
    "file": "ripple.hhapp",
    "bytes": 544,
-   "api": 8,
+   "api": 9,
    "description": "Ripple: rings run out from the centre, one every 1.5 s, 11 mm apart; the arms ripple in colour with them. B / D: brighter / dimmer. As in the previous firmware.",
    "recommended": true
   },
@@ -140,7 +140,7 @@
    "name": "SIMON",
    "file": "simon.hhapp",
    "bytes": 1424,
-   "api": 8,
+   "api": 9,
    "description": "Simon says: the badge plays a sequence on the four arms next to the buttons, and you press it back. Every round adds one. The top arm shows how far you are, and lights green when you got it all. A wrong button, or 5 s without one, ends the game; any button then starts again. The grid shows the length; the outline the length and (dimly) the best so far. Until the first button the badge plays a demo (it slips up at some point), and it goes back to that 15 s after a game. As in the previous firmware's Simon.",
    "recommended": true
   },
@@ -148,7 +148,7 @@
    "name": "SNAKE",
    "file": "snake.hhapp",
    "bytes": 1724,
-   "api": 8,
+   "api": 9,
    "description": "Snake on the centre grid. C turns left, D turns right; eat the blinking dot. The outline counts the score, dimly up to the best score so far (kept on the badge). After a crash the score shows as a number; A or B starts again. Until the first button the badge plays a demo, and it goes back to that 15 s after a crash.",
    "recommended": true
   },
@@ -156,7 +156,7 @@
    "name": "SPARKLE",
    "file": "sparkle.hhapp",
    "bytes": 448,
-   "api": 8,
+   "api": 9,
    "description": "Sparkles on the grid and the outline, a rainbow turning round the arms. B: more sparkles, D: fewer.",
    "recommended": false
   },
@@ -164,7 +164,7 @@
    "name": "STARTRIS",
    "file": "startris.hhapp",
    "bytes": 3232,
-   "api": 8,
+   "api": 9,
    "description": "Startris: a 9-wide, 14-deep well in the middle of the octagon. C / D move the piece (hold to repeat), tap A to rotate, B drops it. Full rows clear; the more lines, the faster the pieces fall. The arms show the next piece's colour and fill with the lines you cleared. When a new piece has no room, the game is over: the grid shows the lines, the outline the best (kept on the badge), and any button starts again. Until the first button the badge plays a demo, placing each piece where it scores best, and it goes back to that 15 s after a game. As in the previous firmware's Startris.",
    "recommended": true
   },
@@ -172,7 +172,7 @@
    "name": "TVBON",
    "file": "tvbon.hhapp",
    "bytes": 2940,
-   "api": 8,
+   "api": 9,
    "description": "TVBOn: turns the TVs around you on or off, by infrared. Press A: the badge sends the power-on code of each TV brand it knows (Samsung, LG, Hisense, Sony, Panasonic, Philips, Toshiba): the arm to A fills up green, faster and faster, then flashes; in its second half a laser flickers at the arm's tip, wilder and wilder, until the arm all but bursts at the end. Press B: the power-off codes, the same in red to B. Brands with only a power toggle (TCL, Xiaomi, newer Hisense, Philips and Toshiba, Sharp, Telefunken and others by Vestel, Hitachi) get it with A and with B, first, so a TV that knows both ends with its own on or off. Philips's off is the standby button, which toggles on newer Philips TVs. A press takes about two seconds.",
    "recommended": false
   },
@@ -180,7 +180,7 @@
    "name": "TWINKLE",
    "file": "twinkle.hhapp",
    "bytes": 556,
-   "api": 8,
+   "api": 9,
    "description": "Twinkle: every LED of the grid and the outline sparkles at a speed and time of its own, and a comet runs up each arm every 3 s, the arms one after the other. B / D: brighter / dimmer. As in the previous firmware.",
    "recommended": false
   },
@@ -188,7 +188,7 @@
    "name": "WHACK",
    "file": "whack.hhapp",
    "bytes": 1124,
-   "api": 8,
+   "api": 9,
    "description": "Whack-a-mole: a random arm lights up from its tip towards the centre, one LED at a time. Stop it with any button before it reaches the centre: the sooner, the more points (5 with one LED lit, 2 with four). Reaching the centre ends the game, and so does pressing while nothing is lit. It gets faster every 3 hits. The grid shows the points, the outline the best so far; after the end, any button starts again. Until the first button the badge plays a demo, and it goes back to that 15 s after a game. As in the previous firmware's whack-a-mole.",
    "recommended": false
   }
